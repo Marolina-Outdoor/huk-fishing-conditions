@@ -278,6 +278,62 @@
 }
 
 /* ── Loading ─────────────────────────────────────────────────── */
+/* ── Location permission prompt ─────────────────────────────── */
+.huk-fc-loc-prompt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(15,76,129,0.04);
+  border-radius: 10px;
+  margin: 4px;
+}
+
+.huk-fc-loc-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.huk-fc-loc-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+.huk-fc-loc-text strong {
+  font-family: 'Styrene A', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--huk-navy-dark);
+}
+
+.huk-fc-loc-text span {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  color: var(--huk-navy-body);
+  opacity: 0.65;
+  line-height: 1.4;
+}
+
+.huk-fc-loc-btn {
+  flex-shrink: 0;
+  background: var(--huk-navy);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 13px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.huk-fc-loc-btn:hover { background: var(--huk-navy-dark); }
+
 .huk-fc-loading {
   display: flex;
   align-items: center;

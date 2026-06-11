@@ -882,9 +882,18 @@
   }
 
   // ── Main load ───────────────────────────────────────────────
-  async function loadConditions(containers) {
-    containers.forEach(el => renderInto(el, buildLoadingHTML()));
+  function buildLocationPromptHTML() {
+    return `<div class="huk-fc-loc-prompt">
+      <span class="huk-fc-loc-icon">📍</span>
+      <div class="huk-fc-loc-text">
+        <strong>See conditions near you</strong>
+        <span>Share your location to get live fishing conditions, tides, and a cast score for your area.</span>
+      </div>
+      <button type="button" class="huk-fc-loc-btn">Allow Location</button>
+    </div>`;
+  }
 
+  async function loadConditions(containers) {
     const cached = getCached();
     if (cached) {
       containers.forEach(el => {
@@ -894,6 +903,25 @@
       });
       return;
     }
+
+    // Check if permission already granted — skip prompt if so
+    let permState = 'prompt';
+    try {
+      const result = await navigator.permissions.query({ name: 'geolocation' });
+      permState = result.state;
+    } catch {}
+
+    if (permState === 'prompt') {
+      containers.forEach(el => renderInto(el, buildLocationPromptHTML()));
+      await new Promise(resolve => {
+        containers.forEach(el => {
+          const btn = (el.querySelector('.huk-fc-inner') || el).querySelector('.huk-fc-loc-btn');
+          if (btn) btn.addEventListener('click', resolve, { once: true });
+        });
+      });
+    }
+
+    containers.forEach(el => renderInto(el, buildLoadingHTML()));
 
     // Geolocation
     let lat, lon;
