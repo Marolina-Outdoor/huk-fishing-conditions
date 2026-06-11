@@ -1,0 +1,106 @@
+{% comment %}
+  Fishing Conditions Section
+  Displays local weather, tide, and fishing score using
+  Open-Meteo (weather) + NOAA CO-OPS (tides) APIs.
+  Requires customer geolocation permission.
+{% endcomment %}
+
+{%- liquid
+  assign section_bg     = section.settings.color_bg
+  assign section_text   = section.settings.color_text
+  assign card_bg        = section.settings.color_card_bg
+  assign title          = section.settings.title
+  assign subtitle       = section.settings.subtitle
+  assign show_section   = section.settings.show_section
+-%}
+
+{%- if show_section -%}
+<link rel="stylesheet" href="{{ 'fishing-conditions.css' | asset_url }}">
+
+<section
+  class="huk-fc-section"
+  id="section-{{ section.id }}"
+  style="background-color: {{ section_bg }}; color: {{ section_text }};"
+>
+  <div class="huk-fc-section-container">
+
+    {%- if title != blank or subtitle != blank -%}
+    <div class="huk-fc-section-header">
+      {%- if title != blank -%}
+        <h2 class="huk-fc-section-title">{{ title }}</h2>
+      {%- endif -%}
+      {%- if subtitle != blank -%}
+        <span class="huk-fc-section-sub">{{ subtitle }}</span>
+      {%- endif -%}
+    </div>
+    {%- endif -%}
+
+    <div
+      class="huk-fc-section-body"
+      style="background-color: {{ card_bg }};"
+    >
+      <div class="huk-fc-inner">
+        {%- comment -%}Populated by fishing-conditions.js{%- endcomment -%}
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script src="{{ 'fishing-conditions.js' | asset_url }}" defer></script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Fishing Conditions",
+  "tag": "section",
+  "class": "huk-fishing-conditions",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show this section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section heading",
+      "default": "🎣 Today's Fishing Outlook"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Local weather, tides & fishing score — updated every 30 min"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "color_bg",
+      "label": "Section background",
+      "default": "#f0f9ff"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "Text color",
+      "default": "#0f172a"
+    },
+    {
+      "type": "color",
+      "id": "color_card_bg",
+      "label": "Card background",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fishing Conditions"
+    }
+  ]
+}
+{% endschema %}

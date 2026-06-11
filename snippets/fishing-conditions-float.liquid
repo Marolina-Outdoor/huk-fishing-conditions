@@ -1,0 +1,59 @@
+{% comment %}
+  Floating fishing conditions widget (FAB + slide-up panel).
+  Include once in theme.liquid just before </body>:
+    {% render 'fishing-conditions-float' %}
+
+  Controlled via theme customizer section "Fishing Conditions Float".
+  Settings are read from global settings_data or can be hardcoded here.
+{% endcomment %}
+
+{%- assign show_float = settings.fishing_float_enabled | default: true -%}
+
+{%- if show_float -%}
+<link rel="stylesheet" href="{{ 'fishing-conditions.css' | asset_url }}">
+
+<div class="huk-fc-float-wrap" role="complementary" aria-label="Fishing conditions widget">
+
+  <div
+    id="huk-fc-float-panel"
+    class="huk-fc-float-panel"
+    role="dialog"
+    aria-label="Local fishing conditions"
+    aria-modal="false"
+    style="background: #fff; color: #0f172a;"
+  >
+    <div class="huk-fc-float-header">
+      <span class="huk-fc-float-title">🎣 Today's Fishing Outlook</span>
+      <button
+        id="huk-fc-float-close"
+        class="huk-fc-float-close"
+        aria-label="Close fishing conditions"
+        type="button"
+      >✕</button>
+    </div>
+
+    <div class="huk-fc-float-body">
+      <div class="huk-fc-inner">
+        {%- comment -%}Populated by fishing-conditions.js on open{%- endcomment -%}
+      </div>
+    </div>
+
+    <div class="huk-fc-float-footer">
+      Weather by Open-Meteo · Tide data from NOAA CO-OPS
+    </div>
+  </div>
+
+  <button
+    id="huk-fc-fab"
+    class="huk-fc-fab"
+    type="button"
+    aria-label="Show local fishing conditions"
+    aria-expanded="false"
+    aria-controls="huk-fc-float-panel"
+    title="Local Fishing Conditions"
+  >🎣</button>
+
+</div>
+
+<script src="{{ 'fishing-conditions.js' | asset_url }}" defer></script>
+{%- endif -%}

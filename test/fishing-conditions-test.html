@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HUK — Fishing Conditions Widget Test</title>
+
+  <!-- Widget styles (loaded from sibling assets folder) -->
+  <link rel="stylesheet" href="../assets/fishing-conditions.css">
+
+  <style>
+    /* ── Test harness styles only ── */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f1f5f9;
+      margin: 0;
+      padding: 0;
+      color: #0f172a;
+    }
+
+    .test-header {
+      background: #0f172a;
+      color: #fff;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .test-header h1 { margin: 0; font-size: 16px; font-weight: 600; }
+    .test-badge {
+      background: #f59e0b;
+      color: #000;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .test-controls {
+      background: #fff;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 14px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .test-controls label {
+      font-size: 13px;
+      font-weight: 500;
+      color: #64748b;
+    }
+
+    .test-btn {
+      padding: 7px 14px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      background: #fff;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .test-btn:hover { background: #f8fafc; border-color: #94a3b8; }
+
+    .test-btn.primary {
+      background: #0ea5e9;
+      color: #fff;
+      border-color: #0ea5e9;
+    }
+
+    .test-btn.primary:hover { background: #0284c7; }
+
+    .test-btn.danger {
+      background: #fef2f2;
+      color: #dc2626;
+      border-color: #fca5a5;
+    }
+
+    .test-btn.danger:hover { background: #fee2e2; }
+
+    .test-sep { width: 1px; height: 24px; background: #e2e8f0; }
+
+    .test-log {
+      background: #1e293b;
+      color: #94a3b8;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 11px;
+      padding: 10px 16px;
+      max-height: 100px;
+      overflow-y: auto;
+      border-bottom: 1px solid #0f172a;
+    }
+
+    .test-log .log-entry { padding: 2px 0; }
+    .test-log .log-ok   { color: #4ade80; }
+    .test-log .log-err  { color: #f87171; }
+    .test-log .log-info { color: #7dd3fc; }
+
+    .test-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      padding: 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 800px) {
+      .test-layout { grid-template-columns: 1fr; }
+    }
+
+    .test-panel {
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+    }
+
+    .test-panel-label {
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 10px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .test-panel-label .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #94a3b8;
+    }
+
+    .test-panel-label .dot.green { background: #4ade80; }
+
+    .test-panel-body { padding: 0; }
+
+    /* Override section body for test panel */
+    .test-panel-body .huk-fc-section-body {
+      border-radius: 0;
+      margin: 0;
+    }
+
+    .test-panel-body .huk-fc-section {
+      padding: 16px;
+      background: #f0f9ff;
+    }
+
+    /* Mock dark theme panel */
+    .dark-bg .huk-fc-section {
+      --huk-navy:      #7eb8f7;
+      --huk-navy-dark: #ffffff;
+      --huk-navy-body: #c8dff5;
+      --huk-accent:    #60aaff;
+      --huk-sky:       #29ABE2;
+      --huk-stat-bg:   rgba(255,255,255,0.07);
+      --huk-border:    rgba(255,255,255,0.12);
+      background: #0f172a !important;
+      color: #f1f5f9 !important;
+    }
+
+    .dark-bg .huk-fc-section-body {
+      background: #1e293b !important;
+      color: #f1f5f9 !important;
+    }
+
+    .dark-bg .huk-fc-stat {
+      background: rgba(255,255,255,0.07) !important;
+      border-color: rgba(255,255,255,0.1) !important;
+    }
+
+    .dark-bg .huk-fc-stat-label,
+    .dark-bg .huk-fc-cast-label,
+    .dark-bg .huk-fc-cast-detail,
+    .dark-bg .huk-fc-weather-desc,
+    .dark-bg .huk-fc-tides-title,
+    .dark-bg .huk-fc-tide-time,
+    .dark-bg .huk-fc-license-loc,
+    .dark-bg .huk-fc-travel-hint,
+    .dark-bg .huk-fc-score-sub,
+    .dark-bg .huk-fc-summary {
+      color: rgba(255,255,255,0.45) !important;
+    }
+    .dark-bg .huk-fc-conf-medium { background: rgba(240,180,41,0.2) !important; color: #f0c040 !important; }
+    .dark-bg .huk-fc-conf-low    { background: rgba(239,68,68,0.2)  !important; color: #f87171 !important; }
+
+    .dark-bg .huk-fc-temp,
+    .dark-bg .huk-fc-score-num,
+    .dark-bg .huk-fc-stat strong,
+    .dark-bg .huk-fc-tide-ht,
+    .dark-bg .huk-fc-license-q {
+      color: #ffffff !important;
+    }
+
+    .dark-bg .huk-fc-tides {
+      border-top-color: rgba(255,255,255,0.1) !important;
+    }
+
+    .dark-bg .huk-fc-license {
+      border-top-color: rgba(255,255,255,0.1) !important;
+    }
+
+    .dark-bg .huk-fc-travel-toggle {
+      color: rgba(255,255,255,0.75) !important;
+      border-top-color: rgba(255,255,255,0.1) !important;
+    }
+
+    .dark-bg .huk-fc-travel-body {
+      border-color: rgba(255,255,255,0.1) !important;
+    }
+
+    .dark-bg .huk-fc-zip-input {
+      background: rgba(255,255,255,0.08) !important;
+      border-color: rgba(255,255,255,0.15) !important;
+      color: #fff !important;
+    }
+
+    .dark-bg .huk-fc-zip-input::placeholder {
+      color: rgba(255,255,255,0.35) !important;
+    }
+
+    .dark-bg .huk-fc-tide-type.low {
+      color: #7eb8f7 !important;
+    }
+
+    .test-coords {
+      font-family: monospace;
+      font-size: 12px;
+      color: #64748b;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      padding: 4px 8px;
+    }
+
+    /* Float widget label override for test page */
+    .huk-fc-float-panel {
+      background: #fff !important;
+      color: #0f172a !important;
+    }
+
+    .float-preview-note {
+      padding: 24px;
+      font-size: 13px;
+      color: #64748b;
+      text-align: center;
+    }
+
+    .api-status {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 16px;
+    }
+
+    .api-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+    }
+
+    .api-chip .status-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #cbd5e1;
+    }
+
+    .api-chip .status-dot.ok    { background: #4ade80; }
+    .api-chip .status-dot.err   { background: #f87171; }
+    .api-chip .status-dot.pend  { background: #fbbf24; animation: pulse 1s infinite; }
+
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  </style>
+</head>
+<body>
+
+<!-- ── Test Header ── -->
+<div class="test-header">
+  <h1>🎣 HUK Fishing Conditions — Widget Test Environment</h1>
+  <span class="test-badge">Local Dev Only</span>
+</div>
+
+<!-- ── Controls ── -->
+<div class="test-controls">
+  <label>Controls:</label>
+
+  <button class="test-btn primary" onclick="testRefresh()">↺ Reload Data</button>
+  <button class="test-btn danger"  onclick="testClearCache()">✕ Clear Cache</button>
+
+  <div class="test-sep"></div>
+
+  <button class="test-btn" onclick="testMockLocation(47.6, -122.3, 'Seattle, WA')">📍 Seattle</button>
+  <button class="test-btn" onclick="testMockLocation(32.7, -117.2, 'San Diego, CA')">📍 San Diego</button>
+  <button class="test-btn" onclick="testMockLocation(25.8, -80.2, 'Miami, FL')">📍 Miami</button>
+  <button class="test-btn" onclick="testMockLocation(40.7, -74.0, 'New York, NY')">📍 New York</button>
+  <button class="test-btn" onclick="testMockLocation(29.3, -94.8, 'Galveston, TX')">📍 Galveston</button>
+  <button class="test-btn" onclick="testMockLocation(32.8, -79.9, 'Charleston, SC')">📍 Charleston</button>
+
+  <div class="test-sep"></div>
+
+  <span id="test-coords" class="test-coords">No location yet</span>
+</div>
+
+<!-- ── Log ── -->
+<div class="test-log" id="test-log">
+  <div class="log-entry log-info">▶ Test harness loaded. Click "Reload Data" or select a mock location.</div>
+</div>
+
+<!-- ── API Status ── -->
+<div style="max-width:1200px; margin:16px auto 0; padding:0 24px;">
+  <div class="api-status" id="api-status">
+    <div class="api-chip" id="chip-geo">
+      <div class="status-dot" id="dot-geo"></div> Geolocation
+    </div>
+    <div class="api-chip" id="chip-weather">
+      <div class="status-dot" id="dot-weather"></div> Open-Meteo (Weather)
+    </div>
+    <div class="api-chip" id="chip-tides">
+      <div class="status-dot" id="dot-tides"></div> NOAA CO-OPS (Tides)
+    </div>
+  </div>
+</div>
+
+<!-- ── Widget Previews ── -->
+<div class="test-layout">
+
+  <!-- Light theme section -->
+  <div class="test-panel">
+    <div class="test-panel-label">
+      <div class="dot green"></div>
+      Homepage Section — Light Theme
+    </div>
+    <div class="test-panel-body" id="preview-light">
+      <section class="huk-fc-section" style="background:#f0f9ff; color:#0f172a;">
+        <div class="huk-fc-section-container" style="max-width:100%; padding:0 16px;">
+          <div class="huk-fc-section-header">
+            <h2 class="huk-fc-section-title">🎣 Current Fishing Conditions</h2>
+            <span class="huk-fc-section-sub">Local weather, tides &amp; fishing score</span>
+          </div>
+          <div class="huk-fc-section-body huk-fc-section-light" style="background:#fff;">
+            <div class="huk-fc-inner huk-fc-section-body-content"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Dark theme section -->
+  <div class="test-panel dark-bg">
+    <div class="test-panel-label">
+      <div class="dot green"></div>
+      Homepage Section — Dark Theme
+    </div>
+    <div class="test-panel-body" id="preview-dark">
+      <section class="huk-fc-section" style="background:#0f172a; color:#f1f5f9;">
+        <div class="huk-fc-section-container" style="max-width:100%; padding:0 16px;">
+          <div class="huk-fc-section-header">
+            <h2 class="huk-fc-section-title">🎣 Current Fishing Conditions</h2>
+            <span class="huk-fc-section-sub">Local weather, tides &amp; fishing score</span>
+          </div>
+          <div class="huk-fc-section-body" style="background:#1e293b; color:#f1f5f9;">
+            <div class="huk-fc-inner huk-fc-section-body-content"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Floating widget preview -->
+  <div class="test-panel">
+    <div class="test-panel-label">
+      <div class="dot green"></div>
+      Floating Widget (FAB) — Panel Preview
+    </div>
+    <div class="test-panel-body" style="padding:16px;">
+      <p style="font-size:13px;color:#64748b;margin:0 0 12px;">
+        The floating 🎣 button appears fixed in the bottom-right corner of this page.<br>
+        Click it to open the panel. Below is an always-open preview of the panel content:
+      </p>
+      <div style="border:1px solid #e2e8f0; border-radius:12px; overflow:hidden; max-width:340px;">
+        <div style="background:#f8fafc; padding:12px 14px; border-bottom:1px solid #e2e8f0; font-weight:600; font-size:14px;">
+          🎣 Fishing Conditions
+        </div>
+        <div class="huk-fc-float-body" style="padding:16px;">
+          <div class="huk-fc-inner huk-fc-float-content" style="flex-direction:column; gap:16px;"></div>
+        </div>
+        <div style="padding:8px 14px 10px; font-size:10px; color:#94a3b8; text-align:center;">
+          Weather: Open-Meteo · Tides: NOAA CO-OPS
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Raw data inspector -->
+  <div class="test-panel">
+    <div class="test-panel-label">
+      <div class="dot"></div>
+      Raw API Response
+    </div>
+    <div class="test-panel-body">
+      <pre id="raw-data" style="margin:0; padding:16px; font-size:11px; font-family:monospace; overflow:auto; max-height:400px; background:#f8fafc; color:#334155;">
+Waiting for data...
+      </pre>
+    </div>
+  </div>
+
+</div>
+
+<!-- Widget JS (loaded from sibling assets folder) -->
+<script src="../assets/fishing-conditions.js"></script>
+
+<!-- ── Test Harness ── -->
+<script>
+  // ── Logging ──────────────────────────────────────────────
+  function log(msg, type = 'info') {
+    const el = document.getElementById('test-log');
+    const entry = document.createElement('div');
+    entry.className = `log-entry log-${type}`;
+    const ts = new Date().toLocaleTimeString();
+    entry.textContent = `[${ts}] ${msg}`;
+    el.appendChild(entry);
+    el.scrollTop = el.scrollHeight;
+  }
+
+  function setDot(id, state) {
+    const el = document.getElementById(id);
+    if (el) { el.className = `status-dot ${state}`; }
+  }
+
+  // ── Location mock ─────────────────────────────────────────
+  let mockLat = null, mockLon = null;
+  let originalGetCurrentPosition = null;
+
+  function testMockLocation(lat, lon, label) {
+    mockLat = lat; mockLon = lon;
+    document.getElementById('test-coords').textContent = `${label} (${lat}, ${lon})`;
+    log(`Mock location set: ${label} (${lat}, ${lon})`, 'info');
+
+    // Patch geolocation
+    if (!originalGetCurrentPosition) {
+      originalGetCurrentPosition = navigator.geolocation.getCurrentPosition.bind(navigator.geolocation);
+    }
+    navigator.geolocation.getCurrentPosition = (success, error, opts) => {
+      log('Geolocation: using mock coordinates', 'ok');
+      setDot('dot-geo', 'ok');
+      success({ coords: { latitude: lat, longitude: lon, accuracy: 10 } });
+    };
+
+    testClearCache();
+    testRefresh();
+  }
+
+  // ── Cache ─────────────────────────────────────────────────
+  function testClearCache() {
+    sessionStorage.removeItem('huk_fishing_conditions');
+    log('Session cache cleared', 'info');
+  }
+
+  // ── Refresh ───────────────────────────────────────────────
+  function testRefresh() {
+    testClearCache();
+    log('Fetching fresh data...', 'info');
+    setDot('dot-geo', 'pend');
+    setDot('dot-weather', 'pend');
+    setDot('dot-tides', 'pend');
+    // Use the widget's public API — reload() clears cache and re-fetches all containers
+    window.HukFishingConditions.reload();
+  }
+
+  // ── Intercept fetch for logging ───────────────────────────
+  const _origFetch = window.fetch;
+  window.fetch = function(url, opts) {
+    const isWeather = typeof url === 'string' && url.includes('open-meteo');
+    const isTides   = typeof url === 'string' && url.includes('tidesandcurrents');
+
+    if (isWeather) { log(`→ Open-Meteo request`, 'info'); setDot('dot-weather', 'pend'); }
+    if (isTides)   { log(`→ NOAA CO-OPS request`, 'info'); setDot('dot-tides', 'pend'); }
+
+    return _origFetch(url, opts).then(res => {
+      if (isWeather) {
+        if (res.ok) { log('✓ Open-Meteo: 200 OK', 'ok'); setDot('dot-weather', 'ok'); }
+        else        { log(`✗ Open-Meteo: ${res.status}`, 'err'); setDot('dot-weather', 'err'); }
+      }
+      if (isTides) {
+        if (res.ok) { log('✓ NOAA CO-OPS: 200 OK', 'ok'); setDot('dot-tides', 'ok'); }
+        else        { log(`✗ NOAA CO-OPS: ${res.status}`, 'err'); setDot('dot-tides', 'err'); }
+      }
+      return res;
+    }).catch(err => {
+      if (isWeather) { log(`✗ Open-Meteo error: ${err.message}`, 'err'); setDot('dot-weather', 'err'); }
+      if (isTides)   { log(`✗ NOAA error: ${err.message}`, 'err'); setDot('dot-tides', 'err'); }
+      throw err;
+    });
+  };
+
+  // ── Raw data display ──────────────────────────────────────
+  document.addEventListener('huk-fc-data', (e) => {
+    const { weather, tides, station, score } = e.detail;
+    const display = {
+      station,
+      score,
+      current: weather.current,
+      wave_height_m: weather.hourly?.wave_height?.[0],
+      water_temp_c: weather.hourly?.water_temperature?.[0],
+      tides_today: tides,
+    };
+    document.getElementById('raw-data').textContent =
+      JSON.stringify(display, null, 2);
+    log(`Fishing score: ${score}/100`, score >= 60 ? 'ok' : 'info');
+    log(`Station: ${station.name} (${station.distKm} km away)`, 'info');
+  });
+
+  // ── Geolocation status (real) ────────────────────────────
+  if (mockLat === null) {
+    navigator.permissions?.query({ name: 'geolocation' }).then(result => {
+      if (result.state === 'granted') setDot('dot-geo', 'ok');
+      else if (result.state === 'denied') setDot('dot-geo', 'err');
+      else setDot('dot-geo', 'pend');
+    }).catch(() => {});
+  }
+
+  log('Test harness ready. Use buttons above to test with mock locations or live GPS.', 'info');
+</script>
+
+<!-- Floating widget (same as it would appear on live site) -->
+<div class="huk-fc-float-wrap" role="complementary" aria-label="Fishing conditions widget">
+  <div
+    id="huk-fc-float-panel"
+    class="huk-fc-float-panel"
+    role="dialog"
+    aria-label="Local fishing conditions"
+    style="background:#fff; color:#0f172a;"
+  >
+    <div class="huk-fc-float-header">
+      <span class="huk-fc-float-title">🎣 Fishing Conditions</span>
+      <button id="huk-fc-float-close" class="huk-fc-float-close" aria-label="Close" type="button">✕</button>
+    </div>
+    <div class="huk-fc-float-body">
+      <div class="huk-fc-inner"></div>
+    </div>
+    <div class="huk-fc-float-footer">Weather: Open-Meteo · Tides: NOAA CO-OPS</div>
+  </div>
+  <button
+    id="huk-fc-fab"
+    class="huk-fc-fab"
+    type="button"
+    aria-label="Show local fishing conditions"
+    aria-expanded="false"
+    title="Local Fishing Conditions"
+    style="background:#0ea5e9;"
+  >🎣</button>
+</div>
+
+</body>
+</html>
