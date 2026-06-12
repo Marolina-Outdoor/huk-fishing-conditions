@@ -1,0 +1,23 @@
+<div class="side-panel search-drawer" tabindex="-1" id="Search-Drawer" role="dialog" aria-modal="true" aria-labelledby="search-drawer-title">
+	<div class="side-panel-inner">
+		<div class="side-panel-header">
+			<div>
+				<form role="search" method="get" class="searchform" action="{{ routes.search_url }}">
+					<fieldset>
+						<label id="search-drawer-title" for="side-panel-search-input">{{ 'sections.header.search' | t }}</label>
+						<input id="side-panel-search-input" type="search" class="search-field frenzy_search_suggest frenzy_search_suggest_auto_focus" placeholder="{{ 'sections.header.search_for' | t | escape }}" value="{{ search.terms | replace: '*', '' }}" name="q" autocomplete="off" aria-required="true" aria-invalid="false" aria-describedby="search-input-error">
+					</fieldset>
+					<span id="search-input-error" role="alert" aria-live="polite" class="search-error-msg" style="display:block;color:#c0392b;font-size:13px;padding:4px 0 0;min-height:1em;"></span>
+				</form>
+				<side-panel-close class="side-panel-close" aria-label="{{ 'accessibility.close' | t }}">{%- render 'svg-icons' with 'close' -%}</side-panel-close>
+			</div>
+		</div>
+        <div class="frenzy-suggest-wrapper"></div>
+
+	</div>
+</div>
+
+<link rel="stylesheet" href="{{ 'predictive-search.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>
+	{{ 'predictive-search.css' | asset_url | stylesheet_tag }}
+</noscript>
