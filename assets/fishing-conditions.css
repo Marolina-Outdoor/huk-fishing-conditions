@@ -909,3 +909,275 @@
   .huk-fc-fab { animation: none; }
   .huk-fc-float-panel { transition: none; }
 }
+
+/* ── Tabs ─────────────────────────────────────────────────────── */
+.huk-fc-tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  margin: 0 -16px 0;
+  padding: 0 16px;
+  gap: 0;
+}
+
+.huk-fc-tab {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px 14px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: border-color 0.15s;
+  color: rgba(255,255,255,0.55);
+  font-family: inherit;
+}
+
+.huk-fc-tab.active {
+  border-bottom-color: #22c55e;
+  color: #fff;
+}
+
+.huk-fc-tab-name {
+  font-family: 'Styrene A', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.huk-fc-tab-meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.huk-fc-tab-best {
+  font-size: 10px;
+  font-weight: 600;
+  color: #22c55e;
+  letter-spacing: 0.02em;
+}
+
+.huk-fc-tab-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: huk-fc-pulse 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* ── Panes ────────────────────────────────────────────────────── */
+.huk-fc-pane { display: block; }
+.huk-fc-pane-hidden { display: none; }
+
+/* ── Why? button ──────────────────────────────────────────────── */
+.huk-fc-why-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.55);
+  border-bottom: 1px dashed rgba(255,255,255,0.4);
+  padding: 0;
+  line-height: 1.2;
+  margin-left: auto;
+  font-family: inherit;
+  transition: color 0.15s;
+}
+
+.huk-fc-why-btn:hover { color: rgba(255,255,255,0.9); }
+
+.huk-fc-stat-hd {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+/* ── Info drawer ──────────────────────────────────────────────── */
+.huk-fc-info-drawer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.25s ease;
+  margin: 0 -16px;
+}
+
+.huk-fc-info-drawer.open {
+  max-height: 240px;
+}
+
+.huk-fc-info-drawer-inner {
+  background: rgba(255,255,255,0.07);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 12px 16px;
+}
+
+.huk-fc-info-drawer-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.huk-fc-info-drawer-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  font-family: 'Styrene A', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.huk-fc-info-close {
+  background: rgba(255,255,255,0.15);
+  border: none;
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #fff;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.huk-fc-info-close:hover { background: rgba(255,255,255,0.28); }
+
+.huk-fc-info-drawer-body { font-size: 11px; color: rgba(255,255,255,0.8); }
+
+.huk-fc-info-why {
+  margin: 0 0 8px;
+  line-height: 1.45;
+}
+
+.huk-fc-score-bar-wrap { margin-bottom: 8px; }
+
+.huk-fc-score-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 4px;
+}
+
+.huk-fc-score-bar-val { font-weight: 700; color: #fff; }
+
+.huk-fc-score-bar-track {
+  height: 5px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.huk-fc-score-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.huk-fc-sweet-spot {
+  font-size: 10px;
+  color: rgba(255,255,255,0.55);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 6px;
+  line-height: 1.4;
+}
+
+/* ── 7-Day pane ───────────────────────────────────────────────── */
+.huk-fc-7day { padding: 12px 0 4px; }
+
+.huk-fc-best-callout {
+  font-size: 11px;
+  font-weight: 700;
+  color: #22c55e;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.huk-fc-best-callout::before {
+  content: '★';
+  font-size: 10px;
+}
+
+.huk-fc-7day-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.huk-fc-7day-card {
+  display: grid;
+  grid-template-columns: 38px 1fr 28px 36px;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.huk-fc-7day-card:last-child { border-bottom: none; }
+
+.huk-fc-7day-card.best-day .huk-fc-7day-name { color: #22c55e; font-weight: 700; }
+
+.huk-fc-7day-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  font-family: 'Styrene A', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.huk-fc-7day-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.huk-fc-7day-bar-track {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.huk-fc-7day-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+}
+
+.huk-fc-7day-score-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  min-width: 22px;
+  text-align: right;
+}
+
+.huk-fc-7day-icon {
+  font-size: 16px;
+  text-align: center;
+}
+
+.huk-fc-7day-conf-note {
+  font-size: 9px;
+  color: rgba(255,255,255,0.35);
+  text-align: right;
+  line-height: 1.2;
+}

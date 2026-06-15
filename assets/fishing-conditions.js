@@ -10,8 +10,18 @@
 (function () {
   'use strict';
 
-  const CACHE_KEY = 'huk_fishing_conditions_v2';
+  const CACHE_KEY = 'huk_fishing_conditions_v3';
   const CACHE_TTL = 30 * 60 * 1000; // 30 minutes
+
+  const CONDITION_INFO = {
+    wind:          { icon: '💨', title: 'Why Wind Matters',          sweetSpot: 'Ideal: 5–15 mph. Calmer than 5 can be glassy and spooky. Above 25 mph most anglers call it a day.',                                                                            weight: '14%' },
+    tide:          { icon: '🌊', title: 'Why Tide Matters',          sweetSpot: 'Best: Incoming within 2 hrs of high, or outgoing within 2 hrs of low. Slack water (±30 min of the change) scores lowest.',                                                       weight: '17%' },
+    current:       { icon: '🔄', title: 'Why Current Matters',       sweetSpot: 'Ideal: 0.5–1.5 knots. Too slow and fish have time to inspect the bait. Faster than 3 knots and most presentations lose their action.',                                          weight: '15%' },
+    seaSurfaceTemp:{ icon: '🌡️', title: 'Why Water Temp Matters',    sweetSpot: 'General saltwater sweet spot: 65–84°F. Below 55°F most inshore fish become sluggish. Above 88°F oxygen stress sets in.',                                                        weight: '18%' },
+    surf:          { icon: '🏄', title: 'Why Surf Matters',          sweetSpot: 'Ideal: Under 2 ft for shore or kayak; under 4 ft for small boats. Above 6 ft conditions become dangerous for most nearshore fishing.',                                           weight: '10%' },
+    pressure:      { icon: '📊', title: 'Why Pressure Matters',      sweetSpot: 'Best: Slowly falling pressure over 3–6 hrs. Stable high pressure is also good. Rapid drops or rapid rises both tend to shut down feeding.',                                      weight: '12%' },
+    visibility:    { icon: '👁️', title: 'Why Sky Conditions Matter', sweetSpot: 'Overcast and partly cloudy typically score higher than full sun. Fog and heavy rain reduce visibility enough to hurt most presentations.',                                        weight: '8%'  },
+  };
 
   // ── NOAA tide stations ──────────────────────────────────────
   // [lat, lon, stationId, label]
@@ -571,8 +581,8 @@
 
   // ── API fetches ─────────────────────────────────────────────
   async function fetchWeather(lat, lon) {
-    const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m,relative_humidity_2m,cloud_cover,surface_pressure&hourly=surface_pressure&wind_speed_unit=kmh&temperature_unit=fahrenheit&forecast_days=1&timezone=auto`;
-    const marineUrl  = `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lon}&hourly=wave_height,wave_period,sea_surface_temperature&forecast_days=1&timezone=auto`;
+    const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m,relative_humidity_2m,cloud_cover,surface_pressure&hourly=surface_pressure&daily=wind_speed_10m_max,weather_code,precipitation_sum&wind_speed_unit=kmh&temperature_unit=fahrenheit&forecast_days=7&timezone=auto`;
+    const marineUrl  = `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lon}&hourly=wave_height,wave_period,sea_surface_temperature&daily=wave_height_max&forecast_days=7&timezone=auto`;
 
     const [weatherRes, marineRes] = await Promise.all([
       fetch(weatherUrl),
@@ -588,6 +598,8 @@
       weather.hourly.wave_height       = marine.hourly?.wave_height;
       weather.hourly.wave_period       = marine.hourly?.wave_period;
       weather.hourly.water_temperature = marine.hourly?.sea_surface_temperature;
+      weather.daily  = weather.daily  || {};
+      weather.daily.wave_height_max    = marine.daily?.wave_height_max;
     }
 
     return weather;
@@ -597,11 +609,63 @@
     const now = new Date();
     const pad = n => String(n).padStart(2, '0');
     const dateStr = `${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(now.getDate())}`;
-    const url = `https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=${dateStr}&range=24&station=${stationId}&product=predictions&datum=MLLW&time_zone=lst_ldt&interval=hilo&units=english&application=huk_fishing_widget&format=json`;
+    const url = `https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=${dateStr}&range=168&station=${stationId}&product=predictions&datum=MLLW&time_zone=lst_ldt&interval=hilo&units=english&application=huk_fishing_widget&format=json`;
     const res = await fetch(url);
     if (!res.ok) throw new Error('Tide fetch failed');
     const data = await res.json();
     return data.predictions || [];
+  }
+
+  // ── 7-day helpers ───────────────────────────────────────────
+  function computeDayScore(windMaxKph, waveMaxM, weatherCode) {
+    const windMph = windMaxKph * 0.621371;
+    const windS = windMph <= 3 ? 65 : windMph <= 15 ? 90 : windMph <= 20 ? 65 : windMph <= 25 ? 40 : 20;
+    const waveS = waveMaxM == null ? 75 : waveMaxM <= 0.5 ? 83 : waveMaxM <= 1.5 ? 92 : waveMaxM <= 3 ? 65 : waveMaxM <= 5 ? 35 : 15;
+    const wxS   = weatherCode >= 95 ? 15 : weatherCode >= 80 ? 50 : weatherCode >= 61 ? 62 : weatherCode >= 51 ? 72 : 85;
+    let s = Math.round(windS * 0.4 + waveS * 0.3 + wxS * 0.3);
+    if (weatherCode >= 95) s = Math.min(s, 30);
+    return Math.min(Math.max(s, 5), 100);
+  }
+
+  function build7DayPaneHTML(weather) {
+    const daily = weather.daily;
+    if (!daily || !daily.time) return '<div class="huk-fc-7day"><p style="font-size:12px;opacity:.5;padding:12px 0;">7-day forecast not available.</p></div>';
+    const DAYS_SHORT = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const scored = daily.time.map((dateStr, i) => {
+      const d     = new Date(dateStr + 'T12:00:00');
+      const name  = i === 0 ? 'Today' : DAYS_SHORT[d.getDay()];
+      const score = computeDayScore(daily.wind_speed_10m_max?.[i] || 0, daily.wave_height_max?.[i] ?? null, daily.weather_code?.[i] || 0);
+      let color, label;
+      if (score >= 90)      { color = '#22c55e'; label = 'Pack the Cooler'; }
+      else if (score >= 75) { color = '#84cc16'; label = 'Fish On'; }
+      else if (score >= 60) { color = '#f0b429'; label = 'Wet a Line'; }
+      else if (score >= 40) { color = '#f59e0b'; label = 'Keep the Tip Up'; }
+      else if (score >= 20) { color = '#f97316'; label = "Bird's Nest"; }
+      else                   { color = '#ef4444'; label = 'Skunk Watch'; }
+      const conf = i < 2 ? 1.0 : i < 5 ? 0.72 : 0.45;
+      return { name, score, color, label, conf, code: daily.weather_code?.[i] || 0 };
+    });
+    const best = scored.slice(1).reduce((b, d) => d.score > b.score ? d : b, scored[1] || scored[0]);
+    const cards = scored.map((d, i) => `
+      <div class="huk-fc-7day-card${i === 0 ? ' today' : ''}" style="opacity:${d.conf};">
+        <div class="huk-fc-7day-name">${d.name}</div>
+        <div class="huk-fc-7day-score" style="color:${d.color};">${d.score}</div>
+        <div class="huk-fc-7day-bar" style="background:${d.color};width:${d.score}%;"></div>
+        <div class="huk-fc-7day-icon">${weatherCodeIcon(d.code)}</div>
+      </div>`).join('');
+    return `
+      <div class="huk-fc-7day">
+        <div class="huk-fc-best-callout">
+          <span class="huk-fc-best-callout-label">Best day</span>
+          <span class="huk-fc-best-callout-val">${best.name} · ${best.score} · ${best.label}</span>
+        </div>
+        <div class="huk-fc-7day-grid">${cards}</div>
+        <div class="huk-fc-7day-conf-note">
+          <span class="huk-fc-7day-conf-dot" style="background:#16a34a;"></span>Days 1–2 solid
+          <span class="huk-fc-7day-conf-dot" style="background:#f59e0b;margin-left:6px;"></span>Days 3–5 moderate
+          <span class="huk-fc-7day-conf-dot" style="background:#94a3b8;margin-left:6px;"></span>Days 6–7 estimated
+        </div>
+      </div>`;
   }
 
   // ── HTML builders ───────────────────────────────────────────
@@ -724,19 +788,39 @@
     // Pad to 6 if needed (shouldn't happen but be safe)
     while (cards.length < 6) cards.push({ key: 'pad' + cards.length, icon: '—', label: '', val: '—', sub: '' });
 
-    const cardsHTML = cards.map(c => `
-      <div class="huk-fc-stat">
-        <div class="huk-fc-stat-hd"><span class="huk-fc-stat-icon">${c.icon}</span><span class="huk-fc-stat-label">${c.label}</span></div>
+    const cardsHTML = cards.map(c => {
+      const condData = C[c.key];
+      const whyBtn = CONDITION_INFO[c.key] && condData
+        ? `<button type="button" class="huk-fc-why-btn" data-cond="${c.key}" data-score="${condData.score}" data-reason="${(condData.reason || '').replace(/"/g, '&quot;')}">Why?</button>`
+        : '';
+      return `<div class="huk-fc-stat">
+        <div class="huk-fc-stat-hd"><span class="huk-fc-stat-icon">${c.icon}</span><span class="huk-fc-stat-label">${c.label}</span>${whyBtn}</div>
         <strong>${c.val}</strong>
         ${c.sub ? `<span class="huk-fc-stat-sub">${c.sub}</span>` : ''}
-      </div>`).join('');
+      </div>`;
+    }).join('');
 
     const licenseHTML = stateCode ? buildLicenseHTML(stateCode, lat, lon, station.name) : '';
     const tideGraph   = buildTideGraph(tides);
     const confidenceBadge = sc.confidence === 'high' ? '' :
       `<span class="huk-fc-conf huk-fc-conf-${sc.confidence}">${sc.confidence} confidence</span>`;
 
-    return `
+    // Tab teaser — best day from 7-day forecast
+    const DAYS_S = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    let bestDayTeaser = '';
+    if (weather.daily?.time) {
+      let bScore = 0, bName = '';
+      weather.daily.time.slice(1).forEach((ds, idx) => {
+        const i  = idx + 1;
+        const s7 = computeDayScore(weather.daily.wind_speed_10m_max?.[i] || 0, weather.daily.wave_height_max?.[i] ?? null, weather.daily.weather_code?.[i] || 0);
+        if (s7 > bScore) { bScore = s7; bName = DAYS_S[new Date(ds + 'T12:00:00').getDay()]; }
+      });
+      if (bName) bestDayTeaser = `<span class="huk-fc-tab-best">${bName} ${bScore}</span>`;
+    }
+    const seenDot = (() => { try { return !!sessionStorage.getItem('huk_fc_7day_seen'); } catch { return false; } })();
+    const dotHTML = seenDot ? '' : `<span class="huk-fc-tab-dot" aria-hidden="true"></span>`;
+
+    const todayPane = `
       <div class="huk-fc-data">
         <div class="huk-fc-cast-row">
           <div class="huk-fc-score-ring" style="--score-color:${scoreColor}">
@@ -769,6 +853,25 @@
         <div class="huk-fc-stats">
           ${cardsHTML}
         </div>
+        <div class="huk-fc-info-drawer" aria-live="polite">
+          <div class="huk-fc-info-drawer-inner">
+            <div class="huk-fc-info-drawer-hd">
+              <span class="huk-fc-info-drawer-title"></span>
+              <button type="button" class="huk-fc-info-close" aria-label="Close info">✕</button>
+            </div>
+            <div class="huk-fc-info-drawer-body">
+              <p class="huk-fc-info-why"></p>
+              <div class="huk-fc-score-bar-wrap">
+                <div class="huk-fc-score-bar-label">
+                  <span>Sub-score</span>
+                  <span class="huk-fc-score-bar-val"></span>
+                </div>
+                <div class="huk-fc-score-bar-track"><div class="huk-fc-score-bar-fill"></div></div>
+              </div>
+              <div class="huk-fc-sweet-spot"></div>
+            </div>
+          </div>
+        </div>
         ${upcoming.length > 0 ? `
         <div class="huk-fc-tides">
           <div class="huk-fc-tides-title">Today's tide times</div>
@@ -777,6 +880,19 @@
         </div>` : ''}
         ${licenseHTML}
       </div>`;
+
+    return `
+      <div class="huk-fc-tabs" role="tablist">
+        <button class="huk-fc-tab active" data-tab="today" role="tab" aria-selected="true">
+          <span class="huk-fc-tab-name">Today</span>
+        </button>
+        <button class="huk-fc-tab" data-tab="7day" role="tab" aria-selected="false">
+          <span class="huk-fc-tab-name">7-Day</span>
+          ${(bestDayTeaser || dotHTML) ? `<span class="huk-fc-tab-meta">${bestDayTeaser}${dotHTML}</span>` : ''}
+        </button>
+      </div>
+      <div class="huk-fc-pane huk-fc-pane-today" role="tabpanel">${todayPane}</div>
+      <div class="huk-fc-pane huk-fc-pane-7day huk-fc-pane-hidden" role="tabpanel">${build7DayPaneHTML(weather)}</div>`;
   }
 
   function buildLoadingHTML() {
@@ -794,6 +910,72 @@
 
   // ── License section interactivity ───────────────────────────
   // Uses event delegation on the container so it survives re-renders.
+  function attachWidgetHandlers(root) {
+    // Tab switching
+    root.addEventListener('click', function(e) {
+      const tab = e.target.closest('.huk-fc-tab');
+      if (tab) {
+        const tabName = tab.dataset.tab;
+        root.querySelectorAll('.huk-fc-tab').forEach(t => {
+          t.classList.toggle('active', t.dataset.tab === tabName);
+          t.setAttribute('aria-selected', t.dataset.tab === tabName ? 'true' : 'false');
+        });
+        root.querySelectorAll('.huk-fc-pane').forEach(p => {
+          const isToday = p.classList.contains('huk-fc-pane-today');
+          const is7day  = p.classList.contains('huk-fc-pane-7day');
+          if (tabName === 'today') { p.classList.toggle('huk-fc-pane-hidden', !isToday); }
+          else                     { p.classList.toggle('huk-fc-pane-hidden', !is7day);  }
+        });
+        // Dismiss discovery dot
+        if (tabName === '7day') {
+          try { sessionStorage.setItem('huk_fc_7day_seen', '1'); } catch {}
+          const dot = root.querySelector('.huk-fc-tab-dot');
+          if (dot) dot.remove();
+        }
+        return;
+      }
+
+      // Why? button
+      const whyBtn = e.target.closest('.huk-fc-why-btn');
+      if (whyBtn) {
+        const drawer = root.querySelector('.huk-fc-info-drawer');
+        if (!drawer) return;
+        const key = whyBtn.dataset.cond;
+        const info = CONDITION_INFO[key];
+        if (!info) return;
+        const score  = parseInt(whyBtn.dataset.score, 10);
+        const reason = whyBtn.dataset.reason;
+        const scoreColor = getScoreColor(score);
+        const alreadyOpen = drawer.classList.contains('open') && drawer.dataset.cond === key;
+        if (alreadyOpen) {
+          drawer.classList.remove('open');
+          drawer.removeAttribute('data-cond');
+          return;
+        }
+        drawer.dataset.cond = key;
+        drawer.querySelector('.huk-fc-info-drawer-title').textContent = `${info.icon} ${info.title}`;
+        drawer.querySelector('.huk-fc-info-why').textContent = reason || info.sweetSpot;
+        drawer.querySelector('.huk-fc-score-bar-val').textContent = `${score}/100`;
+        const fill = drawer.querySelector('.huk-fc-score-bar-fill');
+        fill.style.width = `${score}%`;
+        fill.style.background = scoreColor;
+        drawer.querySelector('.huk-fc-sweet-spot').textContent = `Sweet spot: ${info.sweetSpot}`;
+        drawer.classList.add('open');
+        return;
+      }
+
+      // Info drawer close button
+      if (e.target.closest('.huk-fc-info-close')) {
+        const drawer = root.querySelector('.huk-fc-info-drawer');
+        if (drawer) { drawer.classList.remove('open'); drawer.removeAttribute('data-cond'); }
+        return;
+      }
+    });
+
+    // Existing license handlers
+    attachLicenseHandlers(root);
+  }
+
   function attachLicenseHandlers(root) {
     root.addEventListener('click', async function handler(e) {
       // Travel toggle
@@ -899,7 +1081,7 @@
       containers.forEach(el => {
         renderInto(el, buildWidgetHTML(...cached));
         markLoaded(el);
-        attachLicenseHandlers(el.querySelector('.huk-fc-inner') || el);
+        attachWidgetHandlers(el.querySelector('.huk-fc-inner') || el);
       });
       return;
     }
@@ -960,7 +1142,7 @@
       containers.forEach(el => {
         renderInto(el, buildWidgetHTML(...args));
         markLoaded(el);
-        attachLicenseHandlers(el.querySelector('.huk-fc-inner') || el);
+        attachWidgetHandlers(el.querySelector('.huk-fc-inner') || el);
       });
 
       document.dispatchEvent(new CustomEvent('huk-fc-data', {
