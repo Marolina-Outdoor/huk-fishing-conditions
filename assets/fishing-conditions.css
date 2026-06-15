@@ -11,6 +11,16 @@
    Fonts: Styrene A (display), Manrope (body) — loaded by theme
    ============================================================ */
 
+/* ── Box-sizing reset (scoped to widget) ───────────────────── */
+.huk-fc-float-wrap *,
+.huk-fc-float-wrap *::before,
+.huk-fc-float-wrap *::after,
+.huk-fc-section *,
+.huk-fc-section *::before,
+.huk-fc-section *::after {
+  box-sizing: border-box;
+}
+
 /* ── CSS custom properties (easy overrides) ────────────────── */
 .huk-fc-section,
 .huk-fc-float-panel,
@@ -134,7 +144,7 @@
 }
 
 /* ── Data column ─────────────────────────────────────────────── */
-.huk-fc-data { flex: 1; min-width: 240px; }
+.huk-fc-data { flex: 1; min-width: 0; }
 
 .huk-fc-weather-row {
   display: flex;
@@ -170,9 +180,14 @@
 /* ── Stats grid ──────────────────────────────────────────────── */
 .huk-fc-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(136px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(136px, 30%), 1fr));
   gap: 8px;
   margin-bottom: 14px;
+}
+
+/* Force 3-col inside the float panel at all sizes */
+.huk-fc-float-body .huk-fc-stats {
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .huk-fc-stat {
@@ -412,7 +427,7 @@
    ============================================================ */
 .huk-fc-float-wrap {
   position: fixed;
-  bottom: 24px;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
   right: 24px;
   z-index: 9000;
   display: flex;
@@ -843,9 +858,54 @@
   .huk-fc-score-ring { align-self: center; }
 
   .huk-fc-float-wrap {
-    bottom: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     right: 16px;
   }
 
   .huk-fc-section-title { font-size: 20px; }
+}
+
+/* Small phones (iPhone SE, Galaxy A series, etc.) */
+@media (max-width: 380px) {
+  .huk-fc-float-panel {
+    max-width: calc(100vw - 24px);
+    border-radius: 10px;
+  }
+
+  .huk-fc-float-wrap {
+    right: 12px;
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .huk-fc-fab-text { font-size: 12px; }
+
+  .huk-fc-cast-row { gap: 10px; }
+
+  .huk-fc-score-ring {
+    width: 62px;
+    height: 62px;
+  }
+
+  .huk-fc-score-num { font-size: 18px; }
+
+  .huk-fc-stat strong { font-size: 12px; }
+}
+
+/* Landscape phone — panel can't be taller than the short viewport */
+@media (max-height: 500px) and (orientation: landscape) {
+  .huk-fc-float-panel {
+    max-height: calc(100vh - 80px);
+    width: min(340px, calc(100vw - 48px));
+  }
+
+  .huk-fc-float-wrap {
+    bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+    right: max(16px, env(safe-area-inset-right, 16px));
+  }
+}
+
+/* Respect user preference — no animation */
+@media (prefers-reduced-motion: reduce) {
+  .huk-fc-fab { animation: none; }
+  .huk-fc-float-panel { transition: none; }
 }
