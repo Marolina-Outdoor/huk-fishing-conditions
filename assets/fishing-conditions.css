@@ -1361,3 +1361,7 @@
   .huk-fc-license-btns .huk-fc-btn { width:100%; }
   .huk-fc-frows { flex-direction:column; }
 }
+
+/* 7-day pane needs its own horizontal padding (container padding now 0) */
+.huk-fc-pane-7day { padding: 4px 16px 8px; }
+.huk-fc-pane-7day .huk-fc-7day { padding-left: 0; padding-right: 0; }
