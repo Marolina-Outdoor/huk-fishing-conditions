@@ -523,20 +523,20 @@
     const overallScore = clamp(Math.round(weighted), 0, 100);
 
     let overallLabel, overallColor;
-    if (overallScore >= 90) { overallLabel = 'Pack the Cooler'; overallColor = '#22c55e'; }
-    else if (overallScore >= 75) { overallLabel = 'Fish On';         overallColor = '#84cc16'; }
-    else if (overallScore >= 60) { overallLabel = 'Wet a Line';      overallColor = '#f0b429'; }
-    else if (overallScore >= 40) { overallLabel = 'Keep the Tip Up'; overallColor = '#f59e0b'; }
-    else if (overallScore >= 20) { overallLabel = "Bird's Nest";     overallColor = '#f97316'; }
-    else                          { overallLabel = 'Skunk Watch';     overallColor = '#ef4444'; }
+    if (overallScore >= 90) { overallLabel = 'Drop Everything'; overallColor = '#22c55e'; }
+    else if (overallScore >= 75) { overallLabel = 'Fish On';        overallColor = '#84cc16'; }
+    else if (overallScore >= 60) { overallLabel = 'Worth the Trip'; overallColor = '#f0b429'; }
+    else if (overallScore >= 40) { overallLabel = 'Grind It Out';   overallColor = '#f59e0b'; }
+    else if (overallScore >= 20) { overallLabel = 'Slow Pick';      overallColor = '#f97316'; }
+    else                          { overallLabel = 'Skunked';        overallColor = '#ef4444'; }
 
     const taglines = {
-      'Pack the Cooler':  'Conditions are dialed. Get out there.',
-      'Fish On':          'Good window with strong potential.',
-      'Wet a Line':       'Fishable, but stay sharp.',
-      'Keep the Tip Up':  'Mixed conditions. Timing matters.',
-      "Bird's Nest":      'Tough conditions and low confidence.',
-      'Skunk Watch':      'Rough day. Expectations low.',
+      'Drop Everything':  'About as good as it gets. Go.',
+      'Fish On':          'Strong conditions with real potential.',
+      'Worth the Trip':   'Solid window with the right approach.',
+      'Grind It Out':     'Mixed bag — timing and technique matter.',
+      'Slow Pick':        'Tough bite. Manage expectations.',
+      'Skunked':          'Rough day. Maybe scout instead.',
     };
 
     const confidence = entries.length >= 6 ? 'high' : entries.length >= 4 ? 'medium' : 'low';
@@ -646,12 +646,12 @@
       const name  = i === 0 ? 'Today' : DAYS_SHORT[d.getDay()];
       const score = computeDayScore(daily.wind_speed_10m_max?.[i] || 0, daily.wave_height_max?.[i] ?? null, daily.weather_code?.[i] || 0);
       let color, label;
-      if (score >= 90)      { color = '#22c55e'; label = 'Pack the Cooler'; }
+      if (score >= 90)      { color = '#22c55e'; label = 'Drop Everything'; }
       else if (score >= 75) { color = '#84cc16'; label = 'Fish On'; }
-      else if (score >= 60) { color = '#f0b429'; label = 'Wet a Line'; }
-      else if (score >= 40) { color = '#f59e0b'; label = 'Keep the Tip Up'; }
-      else if (score >= 20) { color = '#f97316'; label = "Bird's Nest"; }
-      else                   { color = '#ef4444'; label = 'Skunk Watch'; }
+      else if (score >= 60) { color = '#f0b429'; label = 'Worth the Trip'; }
+      else if (score >= 40) { color = '#f59e0b'; label = 'Grind It Out'; }
+      else if (score >= 20) { color = '#f97316'; label = 'Slow Pick'; }
+      else                   { color = '#ef4444'; label = 'Skunked'; }
       const conf = i < 2 ? 1.0 : i < 5 ? 0.72 : 0.45;
       return { name, score, color, label, conf, code: daily.weather_code?.[i] || 0 };
     });
