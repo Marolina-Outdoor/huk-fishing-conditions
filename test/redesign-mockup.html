@@ -11,242 +11,217 @@
   @font-face { font-family:'Manrope'; src:url('../assets/Manrope-VariableFont_wght.ttf') format('truetype'); font-weight:300 800; font-display:swap; }
 
   * { box-sizing:border-box; margin:0; padding:0; }
-  body {
-    font-family:'Manrope', system-ui, sans-serif;
-    background:#eef2f6; color:#17314b; min-height:100vh;
-    padding:32px 16px 64px; display:flex; flex-direction:column; align-items:center; gap:14px;
-  }
-  .page-title { font-family:'Styrene A',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.04em; font-size:13px; color:#64748b; margin-bottom:2px; text-align:center; }
-  .compare { display:flex; gap:28px; flex-wrap:wrap; justify-content:center; align-items:flex-start; }
-  .col { display:flex; flex-direction:column; align-items:center; gap:10px; }
-  .col-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:#94a3b8; }
+  body { font-family:'Manrope',system-ui,sans-serif; background:#eef2f6; color:#17314b; min-height:100vh; padding:28px 16px 64px; display:flex; flex-direction:column; align-items:center; gap:16px; }
+  .page-title { font-family:'Styrene A',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.04em; font-size:13px; color:#64748b; text-align:center; }
 
-  .w { width:380px; max-width:calc(100vw - 32px); border-radius:22px; overflow:hidden; background:#fff;
-       box-shadow:0 18px 50px rgba(15,76,129,.18), 0 2px 8px rgba(15,76,129,.08); }
+  /* demo control */
+  .demo { display:flex; gap:6px; background:#fff; border:1px solid #dbe4ec; border-radius:30px; padding:4px; }
+  .demo button { border:none; background:none; cursor:pointer; font-family:'Styrene A',sans-serif; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:#64748b; padding:7px 16px; border-radius:24px; }
+  .demo button.on { background:#0f4c81; color:#fff; }
+  .demo-note { font-size:11px; color:#94a3b8; max-width:380px; text-align:center; }
 
-  /* ---- HERO (refined, atmospheric) ---- */
-  .hero {
-    position:relative; padding:18px 20px 22px; color:#fff;
+  .w { width:382px; max-width:calc(100vw - 32px); border-radius:22px; overflow:hidden; background:#fff; box-shadow:0 18px 50px rgba(15,76,129,.18),0 2px 8px rgba(15,76,129,.08); }
+
+  /* tabs */
+  .tabs { display:flex; border-bottom:1px solid #e8edf2; padding:0 16px; }
+  .tab { background:none; border:none; cursor:pointer; padding:13px 16px 11px; display:flex; flex-direction:column; align-items:flex-start; gap:3px; border-bottom:2px solid transparent; margin-bottom:-1px; color:#94a3b8; font-family:inherit; }
+  .tab.on { border-bottom-color:#16a34a; color:#0e4174; }
+  .tab .nm { font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; letter-spacing:.04em; text-transform:uppercase; line-height:1; }
+  .tab .meta { font-size:10px; font-weight:700; color:#16a34a; letter-spacing:.02em; }
+
+  /* hero */
+  .hero { position:relative; padding:18px 20px 22px; color:#fff;
     background:
       radial-gradient(95% 75% at 82% 112%, rgba(63,143,47,.72), rgba(63,143,47,0) 60%),
       radial-gradient(120% 85% at 18% -12%, rgba(255,255,255,.17), rgba(255,255,255,0) 55%),
-      linear-gradient(165deg, #0b3766 0%, #0f4c81 55%, #14527f 100%);
-  }
-  .hero::after { content:''; position:absolute; inset:0; pointer-events:none;
-    box-shadow:inset 0 -30px 40px -20px rgba(0,0,0,.25); }
-  .hero-top { position:relative; display:flex; justify-content:space-between; align-items:center;
-    font-size:12px; font-weight:600; color:rgba(255,255,255,.82); }
-  .hero-top .loc { display:flex; align-items:center; gap:5px; }
-  .hero-top svg { width:13px; height:13px; }
-
+      linear-gradient(165deg, #0b3766 0%, #0f4c81 55%, #14527f 100%); }
+  .hero::after { content:''; position:absolute; inset:0; pointer-events:none; box-shadow:inset 0 -30px 40px -20px rgba(0,0,0,.25); }
+  .hero-top { position:relative; display:flex; justify-content:space-between; align-items:center; font-size:12px; font-weight:600; color:rgba(255,255,255,.82); }
+  .hero-top .loc { display:flex; align-items:center; gap:5px; } .hero-top svg { width:13px; height:13px; }
   .score-block { position:relative; text-align:center; padding:10px 0 4px; }
   .score-num { font-family:'Styrene A',sans-serif; font-weight:900; font-size:88px; line-height:.9; letter-spacing:-.02em; text-shadow:0 3px 18px rgba(0,0,0,.22); }
   .score-verdict { font-family:'Styrene A',sans-serif; font-weight:700; font-size:19px; text-transform:uppercase; letter-spacing:.08em; margin-top:8px; }
   .score-tagline { font-size:13px; color:rgba(255,255,255,.85); margin-top:5px; font-weight:500; }
-
   .score-track { position:relative; height:5px; border-radius:3px; background:rgba(255,255,255,.22); margin:16px 4px 0; }
   .score-track .fill { position:absolute; left:0; top:0; bottom:0; border-radius:3px; background:#fff; }
   .score-track .dot { position:absolute; top:50%; width:11px; height:11px; border-radius:50%; background:#fff; transform:translate(-50%,-50%); box-shadow:0 0 0 3px rgba(255,255,255,.3); }
   .score-scale { display:flex; justify-content:space-between; font-size:9px; color:rgba(255,255,255,.6); margin:5px 4px 0; font-weight:600; letter-spacing:.03em; }
-
   .hero-weather { position:relative; display:flex; align-items:center; justify-content:space-between; margin-top:18px; padding-top:14px; border-top:1px solid rgba(255,255,255,.16); }
-  .hero-weather .cond { display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; }
-  .hero-weather .cond svg { width:20px; height:20px; }
+  .hero-weather .cond { display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; } .hero-weather .cond svg { width:20px; height:20px; }
   .hero-weather .temp { font-family:'Styrene A',sans-serif; font-weight:700; font-size:26px; }
 
-  /* ---- CONDITIONS (restructured: chip top-right) ---- */
+  /* summary */
   .summary { padding:14px 20px 4px; font-size:13px; line-height:1.45; color:#3a536b; }
   .summary b { color:#0e4174; font-weight:700; }
+
+  /* conditions */
   .grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:12px 16px 6px; }
-  .cell { border:1px solid #e4ebf2; border-radius:14px; padding:12px 13px; display:flex; flex-direction:column; gap:8px; background:#fbfcfe; }
+  .cell { position:relative; border:1px solid #e4ebf2; border-radius:14px; padding:12px 13px; display:flex; flex-direction:column; gap:8px; background:#fbfcfe; }
   .cell-top { display:flex; align-items:center; justify-content:space-between; gap:6px; }
   .cell-id { display:flex; align-items:center; gap:8px; min-width:0; }
-  .cell-id .ic { width:30px; height:30px; border-radius:9px; display:flex; align-items:center; justify-content:center; background:rgba(15,76,129,.07); color:#0f4c81; flex-shrink:0; }
-  .cell-id .ic svg { width:18px; height:18px; }
+  .cell-id .ic { width:30px; height:30px; border-radius:9px; display:flex; align-items:center; justify-content:center; background:rgba(15,76,129,.07); color:#0f4c81; flex-shrink:0; } .cell-id .ic svg { width:18px; height:18px; }
   .cell-id .lab { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:#64748b; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .info { background:none; border:none; cursor:pointer; padding:1px; color:#9fb0c1; flex-shrink:0; display:flex; } .info svg { width:15px; height:15px; } .info:hover, .info.on { color:#0f4c81; }
   .chip { font-size:9.5px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; padding:3px 7px; border-radius:20px; flex-shrink:0; }
-  .chip.good { background:rgba(34,197,94,.13); color:#15803d; }
-  .chip.fair { background:rgba(240,180,41,.16); color:#a16207; }
-  .chip.poor { background:rgba(239,68,68,.13); color:#b91c1c; }
+  .chip.good { background:rgba(34,197,94,.13); color:#15803d; } .chip.fair { background:rgba(240,180,41,.16); color:#a16207; } .chip.poor { background:rgba(239,68,68,.13); color:#b91c1c; }
   .cell-val { font-family:'Styrene A',sans-serif; font-weight:700; font-size:18px; color:#0e4174; line-height:1; }
   .cell-sub { font-size:11px; color:#7c8da0; line-height:1.2; }
 
-  /* ---- TIDE CHART ---- */
-  .tide { padding:10px 18px 6px; border-top:1px solid #eef2f6; margin:8px 0 0; }
-  .tide-hd { display:flex; align-items:center; justify-content:space-between; margin-bottom:4px; }
-  .tide-hd .t { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:#64748b; }
-  .tide-hd .now { font-size:10px; font-weight:600; color:#b91c1c; display:flex; align-items:center; gap:4px; }
-  .tide-hd .now::before { content:''; width:8px; height:2px; background:repeating-linear-gradient(90deg,#dc2626 0 2px,transparent 2px 4px); display:inline-block; }
-  .tide-chart svg { width:100%; height:auto; display:block; }
-  .tide-rows { display:flex; gap:10px; margin-top:6px; }
-  .tide-row { flex:1; display:flex; align-items:center; gap:7px; background:#f6f9fc; border:1px solid #e9eff4; border-radius:10px; padding:8px 10px; }
-  .tide-row .ar { font-size:11px; }
-  .tide-row.hi .ar { color:#0f4c81; } .tide-row.lo .ar { color:#29ABE2; }
-  .tide-row .lab { font-size:10px; color:#7c8da0; font-weight:600; line-height:1.1; }
-  .tide-row .time { font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; color:#0e4174; line-height:1.1; }
-  .tide-row .ht { margin-left:auto; font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; color:#0f4c81; }
+  /* info drawer */
+  .drawer { grid-column:1/-1; background:#f3f7fb; border:1px solid #e1e9f1; border-radius:14px; padding:0 14px; max-height:0; overflow:hidden; transition:max-height .25s, padding .25s; }
+  .drawer.open { max-height:230px; padding:13px 14px; }
+  .drawer-hd { display:flex; align-items:center; justify-content:space-between; margin-bottom:7px; }
+  .drawer-ti { font-family:'Styrene A',sans-serif; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:#0e4174; }
+  .drawer-x { width:22px; height:22px; border-radius:50%; border:1px solid #d3dde7; background:#fff; cursor:pointer; color:#64748b; font-size:11px; display:flex; align-items:center; justify-content:center; }
+  .drawer-why { font-size:11.5px; color:#3a536b; line-height:1.45; margin-bottom:8px; }
+  .drawer-barhd { display:flex; justify-content:space-between; font-size:10px; color:#7c8da0; margin-bottom:4px; } .drawer-barhd b { color:#0e4174; }
+  .drawer-bartrack { height:5px; background:#e1e9f1; border-radius:3px; overflow:hidden; } .drawer-barfill { height:100%; border-radius:3px; }
+  .drawer-sweet { font-size:10.5px; color:#7c8da0; border-top:1px solid #e1e9f1; padding-top:6px; margin-top:8px; line-height:1.4; }
 
-  /* ---- CTA ---- */
-  .cta { padding:14px 20px 20px; }
+  /* tide chart */
+  .panel { padding:10px 18px 6px; border-top:1px solid #eef2f6; margin-top:8px; }
+  .panel-hd { display:flex; align-items:center; justify-content:space-between; margin-bottom:4px; }
+  .panel-hd .t { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:#64748b; }
+  .panel-hd .now { font-size:10px; font-weight:600; color:#b91c1c; }
+  .chart svg { width:100%; height:auto; display:block; }
+  .rows { display:flex; gap:10px; margin-top:6px; }
+  .row2 { flex:1; display:flex; align-items:center; gap:7px; background:#f6f9fc; border:1px solid #e9eff4; border-radius:10px; padding:8px 10px; }
+  .row2 .ar { font-size:11px; } .row2.hi .ar{color:#0f4c81;} .row2.lo .ar{color:#29ABE2;} .row2.maj .ar{color:#16a34a;} .row2.min .ar{color:#65a30d;}
+  .row2 .lab { font-size:10px; color:#7c8da0; font-weight:600; line-height:1.1; }
+  .row2 .time { font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; color:#0e4174; line-height:1.1; }
+  .row2 .ht { margin-left:auto; font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; color:#0f4c81; }
+
+  /* solunar timeline */
+  .sol-track { position:relative; height:34px; background:#f1f6fa; border-radius:8px; overflow:hidden; margin-top:2px; }
+  .sol-band { position:absolute; top:0; bottom:0; }
+  .sol-band.maj { background:rgba(22,163,74,.28); } .sol-band.min { background:rgba(101,163,13,.18); }
+  .sol-now { position:absolute; top:-2px; bottom:-2px; width:0; border-left:1.5px dashed #dc2626; }
+  .sol-ticks { display:flex; justify-content:space-between; font-size:9px; color:#a8b4c2; font-weight:600; margin-top:3px; padding:0 2px; }
+
+  /* license + travel */
+  .cta { padding:14px 20px 6px; }
   .cta-q { font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; color:#0e4174; }
   .cta-loc { font-size:11px; color:#94a3b8; margin:2px 0 12px; }
   .cta-btns { display:flex; gap:8px; }
   .btn { flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:11px; border-radius:10px; font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; text-decoration:none; cursor:pointer; border:none; }
-  .btn-pri { background:#0f4c81; color:#fff; }
-  .btn-sec { background:#eef3f8; color:#0e4174; }
-  .btn svg { width:14px; height:14px; }
+  .btn-pri { background:#0f4c81; color:#fff; } .btn-sec { background:#eef3f8; color:#0e4174; } .btn svg { width:14px; height:14px; }
+  .travel { margin:12px 20px 18px 20px; border-top:1px solid #eef2f6; padding-top:10px; }
+  .travel-toggle { width:100%; background:none; border:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:8px; padding:4px 0; font-family:inherit; }
+  .travel-toggle .tt { font-size:13px; color:#0e4174; } .travel-toggle .tt b { font-weight:700; } .travel-toggle .tt span { color:#94a3b8; font-weight:500; }
+  .travel-toggle .chev { color:#94a3b8; font-size:16px; transition:transform .2s; }
+  .travel.open .chev { transform:rotate(90deg); }
+  .travel-body { max-height:0; overflow:hidden; transition:max-height .25s; }
+  .travel.open .travel-body { max-height:160px; }
+  .travel-hint { font-size:11px; color:#7c8da0; margin:8px 0 8px; }
+  .zip-row { display:flex; gap:8px; }
+  .zip-row input { flex:1; border:1px solid #dbe4ec; border-radius:8px; padding:9px 11px; font-family:inherit; font-size:13px; }
+  .zip-row button { background:#0f4c81; color:#fff; border:none; border-radius:8px; padding:0 16px; font-family:'Styrene A',sans-serif; font-weight:700; font-size:12px; cursor:pointer; }
 
-  /* ---- 7-DAY ---- */
-  .hero7 { position:relative; padding:16px 20px 16px; color:#fff;
-    background:
-      radial-gradient(90% 90% at 85% 120%, rgba(63,143,47,.55), rgba(63,143,47,0) 60%),
-      linear-gradient(160deg, #0b3766 0%, #0f4c81 70%); }
-  .hero7-top { display:flex; justify-content:space-between; align-items:baseline; }
-  .hero7-title { font-family:'Styrene A',sans-serif; font-weight:700; font-size:16px; text-transform:uppercase; letter-spacing:.06em; }
-  .hero7-loc { font-size:12px; color:rgba(255,255,255,.78); font-weight:600; }
-  .best-pill { display:inline-flex; align-items:center; gap:6px; margin-top:12px; padding:6px 12px; border-radius:30px;
-    background:rgba(255,255,255,.14); font-size:11px; font-weight:700; letter-spacing:.03em; }
-  .best-pill .star { color:#86efac; }
+  /* 7-day */
   .days { padding:4px 18px 14px; }
   .drow { padding:12px 0; border-bottom:1px solid #eef2f6; display:flex; flex-direction:column; gap:7px; }
   .drow:last-child { border-bottom:none; }
-  .drow.best .dname { color:#15803d; }
+  .best-pill { display:inline-flex; align-items:center; gap:6px; margin:10px 0 2px; padding:6px 12px; border-radius:30px; background:rgba(22,163,74,.1); color:#15803d; font-size:11px; font-weight:700; letter-spacing:.02em; }
   .drow-top { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
   .drow-id { display:flex; align-items:center; gap:9px; }
   .dname { font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; color:#3a536b; min-width:44px; }
-  .dwx { display:flex; align-items:center; gap:6px; font-size:12px; color:#7c8da0; font-weight:500; }
-  .dwx .dicon { color:#94a3b8; display:flex; }
-  .dwx .dicon svg { width:20px; height:20px; }
+  .drow.best .dname { color:#15803d; }
+  .dwx { display:flex; align-items:center; gap:6px; font-size:12px; color:#7c8da0; font-weight:500; } .dwx .dicon{color:#94a3b8;display:flex;} .dwx .dicon svg{width:20px;height:20px;}
   .drow-score { text-align:right; flex-shrink:0; }
   .dscore { font-family:'Styrene A',sans-serif; font-weight:700; font-size:20px; line-height:1; }
   .dlabel { font-size:9.5px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; line-height:1; margin-top:2px; }
-  .dbar { height:4px; border-radius:3px; background:#eef2f6; position:relative; overflow:hidden; }
-  .dbar .f { position:absolute; left:0; top:0; bottom:0; border-radius:3px; }
-  .ddetail { font-size:10.5px; color:#8090a2; }
-  .ddetail .sep { opacity:.5; margin:0 2px; }
+  .dbar { height:4px; border-radius:3px; background:#eef2f6; position:relative; overflow:hidden; } .dbar .f{position:absolute;left:0;top:0;bottom:0;border-radius:3px;}
+  .ddetail { font-size:10.5px; color:#8090a2; } .ddetail .sep{opacity:.5;margin:0 2px;}
   .conf-note { font-size:9.5px; color:#a8b4c2; text-align:center; padding-top:10px; }
 
   svg.ln { fill:none; stroke:currentColor; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round; }
   svg.ln-thin { fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
-
-  .note { max-width:800px; font-size:12.5px; line-height:1.6; color:#475569; background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:14px 18px; margin-top:8px; }
-  .note b { color:#0e4174; }
+  .pane.hidden { display:none; }
+  .note { max-width:820px; font-size:12.5px; line-height:1.6; color:#475569; background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:14px 18px; margin-top:8px; } .note b{color:#0e4174;}
 </style>
 </head>
 <body>
-  <div class="page-title">HUK Fishing Conditions · Redesign Mockup v2</div>
+  <div class="page-title">HUK Fishing Conditions · Redesign — full feature set</div>
+  <div class="demo">
+    <button id="m-coastal" class="on" onclick="setMode('coastal')">Coastal</button>
+    <button id="m-inland" onclick="setMode('inland')">Inland</button>
+  </div>
+  <div class="demo-note" id="demo-note">Coastal mode — tide-driven. In production this is auto-detected by proximity to a NOAA tide station.</div>
 
-  <div class="compare">
-    <!-- ============ TODAY ============ -->
-    <div class="col">
-      <div class="col-label">Today</div>
-      <div class="w">
-        <div class="hero">
-          <div class="hero-top">
-            <span class="loc"><svg class="ln" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> Charleston, SC</span>
-            <span>Sun · Jun 15</span>
-          </div>
-          <div class="score-block">
-            <div class="score-num">84</div>
-            <div class="score-verdict">Fish On</div>
-            <div class="score-tagline">Good window with strong potential.</div>
-          </div>
-          <div class="score-track"><div class="fill" style="width:84%"></div><div class="dot" style="left:84%"></div></div>
-          <div class="score-scale"><span>SKUNK</span><span>SLOW</span><span>FAIR</span><span>GOOD</span><span>PRIME</span></div>
-          <div class="hero-weather">
-            <span class="cond"><svg class="ln" viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.6-1.3A3.8 3.8 0 0 1 18 18z"/></svg> Overcast</span>
-            <span class="temp">82°</span>
-          </div>
+  <div class="w">
+    <div class="tabs">
+      <button class="tab on" data-tab="today" onclick="setTab('today')"><span class="nm">Today</span></button>
+      <button class="tab" data-tab="7day" onclick="setTab('7day')"><span class="nm">7-Day</span><span class="meta" id="best-teaser">Mon 86</span></button>
+    </div>
+
+    <!-- TODAY -->
+    <div class="pane" id="pane-today">
+      <div class="hero" id="hero">
+        <div class="hero-top">
+          <span class="loc"><svg class="ln" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> <span id="loc-name">Charleston, SC</span></span>
+          <span>Sun · Jun 15</span>
         </div>
-
-        <div class="summary"><b>Tide movement and current</b> are both working in your favor.</div>
-
-        <div class="grid">
-          <div class="cell">
-            <div class="cell-top"><span class="cell-id"><span class="ic"><svg class="ln" viewBox="0 0 24 24"><path d="M3 8h9.5a2.5 2.5 0 1 0-2.5-2.5"/><path d="M3 12h13a3 3 0 1 1-3 3"/><path d="M3 16h7a2 2 0 1 1-2 2"/></svg></span><span class="lab">Wind</span></span><span class="chip fair">Fair</span></div>
-            <div class="cell-val">3 mph SW</div><div class="cell-sub">Light &amp; steady</div>
-          </div>
-          <div class="cell">
-            <div class="cell-top"><span class="cell-id"><span class="ic"><svg class="ln" viewBox="0 0 24 24"><path d="M2 9c2-2.2 4-2.2 6 0s4 2.2 6 0 4-2.2 6 0"/><path d="M2 14c2-2.2 4-2.2 6 0s4 2.2 6 0 4-2.2 6 0"/></svg></span><span class="lab">Tide</span></span><span class="chip good">Good</span></div>
-            <div class="cell-val">Outgoing</div><div class="cell-sub">Low 3:43 AM</div>
-          </div>
-          <div class="cell">
-            <div class="cell-top"><span class="cell-id"><span class="ic"><svg class="ln" viewBox="0 0 24 24"><path d="M4 8.5a8 8 0 0 1 13.5-2.8L20 8"/><path d="M20 4v4h-4"/><path d="M20 15.5a8 8 0 0 1-13.5 2.8L4 16"/><path d="M4 20v-4h4"/></svg></span><span class="lab">Current</span></span><span class="chip good">Good</span></div>
-            <div class="cell-val">~0.9 kt</div><div class="cell-sub">Ideal range</div>
-          </div>
-          <div class="cell">
-            <div class="cell-top"><span class="cell-id"><span class="ic"><svg class="ln" viewBox="0 0 24 24"><path d="M10 13.5V5a2 2 0 1 1 4 0v8.5a3.6 3.6 0 1 1-4 0z"/><line x1="12" y1="13" x2="12" y2="8.5"/></svg></span><span class="lab">Water Temp</span></span><span class="chip good">Good</span></div>
-            <div class="cell-val">83°F</div><div class="cell-sub">Sweet spot</div>
-          </div>
-          <div class="cell">
-            <div class="cell-top"><span class="cell-id"><span class="ic"><svg class="ln" viewBox="0 0 24 24"><path d="M21 9.5C18.7 5.2 13.2 4.6 10 8c-2.1 2.2-1.7 5.4.5 7 1.8 1.3 4.3.6 4.8-1.4.4-1.5-.6-2.8-2-3"/><path d="M2.5 17.5c3 2.2 6.5 2.2 9.5 0"/></svg></span><span class="lab">Surf</span></span><span class="chip good">Good</span></div>
-            <div class="cell-val">1.6 ft</div><div class="cell-sub">Calm nearshore</div>
-          </div>
-          <div class="cell">
-            <div class="cell-top"><span class="cell-id"><span class="ic"><svg class="ln" viewBox="0 0 24 24"><path d="M4 14a8 8 0 1 1 16 0"/><line x1="12" y1="14" x2="16" y2="10.5"/><circle cx="12" cy="14" r="1.4" fill="currentColor" stroke="none"/></svg></span><span class="lab">Pressure</span></span><span class="chip good">Good</span></div>
-            <div class="cell-val">29.86 inHg</div><div class="cell-sub">Steady</div>
-          </div>
+        <div class="score-block">
+          <div class="score-num">84</div>
+          <div class="score-verdict">Fish On</div>
+          <div class="score-tagline">Strong conditions with real potential.</div>
         </div>
-
-        <div class="tide">
-          <div class="tide-hd">
-            <span class="t">Today's Tide</span>
-            <span class="now">Now · 4:18 PM</span>
-          </div>
-          <div class="tide-chart">
-            <svg viewBox="0 0 320 100" preserveAspectRatio="none" aria-label="Tide curve">
-              <defs>
-                <linearGradient id="tg" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="#29ABE2" stop-opacity="0.22"/>
-                  <stop offset="100%" stop-color="#29ABE2" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-              <path d="M6,52 C28,34 48,30 66,30 C108,30 150,66 180,70 C214,74 268,44 296,34 L314,36 L314,92 L6,92 Z" fill="url(#tg)"/>
-              <path d="M6,52 C28,34 48,30 66,30 C108,30 150,66 180,70 C214,74 268,44 296,34 L314,36" fill="none" stroke="#29ABE2" stroke-width="2.5" stroke-linecap="round"/>
-              <line x1="250" y1="12" x2="250" y2="92" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3 3"/>
-              <circle cx="66" cy="30" r="3.6" fill="#1f8fc0" stroke="#fff" stroke-width="1.6"/>
-              <circle cx="180" cy="70" r="3.6" fill="#1f8fc0" stroke="#fff" stroke-width="1.6"/>
-              <circle cx="296" cy="34" r="3.6" fill="#1f8fc0" stroke="#fff" stroke-width="1.6"/>
-              <text x="66" y="20" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" font-weight="700" fill="#3a536b">8:40 AM</text>
-              <text x="180" y="86" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" font-weight="700" fill="#7c8da0">3:39 PM</text>
-              <text x="294" y="24" text-anchor="end" font-family="Manrope,sans-serif" font-size="9" font-weight="700" fill="#3a536b">9:11 PM</text>
-            </svg>
-          </div>
-          <div class="tide-rows">
-            <div class="tide-row lo"><span class="ar">▼</span><span><span class="lab">Next low</span><br><span class="time">3:39 PM</span></span><span class="ht">-0.8 ft</span></div>
-            <div class="tide-row hi"><span class="ar">▲</span><span><span class="lab">Next high</span><br><span class="time">9:11 PM</span></span><span class="ht">6.7 ft</span></div>
-          </div>
+        <div class="score-track"><div class="fill" style="width:84%"></div><div class="dot" style="left:84%"></div></div>
+        <div class="score-scale"><span>SKUNK</span><span>SLOW</span><span>GRIND</span><span>FISH ON</span><span>DROP ALL</span></div>
+        <div class="hero-weather">
+          <span class="cond"><svg class="ln" viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.6-1.3A3.8 3.8 0 0 1 18 18z"/></svg> Overcast</span>
+          <span class="temp">82°</span>
         </div>
+      </div>
 
-        <div class="cta">
-          <div class="cta-q">Need a Fishing License?</div>
-          <div class="cta-loc">Your location · South Carolina</div>
-          <div class="cta-btns">
-            <a class="btn btn-pri">Get A License →</a>
-            <a class="btn btn-sec"><svg class="ln" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> Directions</a>
-          </div>
+      <div class="summary" id="summary"><b>Tide movement and current</b> are both working in your favor.</div>
+
+      <div class="grid" id="grid"></div>
+
+      <div class="panel" id="panel"></div>
+
+      <div class="cta">
+        <div class="cta-q">Need a Fishing License?</div>
+        <div class="cta-loc">Your location · South Carolina</div>
+        <div class="cta-btns">
+          <a class="btn btn-pri">Get A License →</a>
+          <a class="btn btn-sec"><svg class="ln" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> Directions</a>
+        </div>
+      </div>
+
+      <div class="travel" id="travel">
+        <button class="travel-toggle" onclick="document.getElementById('travel').classList.toggle('open')">
+          <span class="tt">🎣 <b>Going on a fishing trip?</b> <span>Get a license before you go.</span></span>
+          <span class="chev">›</span>
+        </button>
+        <div class="travel-body">
+          <p class="travel-hint">Enter your destination ZIP for the correct license and local directions.</p>
+          <div class="zip-row"><input type="text" inputmode="numeric" maxlength="5" placeholder="Destination ZIP"><button>Look Up</button></div>
         </div>
       </div>
     </div>
 
-    <!-- ============ 7-DAY ============ -->
-    <div class="col">
-      <div class="col-label">7-Day Outlook</div>
-      <div class="w">
-        <div class="hero7">
-          <div class="hero7-top"><span class="hero7-title">7-Day Outlook</span><span class="hero7-loc">Charleston, SC</span></div>
-          <div class="best-pill"><span class="star">★</span> Best day · Sun · 86 · Fish On</div>
-        </div>
-        <div class="days" id="days"></div>
-      </div>
+    <!-- 7-DAY -->
+    <div class="pane hidden" id="pane-7day">
+      <div class="best-pill" style="margin-left:18px;">★ Best day · Mon · 86 · Fish On</div>
+      <div class="days" id="days"></div>
     </div>
   </div>
 
-  <div class="note">
-    <b>v2 refinements:</b> (1) <b>Gradient hero</b> is now atmospheric — navy base with a soft score-colored glow rising from the corner + inner shadow for depth (glow shifts amber/red on poor days). (2) <b>Icons</b> unified line set; Surf redrawn as a breaking wave, Current as a clean cyclic flow. (3) <b>Cards</b> restructured so the Good/Fair/Poor chip sits top-right and never collides with the sub-label. (4) <b>7-Day</b> rebuilt in the same language — iOS-style rows with weather glyph, score bar, and color-coded score, plus a best-day pill.
-  </div>
+  <div class="note" id="note"></div>
 
 <script>
+  const ICON = {
+    wind:'<path d="M3 8h9.5a2.5 2.5 0 1 0-2.5-2.5"/><path d="M3 12h13a3 3 0 1 1-3 3"/><path d="M3 16h7a2 2 0 1 1-2 2"/>',
+    tide:'<path d="M2 9c2-2.2 4-2.2 6 0s4 2.2 6 0 4-2.2 6 0"/><path d="M2 14c2-2.2 4-2.2 6 0s4 2.2 6 0 4-2.2 6 0"/>',
+    current:'<path d="M4 8.5a8 8 0 0 1 13.5-2.8L20 8"/><path d="M20 4v4h-4"/><path d="M20 15.5a8 8 0 0 1-13.5 2.8L4 16"/><path d="M4 20v-4h4"/>',
+    temp:'<path d="M10 13.5V5a2 2 0 1 1 4 0v8.5a3.6 3.6 0 1 1-4 0z"/><line x1="12" y1="13" x2="12" y2="8.5"/>',
+    surf:'<path d="M21 9.5C18.7 5.2 13.2 4.6 10 8c-2.1 2.2-1.7 5.4.5 7 1.8 1.3 4.3.6 4.8-1.4.4-1.5-.6-2.8-2-3"/><path d="M2.5 17.5c3 2.2 6.5 2.2 9.5 0"/>',
+    pressure:'<path d="M4 14a8 8 0 1 1 16 0"/><line x1="12" y1="14" x2="16" y2="10.5"/><circle cx="12" cy="14" r="1.4" fill="currentColor" stroke="none"/>',
+    solunar:'<circle cx="12" cy="12" r="7"/><path d="M12 5a7 7 0 0 0 0 14z" fill="currentColor" stroke="none"/>',
+    moon:'<path d="M17 4a8 8 0 1 0 3 13A9 9 0 0 1 17 4z"/>',
+    sky:'<circle cx="8" cy="8" r="3"/><path d="M8 2.5V4M8 12v1.5M2.5 8H4M12 8h1.5M4.3 4.3l1 1M11.7 4.3l-1 1"/><path d="M9 19a3.5 3.5 0 0 1 0-7 4.5 4.5 0 0 1 8.6-1A3.2 3.2 0 0 1 18 19z"/>'
+  };
   const WX = {
     cloud:'<path d="M7 18a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.6-1.3A3.8 3.8 0 0 1 18 18z"/>',
     partly:'<circle cx="8" cy="8" r="3"/><path d="M8 2v1.5M8 12.5V14M2 8h1.5M12.5 8H14M4.3 4.3l1 1M11.7 4.3l-1 1"/><path d="M9 19a3.5 3.5 0 0 1 0-7 4.5 4.5 0 0 1 8.6-1A3.2 3.2 0 0 1 18 19z"/>',
@@ -254,37 +229,162 @@
     storm:'<path d="M7 14a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.6-1.3A3.8 3.8 0 0 1 18 14z"/><path d="M12 14l-2 4h3l-2 4"/>',
     drizzle:'<path d="M7 15a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.6-1.3A3.8 3.8 0 0 1 18 15z"/><path d="M9 18.5v1.5M13 18.5v1.5"/>'
   };
+  const INFO = {
+    wind:{why:'Light to moderate wind is ideal for casting and drift. Above 25 mph most anglers call it a day.', sweet:'Ideal 5–15 mph. Calmer than 5 can be glassy; above 25 mph it gets tough.', s:62},
+    tide:{why:'A moving tide pushes bait and triggers feeding. Slack water around the change scores lowest.', sweet:'Best within 2 hrs of high or low. Slack (±30 min) is slowest.', s:88},
+    current:{why:'Moving water positions fish and keeps bait active.', sweet:'Ideal 0.5–1.5 kt. Over 3 kt and presentations lose action.', s:80},
+    temp:{why:'Water temperature drives fish metabolism and where they hold.', sweet:'Saltwater sweet spot 65–84°F. Below 55°F fish slow down.', s:82},
+    surf:{why:'Wave height affects access and water clarity nearshore.', sweet:'Under 2 ft for shore/kayak; under 4 ft for small boats.', s:78},
+    pressure:{why:'Falling pressure ahead of a front often sparks feeding; rapid swings shut it down.', sweet:'Best: slowly falling over 3–6 hrs. Stable high is good too.', s:79},
+    solunar:{why:'Solunar theory: fish feed hardest during major periods (moon overhead/underfoot) and minor periods (moonrise/set).', sweet:'Plan around the major windows — about 2 hrs each, twice a day.', s:74},
+    moon:{why:'Moon phase influences feeding intensity; new and full moons tend to peak.', sweet:'Stronger activity near new and full moons.', s:70},
+    sky:{why:'Overcast and low light push fish to feed more freely; bright sun makes them cautious.', sweet:'Overcast/partly cloudy usually beats full sun.', s:72}
+  };
+
   function color(s){ return s>=90?'#16a34a':s>=75?'#65a30d':s>=60?'#ca8a04':s>=40?'#d97706':s>=20?'#ea580c':'#dc2626'; }
   function label(s){ return s>=90?'Drop Everything':s>=75?'Fish On':s>=60?'Worth the Trip':s>=40?'Grind It Out':s>=20?'Slow Pick':'Skunked'; }
-  const days = [
-    {d:'Today', wx:'cloud',   desc:'Overcast',     s:84, wind:3,  wave:1.6, rain:0},
-    {d:'Mon',   wx:'partly',  desc:'Partly cloudy',s:86, wind:8,  wave:2.0, rain:0},
-    {d:'Tue',   wx:'drizzle', desc:'Drizzle',      s:78, wind:13, wave:2.0, rain:0.2},
-    {d:'Wed',   wx:'storm',   desc:'Thunderstorm', s:30, wind:14, wave:2.7, rain:0.9},
-    {d:'Thu',   wx:'rain',    desc:'Rain showers', s:62, wind:19, wave:2.6, rain:0.4},
-    {d:'Fri',   wx:'partly',  desc:'Partly cloudy',s:71, wind:15, wave:3.1, rain:0},
-    {d:'Sat',   wx:'cloud',   desc:'Overcast',     s:74, wind:9,  wave:3.0, rain:0},
-  ];
-  const max = Math.max(...days.map(x=>x.s));
-  document.getElementById('days').innerHTML = days.map((x,i)=>{
-    const c = color(x.s);
-    const isBest = x.s===max;
-    const conf = i<2?1:i<5?.84:.62;
-    const parts = [`💨 ${x.wind} mph`, `🌊 ${x.wave} ft`];
-    if (x.rain > 0.05) parts.push(`🌧 ${x.rain}" rain`);
-    const detail = parts.join('<span class="sep">·</span>');
-    return `<div class="drow${isBest?' best':''}" style="opacity:${conf}">
-      <div class="drow-top">
-        <div class="drow-id">
-          <span class="dname">${x.d}</span>
-          <span class="dwx"><span class="dicon"><svg class="ln-thin" viewBox="0 0 24 24">${WX[x.wx]}</svg></span>${x.desc}</span>
+
+  // condition card sets per mode
+  const CARDS = {
+    coastal:[
+      {k:'wind',label:'Wind',val:'3 mph SW',sub:'Light & steady',chip:'fair'},
+      {k:'tide',label:'Tide',val:'Outgoing',sub:'Low 3:43 AM',chip:'good'},
+      {k:'current',label:'Current',val:'~0.9 kt',sub:'Ideal range',chip:'good'},
+      {k:'temp',label:'Water Temp',val:'83°F',sub:'Sweet spot',chip:'good'},
+      {k:'surf',label:'Surf',val:'1.6 ft',sub:'Calm nearshore',chip:'good'},
+      {k:'pressure',label:'Pressure',val:'29.86 inHg',sub:'Steady',chip:'good'}
+    ],
+    inland:[
+      {k:'pressure',label:'Pressure',val:'29.92 inHg',sub:'Slowly falling',chip:'good'},
+      {k:'solunar',label:'Solunar',val:'Major 6:12 AM',sub:'Peak feeding',chip:'good'},
+      {k:'temp',label:'Water Temp',val:'74°F',sub:'Active range',chip:'good'},
+      {k:'wind',label:'Wind',val:'5 mph W',sub:'Light ripple',chip:'good'},
+      {k:'moon',label:'Moon',val:'Waxing 68%',sub:'Gibbous',chip:'fair'},
+      {k:'sky',label:'Sky',val:'Partly cloudy',sub:'Good light',chip:'good'}
+    ]
+  };
+
+  let mode='coastal', tab='today', openCond=null;
+
+  function renderGrid(){
+    const cards = CARDS[mode];
+    let html = cards.map(c=>`
+      <div class="cell">
+        <div class="cell-top">
+          <span class="cell-id"><span class="ic"><svg class="ln" viewBox="0 0 24 24">${ICON[c.k]}</svg></span><span class="lab">${c.label}</span></span>
+          <button class="info${openCond===c.k?' on':''}" onclick="toggleInfo('${c.k}')" aria-label="More info"><svg class="ln" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></button>
         </div>
-        <div class="drow-score"><div class="dscore" style="color:${c}">${x.s}</div><div class="dlabel" style="color:${c}">${label(x.s)}</div></div>
-      </div>
-      <div class="dbar"><span class="f" style="width:${x.s}%;background:${c}"></span></div>
-      <div class="ddetail">${detail}</div>
-    </div>`;
-  }).join('') + `<div class="conf-note">Days 1–2 high confidence · 3–5 moderate · 6–7 estimated</div>`;
+        <div class="cell-val">${c.val}</div>
+        <div class="cell-sub">${c.sub}</div>
+      </div>`).join('');
+    if(openCond){
+      const i=INFO[openCond]; const c=color(i.s);
+      html += `<div class="drawer open">
+        <div class="drawer-hd"><span class="drawer-ti">Why ${cards.find(x=>x.k===openCond).label} matters</span><button class="drawer-x" onclick="toggleInfo('${openCond}')">✕</button></div>
+        <div class="drawer-why">${i.why}</div>
+        <div class="drawer-barhd"><span>Sub-score</span><b>${i.s}/100</b></div>
+        <div class="drawer-bartrack"><div class="drawer-barfill" style="width:${i.s}%;background:${c}"></div></div>
+        <div class="drawer-sweet">Sweet spot: ${i.sweet}</div>
+      </div>`;
+    }
+    document.getElementById('grid').innerHTML = html;
+  }
+  function toggleInfo(k){ openCond = openCond===k?null:k; renderGrid(); }
+
+  function renderPanel(){
+    if(mode==='coastal'){
+      document.getElementById('panel').innerHTML = `
+        <div class="panel-hd"><span class="t">Today's Tide</span><span class="now">Now · 4:18 PM</span></div>
+        <div class="chart"><svg viewBox="0 0 320 100" preserveAspectRatio="none">
+          <defs><linearGradient id="tg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#29ABE2" stop-opacity="0.22"/><stop offset="100%" stop-color="#29ABE2" stop-opacity="0"/></linearGradient></defs>
+          <path d="M6,52 C28,34 48,30 66,30 C108,30 150,66 180,70 C214,74 268,44 296,34 L314,36 L314,92 L6,92 Z" fill="url(#tg)"/>
+          <path d="M6,52 C28,34 48,30 66,30 C108,30 150,66 180,70 C214,74 268,44 296,34 L314,36" fill="none" stroke="#29ABE2" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="250" y1="12" x2="250" y2="92" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <circle cx="66" cy="30" r="3.6" fill="#1f8fc0" stroke="#fff" stroke-width="1.6"/><circle cx="180" cy="70" r="3.6" fill="#1f8fc0" stroke="#fff" stroke-width="1.6"/><circle cx="296" cy="34" r="3.6" fill="#1f8fc0" stroke="#fff" stroke-width="1.6"/>
+          <text x="66" y="20" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" font-weight="700" fill="#3a536b">8:40 AM</text>
+          <text x="180" y="86" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" font-weight="700" fill="#7c8da0">3:39 PM</text>
+          <text x="294" y="24" text-anchor="end" font-family="Manrope,sans-serif" font-size="9" font-weight="700" fill="#3a536b">9:11 PM</text>
+        </svg></div>
+        <div class="rows">
+          <div class="row2 lo"><span class="ar">▼</span><span><span class="lab">Next low</span><br><span class="time">3:39 PM</span></span><span class="ht">-0.8 ft</span></div>
+          <div class="row2 hi"><span class="ar">▲</span><span><span class="lab">Next high</span><br><span class="time">9:11 PM</span></span><span class="ht">6.7 ft</span></div>
+        </div>`;
+    } else {
+      document.getElementById('panel').innerHTML = `
+        <div class="panel-hd"><span class="t">Solunar Feeding Times</span><span class="now">Now · 4:18 PM</span></div>
+        <div class="sol-track">
+          <div class="sol-band maj" style="left:23%;width:9%"></div>
+          <div class="sol-band min" style="left:50%;width:5%"></div>
+          <div class="sol-band maj" style="left:75%;width:9%"></div>
+          <div class="sol-band min" style="left:2%;width:4%"></div>
+          <div class="sol-now" style="left:68%"></div>
+        </div>
+        <div class="sol-ticks"><span>12a</span><span>6a</span><span>12p</span><span>6p</span><span>12a</span></div>
+        <div class="rows">
+          <div class="row2 maj"><span class="ar">●</span><span><span class="lab">Major</span><br><span class="time">5:42–7:42 AM</span></span><span class="ht">Strong</span></div>
+          <div class="row2 min"><span class="ar">●</span><span><span class="lab">Minor</span><br><span class="time">12:10–1:10 PM</span></span><span class="ht">Fair</span></div>
+        </div>`;
+    }
+  }
+
+  // 7-day data per mode (inland drops wave, adds nothing marine)
+  const DAYS = {
+    coastal:[
+      {d:'Today',wx:'cloud',desc:'Overcast',s:84,wind:3,wave:1.6,rain:0},
+      {d:'Mon',wx:'partly',desc:'Partly cloudy',s:86,wind:8,wave:2.0,rain:0},
+      {d:'Tue',wx:'drizzle',desc:'Drizzle',s:78,wind:13,wave:2.0,rain:0.2},
+      {d:'Wed',wx:'storm',desc:'Thunderstorm',s:30,wind:14,wave:2.7,rain:0.9},
+      {d:'Thu',wx:'rain',desc:'Rain showers',s:62,wind:19,wave:2.6,rain:0.4},
+      {d:'Fri',wx:'partly',desc:'Partly cloudy',s:71,wind:15,wave:3.1,rain:0},
+      {d:'Sat',wx:'cloud',desc:'Overcast',s:74,wind:9,wave:3.0,rain:0}
+    ],
+    inland:[
+      {d:'Today',wx:'cloud',desc:'Overcast',s:80,wind:5,rain:0,sol:'Major 6:12a'},
+      {d:'Mon',wx:'partly',desc:'Partly cloudy',s:86,wind:7,rain:0,sol:'Major 6:58a'},
+      {d:'Tue',wx:'partly',desc:'Partly cloudy',s:82,wind:9,rain:0,sol:'Major 7:44a'},
+      {d:'Wed',wx:'storm',desc:'Thunderstorm',s:34,wind:13,rain:0.8,sol:'Major 8:30a'},
+      {d:'Thu',wx:'rain',desc:'Rain showers',s:66,wind:12,rain:0.3,sol:'Major 9:18a'},
+      {d:'Fri',wx:'partly',desc:'Partly cloudy',s:77,wind:8,rain:0,sol:'Major 10:06a'},
+      {d:'Sat',wx:'cloud',desc:'Overcast',s:79,wind:6,rain:0,sol:'Major 10:54a'}
+    ]
+  };
+  function renderDays(){
+    const days = DAYS[mode]; const max = Math.max(...days.map(x=>x.s));
+    document.getElementById('days').innerHTML = days.map((x,i)=>{
+      const c=color(x.s); const conf=i<2?1:i<5?.84:.62;
+      const parts = mode==='coastal'
+        ? [`💨 ${x.wind} mph`,`🌊 ${x.wave} ft`].concat(x.rain>0.05?[`🌧 ${x.rain}" rain`]:[])
+        : [`💨 ${x.wind} mph`,`🌙 ${x.sol}`].concat(x.rain>0.05?[`🌧 ${x.rain}" rain`]:[]);
+      return `<div class="drow${x.s===max?' best':''}" style="opacity:${conf}">
+        <div class="drow-top">
+          <div class="drow-id"><span class="dname">${x.d}</span><span class="dwx"><span class="dicon"><svg class="ln-thin" viewBox="0 0 24 24">${WX[x.wx]}</svg></span>${x.desc}</span></div>
+          <div class="drow-score"><div class="dscore" style="color:${c}">${x.s}</div><div class="dlabel" style="color:${c}">${label(x.s)}</div></div>
+        </div>
+        <div class="dbar"><span class="f" style="width:${x.s}%;background:${c}"></span></div>
+        <div class="ddetail">${parts.join('<span class="sep">·</span>')}</div>
+      </div>`;
+    }).join('') + `<div class="conf-note">Days 1–2 high confidence · 3–5 moderate · 6–7 estimated</div>`;
+  }
+
+  function setTab(t){ tab=t; document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===t)); document.getElementById('pane-today').classList.toggle('hidden',t!=='today'); document.getElementById('pane-7day').classList.toggle('hidden',t!=='7day'); }
+  function setMode(m){
+    mode=m; openCond=null;
+    document.getElementById('m-coastal').classList.toggle('on',m==='coastal');
+    document.getElementById('m-inland').classList.toggle('on',m==='inland');
+    document.getElementById('loc-name').textContent = m==='coastal'?'Charleston, SC':'Lake Murray, SC';
+    document.getElementById('summary').innerHTML = m==='coastal'
+      ? '<b>Tide movement and current</b> are both working in your favor.'
+      : '<b>Falling pressure and a strong solunar window</b> line up this morning.';
+    document.getElementById('demo-note').textContent = m==='coastal'
+      ? 'Coastal mode — tide-driven. In production this is auto-detected by proximity to a NOAA tide station.'
+      : 'Inland mode — no tide station nearby, so Tide → Solunar and Current/Surf are dropped for Moon & Sky.';
+    document.getElementById('note').innerHTML = m==='coastal'
+      ? '<b>Coastal mode:</b> full feature set in the new look — tab toggle, hero, 6 condition cards each with a working <b>info icon → drawer</b>, today\'s tide chart, license CTA, and the <b>“Going on a fishing trip?”</b> travel/ZIP block. Nothing removed.'
+      : '<b>Inland mode:</b> for lakes/rivers/reservoirs the widget swaps <b>Tide → Solunar feeding times</b>, drops Current &amp; Surf (marine-only), and surfaces <b>Moon phase</b> &amp; <b>Sky</b>. Pressure, water temp, and solunar carry the score. Everything else (info drawers, license, travel, 7-day) stays.';
+    renderGrid(); renderPanel(); renderDays();
+  }
+
+  renderGrid(); renderPanel(); renderDays(); setMode('coastal');
 </script>
 </body>
 </html>
