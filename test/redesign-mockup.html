@@ -13,102 +13,63 @@
   * { box-sizing:border-box; margin:0; padding:0; }
   body {
     font-family:'Manrope', system-ui, sans-serif;
-    background:#eef2f6;
-    color:#17314b;
-    min-height:100vh;
-    padding:32px 16px 64px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:14px;
+    background:#eef2f6; color:#17314b; min-height:100vh;
+    padding:32px 16px 64px; display:flex; flex-direction:column; align-items:center; gap:14px;
   }
-  .page-title { font-family:'Styrene A',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.04em; font-size:13px; color:#64748b; margin-bottom:6px; }
+  .page-title { font-family:'Styrene A',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.04em; font-size:13px; color:#64748b; margin-bottom:2px; text-align:center; }
   .compare { display:flex; gap:28px; flex-wrap:wrap; justify-content:center; align-items:flex-start; }
   .col { display:flex; flex-direction:column; align-items:center; gap:10px; }
   .col-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:#94a3b8; }
 
-  /* ---- Widget shell ---- */
-  .w {
-    width:380px;
-    max-width:calc(100vw - 32px);
-    border-radius:22px;
-    overflow:hidden;
-    background:#fff;
-    box-shadow:0 18px 50px rgba(15,76,129,.18), 0 2px 8px rgba(15,76,129,.08);
-  }
+  .w { width:380px; max-width:calc(100vw - 32px); border-radius:22px; overflow:hidden; background:#fff;
+       box-shadow:0 18px 50px rgba(15,76,129,.18), 0 2px 8px rgba(15,76,129,.08); }
 
-  /* ---- HERO ---- */
+  /* ---- HERO (refined, atmospheric) ---- */
   .hero {
-    position:relative;
-    padding:18px 20px 22px;
-    color:#fff;
-    /* navy → score-green atmospheric gradient */
+    position:relative; padding:18px 20px 22px; color:#fff;
     background:
-      radial-gradient(120% 80% at 15% 0%, rgba(255,255,255,.16), rgba(255,255,255,0) 55%),
-      linear-gradient(158deg, #0e4174 0%, #0f4c81 42%, #2f7d3e 100%);
+      radial-gradient(95% 75% at 82% 112%, rgba(63,143,47,.72), rgba(63,143,47,0) 60%),
+      radial-gradient(120% 85% at 18% -12%, rgba(255,255,255,.17), rgba(255,255,255,0) 55%),
+      linear-gradient(165deg, #0b3766 0%, #0f4c81 55%, #14527f 100%);
   }
-  .hero-top {
-    display:flex; justify-content:space-between; align-items:center;
-    font-size:12px; font-weight:600; letter-spacing:.01em;
-    color:rgba(255,255,255,.82);
-  }
+  .hero::after { content:''; position:absolute; inset:0; pointer-events:none;
+    box-shadow:inset 0 -30px 40px -20px rgba(0,0,0,.25); }
+  .hero-top { position:relative; display:flex; justify-content:space-between; align-items:center;
+    font-size:12px; font-weight:600; color:rgba(255,255,255,.82); }
   .hero-top .loc { display:flex; align-items:center; gap:5px; }
   .hero-top svg { width:13px; height:13px; }
 
-  .score-block { text-align:center; padding:12px 0 6px; }
-  .score-num {
-    font-family:'Styrene A',sans-serif; font-weight:900;
-    font-size:88px; line-height:.9; letter-spacing:-.02em;
-    text-shadow:0 2px 14px rgba(0,0,0,.18);
-  }
-  .score-verdict {
-    font-family:'Styrene A',sans-serif; font-weight:700;
-    font-size:19px; text-transform:uppercase; letter-spacing:.08em;
-    margin-top:8px;
-  }
-  .score-tagline {
-    font-size:13px; color:rgba(255,255,255,.85); margin-top:5px; font-weight:500;
-  }
+  .score-block { position:relative; text-align:center; padding:10px 0 4px; }
+  .score-num { font-family:'Styrene A',sans-serif; font-weight:900; font-size:88px; line-height:.9; letter-spacing:-.02em; text-shadow:0 3px 18px rgba(0,0,0,.22); }
+  .score-verdict { font-family:'Styrene A',sans-serif; font-weight:700; font-size:19px; text-transform:uppercase; letter-spacing:.08em; margin-top:8px; }
+  .score-tagline { font-size:13px; color:rgba(255,255,255,.85); margin-top:5px; font-weight:500; }
 
-  .score-track {
-    position:relative; height:5px; border-radius:3px;
-    background:rgba(255,255,255,.22); margin:16px 4px 0; overflow:visible;
-  }
+  .score-track { position:relative; height:5px; border-radius:3px; background:rgba(255,255,255,.22); margin:16px 4px 0; }
   .score-track .fill { position:absolute; left:0; top:0; bottom:0; border-radius:3px; background:#fff; }
   .score-track .dot { position:absolute; top:50%; width:11px; height:11px; border-radius:50%; background:#fff; transform:translate(-50%,-50%); box-shadow:0 0 0 3px rgba(255,255,255,.3); }
   .score-scale { display:flex; justify-content:space-between; font-size:9px; color:rgba(255,255,255,.6); margin:5px 4px 0; font-weight:600; letter-spacing:.03em; }
 
-  .hero-weather {
-    display:flex; align-items:center; justify-content:space-between;
-    margin-top:18px; padding-top:14px; border-top:1px solid rgba(255,255,255,.16);
-  }
+  .hero-weather { position:relative; display:flex; align-items:center; justify-content:space-between; margin-top:18px; padding-top:14px; border-top:1px solid rgba(255,255,255,.16); }
   .hero-weather .cond { display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; }
   .hero-weather .cond svg { width:20px; height:20px; }
   .hero-weather .temp { font-family:'Styrene A',sans-serif; font-weight:700; font-size:26px; }
 
-  /* ---- CONDITIONS ---- */
+  /* ---- CONDITIONS (restructured: chip top-right) ---- */
   .summary { padding:14px 20px 4px; font-size:13px; line-height:1.45; color:#3a536b; }
   .summary b { color:#0e4174; font-weight:700; }
-
   .grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; padding:12px 16px 6px; }
-  .cell {
-    border:1px solid #e4ebf2; border-radius:14px; padding:12px 13px;
-    display:flex; flex-direction:column; gap:7px; background:#fbfcfe;
-  }
-  .cell-hd { display:flex; align-items:center; gap:8px; }
-  .cell-hd .ic {
-    width:30px; height:30px; border-radius:9px;
-    display:flex; align-items:center; justify-content:center;
-    background:rgba(15,76,129,.07); color:#0f4c81; flex-shrink:0;
-  }
-  .cell-hd .ic svg { width:18px; height:18px; }
-  .cell-hd .lab { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:#64748b; }
-  .cell-val { font-family:'Styrene A',sans-serif; font-weight:700; font-size:18px; color:#0e4174; line-height:1; }
-  .cell-foot { display:flex; align-items:center; justify-content:space-between; }
-  .cell-sub { font-size:11px; color:#7c8da0; }
-  .chip { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; padding:2px 7px; border-radius:20px; }
+  .cell { border:1px solid #e4ebf2; border-radius:14px; padding:12px 13px; display:flex; flex-direction:column; gap:8px; background:#fbfcfe; }
+  .cell-top { display:flex; align-items:center; justify-content:space-between; gap:6px; }
+  .cell-id { display:flex; align-items:center; gap:8px; min-width:0; }
+  .cell-id .ic { width:30px; height:30px; border-radius:9px; display:flex; align-items:center; justify-content:center; background:rgba(15,76,129,.07); color:#0f4c81; flex-shrink:0; }
+  .cell-id .ic svg { width:18px; height:18px; }
+  .cell-id .lab { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:#64748b; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .chip { font-size:9.5px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; padding:3px 7px; border-radius:20px; flex-shrink:0; }
   .chip.good { background:rgba(34,197,94,.13); color:#15803d; }
   .chip.fair { background:rgba(240,180,41,.16); color:#a16207; }
+  .chip.poor { background:rgba(239,68,68,.13); color:#b91c1c; }
+  .cell-val { font-family:'Styrene A',sans-serif; font-weight:700; font-size:18px; color:#0e4174; line-height:1; }
+  .cell-sub { font-size:11px; color:#7c8da0; line-height:1.2; }
 
   /* ---- CTA ---- */
   .cta { padding:14px 20px 20px; }
@@ -120,112 +81,91 @@
   .btn-sec { background:#eef3f8; color:#0e4174; }
   .btn svg { width:14px; height:14px; }
 
-  /* icon stroke defaults */
-  svg.ln { fill:none; stroke:currentColor; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round; }
+  /* ---- 7-DAY ---- */
+  .hero7 { position:relative; padding:16px 20px 16px; color:#fff;
+    background:
+      radial-gradient(90% 90% at 85% 120%, rgba(63,143,47,.55), rgba(63,143,47,0) 60%),
+      linear-gradient(160deg, #0b3766 0%, #0f4c81 70%); }
+  .hero7-top { display:flex; justify-content:space-between; align-items:baseline; }
+  .hero7-title { font-family:'Styrene A',sans-serif; font-weight:700; font-size:16px; text-transform:uppercase; letter-spacing:.06em; }
+  .hero7-loc { font-size:12px; color:rgba(255,255,255,.78); font-weight:600; }
+  .best-pill { display:inline-flex; align-items:center; gap:6px; margin-top:12px; padding:6px 12px; border-radius:30px;
+    background:rgba(255,255,255,.14); font-size:11px; font-weight:700; letter-spacing:.03em; }
+  .best-pill .star { color:#86efac; }
+  .days { padding:6px 18px 14px; }
+  .drow { display:grid; grid-template-columns:52px 24px 1fr 30px; align-items:center; gap:11px; padding:12px 0; border-bottom:1px solid #eef2f6; }
+  .drow:last-child { border-bottom:none; }
+  .drow.best .dname { color:#15803d; }
+  .dname { font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; color:#3a536b; }
+  .dicon { color:#94a3b8; display:flex; }
+  .dicon svg { width:22px; height:22px; }
+  .dbar { height:6px; border-radius:4px; background:#eef2f6; position:relative; overflow:hidden; }
+  .dbar .f { position:absolute; left:0; top:0; bottom:0; border-radius:4px; }
+  .dscore { font-family:'Styrene A',sans-serif; font-weight:700; font-size:16px; text-align:right; }
+  .conf-note { font-size:9.5px; color:#a8b4c2; text-align:center; padding-top:8px; }
 
-  .note { max-width:760px; font-size:12.5px; line-height:1.6; color:#475569; background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:14px 18px; margin-top:8px; }
+  svg.ln { fill:none; stroke:currentColor; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round; }
+  svg.ln-thin { fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+
+  .note { max-width:800px; font-size:12.5px; line-height:1.6; color:#475569; background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:14px 18px; margin-top:8px; }
   .note b { color:#0e4174; }
 </style>
 </head>
 <body>
-  <div class="page-title">HUK Fishing Conditions · Redesign Mockup (iOS-Weather direction)</div>
+  <div class="page-title">HUK Fishing Conditions · Redesign Mockup v2</div>
 
   <div class="compare">
+    <!-- ============ TODAY ============ -->
     <div class="col">
-      <div class="col-label">Proposed — gradient hero + line icons</div>
+      <div class="col-label">Today</div>
       <div class="w">
-        <!-- HERO -->
-        <div class="hero" id="hero">
+        <div class="hero">
           <div class="hero-top">
-            <span class="loc">
-              <svg class="ln" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-              Charleston, SC
-            </span>
+            <span class="loc"><svg class="ln" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> Charleston, SC</span>
             <span>Sun · Jun 15</span>
           </div>
-
           <div class="score-block">
             <div class="score-num">84</div>
             <div class="score-verdict">Fish On</div>
             <div class="score-tagline">Good window with strong potential.</div>
           </div>
-
-          <div class="score-track">
-            <div class="fill" style="width:84%"></div>
-            <div class="dot" style="left:84%"></div>
-          </div>
+          <div class="score-track"><div class="fill" style="width:84%"></div><div class="dot" style="left:84%"></div></div>
           <div class="score-scale"><span>SKUNK</span><span>SLOW</span><span>FAIR</span><span>GOOD</span><span>PRIME</span></div>
-
           <div class="hero-weather">
-            <span class="cond">
-              <svg class="ln" viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.6-1.3A3.8 3.8 0 0 1 18 18z"/></svg>
-              Overcast
-            </span>
+            <span class="cond"><svg class="ln" viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.6-1.3A3.8 3.8 0 0 1 18 18z"/></svg> Overcast</span>
             <span class="temp">82°</span>
           </div>
         </div>
 
-        <!-- SUMMARY -->
         <div class="summary"><b>Tide movement and current</b> are both working in your favor.</div>
 
-        <!-- CONDITIONS GRID -->
         <div class="grid">
           <div class="cell">
-            <div class="cell-hd">
-              <span class="ic"><svg class="ln" viewBox="0 0 24 24"><path d="M3 8h9.5a2.5 2.5 0 1 0-2.5-2.5"/><path d="M3 12h13a3 3 0 1 1-3 3"/><path d="M3 16h7a2 2 0 1 1-2 2"/></svg></span>
-              <span class="lab">Wind</span>
-            </div>
-            <div class="cell-val">3 mph SW</div>
-            <div class="cell-foot"><span class="cell-sub">Light & steady</span><span class="chip fair">Fair</span></div>
+            <div class="cell-top"><span class="cell-id"><span class="ic"><svg class="ln" viewBox="0 0 24 24"><path d="M3 8h9.5a2.5 2.5 0 1 0-2.5-2.5"/><path d="M3 12h13a3 3 0 1 1-3 3"/><path d="M3 16h7a2 2 0 1 1-2 2"/></svg></span><span class="lab">Wind</span></span><span class="chip fair">Fair</span></div>
+            <div class="cell-val">3 mph SW</div><div class="cell-sub">Light &amp; steady</div>
           </div>
-
           <div class="cell">
-            <div class="cell-hd">
-              <span class="ic"><svg class="ln" viewBox="0 0 24 24"><path d="M2 9c2-2.2 4-2.2 6 0s4 2.2 6 0 4-2.2 6 0"/><path d="M2 14c2-2.2 4-2.2 6 0s4 2.2 6 0 4-2.2 6 0"/></svg></span>
-              <span class="lab">Tide</span>
-            </div>
-            <div class="cell-val">Outgoing</div>
-            <div class="cell-foot"><span class="cell-sub">Low 3:43 AM</span><span class="chip good">Good</span></div>
+            <div class="cell-top"><span class="cell-id"><span class="ic"><svg class="ln" viewBox="0 0 24 24"><path d="M2 9c2-2.2 4-2.2 6 0s4 2.2 6 0 4-2.2 6 0"/><path d="M2 14c2-2.2 4-2.2 6 0s4 2.2 6 0 4-2.2 6 0"/></svg></span><span class="lab">Tide</span></span><span class="chip good">Good</span></div>
+            <div class="cell-val">Outgoing</div><div class="cell-sub">Low 3:43 AM</div>
           </div>
-
           <div class="cell">
-            <div class="cell-hd">
-              <span class="ic"><svg class="ln" viewBox="0 0 24 24"><path d="M4 8.5a8 8 0 0 1 13.5-2.8L20 8"/><path d="M20 4v4h-4"/><path d="M20 15.5a8 8 0 0 1-13.5 2.8L4 16"/><path d="M4 20v-4h4"/></svg></span>
-              <span class="lab">Current</span>
-            </div>
-            <div class="cell-val">~0.9 kt</div>
-            <div class="cell-foot"><span class="cell-sub">Ideal range</span><span class="chip good">Good</span></div>
+            <div class="cell-top"><span class="cell-id"><span class="ic"><svg class="ln" viewBox="0 0 24 24"><path d="M4 8.5a8 8 0 0 1 13.5-2.8L20 8"/><path d="M20 4v4h-4"/><path d="M20 15.5a8 8 0 0 1-13.5 2.8L4 16"/><path d="M4 20v-4h4"/></svg></span><span class="lab">Current</span></span><span class="chip good">Good</span></div>
+            <div class="cell-val">~0.9 kt</div><div class="cell-sub">Ideal range</div>
           </div>
-
           <div class="cell">
-            <div class="cell-hd">
-              <span class="ic"><svg class="ln" viewBox="0 0 24 24"><path d="M10 13.5V5a2 2 0 1 1 4 0v8.5a3.6 3.6 0 1 1-4 0z"/><line x1="12" y1="13" x2="12" y2="8.5"/></svg></span>
-              <span class="lab">Water Temp</span>
-            </div>
-            <div class="cell-val">83°F</div>
-            <div class="cell-foot"><span class="cell-sub">Sweet spot</span><span class="chip good">Good</span></div>
+            <div class="cell-top"><span class="cell-id"><span class="ic"><svg class="ln" viewBox="0 0 24 24"><path d="M10 13.5V5a2 2 0 1 1 4 0v8.5a3.6 3.6 0 1 1-4 0z"/><line x1="12" y1="13" x2="12" y2="8.5"/></svg></span><span class="lab">Water Temp</span></span><span class="chip good">Good</span></div>
+            <div class="cell-val">83°F</div><div class="cell-sub">Sweet spot</div>
           </div>
-
           <div class="cell">
-            <div class="cell-hd">
-              <span class="ic"><svg class="ln" viewBox="0 0 24 24"><path d="M21 9.5C18.7 5.2 13.2 4.6 10 8c-2.1 2.2-1.7 5.4.5 7 1.8 1.3 4.3.6 4.8-1.4.4-1.5-.6-2.8-2-3"/><path d="M2.5 17.5c3 2.2 6.5 2.2 9.5 0"/></svg></span>
-              <span class="lab">Surf</span>
-            </div>
-            <div class="cell-val">1.6 ft</div>
-            <div class="cell-foot"><span class="cell-sub">Calm nearshore</span><span class="chip good">Good</span></div>
+            <div class="cell-top"><span class="cell-id"><span class="ic"><svg class="ln" viewBox="0 0 24 24"><path d="M21 9.5C18.7 5.2 13.2 4.6 10 8c-2.1 2.2-1.7 5.4.5 7 1.8 1.3 4.3.6 4.8-1.4.4-1.5-.6-2.8-2-3"/><path d="M2.5 17.5c3 2.2 6.5 2.2 9.5 0"/></svg></span><span class="lab">Surf</span></span><span class="chip good">Good</span></div>
+            <div class="cell-val">1.6 ft</div><div class="cell-sub">Calm nearshore</div>
           </div>
-
           <div class="cell">
-            <div class="cell-hd">
-              <span class="ic"><svg class="ln" viewBox="0 0 24 24"><path d="M4 14a8 8 0 1 1 16 0"/><line x1="12" y1="14" x2="16" y2="10.5"/><circle cx="12" cy="14" r="1.4" fill="currentColor" stroke="none"/></svg></span>
-              <span class="lab">Pressure</span>
-            </div>
-            <div class="cell-val">29.86 inHg</div>
-            <div class="cell-foot"><span class="cell-sub">Steady</span><span class="chip good">Good</span></div>
+            <div class="cell-top"><span class="cell-id"><span class="ic"><svg class="ln" viewBox="0 0 24 24"><path d="M4 14a8 8 0 1 1 16 0"/><line x1="12" y1="14" x2="16" y2="10.5"/><circle cx="12" cy="14" r="1.4" fill="currentColor" stroke="none"/></svg></span><span class="lab">Pressure</span></span><span class="chip good">Good</span></div>
+            <div class="cell-val">29.86 inHg</div><div class="cell-sub">Steady</div>
           </div>
         </div>
 
-        <!-- CTA -->
         <div class="cta">
           <div class="cta-q">Need a Fishing License?</div>
           <div class="cta-loc">Your location · South Carolina</div>
@@ -236,10 +176,56 @@
         </div>
       </div>
     </div>
+
+    <!-- ============ 7-DAY ============ -->
+    <div class="col">
+      <div class="col-label">7-Day Outlook</div>
+      <div class="w">
+        <div class="hero7">
+          <div class="hero7-top"><span class="hero7-title">7-Day Outlook</span><span class="hero7-loc">Charleston, SC</span></div>
+          <div class="best-pill"><span class="star">★</span> Best day · Sun · 86 · Fish On</div>
+        </div>
+        <div class="days" id="days"></div>
+      </div>
+    </div>
   </div>
 
   <div class="note">
-    <b>What changed vs. today:</b> (1) The Cast Score is now a full gradient hero — navy→green mapped to the score, with a 0–100 position bar so the number has context. (2) Hierarchy fixed: one giant <b>84</b>, verdict + one-line tagline, and the temperature demoted into the weather row so it no longer competes. (3) Emoji replaced with a unified SF-Symbols-style line-icon set in soft navy tiles. Each card gains a Good/Fair chip for instant scannability.
+    <b>v2 refinements:</b> (1) <b>Gradient hero</b> is now atmospheric — navy base with a soft score-colored glow rising from the corner + inner shadow for depth (glow shifts amber/red on poor days). (2) <b>Icons</b> unified line set; Surf redrawn as a breaking wave, Current as a clean cyclic flow. (3) <b>Cards</b> restructured so the Good/Fair/Poor chip sits top-right and never collides with the sub-label. (4) <b>7-Day</b> rebuilt in the same language — iOS-style rows with weather glyph, score bar, and color-coded score, plus a best-day pill.
   </div>
+
+<script>
+  const WX = {
+    cloud:'<path d="M7 18a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.6-1.3A3.8 3.8 0 0 1 18 18z"/>',
+    partly:'<circle cx="8" cy="8" r="3"/><path d="M8 2v1.5M8 12.5V14M2 8h1.5M12.5 8H14M4.3 4.3l1 1M11.7 4.3l-1 1"/><path d="M9 19a3.5 3.5 0 0 1 0-7 4.5 4.5 0 0 1 8.6-1A3.2 3.2 0 0 1 18 19z"/>',
+    rain:'<path d="M7 15a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.6-1.3A3.8 3.8 0 0 1 18 15z"/><path d="M8 18.5v2M12 18.5v2.5M16 18.5v2"/>',
+    storm:'<path d="M7 14a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.6-1.3A3.8 3.8 0 0 1 18 14z"/><path d="M12 14l-2 4h3l-2 4"/>',
+    drizzle:'<path d="M7 15a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.6-1.3A3.8 3.8 0 0 1 18 15z"/><path d="M9 18.5v1.5M13 18.5v1.5"/>'
+  };
+  function color(s){ return s>=90?'#16a34a':s>=75?'#65a30d':s>=60?'#ca8a04':s>=40?'#d97706':s>=20?'#ea580c':'#dc2626'; }
+  function label(s){ return s>=90?'Pack Cooler':s>=75?'Fish On':s>=60?'Wet a Line':s>=40?'Tip Up':s>=20?"Bird's Nest":'Skunk'; }
+  const days = [
+    {d:'Today', wx:'cloud',   s:84, best:true},
+    {d:'Mon',   wx:'partly',  s:86, best:true},
+    {d:'Tue',   wx:'drizzle', s:78},
+    {d:'Wed',   wx:'storm',   s:30},
+    {d:'Thu',   wx:'rain',    s:62},
+    {d:'Fri',   wx:'partly',  s:71},
+    {d:'Sat',   wx:'cloud',   s:74},
+  ];
+  // mark only the true best (highest) as .best
+  const max = Math.max(...days.map(x=>x.s));
+  document.getElementById('days').innerHTML = days.map((x,i)=>{
+    const c = color(x.s);
+    const isBest = x.s===max;
+    const conf = i<2?1:i<5?.82:.6;
+    return `<div class="drow${isBest?' best':''}" style="opacity:${conf}">
+      <span class="dname">${x.d}</span>
+      <span class="dicon"><svg class="ln-thin" viewBox="0 0 24 24">${WX[x.wx]}</svg></span>
+      <span class="dbar"><span class="f" style="width:${x.s}%;background:${c}"></span></span>
+      <span class="dscore" style="color:${c}">${x.s}</span>
+    </div>`;
+  }).join('') + `<div class="conf-note">Days 1–2 high confidence · 3–5 moderate · 6–7 estimated</div>`;
+</script>
 </body>
 </html>
