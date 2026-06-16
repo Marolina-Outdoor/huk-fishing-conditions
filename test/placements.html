@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>HUK Fishing Conditions — Placements</title>
+<style>
+  @font-face { font-family:'Styrene A'; src:url('../assets/StyreneA-Black-Web.woff2') format('woff2'); font-weight:900; font-display:swap; }
+  @font-face { font-family:'Styrene A'; src:url('../assets/StyreneA-Bold-Web.woff2') format('woff2'); font-weight:700; font-display:swap; }
+  @font-face { font-family:'Manrope'; src:url('../assets/Manrope-VariableFont_wght.ttf') format('truetype'); font-weight:300 800; font-display:swap; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Manrope',system-ui,sans-serif; background:#e7edf3; color:#17314b; padding:26px 16px 80px; display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .ptitle { font-family:'Styrene A',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.04em; font-size:13px; color:#64748b; text-align:center; }
+  .controls { display:flex; gap:6px; background:#fff; border:1px solid #dbe4ec; border-radius:30px; padding:4px; }
+  .controls button { border:none; background:none; cursor:pointer; font-family:'Styrene A',sans-serif; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:#64748b; padding:7px 15px; border-radius:24px; }
+  .controls button.on { background:#0f4c81; color:#fff; }
+
+  .placements { display:flex; flex-wrap:wrap; gap:34px; justify-content:center; align-items:flex-start; width:100%; margin-top:6px; }
+  .placement { display:flex; flex-direction:column; align-items:center; gap:8px; }
+  .plabel { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:#8a99a8; }
+  .frame { border-radius:20px; overflow:hidden; background:#fff; box-shadow:0 18px 50px rgba(15,76,129,.16),0 2px 8px rgba(15,76,129,.07); }
+  .frame.drawer { width:380px; } .frame.modal { width:560px; } .frame.section { width:980px; max-width:100%; }
+  @media (max-width:1020px){ .frame.section{ width:100%; } }
+  @media (max-width:600px){ .frame.modal,.frame.drawer{ width:100%; } }
+  /* modal chrome */
+  .modalwrap { background:rgba(15,33,55,.35); padding:22px; border-radius:24px; }
+  .modalwrap .frame { box-shadow:0 24px 70px rgba(0,0,0,.3); }
+
+  /* ===== WIDGET ===== */
+  .fc { container-type:inline-size; width:100%; font-family:'Manrope',sans-serif; color:#17314b; }
+
+  /* tabs */
+  .tabs { display:flex; gap:4px; background:#eef2f6; border-radius:13px; padding:4px; margin:14px 16px 4px; }
+  .tab { flex:1; background:none; border:none; cursor:pointer; border-radius:10px; padding:9px 6px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; color:#64748b; font-family:inherit; }
+  .tab.on { background:#fff; box-shadow:0 1px 4px rgba(15,76,129,.16); color:#0e4174; }
+  .tab .nm { font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; letter-spacing:.04em; text-transform:uppercase; line-height:1; }
+  .tab .best { font-size:9px; font-weight:700; color:#16a34a; letter-spacing:.03em; text-transform:uppercase; line-height:1; }
+
+  /* mode line under tabs */
+  .modeline { font-size:11px; color:#8a99a8; margin:0 18px; padding-top:8px; display:flex; align-items:center; gap:5px; }
+  .modeline svg { width:12px; height:12px; color:#16a34a; }
+
+  /* hero */
+  .hero { position:relative; padding:18px 20px 20px; color:#fff;
+    background:radial-gradient(95% 80% at 85% 115%, rgba(63,143,47,.7), rgba(63,143,47,0) 60%), radial-gradient(120% 85% at 12% -12%, rgba(255,255,255,.16), rgba(255,255,255,0) 55%), linear-gradient(165deg,#0b3766,#0f4c81 55%,#14527f); }
+  .hero-top { display:flex; justify-content:space-between; align-items:center; font-size:12px; font-weight:600; color:rgba(255,255,255,.85); }
+  .hero-top .loc { display:flex; align-items:center; gap:5px; } .hero-top svg { width:13px; height:13px; }
+  .score-block { text-align:center; padding:8px 0 4px; }
+  .score-num { font-family:'Styrene A',sans-serif; font-weight:900; font-size:82px; line-height:.9; letter-spacing:-.02em; text-shadow:0 3px 18px rgba(0,0,0,.22); }
+  .score-verdict { font-family:'Styrene A',sans-serif; font-weight:700; font-size:19px; text-transform:uppercase; letter-spacing:.08em; margin-top:6px; }
+  .score-tagline { font-size:13px; color:rgba(255,255,255,.85); margin-top:5px; font-weight:500; }
+  .scale-eyebrow { font-size:9px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.6); margin:15px 4px 0; }
+  .score-track { position:relative; height:6px; border-radius:4px; margin:7px 6px 0; background:linear-gradient(90deg,#ef4444 0%,#f97316 22%,#f59e0b 42%,#f0b429 60%,#84cc16 80%,#22c55e 100%); }
+  .score-track .dot { position:absolute; top:50%; width:13px; height:13px; border-radius:50%; background:#fff; transform:translate(-50%,-50%); box-shadow:0 0 0 3px rgba(15,76,129,.4),0 1px 3px rgba(0,0,0,.35); }
+  .score-scale { display:flex; justify-content:space-between; font-size:8px; color:rgba(255,255,255,.62); margin:6px 2px 0; font-weight:700; letter-spacing:.02em; text-transform:uppercase; }
+  .hero-weather { display:flex; align-items:center; justify-content:space-between; margin-top:16px; padding-top:13px; border-top:1px solid rgba(255,255,255,.16); }
+  .hero-weather .cond { display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; } .hero-weather .cond svg { width:20px; height:20px; }
+  .hero-weather .temp { font-family:'Styrene A',sans-serif; font-weight:700; font-size:26px; }
+
+  /* body — single column; two columns when container is wide */
+  .summary { font-size:13px; line-height:1.45; color:#3a536b; padding:14px 20px 0; } .summary b { color:#0e4174; font-weight:700; }
+  .body { padding:12px 16px 16px; display:flex; flex-direction:column; gap:6px; }
+  @container (min-width:700px){
+    .body { display:grid; grid-template-columns:1fr 1fr; gap:6px 20px; align-items:start; }
+    .col-main { grid-column:1; } .col-side { grid-column:2; }
+  }
+
+  /* conditions */
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  @container (min-width:480px){ .grid { grid-template-columns:repeat(3,1fr); } }
+  @container (min-width:700px){ .grid { grid-template-columns:repeat(2,1fr); } }
+  .cell { position:relative; border:1px solid #e4ebf2; border-radius:14px; padding:12px 13px; display:flex; flex-direction:column; gap:8px; background:#fbfcfe; }
+  .cell-top { display:flex; align-items:center; justify-content:space-between; gap:6px; }
+  .cell-id { display:flex; align-items:center; gap:8px; min-width:0; }
+  .cell-id .ic { width:30px; height:30px; border-radius:9px; display:flex; align-items:center; justify-content:center; background:rgba(15,76,129,.07); color:#0f4c81; flex-shrink:0; } .cell-id .ic svg { width:18px; height:18px; }
+  .cell-id .lab { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:#64748b; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .info { background:none; border:none; cursor:pointer; padding:1px; color:#9fb0c1; flex-shrink:0; display:flex; } .info svg { width:15px; height:15px; } .info:hover,.info.on { color:#0f4c81; }
+  .cell-val { font-family:'Styrene A',sans-serif; font-weight:700; font-size:18px; color:#0e4174; line-height:1; }
+  .cell-sub { font-size:11px; color:#7c8da0; line-height:1.2; }
+
+  .drawer { background:#f3f7fb; border:1px solid #e1e9f1; border-radius:14px; padding:13px 14px; margin-top:10px; }
+  .drawer-hd { display:flex; align-items:center; justify-content:space-between; margin-bottom:7px; }
+  .drawer-ti { font-family:'Styrene A',sans-serif; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:#0e4174; }
+  .drawer-x { width:22px; height:22px; border-radius:50%; border:1px solid #d3dde7; background:#fff; cursor:pointer; color:#64748b; font-size:11px; display:flex; align-items:center; justify-content:center; }
+  .drawer-why { font-size:11.5px; color:#3a536b; line-height:1.45; margin-bottom:8px; }
+  .drawer-barhd { display:flex; justify-content:space-between; font-size:10px; color:#7c8da0; margin-bottom:4px; } .drawer-barhd b { color:#0e4174; }
+  .drawer-bartrack { height:5px; background:#e1e9f1; border-radius:3px; overflow:hidden; } .drawer-barfill { height:100%; border-radius:3px; }
+  .drawer-sweet { font-size:10.5px; color:#7c8da0; border-top:1px solid #e1e9f1; padding-top:6px; margin-top:8px; line-height:1.4; }
+
+  /* panel (tide / solunar) */
+  .panel { padding-top:8px; }
+  .panel-hd { display:flex; align-items:center; justify-content:space-between; margin-bottom:4px; }
+  .panel-hd .t { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:#64748b; }
+  .panel-hd .now { font-size:10px; font-weight:600; color:#b91c1c; }
+  .chart svg { width:100%; height:auto; display:block; }
+  .rows { display:flex; gap:10px; margin-top:8px; }
+  .frow { flex:1; display:flex; align-items:center; gap:9px; background:#f6f9fc; border:1px solid #e9eff4; border-radius:10px; padding:9px 11px; min-width:0; }
+  .frow .fic { font-size:12px; line-height:1; flex-shrink:0; }
+  .frow.hi .fic{color:#0f4c81;} .frow.lo .fic{color:#29ABE2;} .frow.maj .fic{color:#16a34a;} .frow.min .fic{color:#84cc16;}
+  .frow .fmid { display:flex; flex-direction:column; gap:2px; min-width:0; }
+  .frow .fl { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:#7c8da0; line-height:1; }
+  .frow .fl b{ font-weight:700; } .frow.maj .fl b{color:#16a34a;} .frow.min .fl b{color:#65a30d;}
+  .frow .fv { font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; color:#0e4174; line-height:1; white-space:nowrap; }
+  .frow .fr { margin-left:auto; font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; white-space:nowrap; padding-left:6px; }
+  .frow.hi .fr,.frow.lo .fr{color:#0f4c81;}
+  .sol-track { position:relative; height:34px; background:#f1f6fa; border-radius:8px; overflow:hidden; margin-top:2px; }
+  .sol-band { position:absolute; top:0; bottom:0; } .sol-band.maj { background:rgba(22,163,74,.28); } .sol-band.min { background:rgba(101,163,13,.18); }
+  .sol-now { position:absolute; top:-2px; bottom:-2px; width:0; border-left:1.5px dashed #dc2626; }
+  .sol-ticks { display:flex; justify-content:space-between; font-size:9px; color:#a8b4c2; font-weight:600; margin-top:3px; padding:0 2px; }
+
+  /* license + travel */
+  .cta { padding-top:14px; }
+  .cta-q { font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; color:#0e4174; }
+  .cta-loc { font-size:11px; color:#94a3b8; margin:2px 0 12px; }
+  .cta-btns { display:flex; gap:8px; }
+  .btn { flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:11px; border-radius:10px; font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; text-decoration:none; cursor:pointer; border:none; }
+  .btn-pri { background:#0f4c81; color:#fff; } .btn-sec { background:#eef3f8; color:#0e4174; } .btn svg { width:14px; height:14px; }
+  .travel { margin-top:12px; border-top:1px solid #eef2f6; padding-top:10px; }
+  .travel-toggle { width:100%; background:none; border:none; cursor:pointer; display:flex; align-items:center; gap:12px; padding:4px 0; font-family:inherit; text-align:left; }
+  .travel-toggle .tic { width:34px; height:34px; border-radius:9px; background:rgba(15,76,129,.07); color:#0f4c81; display:flex; align-items:center; justify-content:center; flex-shrink:0; } .travel-toggle .tic svg { width:18px; height:18px; }
+  .travel-toggle .ttx { flex:1; min-width:0; } .travel-toggle .ttx b { display:block; font-size:13px; font-weight:700; color:#0e4174; line-height:1.25; } .travel-toggle .ttx em { font-style:normal; font-size:11.5px; color:#94a3b8; }
+  .travel-toggle .chev { color:#b0bccb; font-size:18px; flex-shrink:0; transition:transform .2s; }
+  .travel.open .chev { transform:rotate(90deg); }
+  .travel-body { max-height:0; overflow:hidden; transition:max-height .25s; }
+  .travel.open .travel-body { max-height:160px; }
+  .travel-hint { font-size:11px; color:#7c8da0; margin:8px 0 8px; }
+  .zip-row { display:flex; gap:8px; } .zip-row input { flex:1; border:1px solid #dbe4ec; border-radius:8px; padding:9px 11px; font-family:inherit; font-size:13px; } .zip-row button { background:#0f4c81; color:#fff; border:none; border-radius:8px; padding:0 16px; font-family:'Styrene A',sans-serif; font-weight:700; font-size:12px; cursor:pointer; }
+
+  /* 7-day */
+  .best-pill { display:inline-flex; align-items:center; gap:6px; margin:6px 0 10px; padding:6px 12px; border-radius:30px; background:rgba(22,163,74,.1); color:#15803d; font-size:11px; font-weight:700; letter-spacing:.02em; }
+  .days7 { display:flex; flex-direction:column; gap:0; }
+  @container (min-width:700px){ .days7 { display:grid; grid-template-columns:1fr 1fr; gap:0 20px; } }
+  .drow { padding:12px 0; border-bottom:1px solid #eef2f6; display:flex; flex-direction:column; gap:7px; }
+  .drow-top { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+  .drow-id { display:flex; align-items:center; gap:9px; }
+  .dname { font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; color:#3a536b; min-width:44px; }
+  .drow.best .dname { color:#15803d; }
+  .dwx { display:flex; align-items:center; gap:6px; font-size:12px; color:#7c8da0; font-weight:500; } .dwx .dicon{color:#94a3b8;display:flex;} .dwx .dicon svg{width:20px;height:20px;}
+  .drow-score { text-align:right; flex-shrink:0; }
+  .dscore { font-family:'Styrene A',sans-serif; font-weight:700; font-size:20px; line-height:1; }
+  .dlabel { font-size:9.5px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; line-height:1; margin-top:2px; }
+  .dbar { height:4px; border-radius:3px; background:#eef2f6; position:relative; overflow:hidden; } .dbar .f{position:absolute;left:0;top:0;bottom:0;border-radius:3px;}
+  .ddetail { font-size:10.5px; color:#8090a2; } .ddetail .sep{opacity:.5;margin:0 2px;}
+  .conf-note { font-size:9.5px; color:#a8b4c2; text-align:center; padding:10px 0 2px; }
+
+  svg.ln { fill:none; stroke:currentColor; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round; }
+  svg.ln-thin { fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+  .note { max-width:920px; font-size:12.5px; line-height:1.6; color:#475569; background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:14px 18px; margin-top:14px; } .note b{color:#0e4174;}
+</style>
+</head>
+<body>
+  <div class="ptitle">HUK Fishing Conditions · one fluid widget — Shopify block · modal · drawer</div>
+  <div class="controls">
+    <button class="on" data-mode="coastal" onclick="setMode('coastal')">Coastal</button>
+    <button data-mode="inland" onclick="setMode('inland')">Inland</button>
+  </div>
+
+  <div class="placements">
+    <div class="placement"><span class="plabel">Drawer / FAB · 380</span><div class="frame drawer"><div class="fc" data-fc></div></div></div>
+    <div class="placement"><span class="plabel">Pop-out Modal · 560</span><div class="modalwrap"><div class="frame modal"><div class="fc" data-fc></div></div></div></div>
+    <div class="placement"><span class="plabel">Shopify Section Block · 980</span><div class="frame section"><div class="fc" data-fc></div></div></div>
+  </div>
+
+  <div class="note" id="note"></div>
+
+<script>
+  const ICON = {
+    pin:'<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+    wind:'<path d="M3 8h9.5a2.5 2.5 0 1 0-2.5-2.5"/><path d="M3 12h13a3 3 0 1 1-3 3"/><path d="M3 16h7a2 2 0 1 1-2 2"/>',
+    tide:'<path d="M2 9c2-2.2 4-2.2 6 0s4 2.2 6 0 4-2.2 6 0"/><path d="M2 14c2-2.2 4-2.2 6 0s4 2.2 6 0 4-2.2 6 0"/>',
+    current:'<path d="M4 8.5a8 8 0 0 1 13.5-2.8L20 8"/><path d="M20 4v4h-4"/><path d="M20 15.5a8 8 0 0 1-13.5 2.8L4 16"/><path d="M4 20v-4h4"/>',
+    temp:'<path d="M10 13.5V5a2 2 0 1 1 4 0v8.5a3.6 3.6 0 1 1-4 0z"/><line x1="12" y1="13" x2="12" y2="8.5"/>',
+    surf:'<path d="M21 9.5C18.7 5.2 13.2 4.6 10 8c-2.1 2.2-1.7 5.4.5 7 1.8 1.3 4.3.6 4.8-1.4.4-1.5-.6-2.8-2-3"/><path d="M2.5 17.5c3 2.2 6.5 2.2 9.5 0"/>',
+    pressure:'<path d="M4 14a8 8 0 1 1 16 0"/><line x1="12" y1="14" x2="16" y2="10.5"/><circle cx="12" cy="14" r="1.4" fill="currentColor" stroke="none"/>',
+    solunar:'<circle cx="12" cy="12" r="7"/><path d="M12 5a7 7 0 0 0 0 14z" fill="currentColor" stroke="none"/>',
+    moon:'<path d="M17 4a8 8 0 1 0 3 13A9 9 0 0 1 17 4z"/>',
+    sky:'<circle cx="8" cy="8" r="3"/><path d="M8 2.5V4M2.5 8H4M4.3 4.3l1 1"/><path d="M9 19a3.5 3.5 0 0 1 0-7 4.5 4.5 0 0 1 8.6-1A3.2 3.2 0 0 1 18 19z"/>',
+    nav:'<path d="M3 11l18-8-8 18-2-8-8-2z"/>'
+  };
+  const WX = {
+    cloud:'<path d="M7 18a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.6-1.3A3.8 3.8 0 0 1 18 18z"/>',
+    partly:'<circle cx="8" cy="8" r="3"/><path d="M8 2v1.5M8 12.5V14M2 8h1.5M12.5 8H14M4.3 4.3l1 1M11.7 4.3l-1 1"/><path d="M9 19a3.5 3.5 0 0 1 0-7 4.5 4.5 0 0 1 8.6-1A3.2 3.2 0 0 1 18 19z"/>',
+    rain:'<path d="M7 15a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.6-1.3A3.8 3.8 0 0 1 18 15z"/><path d="M8 18.5v2M12 18.5v2.5M16 18.5v2"/>',
+    storm:'<path d="M7 14a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.6-1.3A3.8 3.8 0 0 1 18 14z"/><path d="M12 14l-2 4h3l-2 4"/>',
+    drizzle:'<path d="M7 15a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.6-1.3A3.8 3.8 0 0 1 18 15z"/><path d="M9 18.5v1.5M13 18.5v1.5"/>'
+  };
+  const INFO = {
+    wind:{t:'Why Wind matters', why:'Light to moderate wind is ideal for casting and drift. Above 25 mph most anglers call it a day.', sweet:'Ideal 5–15 mph. Calmer than 5 can be glassy; above 25 mph it gets tough.', s:62},
+    tide:{t:'Why Tide matters', why:'A moving tide pushes bait and triggers feeding. Slack water around the change scores lowest.', sweet:'Best within 2 hrs of high or low. Slack (±30 min) is slowest.', s:88},
+    current:{t:'Why Current matters', why:'Moving water positions fish and keeps bait active.', sweet:'Ideal 0.5–1.5 kt. Over 3 kt and presentations lose action.', s:80},
+    temp:{t:'Why Water Temp matters', why:'Water temperature drives fish metabolism and where they hold.', sweet:'Saltwater sweet spot 65–84°F. Below 55°F fish slow down.', s:82},
+    surf:{t:'Why Surf matters', why:'Wave height affects access and water clarity nearshore.', sweet:'Under 2 ft for shore/kayak; under 4 ft for small boats.', s:78},
+    pressure:{t:'Why Pressure matters', why:'Falling pressure ahead of a front often sparks feeding; rapid swings shut it down.', sweet:'Best: slowly falling over 3–6 hrs. Stable high is good too.', s:79},
+    solunar:{t:'Why Solunar matters', why:'Fish feed hardest during major periods (moon overhead/underfoot) and minor periods (moonrise/set).', sweet:'Plan around the major windows — about 2 hrs each, twice a day.', s:74},
+    moon:{t:'Why Moon Phase matters', why:'Moon phase influences feeding intensity; new and full moons tend to peak.', sweet:'Stronger activity near new and full moons.', s:70},
+    sky:{t:'Why Sky matters', why:'Overcast and low light push fish to feed freely; bright sun makes them cautious.', sweet:'Overcast/partly cloudy usually beats full sun.', s:72}
+  };
+  const CARDS = {
+    coastal:[['wind','Wind','3 mph SW','Light & steady'],['tide','Tide','Outgoing','Low 3:43 AM'],['current','Current','~0.9 kt','Ideal range'],['temp','Water Temp','83°F','Sweet spot'],['surf','Surf','1.6 ft','Calm nearshore'],['pressure','Pressure','29.86 inHg','Steady']],
+    inland:[['pressure','Pressure','29.92 inHg','Slowly falling'],['solunar','Solunar','Major 6:12a','Peak feeding'],['temp','Water Temp','74°F','Active range'],['wind','Wind','5 mph W','Light ripple'],['moon','Moon','Waxing 68%','Gibbous'],['sky','Sky','Partly cloudy','Good light']]
+  };
+  const DAYS = {
+    coastal:[['Today','cloud','Overcast',84,'💨 3 mph','🌊 1.6 ft'],['Mon','partly','Partly cloudy',86,'💨 8 mph','🌊 2.0 ft'],['Tue','drizzle','Drizzle',78,'💨 13 mph','🌊 2.0 ft'],['Wed','storm','Thunderstorm',30,'💨 14 mph','🌧 0.9" rain'],['Thu','rain','Rain showers',62,'💨 19 mph','🌊 2.6 ft'],['Fri','partly','Partly cloudy',71,'💨 15 mph','🌊 3.1 ft'],['Sat','cloud','Overcast',74,'💨 9 mph','🌊 3.0 ft']],
+    inland:[['Today','cloud','Overcast',80,'💨 5 mph','🌙 Major 6:12a'],['Mon','partly','Partly cloudy',86,'💨 7 mph','🌙 Major 6:58a'],['Tue','partly','Partly cloudy',82,'💨 9 mph','🌙 Major 7:44a'],['Wed','storm','Thunderstorm',34,'💨 13 mph','🌧 0.8" rain'],['Thu','rain','Rain showers',66,'💨 12 mph','🌙 Major 9:18a'],['Fri','partly','Partly cloudy',77,'💨 8 mph','🌙 Major 10:06a'],['Sat','cloud','Overcast',79,'💨 6 mph','🌙 Major 10:54a']]
+  };
+  const MODE = {
+    coastal:{ loc:'Charleston, SC', station:'Charleston Harbor tide station · 2.4 mi', score:84, verdict:'Fish On', tagline:'Strong conditions with real potential.', summary:'<b>Tide movement and current</b> are both working in your favor.' },
+    inland:{ loc:'Lake Murray, SC', station:'Using weather, pressure, moon phase & sun times', score:80, verdict:'Fish On', tagline:'Strong conditions with real potential.', summary:'<b>Falling pressure and a strong solunar window</b> line up this morning.' }
+  };
+  function color(s){ return s>=90?'#16a34a':s>=75?'#65a30d':s>=60?'#ca8a04':s>=40?'#d97706':s>=20?'#ea580c':'#dc2626'; }
+  function label(s){ return s>=90?'Drop Everything':s>=75?'Fish On':s>=60?'Worth the Trip':s>=40?'Grind It Out':s>=20?'Slow Pick':'Skunked'; }
+
+  let mode='coastal', tab='today', openCond=null, travelOpen=false;
+
+  function heroHTML(m){
+    return `<div class="hero">
+      <div class="hero-top"><span class="loc"><svg class="ln" viewBox="0 0 24 24">${ICON.pin}</svg> ${m.loc}</span><span>Sun · Jun 15</span></div>
+      <div class="score-block"><div class="score-num">${m.score}</div><div class="score-verdict">${m.verdict}</div><div class="score-tagline">${m.tagline}</div></div>
+      <div class="scale-eyebrow">Cast score scale</div>
+      <div class="score-track"><div class="dot" style="left:${m.score}%"></div></div>
+      <div class="score-scale"><span>Skunked</span><span>Slow</span><span>Grind</span><span>Worth It</span><span>Fish On</span><span>Drop All</span></div>
+      <div class="hero-weather"><span class="cond"><svg class="ln" viewBox="0 0 24 24">${WX.cloud}</svg> ${mode==='coastal'?'Overcast':'Partly cloudy'}</span><span class="temp">${mode==='coastal'?'82°':'74°'}</span></div>
+    </div>`;
+  }
+  function gridHTML(){
+    const cards=CARDS[mode];
+    let h=cards.map(c=>`<div class="cell"><div class="cell-top"><span class="cell-id"><span class="ic"><svg class="ln" viewBox="0 0 24 24">${ICON[c[0]]}</svg></span><span class="lab">${c[1]}</span></span>
+      <button class="info${openCond===c[0]?' on':''}" onclick="toggleInfo('${c[0]}')"><svg class="ln" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></button></div>
+      <div class="cell-val">${c[2]}</div><div class="cell-sub">${c[3]}</div></div>`).join('');
+    return `<div class="grid">${h}</div>${openCond?drawerHTML():''}`;
+  }
+  function drawerHTML(){
+    const i=INFO[openCond], c=color(i.s);
+    return `<div class="drawer"><div class="drawer-hd"><span class="drawer-ti">${i.t}</span><button class="drawer-x" onclick="toggleInfo('${openCond}')">✕</button></div>
+      <div class="drawer-why">${i.why}</div>
+      <div class="drawer-barhd"><span>Sub-score</span><b>${i.s}/100</b></div><div class="drawer-bartrack"><div class="drawer-barfill" style="width:${i.s}%;background:${c}"></div></div>
+      <div class="drawer-sweet">Sweet spot: ${i.sweet}</div></div>`;
+  }
+  function panelHTML(){
+    if(mode==='coastal'){
+      return `<div class="panel"><div class="panel-hd"><span class="t">Today's Tide</span><span class="now">Now · 4:18 PM</span></div>
+        <div class="chart"><svg viewBox="0 0 320 100" preserveAspectRatio="none"><defs><linearGradient id="tg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#29ABE2" stop-opacity="0.22"/><stop offset="100%" stop-color="#29ABE2" stop-opacity="0"/></linearGradient></defs>
+          <path d="M6,52 C28,34 48,30 66,30 C108,30 150,66 180,70 C214,74 268,44 296,34 L314,36 L314,92 L6,92 Z" fill="url(#tg)"/>
+          <path d="M6,52 C28,34 48,30 66,30 C108,30 150,66 180,70 C214,74 268,44 296,34 L314,36" fill="none" stroke="#29ABE2" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="250" y1="12" x2="250" y2="92" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3 3"/>
+          <circle cx="66" cy="30" r="3.6" fill="#1f8fc0" stroke="#fff" stroke-width="1.6"/><circle cx="180" cy="70" r="3.6" fill="#1f8fc0" stroke="#fff" stroke-width="1.6"/><circle cx="296" cy="34" r="3.6" fill="#1f8fc0" stroke="#fff" stroke-width="1.6"/>
+          <text x="66" y="20" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" font-weight="700" fill="#3a536b">8:40 AM</text><text x="180" y="86" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" font-weight="700" fill="#7c8da0">3:39 PM</text><text x="294" y="24" text-anchor="end" font-family="Manrope,sans-serif" font-size="9" font-weight="700" fill="#3a536b">9:11 PM</text></svg></div>
+        <div class="rows"><div class="frow lo"><span class="fic">▼</span><span class="fmid"><span class="fl">Next Low</span><span class="fv">3:39 PM</span></span><span class="fr">-0.8 ft</span></div>
+          <div class="frow hi"><span class="fic">▲</span><span class="fmid"><span class="fl">Next High</span><span class="fv">9:11 PM</span></span><span class="fr">6.7 ft</span></div></div></div>`;
+    }
+    return `<div class="panel"><div class="panel-hd"><span class="t">Solunar Feeding Times</span><span class="now">Now · 4:18 PM</span></div>
+      <div class="sol-track"><div class="sol-band maj" style="left:23%;width:9%"></div><div class="sol-band min" style="left:50%;width:5%"></div><div class="sol-band maj" style="left:75%;width:9%"></div><div class="sol-band min" style="left:2%;width:4%"></div><div class="sol-now" style="left:68%"></div></div>
+      <div class="sol-ticks"><span>12a</span><span>6a</span><span>12p</span><span>6p</span><span>12a</span></div>
+      <div class="rows"><div class="frow maj"><span class="fic">●</span><span class="fmid"><span class="fl">Major · <b>Strong</b></span><span class="fv">5:42–7:42a</span></span></div>
+        <div class="frow min"><span class="fic">●</span><span class="fmid"><span class="fl">Minor · <b>Fair</b></span><span class="fv">12:10–1:10p</span></span></div></div></div>`;
+  }
+  function ctaHTML(){
+    return `<div class="cta"><div class="cta-q">Need a Fishing License?</div><div class="cta-loc">Your location · South Carolina</div>
+      <div class="cta-btns"><a class="btn btn-pri">Get A License →</a><a class="btn btn-sec"><svg class="ln" viewBox="0 0 24 24">${ICON.pin}</svg> Directions</a></div>
+      <div class="travel${travelOpen?' open':''}"><button class="travel-toggle" onclick="toggleTravel()"><span class="tic"><svg class="ln" viewBox="0 0 24 24">${ICON.nav}</svg></span><span class="ttx"><b>Going on a fishing trip?</b><em>Get a license before you go.</em></span><span class="chev">›</span></button>
+        <div class="travel-body"><p class="travel-hint">Enter your destination ZIP for the correct license and local directions.</p><div class="zip-row"><input maxlength="5" placeholder="Destination ZIP"><button>Look Up</button></div></div></div></div>`;
+  }
+  function sevenHTML(){
+    const days=DAYS[mode]; const max=Math.max(...days.map(d=>d[3]));
+    const bd=days.reduce((a,b)=>b[3]>a[3]?b:a);
+    const rows=days.map((d,i)=>{ const c=color(d[3]); const conf=i<2?1:i<5?.84:.62; const parts=[d[4],d[5]];
+      return `<div class="drow${d[3]===max?' best':''}" style="opacity:${conf}"><div class="drow-top"><div class="drow-id"><span class="dname">${d[0]}</span><span class="dwx"><span class="dicon"><svg class="ln-thin" viewBox="0 0 24 24">${WX[d[1]]}</svg></span>${d[2]}</span></div>
+        <div class="drow-score"><div class="dscore" style="color:${c}">${d[3]}</div><div class="dlabel" style="color:${c}">${label(d[3])}</div></div></div>
+        <div class="dbar"><span class="f" style="width:${d[3]}%;background:${c}"></span></div><div class="ddetail">${parts.join('<span class="sep">·</span>')}</div></div>`;}).join('');
+    return `<div class="body"><div style="grid-column:1/-1"><div class="best-pill">★ Best day · ${bd[0]} · ${bd[3]} · ${label(bd[3])}</div></div>
+      <div class="days7" style="grid-column:1/-1">${rows}</div>
+      <div class="conf-note" style="grid-column:1/-1">Days 1–2 high confidence · 3–5 moderate · 6–7 estimated</div></div>`;
+  }
+
+  function render(){
+    const m=MODE[mode];
+    const todayBody=`<div class="summary">${m.summary}</div><div class="body"><div class="col-main">${gridHTML()}</div><div class="col-side">${panelHTML()}${ctaHTML()}</div></div>`;
+    const html=`${heroHTML(m)}
+      <div class="tabs"><button class="tab ${tab==='today'?'on':''}" onclick="setTab('today')"><span class="nm">Today</span></button>
+        <button class="tab ${tab==='7day'?'on':''}" onclick="setTab('7day')"><span class="nm">7-Day</span><span class="best">★ Best Mon</span></button></div>
+      <div class="modeline"><svg class="ln" viewBox="0 0 24 24">${ICON.pin}</svg> ${m.station}</div>
+      ${tab==='today'?todayBody:sevenHTML()}`;
+    document.querySelectorAll('[data-fc]').forEach(el=>el.innerHTML=html);
+    document.querySelectorAll('.controls button').forEach(b=>b.classList.toggle('on',b.dataset.mode===mode));
+    document.getElementById('note').innerHTML = `<b>One component, three placements.</b> The exact same widget is rendered into a 380px <b>drawer/FAB</b>, a 560px <b>pop-out modal</b>, and a 980px <b>Shopify section block</b>. It uses <b>container queries</b>, so it lays itself out based on its own width — single column when narrow, <b>two-column</b> (conditions left, tide/license right) when wide — no matter the screen size. Coastal/Inland, the info drawers, tabs, tide/solunar, and the travel block all work in every placement.`;
+  }
+  function setMode(m){ mode=m; openCond=null; render(); }
+  function setTab(t){ tab=t; render(); }
+  function toggleInfo(k){ openCond=openCond===k?null:k; render(); }
+  function toggleTravel(){ travelOpen=!travelOpen; render(); }
+  render();
+</script>
+</body>
+</html>
