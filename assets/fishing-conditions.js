@@ -202,6 +202,16 @@
     return 'Overcast';
   }
 
+  // Single source of truth: fishing score → brand color tier
+  function scoreToColor(score) {
+    if (score >= 90) return '#22c55e';
+    if (score >= 75) return '#84cc16';
+    if (score >= 60) return '#f0b429';
+    if (score >= 40) return '#f59e0b';
+    if (score >= 20) return '#f97316';
+    return '#ef4444';
+  }
+
   function buildTideGraph(tides) {
     if (!tides || tides.length < 2) return '';
     const pts = tides.map(t => ({
@@ -581,7 +591,7 @@
 
   // ── API fetches ─────────────────────────────────────────────
   async function fetchWeather(lat, lon) {
-    const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m,relative_humidity_2m,cloud_cover,surface_pressure&hourly=surface_pressure&daily=wind_speed_10m_max,weather_code,precipitation_sum&wind_speed_unit=kmh&temperature_unit=fahrenheit&forecast_days=7&timezone=auto`;
+    const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m,relative_humidity_2m,cloud_cover,surface_pressure&hourly=surface_pressure&daily=wind_speed_10m_max,weather_code,precipitation_sum&wind_speed_unit=kmh&temperature_unit=fahrenheit&precipitation_unit=inch&forecast_days=7&timezone=auto`;
     const marineUrl  = `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lon}&hourly=wave_height,wave_period,sea_surface_temperature&daily=wave_height_max&forecast_days=7&timezone=auto`;
 
     const [weatherRes, marineRes] = await Promise.all([
@@ -932,6 +942,11 @@
   // ── License section interactivity ───────────────────────────
   // Uses event delegation on the container so it survives re-renders.
   function attachWidgetHandlers(root) {
+    // Guard against double-attachment (loadConditions can render twice:
+    // cached then fresh). A second listener would toggle every click twice.
+    if (root.dataset.hukHandlersAttached === '1') return;
+    root.dataset.hukHandlersAttached = '1';
+
     // Tab switching
     root.addEventListener('click', function(e) {
       const tab = e.target.closest('.huk-fc-tab');
@@ -966,7 +981,7 @@
         if (!info) return;
         const score  = parseInt(whyBtn.dataset.score, 10);
         const reason = whyBtn.dataset.reason;
-        const scoreColor = getScoreColor(score);
+        const scoreColor = scoreToColor(score);
         const alreadyOpen = drawer.classList.contains('open') && drawer.dataset.cond === key;
         if (alreadyOpen) {
           drawer.classList.remove('open');
