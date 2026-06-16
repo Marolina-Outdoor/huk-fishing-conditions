@@ -23,11 +23,11 @@
   .w { width:382px; max-width:calc(100vw - 32px); border-radius:22px; overflow:hidden; background:#fff; box-shadow:0 18px 50px rgba(15,76,129,.18),0 2px 8px rgba(15,76,129,.08); }
 
   /* tabs */
-  .tabs { display:flex; border-bottom:1px solid #e8edf2; padding:0 16px; }
-  .tab { background:none; border:none; cursor:pointer; padding:13px 16px 11px; display:flex; flex-direction:column; align-items:flex-start; gap:3px; border-bottom:2px solid transparent; margin-bottom:-1px; color:#94a3b8; font-family:inherit; }
-  .tab.on { border-bottom-color:#16a34a; color:#0e4174; }
+  .tabs { display:flex; gap:4px; background:#eef2f6; border-radius:13px; padding:4px; margin:14px 16px 4px; }
+  .tab { flex:1; background:none; border:none; cursor:pointer; border-radius:10px; padding:9px 6px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; color:#64748b; font-family:inherit; transition:background .15s,box-shadow .15s; }
+  .tab.on { background:#fff; box-shadow:0 1px 4px rgba(15,76,129,.16); color:#0e4174; }
   .tab .nm { font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; letter-spacing:.04em; text-transform:uppercase; line-height:1; }
-  .tab .meta { font-size:10px; font-weight:700; color:#16a34a; letter-spacing:.02em; }
+  .tab .best { font-size:9px; font-weight:700; color:#16a34a; letter-spacing:.03em; text-transform:uppercase; line-height:1; }
 
   /* hero */
   .hero { position:relative; padding:18px 20px 22px; color:#fff;
@@ -42,10 +42,10 @@
   .score-num { font-family:'Styrene A',sans-serif; font-weight:900; font-size:88px; line-height:.9; letter-spacing:-.02em; text-shadow:0 3px 18px rgba(0,0,0,.22); }
   .score-verdict { font-family:'Styrene A',sans-serif; font-weight:700; font-size:19px; text-transform:uppercase; letter-spacing:.08em; margin-top:8px; }
   .score-tagline { font-size:13px; color:rgba(255,255,255,.85); margin-top:5px; font-weight:500; }
-  .score-track { position:relative; height:5px; border-radius:3px; background:rgba(255,255,255,.22); margin:16px 4px 0; }
-  .score-track .fill { position:absolute; left:0; top:0; bottom:0; border-radius:3px; background:#fff; }
-  .score-track .dot { position:absolute; top:50%; width:11px; height:11px; border-radius:50%; background:#fff; transform:translate(-50%,-50%); box-shadow:0 0 0 3px rgba(255,255,255,.3); }
-  .score-scale { display:flex; justify-content:space-between; font-size:9px; color:rgba(255,255,255,.6); margin:5px 4px 0; font-weight:600; letter-spacing:.03em; }
+  .scale-eyebrow { font-size:9px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.6); margin:16px 4px 0; }
+  .score-track { position:relative; height:6px; border-radius:4px; margin:7px 6px 0; background:linear-gradient(90deg,#ef4444 0%,#f97316 22%,#f59e0b 42%,#f0b429 60%,#84cc16 80%,#22c55e 100%); }
+  .score-track .dot { position:absolute; top:50%; width:13px; height:13px; border-radius:50%; background:#fff; transform:translate(-50%,-50%); box-shadow:0 0 0 3px rgba(15,76,129,.4),0 1px 3px rgba(0,0,0,.35); }
+  .score-scale { display:flex; justify-content:space-between; font-size:8px; color:rgba(255,255,255,.62); margin:6px 2px 0; font-weight:700; letter-spacing:.02em; text-transform:uppercase; }
   .hero-weather { position:relative; display:flex; align-items:center; justify-content:space-between; margin-top:18px; padding-top:14px; border-top:1px solid rgba(255,255,255,.16); }
   .hero-weather .cond { display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; } .hero-weather .cond svg { width:20px; height:20px; }
   .hero-weather .temp { font-family:'Styrene A',sans-serif; font-weight:700; font-size:26px; }
@@ -84,7 +84,16 @@
   .panel-hd .t { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:#64748b; }
   .panel-hd .now { font-size:10px; font-weight:600; color:#b91c1c; }
   .chart svg { width:100%; height:auto; display:block; }
-  .rows { display:flex; gap:10px; margin-top:6px; }
+  .rows { display:flex; gap:10px; margin-top:8px; }
+  .frow { flex:1; display:flex; align-items:center; gap:9px; background:#f6f9fc; border:1px solid #e9eff4; border-radius:10px; padding:9px 11px; min-width:0; }
+  .frow .fic { font-size:12px; line-height:1; flex-shrink:0; }
+  .frow.hi .fic{color:#0f4c81;} .frow.lo .fic{color:#29ABE2;} .frow.maj .fic{color:#16a34a;} .frow.min .fic{color:#84cc16;}
+  .frow .fmid { display:flex; flex-direction:column; gap:2px; min-width:0; }
+  .frow .fl { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:#7c8da0; line-height:1; }
+  .frow .fv { font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; color:#0e4174; line-height:1; white-space:nowrap; }
+  .frow .fr { margin-left:auto; font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; white-space:nowrap; padding-left:6px; }
+  .frow.hi .fr,.frow.lo .fr{color:#0f4c81;} .frow.maj .fr{color:#16a34a;} .frow.min .fr{color:#65a30d;}
+  .frow.maj .fl b{color:#16a34a;} .frow.min .fl b{color:#65a30d;} .frow .fl b{font-weight:700;}
   .row2 { flex:1; display:flex; align-items:center; gap:7px; background:#f6f9fc; border:1px solid #e9eff4; border-radius:10px; padding:8px 10px; }
   .row2 .ar { font-size:11px; } .row2.hi .ar{color:#0f4c81;} .row2.lo .ar{color:#29ABE2;} .row2.maj .ar{color:#16a34a;} .row2.min .ar{color:#65a30d;}
   .row2 .lab { font-size:10px; color:#7c8da0; font-weight:600; line-height:1.1; }
@@ -106,9 +115,13 @@
   .btn { flex:1; display:flex; align-items:center; justify-content:center; gap:6px; padding:11px; border-radius:10px; font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; text-decoration:none; cursor:pointer; border:none; }
   .btn-pri { background:#0f4c81; color:#fff; } .btn-sec { background:#eef3f8; color:#0e4174; } .btn svg { width:14px; height:14px; }
   .travel { margin:12px 20px 18px 20px; border-top:1px solid #eef2f6; padding-top:10px; }
-  .travel-toggle { width:100%; background:none; border:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:8px; padding:4px 0; font-family:inherit; }
-  .travel-toggle .tt { font-size:13px; color:#0e4174; } .travel-toggle .tt b { font-weight:700; } .travel-toggle .tt span { color:#94a3b8; font-weight:500; }
-  .travel-toggle .chev { color:#94a3b8; font-size:16px; transition:transform .2s; }
+  .travel-toggle { width:100%; background:none; border:none; cursor:pointer; display:flex; align-items:center; gap:12px; padding:4px 0; font-family:inherit; text-align:left; }
+  .travel-toggle .tic { width:34px; height:34px; border-radius:9px; background:rgba(15,76,129,.07); color:#0f4c81; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .travel-toggle .tic svg { width:18px; height:18px; }
+  .travel-toggle .ttx { flex:1; min-width:0; }
+  .travel-toggle .ttx b { display:block; font-size:13px; font-weight:700; color:#0e4174; line-height:1.25; }
+  .travel-toggle .ttx em { font-style:normal; font-size:11.5px; color:#94a3b8; line-height:1.25; }
+  .travel-toggle .chev { color:#b0bccb; font-size:18px; flex-shrink:0; transition:transform .2s; }
   .travel.open .chev { transform:rotate(90deg); }
   .travel-body { max-height:0; overflow:hidden; transition:max-height .25s; }
   .travel.open .travel-body { max-height:160px; }
@@ -151,7 +164,7 @@
   <div class="w">
     <div class="tabs">
       <button class="tab on" data-tab="today" onclick="setTab('today')"><span class="nm">Today</span></button>
-      <button class="tab" data-tab="7day" onclick="setTab('7day')"><span class="nm">7-Day</span><span class="meta" id="best-teaser">Mon 86</span></button>
+      <button class="tab" data-tab="7day" onclick="setTab('7day')"><span class="nm">7-Day</span><span class="best">★ Best Mon</span></button>
     </div>
 
     <!-- TODAY -->
@@ -166,8 +179,9 @@
           <div class="score-verdict">Fish On</div>
           <div class="score-tagline">Strong conditions with real potential.</div>
         </div>
-        <div class="score-track"><div class="fill" style="width:84%"></div><div class="dot" style="left:84%"></div></div>
-        <div class="score-scale"><span>SKUNK</span><span>SLOW</span><span>GRIND</span><span>FISH ON</span><span>DROP ALL</span></div>
+        <div class="scale-eyebrow">Cast score scale</div>
+        <div class="score-track"><div class="dot" style="left:84%"></div></div>
+        <div class="score-scale"><span>Skunked</span><span>Slow</span><span>Grind</span><span>Worth It</span><span>Fish On</span><span>Drop All</span></div>
         <div class="hero-weather">
           <span class="cond"><svg class="ln" viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.6-1.3A3.8 3.8 0 0 1 18 18z"/></svg> Overcast</span>
           <span class="temp">82°</span>
@@ -191,7 +205,8 @@
 
       <div class="travel" id="travel">
         <button class="travel-toggle" onclick="document.getElementById('travel').classList.toggle('open')">
-          <span class="tt">🎣 <b>Going on a fishing trip?</b> <span>Get a license before you go.</span></span>
+          <span class="tic"><svg class="ln" viewBox="0 0 24 24"><path d="M3 11l18-8-8 18-2-8-8-2z"/></svg></span>
+          <span class="ttx"><b>Going on a fishing trip?</b><em>Get a license before you go.</em></span>
           <span class="chev">›</span>
         </button>
         <div class="travel-body">
@@ -306,8 +321,8 @@
           <text x="294" y="24" text-anchor="end" font-family="Manrope,sans-serif" font-size="9" font-weight="700" fill="#3a536b">9:11 PM</text>
         </svg></div>
         <div class="rows">
-          <div class="row2 lo"><span class="ar">▼</span><span><span class="lab">Next low</span><br><span class="time">3:39 PM</span></span><span class="ht">-0.8 ft</span></div>
-          <div class="row2 hi"><span class="ar">▲</span><span><span class="lab">Next high</span><br><span class="time">9:11 PM</span></span><span class="ht">6.7 ft</span></div>
+          <div class="frow lo"><span class="fic">▼</span><span class="fmid"><span class="fl">Next Low</span><span class="fv">3:39 PM</span></span><span class="fr">-0.8 ft</span></div>
+          <div class="frow hi"><span class="fic">▲</span><span class="fmid"><span class="fl">Next High</span><span class="fv">9:11 PM</span></span><span class="fr">6.7 ft</span></div>
         </div>`;
     } else {
       document.getElementById('panel').innerHTML = `
@@ -321,8 +336,8 @@
         </div>
         <div class="sol-ticks"><span>12a</span><span>6a</span><span>12p</span><span>6p</span><span>12a</span></div>
         <div class="rows">
-          <div class="row2 maj"><span class="ar">●</span><span><span class="lab">Major · Strong</span><br><span class="time">5:42–7:42a</span></span></div>
-          <div class="row2 min"><span class="ar">●</span><span><span class="lab">Minor · Fair</span><br><span class="time">12:10–1:10p</span></span></div>
+          <div class="frow maj"><span class="fic">●</span><span class="fmid"><span class="fl">Major · <b>Strong</b></span><span class="fv">5:42–7:42a</span></span></div>
+          <div class="frow min"><span class="fic">●</span><span class="fmid"><span class="fl">Minor · <b>Fair</b></span><span class="fv">12:10–1:10p</span></span></div>
         </div>`;
     }
   }
