@@ -71,6 +71,21 @@
   .cell-val { font-family:'Styrene A',sans-serif; font-weight:700; font-size:18px; color:#0e4174; line-height:1; }
   .cell-sub { font-size:11px; color:#7c8da0; line-height:1.2; }
 
+  /* ---- TIDE CHART ---- */
+  .tide { padding:10px 18px 6px; border-top:1px solid #eef2f6; margin:8px 0 0; }
+  .tide-hd { display:flex; align-items:center; justify-content:space-between; margin-bottom:4px; }
+  .tide-hd .t { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:#64748b; }
+  .tide-hd .now { font-size:10px; font-weight:600; color:#b91c1c; display:flex; align-items:center; gap:4px; }
+  .tide-hd .now::before { content:''; width:8px; height:2px; background:repeating-linear-gradient(90deg,#dc2626 0 2px,transparent 2px 4px); display:inline-block; }
+  .tide-chart svg { width:100%; height:auto; display:block; }
+  .tide-rows { display:flex; gap:10px; margin-top:6px; }
+  .tide-row { flex:1; display:flex; align-items:center; gap:7px; background:#f6f9fc; border:1px solid #e9eff4; border-radius:10px; padding:8px 10px; }
+  .tide-row .ar { font-size:11px; }
+  .tide-row.hi .ar { color:#0f4c81; } .tide-row.lo .ar { color:#29ABE2; }
+  .tide-row .lab { font-size:10px; color:#7c8da0; font-weight:600; line-height:1.1; }
+  .tide-row .time { font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; color:#0e4174; line-height:1.1; }
+  .tide-row .ht { margin-left:auto; font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; color:#0f4c81; }
+
   /* ---- CTA ---- */
   .cta { padding:14px 20px 20px; }
   .cta-q { font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; color:#0e4174; }
@@ -92,17 +107,24 @@
   .best-pill { display:inline-flex; align-items:center; gap:6px; margin-top:12px; padding:6px 12px; border-radius:30px;
     background:rgba(255,255,255,.14); font-size:11px; font-weight:700; letter-spacing:.03em; }
   .best-pill .star { color:#86efac; }
-  .days { padding:6px 18px 14px; }
-  .drow { display:grid; grid-template-columns:52px 24px 1fr 30px; align-items:center; gap:11px; padding:12px 0; border-bottom:1px solid #eef2f6; }
+  .days { padding:4px 18px 14px; }
+  .drow { padding:12px 0; border-bottom:1px solid #eef2f6; display:flex; flex-direction:column; gap:7px; }
   .drow:last-child { border-bottom:none; }
   .drow.best .dname { color:#15803d; }
-  .dname { font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; color:#3a536b; }
-  .dicon { color:#94a3b8; display:flex; }
-  .dicon svg { width:22px; height:22px; }
-  .dbar { height:6px; border-radius:4px; background:#eef2f6; position:relative; overflow:hidden; }
-  .dbar .f { position:absolute; left:0; top:0; bottom:0; border-radius:4px; }
-  .dscore { font-family:'Styrene A',sans-serif; font-weight:700; font-size:16px; text-align:right; }
-  .conf-note { font-size:9.5px; color:#a8b4c2; text-align:center; padding-top:8px; }
+  .drow-top { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+  .drow-id { display:flex; align-items:center; gap:9px; }
+  .dname { font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; color:#3a536b; min-width:44px; }
+  .dwx { display:flex; align-items:center; gap:6px; font-size:12px; color:#7c8da0; font-weight:500; }
+  .dwx .dicon { color:#94a3b8; display:flex; }
+  .dwx .dicon svg { width:20px; height:20px; }
+  .drow-score { text-align:right; flex-shrink:0; }
+  .dscore { font-family:'Styrene A',sans-serif; font-weight:700; font-size:20px; line-height:1; }
+  .dlabel { font-size:9.5px; font-weight:700; text-transform:uppercase; letter-spacing:.03em; line-height:1; margin-top:2px; }
+  .dbar { height:4px; border-radius:3px; background:#eef2f6; position:relative; overflow:hidden; }
+  .dbar .f { position:absolute; left:0; top:0; bottom:0; border-radius:3px; }
+  .ddetail { font-size:10.5px; color:#8090a2; }
+  .ddetail .sep { opacity:.5; margin:0 2px; }
+  .conf-note { font-size:9.5px; color:#a8b4c2; text-align:center; padding-top:10px; }
 
   svg.ln { fill:none; stroke:currentColor; stroke-width:1.75; stroke-linecap:round; stroke-linejoin:round; }
   svg.ln-thin { fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
@@ -166,6 +188,36 @@
           </div>
         </div>
 
+        <div class="tide">
+          <div class="tide-hd">
+            <span class="t">Today's Tide</span>
+            <span class="now">Now · 4:18 PM</span>
+          </div>
+          <div class="tide-chart">
+            <svg viewBox="0 0 320 100" preserveAspectRatio="none" aria-label="Tide curve">
+              <defs>
+                <linearGradient id="tg" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#29ABE2" stop-opacity="0.22"/>
+                  <stop offset="100%" stop-color="#29ABE2" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M6,52 C28,34 48,30 66,30 C108,30 150,66 180,70 C214,74 268,44 296,34 L314,36 L314,92 L6,92 Z" fill="url(#tg)"/>
+              <path d="M6,52 C28,34 48,30 66,30 C108,30 150,66 180,70 C214,74 268,44 296,34 L314,36" fill="none" stroke="#29ABE2" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="250" y1="12" x2="250" y2="92" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3 3"/>
+              <circle cx="66" cy="30" r="3.6" fill="#1f8fc0" stroke="#fff" stroke-width="1.6"/>
+              <circle cx="180" cy="70" r="3.6" fill="#1f8fc0" stroke="#fff" stroke-width="1.6"/>
+              <circle cx="296" cy="34" r="3.6" fill="#1f8fc0" stroke="#fff" stroke-width="1.6"/>
+              <text x="66" y="20" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" font-weight="700" fill="#3a536b">8:40 AM</text>
+              <text x="180" y="86" text-anchor="middle" font-family="Manrope,sans-serif" font-size="9" font-weight="700" fill="#7c8da0">3:39 PM</text>
+              <text x="294" y="24" text-anchor="end" font-family="Manrope,sans-serif" font-size="9" font-weight="700" fill="#3a536b">9:11 PM</text>
+            </svg>
+          </div>
+          <div class="tide-rows">
+            <div class="tide-row lo"><span class="ar">▼</span><span><span class="lab">Next low</span><br><span class="time">3:39 PM</span></span><span class="ht">-0.8 ft</span></div>
+            <div class="tide-row hi"><span class="ar">▲</span><span><span class="lab">Next high</span><br><span class="time">9:11 PM</span></span><span class="ht">6.7 ft</span></div>
+          </div>
+        </div>
+
         <div class="cta">
           <div class="cta-q">Need a Fishing License?</div>
           <div class="cta-loc">Your location · South Carolina</div>
@@ -205,25 +257,32 @@
   function color(s){ return s>=90?'#16a34a':s>=75?'#65a30d':s>=60?'#ca8a04':s>=40?'#d97706':s>=20?'#ea580c':'#dc2626'; }
   function label(s){ return s>=90?'Pack Cooler':s>=75?'Fish On':s>=60?'Wet a Line':s>=40?'Tip Up':s>=20?"Bird's Nest":'Skunk'; }
   const days = [
-    {d:'Today', wx:'cloud',   s:84, best:true},
-    {d:'Mon',   wx:'partly',  s:86, best:true},
-    {d:'Tue',   wx:'drizzle', s:78},
-    {d:'Wed',   wx:'storm',   s:30},
-    {d:'Thu',   wx:'rain',    s:62},
-    {d:'Fri',   wx:'partly',  s:71},
-    {d:'Sat',   wx:'cloud',   s:74},
+    {d:'Today', wx:'cloud',   desc:'Overcast',     s:84, wind:3,  wave:1.6, rain:0},
+    {d:'Mon',   wx:'partly',  desc:'Partly cloudy',s:86, wind:8,  wave:2.0, rain:0},
+    {d:'Tue',   wx:'drizzle', desc:'Drizzle',      s:78, wind:13, wave:2.0, rain:0.2},
+    {d:'Wed',   wx:'storm',   desc:'Thunderstorm', s:30, wind:14, wave:2.7, rain:0.9},
+    {d:'Thu',   wx:'rain',    desc:'Rain showers', s:62, wind:19, wave:2.6, rain:0.4},
+    {d:'Fri',   wx:'partly',  desc:'Partly cloudy',s:71, wind:15, wave:3.1, rain:0},
+    {d:'Sat',   wx:'cloud',   desc:'Overcast',     s:74, wind:9,  wave:3.0, rain:0},
   ];
-  // mark only the true best (highest) as .best
   const max = Math.max(...days.map(x=>x.s));
   document.getElementById('days').innerHTML = days.map((x,i)=>{
     const c = color(x.s);
     const isBest = x.s===max;
-    const conf = i<2?1:i<5?.82:.6;
+    const conf = i<2?1:i<5?.84:.62;
+    const parts = [`💨 ${x.wind} mph`, `🌊 ${x.wave} ft`];
+    if (x.rain > 0.05) parts.push(`🌧 ${x.rain}" rain`);
+    const detail = parts.join('<span class="sep">·</span>');
     return `<div class="drow${isBest?' best':''}" style="opacity:${conf}">
-      <span class="dname">${x.d}</span>
-      <span class="dicon"><svg class="ln-thin" viewBox="0 0 24 24">${WX[x.wx]}</svg></span>
-      <span class="dbar"><span class="f" style="width:${x.s}%;background:${c}"></span></span>
-      <span class="dscore" style="color:${c}">${x.s}</span>
+      <div class="drow-top">
+        <div class="drow-id">
+          <span class="dname">${x.d}</span>
+          <span class="dwx"><span class="dicon"><svg class="ln-thin" viewBox="0 0 24 24">${WX[x.wx]}</svg></span>${x.desc}</span>
+        </div>
+        <div class="drow-score"><div class="dscore" style="color:${c}">${x.s}</div><div class="dlabel" style="color:${c}">${label(x.s)}</div></div>
+      </div>
+      <div class="dbar"><span class="f" style="width:${x.s}%;background:${c}"></span></div>
+      <div class="ddetail">${detail}</div>
     </div>`;
   }).join('') + `<div class="conf-note">Days 1–2 high confidence · 3–5 moderate · 6–7 estimated</div>`;
 </script>
