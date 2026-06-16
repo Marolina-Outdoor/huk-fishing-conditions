@@ -1383,3 +1383,14 @@
 .huk-fc-frow .huk-fc-frow-l b { font-weight:700; }
 .huk-fc-frow.maj .huk-fc-frow-l b { color:#16a34a; }
 .huk-fc-frow.min .huk-fc-frow-l b { color:#65a30d; }
+
+/* Condense condition cards — 2-col in narrow placements, tighter cards */
+.huk-fc-stats { grid-template-columns: repeat(2, 1fr) !important; }
+@container (min-width:540px){ .huk-fc-stats { grid-template-columns: repeat(3, 1fr) !important; } }
+@container (min-width:700px){ .huk-fc-stats { grid-template-columns: repeat(2, 1fr) !important; } }
+.huk-fc-stat { padding: 9px 11px; gap: 5px; }
+.huk-fc-stat-ic { width: 26px; height: 26px; border-radius: 8px; }
+.huk-fc-stat-ic svg { width: 15px; height: 15px; }
+.huk-fc-stat strong { font-size: 16px; }
+.huk-fc-stat-sub { font-size: 10px; }
+.huk-fc-stat-hd { padding-right: 14px; }

@@ -347,8 +347,97 @@
   </div>
 </div>
 
+<style>
+  .hiw-tabs { display:flex; gap:6px; padding:14px 20px 0; }
+  .hiw-tab { border:none; background:#e2e8f0; color:#475569; font-weight:700; font-size:13px; padding:9px 18px; border-radius:9px 9px 0 0; cursor:pointer; }
+  .hiw-tab.on { background:#0f4c81; color:#fff; }
+  .hiw { max-width:860px; margin:0 auto; padding:24px 20px 60px; font-family:'Manrope',system-ui,sans-serif; color:#17314b; }
+  .hiw h2 { font-family:'Styrene A',sans-serif; font-size:22px; color:#0e4174; margin:0 0 6px; }
+  .hiw .lede { font-size:15px; color:#475569; line-height:1.5; margin:0 0 28px; }
+  .hiw h3 { font-family:'Styrene A',sans-serif; font-size:13px; text-transform:uppercase; letter-spacing:.05em; color:#0f4c81; margin:28px 0 10px; border-top:1px solid #e2e8f0; padding-top:18px; }
+  .hiw p { font-size:14px; line-height:1.6; color:#3a536b; margin:0 0 12px; }
+  .hiw table { width:100%; border-collapse:collapse; font-size:13px; margin:6px 0 4px; }
+  .hiw th { text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:#94a3b8; padding:6px 10px; border-bottom:2px solid #e2e8f0; }
+  .hiw td { padding:8px 10px; border-bottom:1px solid #eef2f6; vertical-align:top; }
+  .hiw td b { color:#0e4174; }
+  .hiw .tier { font-weight:700; }
+  .hiw .wt { font-family:'Styrene A',sans-serif; font-weight:700; color:#0f4c81; }
+  .hiw .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:10px 24px; }
+  @media (max-width:640px){ .hiw .grid2 { grid-template-columns:1fr; } }
+  .hiw .factor { font-size:13.5px; line-height:1.5; color:#3a536b; padding:8px 0; border-bottom:1px solid #eef2f6; }
+  .hiw .factor b { color:#0e4174; display:block; }
+  .hiw .pill { display:inline-block; font-size:11px; font-weight:700; padding:2px 8px; border-radius:12px; }
+</style>
+
+<!-- ── View tabs ── -->
+<div class="hiw-tabs">
+  <button class="hiw-tab on" id="tab-preview" onclick="showView('preview')">Live Preview</button>
+  <button class="hiw-tab" id="tab-hiw" onclick="showView('hiw')">How It Works</button>
+</div>
+
+<!-- ── How It Works ── -->
+<div id="view-hiw" style="display:none; background:#fff;">
+  <div class="hiw">
+    <h2>How the Fishing Conditions widget works</h2>
+    <p class="lede">It answers three questions fast: <b>Should I go? When should I go? What do I need?</b> It pulls live weather, marine, and tide data for your location, scores how favorable conditions are right now (0–100), and explains why — then points you to a license and gear.</p>
+
+    <h3>The Cast Score (0–100)</h3>
+    <p>The score is a <b>weighted blend</b> of the conditions that actually move fish. Each factor is scored 0–100 on how favorable it is, then combined by weight. Coastal weights:</p>
+    <table>
+      <thead><tr><th>Factor</th><th>Weight</th><th>What scores best</th></tr></thead>
+      <tbody>
+        <tr><td><b>Water Temp</b></td><td class="wt">18%</td><td>Sweet spot ~65–84°F; fish slow below 55°F</td></tr>
+        <tr><td><b>Tide movement</b></td><td class="wt">17%</td><td>Within ~2 hrs of high/low; slack water is slowest</td></tr>
+        <tr><td><b>Current</b></td><td class="wt">15%</td><td>~0.5–1.5 kt — enough to move bait</td></tr>
+        <tr><td><b>Wind</b></td><td class="wt">14%</td><td>~5–15 mph; over 25 mph shuts it down</td></tr>
+        <tr><td><b>Pressure trend</b></td><td class="wt">12%</td><td>Slowly falling, or stable high</td></tr>
+        <tr><td><b>Surf</b></td><td class="wt">10%</td><td>Calmer is safer/clearer nearshore</td></tr>
+        <tr><td><b>Sky / light</b></td><td class="wt">8%</td><td>Overcast & partly cloudy beat full sun</td></tr>
+      </tbody>
+    </table>
+    <p>A few <b>realism caps</b> keep the score honest: thunderstorms cap it at 20; sustained wind over ~21 mph or surf over 4 ft caps it in the 80s; rapidly swinging pressure or two-plus weak factors pull it down. So an "88" really means most things lined up.</p>
+
+    <h3>What the score means</h3>
+    <table>
+      <thead><tr><th>Score</th><th>Verdict</th><th>Read</th></tr></thead>
+      <tbody>
+        <tr><td class="wt">90–100</td><td class="tier" style="color:#16a34a">Drop Everything</td><td>About as good as it gets. Go.</td></tr>
+        <tr><td class="wt">75–89</td><td class="tier" style="color:#65a30d">Fish On</td><td>Strong conditions with real potential.</td></tr>
+        <tr><td class="wt">60–74</td><td class="tier" style="color:#ca8a04">Worth the Trip</td><td>Solid window with the right approach.</td></tr>
+        <tr><td class="wt">40–59</td><td class="tier" style="color:#d97706">Grind It Out</td><td>Mixed bag — timing and technique matter.</td></tr>
+        <tr><td class="wt">20–39</td><td class="tier" style="color:#ea580c">Slow Pick</td><td>Tough bite. Manage expectations.</td></tr>
+        <tr><td class="wt">0–19</td><td class="tier" style="color:#dc2626">Skunked</td><td>Rough day. Maybe scout instead.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Each condition card</h3>
+    <div class="grid2">
+      <div class="factor"><b>💨 Wind</b> Speed & direction. Light to moderate is ideal for casting and boat control; calm-glassy can spook fish, strong wind ends the day.</div>
+      <div class="factor"><b>🌊 Tide</b> Incoming / outgoing / slack and the next high/low time. A moving tide pushes bait and triggers feeding.</div>
+      <div class="factor"><b>🔄 Current</b> Estimated water movement. Enough flow keeps bait active without ruining presentation.</div>
+      <div class="factor"><b>🌡️ Water Temp</b> Sea-surface temperature. Drives fish metabolism and where they hold.</div>
+      <div class="factor"><b>🏄 Surf</b> Wave height nearshore — affects access, safety, and water clarity.</div>
+      <div class="factor"><b>📊 Pressure</b> Barometric pressure and its trend. Falling pressure ahead of a front often sparks a bite.</div>
+      <div class="factor"><b>👁️ Sky</b> Cloud cover & conditions. Lower light generally means fish feed more freely.</div>
+      <div class="factor"><b>ℹ️ "Why?" icon</b> Every card has an info icon that opens its sub-score and the ideal range, so the number is never a black box.</div>
+    </div>
+
+    <h3>Coastal vs. Inland</h3>
+    <p>The widget auto-detects your water. If you're near the coast it runs in <b>Coastal</b> mode (tide-driven, with current & surf). If there's no tide station nearby — a lake, river, or reservoir — it switches to <b>Inland</b> mode:</p>
+    <div class="grid2">
+      <div class="factor"><b>Coastal</b> Tide chart + next high/low, plus Wind, Current, Water Temp, Surf, Pressure, Sky.</div>
+      <div class="factor"><b>Inland</b> A <b>Solunar feeding-times</b> timeline replaces the tide chart. Cards become Pressure, Solunar, Wind, Sky, Moon, Air Temp.</div>
+    </div>
+    <p style="margin-top:12px;">Solunar theory: fish feed hardest during <b>major windows</b> (moon directly overhead or underfoot, ~2 hrs) and <b>minor windows</b> (moonrise & moonset, ~1 hr). We compute these from the moon's position for your exact location and date, and weight them alongside pressure, wind, and sky.</p>
+
+    <h3>Where the data comes from</h3>
+    <p><b>Open-Meteo</b> — weather, wind, pressure, cloud cover, marine waves & sea-surface temperature, and the 7-day outlook. <b>NOAA CO-OPS</b> — tide predictions for the nearest station. <b>Computed astronomy</b> — moon phase and solunar windows (no third-party service). <b>OpenStreetMap/Nominatim</b> — turns your coordinates into a state for the right fishing-license link.</p>
+    <p style="font-size:12px;color:#94a3b8;">Scores are guidance, not a guarantee — conditions and fish both have a sense of humor.</p>
+  </div>
+</div>
+
 <!-- ── Widget Previews ── -->
-<div class="test-layout">
+<div class="test-layout" id="view-preview">
 
   <!-- Light theme section -->
   <div class="test-panel">
@@ -437,6 +526,14 @@ Waiting for data...
 
 <!-- ── Test Harness ── -->
 <script>
+  // ── View toggle (Live Preview / How It Works) ─────────────
+  function showView(v) {
+    document.getElementById('view-preview').style.display = v === 'preview' ? '' : 'none';
+    document.getElementById('view-hiw').style.display     = v === 'hiw' ? '' : 'none';
+    document.getElementById('tab-preview').classList.toggle('on', v === 'preview');
+    document.getElementById('tab-hiw').classList.toggle('on', v === 'hiw');
+  }
+
   // ── Logging ──────────────────────────────────────────────
   function log(msg, type = 'info') {
     const el = document.getElementById('test-log');
