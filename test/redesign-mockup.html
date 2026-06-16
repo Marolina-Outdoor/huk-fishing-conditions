@@ -88,7 +88,7 @@
   .row2 { flex:1; display:flex; align-items:center; gap:7px; background:#f6f9fc; border:1px solid #e9eff4; border-radius:10px; padding:8px 10px; }
   .row2 .ar { font-size:11px; } .row2.hi .ar{color:#0f4c81;} .row2.lo .ar{color:#29ABE2;} .row2.maj .ar{color:#16a34a;} .row2.min .ar{color:#65a30d;}
   .row2 .lab { font-size:10px; color:#7c8da0; font-weight:600; line-height:1.1; }
-  .row2 .time { font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; color:#0e4174; line-height:1.1; }
+  .row2 .time { font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; color:#0e4174; line-height:1.1; white-space:nowrap; }
   .row2 .ht { margin-left:auto; font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; color:#0f4c81; }
 
   /* solunar timeline */
@@ -321,8 +321,8 @@
         </div>
         <div class="sol-ticks"><span>12a</span><span>6a</span><span>12p</span><span>6p</span><span>12a</span></div>
         <div class="rows">
-          <div class="row2 maj"><span class="ar">●</span><span><span class="lab">Major</span><br><span class="time">5:42–7:42 AM</span></span><span class="ht">Strong</span></div>
-          <div class="row2 min"><span class="ar">●</span><span><span class="lab">Minor</span><br><span class="time">12:10–1:10 PM</span></span><span class="ht">Fair</span></div>
+          <div class="row2 maj"><span class="ar">●</span><span><span class="lab">Major · Strong</span><br><span class="time">5:42–7:42a</span></span></div>
+          <div class="row2 min"><span class="ar">●</span><span><span class="lab">Minor · Fair</span><br><span class="time">12:10–1:10p</span></span></div>
         </div>`;
     }
   }
