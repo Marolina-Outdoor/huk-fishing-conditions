@@ -21,6 +21,8 @@
     surf:          { icon: '🏄', title: 'Why Surf Matters',          sweetSpot: 'Ideal: Under 2 ft for shore or kayak; under 4 ft for small boats. Above 6 ft conditions become dangerous for most nearshore fishing.',                                           weight: '10%' },
     pressure:      { icon: '📊', title: 'Why Pressure Matters',      sweetSpot: 'Best: Slowly falling pressure over 3–6 hrs. Stable high pressure is also good. Rapid drops or rapid rises both tend to shut down feeding.',                                      weight: '12%' },
     visibility:    { icon: '👁️', title: 'Why Sky Conditions Matter', sweetSpot: 'Overcast and partly cloudy typically score higher than full sun. Fog and heavy rain reduce visibility enough to hurt most presentations.',                                        weight: '8%'  },
+    solunar:       { icon: '🌙', title: 'Why Solunar Matters',        sweetSpot: 'Plan around the major windows — roughly 2 hrs each, twice a day, when the moon is overhead or underfoot. Minor windows track moonrise and moonset.',                            weight: '26%' },
+    moon:          { icon: '🌙', title: 'Why Moon Phase Matters',     sweetSpot: 'Feeding activity tends to peak near the new and full moon, when solunar windows are strongest.',                                                                            weight: '8%'  },
   };
 
   // ── Line-icon set (SF-Symbols style) ────────────────────────
@@ -36,6 +38,8 @@
     skyCover:      '<path d="M7 18a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.6-1.3A3.8 3.8 0 0 1 18 18z"/>',
     pin:           '<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
     nav:           '<path d="M3 11l18-8-8 18-2-8-8-2z"/>',
+    solunar:       '<circle cx="12" cy="12" r="7"/><path d="M12 5a7 7 0 0 0 0 14z" fill="currentColor" stroke="none"/>',
+    moon:          '<path d="M17 4a8 8 0 1 0 3 13A9 9 0 0 1 17 4z"/>',
   };
   function lineSvg(key, cls) {
     const p = LINE_ICON[key];
@@ -144,6 +148,69 @@
       if (d < bestDist) { bestDist = d; best = s; }
     }
     return { id: best[2], name: best[3], distKm: Math.round(bestDist) };
+  }
+
+  // ── Solunar / moon (SunCalc-derived, MIT-licensed algorithm) ──
+  const SC_RAD = Math.PI / 180, SC_DAYMS = 86400000, SC_J1970 = 2440588, SC_J2000 = 2451545, SC_E = SC_RAD * 23.4397;
+  function scToDays(d) { return (d.valueOf() / SC_DAYMS - 0.5 + SC_J1970) - SC_J2000; }
+  function scRA(l, b) { return Math.atan2(Math.sin(l) * Math.cos(SC_E) - Math.tan(b) * Math.sin(SC_E), Math.cos(l)); }
+  function scDec(l, b) { return Math.asin(Math.sin(b) * Math.cos(SC_E) + Math.cos(b) * Math.sin(SC_E) * Math.sin(l)); }
+  function scSidereal(d, lw) { return SC_RAD * (280.16 + 360.9856235 * d) - lw; }
+  function scAltitude(H, phi, dec) { return Math.asin(Math.sin(phi) * Math.sin(dec) + Math.cos(phi) * Math.cos(dec) * Math.cos(H)); }
+  function scSunCoords(d) {
+    const M = SC_RAD * (357.5291 + 0.98560028 * d);
+    const C = SC_RAD * (1.9148 * Math.sin(M) + 0.02 * Math.sin(2 * M) + 0.0003 * Math.sin(3 * M));
+    const L = M + C + SC_RAD * 102.9372 + Math.PI;
+    return { dec: scDec(L, 0), ra: scRA(L, 0) };
+  }
+  function scMoonCoords(d) {
+    const L = SC_RAD * (218.316 + 13.176396 * d), M = SC_RAD * (134.963 + 13.064993 * d), F = SC_RAD * (93.272 + 13.229350 * d);
+    const l = L + SC_RAD * 6.289 * Math.sin(M), b = SC_RAD * 5.128 * Math.sin(F), dt = 385001 - 20905 * Math.cos(M);
+    return { ra: scRA(l, b), dec: scDec(l, b), dist: dt };
+  }
+  function scMoonAlt(date, lat, lng) {
+    const lw = SC_RAD * -lng, phi = SC_RAD * lat, d = scToDays(date), c = scMoonCoords(d);
+    const H = scSidereal(d, lw) - c.ra;
+    return scAltitude(H, phi, c.dec);
+  }
+  function moonPhaseInfo(date) {
+    const d = scToDays(date), s = scSunCoords(d), m = scMoonCoords(d);
+    const sdist = 149598000;
+    const phi = Math.acos(Math.sin(s.dec) * Math.sin(m.dec) + Math.cos(s.dec) * Math.cos(m.dec) * Math.cos(s.ra - m.ra));
+    const inc = Math.atan2(sdist * Math.sin(phi), m.dist - sdist * Math.cos(phi));
+    const angle = Math.atan2(Math.cos(s.dec) * Math.sin(s.ra - m.ra), Math.sin(s.dec) * Math.cos(m.dec) - Math.cos(s.dec) * Math.sin(m.dec) * Math.cos(s.ra - m.ra));
+    const fraction = (1 + Math.cos(inc)) / 2;
+    const phase = 0.5 + 0.5 * inc * (angle < 0 ? -1 : 1) / Math.PI; // 0=new, .5=full, 1=new
+    const names = ['New Moon','Waxing Crescent','First Quarter','Waxing Gibbous','Full Moon','Waning Gibbous','Last Quarter','Waning Crescent'];
+    const name = names[Math.round(phase * 8) % 8];
+    return { fraction, phase, name };
+  }
+  // Scan the local day for moon transit (overhead), antitransit (underfoot), rise & set.
+  function computeSolunar(lat, lon) {
+    const now = new Date();
+    const start = new Date(now); start.setHours(0, 0, 0, 0);
+    let maxAlt = -Infinity, minAlt = Infinity, transitMs = null, antiMs = null;
+    const crossings = []; // {ms, dir} dir: 'rise'|'set'
+    let prevAlt = scMoonAlt(start, lat, lon), prevMs = start.getTime();
+    for (let i = 1; i <= 144; i++) { // 10-min steps across 24h
+      const t = new Date(start.getTime() + i * 10 * 60000);
+      const a = scMoonAlt(t, lat, lon);
+      if (a > maxAlt) { maxAlt = a; transitMs = t.getTime(); }
+      if (a < minAlt) { minAlt = a; antiMs = t.getTime(); }
+      if (prevAlt < 0 && a >= 0) crossings.push({ ms: prevMs + (t.getTime() - prevMs) / 2, dir: 'rise' });
+      if (prevAlt >= 0 && a < 0) crossings.push({ ms: prevMs + (t.getTime() - prevMs) / 2, dir: 'set' });
+      prevAlt = a; prevMs = t.getTime();
+    }
+    const phase = moonPhaseInfo(now);
+    // Major periods ≈ moon overhead (transit) & underfoot (antitransit), ~2 hrs each.
+    // Minor periods ≈ moonrise & moonset, ~1 hr each.
+    const mkWin = (ms, halfMin, kind) => ms == null ? null : { startMs: ms - halfMin * 60000, endMs: ms + halfMin * 60000, kind };
+    const majors = [mkWin(transitMs, 60, 'major'), mkWin(antiMs, 60, 'major')].filter(Boolean);
+    const minors = crossings.map(c => mkWin(c.ms, 30, 'minor')).filter(Boolean);
+    // Strength scales with proximity to new/full moon (illumination extremes).
+    const fullness = Math.abs(phase.phase - 0.5); // 0 at full, .5 at new
+    const strong = phase.fraction > 0.85 || phase.fraction < 0.15; // near full or new
+    return { phase, majors, minors, strong };
   }
 
   // ── State detection ─────────────────────────────────────────
@@ -582,6 +649,73 @@
       overallSummary, confidence, conditionScores: C, waveFt, sstF, cloudCov };
   }
 
+  // ── Inland (freshwater) scoring — no tide/current/surf; solunar-driven ──
+  function fmtClock(ms) { return new Date(ms).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); }
+  function computeInlandScore(weather, solunar) {
+    const wc       = weather.current.weather_code;
+    const windMph  = kmhToMph(weather.current.wind_speed_10m);
+    const windDir  = weather.current.wind_direction_10m;
+    const cloudCov = weather.current.cloud_cover ?? null;
+    const presHpa  = weather.current.surface_pressure ?? null;
+    const hrPres   = weather.hourly?.surface_pressure ?? null;
+    const airF     = Math.round(weather.current.temperature_2m);
+
+    const windRes = scoreWind(windMph);
+    const presRes = presHpa != null ? scorePressure(presHpa, hrPres, 0) : { score: 60, label: 'Steady', reason: 'Pressure data unavailable.', inHg: null };
+    const visRes  = scoreVisibility(wc, cloudCov);
+
+    // Solunar sub-score: is a feeding window active or near?
+    const now = Date.now();
+    const inWin = (w) => now >= w.startMs && now <= w.endMs;
+    const nearWin = (w) => Math.abs(now - (w.startMs + w.endMs) / 2) <= 90 * 60000;
+    const activeMajor = solunar.majors.some(inWin);
+    const activeMinor = solunar.minors.some(inWin);
+    const nearMajor   = solunar.majors.some(nearWin);
+    let solScore, solLabel;
+    if (activeMajor)      { solScore = 92; solLabel = 'Major window now'; }
+    else if (activeMinor) { solScore = 80; solLabel = 'Minor window now'; }
+    else if (nearMajor)   { solScore = 78; solLabel = 'Major window soon'; }
+    else                  { solScore = 58; solLabel = 'Between windows'; }
+    if (solunar.strong) solScore = Math.min(100, solScore + 5);
+    const nextMajor = solunar.majors.map(w => w.startMs).filter(m => m > now).sort((a,b)=>a-b)[0] || solunar.majors[0]?.startMs;
+    const solValue = nextMajor ? `Major ${fmtClock(nextMajor)}` : '—';
+
+    // Moon phase sub-score: new & full peak
+    const moonScore = Math.round(60 + 40 * Math.abs(solunar.phase.fraction - 0.5) * 2);
+
+    const W = { pressure: 32, solunar: 26, wind: 20, visibility: 14, moon: 8 };
+    const C = {
+      pressure:  { ...presRes, value: presRes.inHg ? `${presRes.inHg} inHg` : '—', weight: W.pressure },
+      solunar:   { score: solScore, label: solLabel, reason: `Solunar theory: fish feed hardest during major periods (moon overhead/underfoot). ${solLabel}.`, value: solValue, weight: W.solunar },
+      wind:      { ...windRes, value: `${windMph} mph ${windDirLabel(windDir)}`, weight: W.wind },
+      visibility:{ ...visRes, value: weatherCodeText(wc), weight: W.visibility },
+      moon:      { score: moonScore, label: solunar.phase.name, reason: `Moon phase influences feeding intensity; new and full moons tend to peak. Now: ${solunar.phase.name}.`, value: `${Math.round(solunar.phase.fraction * 100)}%`, weight: W.moon },
+    };
+    const entries = Object.values(C);
+    const totalW  = entries.reduce((s, c) => s + c.weight, 0);
+    let weighted  = entries.reduce((s, c) => s + c.score * c.weight, 0) / totalW;
+    if (wc >= 95) weighted = Math.min(weighted, 20);
+    if (windMph >= 21) weighted = Math.min(weighted, 84);
+    const pt = presRes.trend;
+    if (pt === 'rapidly_falling' || pt === 'rapidly_rising') weighted = Math.min(weighted, 79);
+    const overallScore = clamp(Math.round(weighted), 0, 100);
+
+    let overallLabel, overallColor;
+    if (overallScore >= 90) { overallLabel = 'Drop Everything'; overallColor = '#22c55e'; }
+    else if (overallScore >= 75) { overallLabel = 'Fish On';        overallColor = '#84cc16'; }
+    else if (overallScore >= 60) { overallLabel = 'Worth the Trip'; overallColor = '#f0b429'; }
+    else if (overallScore >= 40) { overallLabel = 'Grind It Out';   overallColor = '#f59e0b'; }
+    else if (overallScore >= 20) { overallLabel = 'Slow Pick';      overallColor = '#f97316'; }
+    else                          { overallLabel = 'Skunked';        overallColor = '#ef4444'; }
+    const taglines = { 'Drop Everything':'About as good as it gets. Go.', 'Fish On':'Strong conditions with real potential.', 'Worth the Trip':'Solid window with the right approach.', 'Grind It Out':'Mixed bag — timing and technique matter.', 'Slow Pick':'Tough bite. Manage expectations.', 'Skunked':'Rough day. Maybe scout instead.' };
+    let summary;
+    if (activeMajor) summary = `A <b>major solunar window</b> is active now${pt && pt.includes('falling') ? ' with falling pressure' : ''} — prime feeding.`;
+    else if (pt && pt.includes('falling')) summary = `<b>Falling pressure</b> is in your favor; next major window ${fmtClock(nextMajor)}.`;
+    else summary = `Best bite around the <b>major window</b> at ${fmtClock(nextMajor)}.`;
+
+    return { overallScore, overallLabel, overallColor, overallTagline: taglines[overallLabel], overallSummary: summary, confidence: 'medium', conditionScores: C, airF };
+  }
+
   function weatherCodeIcon(code) {
     if (code === 0)  return '☀️';
     if (code <= 2)   return '🌤️';
@@ -790,8 +924,31 @@
       </div>`;
   }
 
-  function buildWidgetHTML(weather, tides, station, tidePhase, lat, lon, stateCode) {
-    const sc           = computeFishingScore(weather, tides, tidePhase);
+  function fmtClockShort(ms) {
+    return new Date(ms).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }).replace(' AM', 'a').replace(' PM', 'p');
+  }
+  function buildSolunarPanel(solunar) {
+    const start = new Date(); start.setHours(0, 0, 0, 0);
+    const dayStart = start.getTime(), DAY = 86400000, now = Date.now();
+    const pct = ms => Math.max(0, Math.min(100, ((ms - dayStart) / DAY) * 100));
+    const bands = [...solunar.majors.map(w => ({ ...w, cls: 'maj' })), ...solunar.minors.map(w => ({ ...w, cls: 'min' }))]
+      .map(w => `<div class="huk-fc-sol-band ${w.cls}" style="left:${pct(w.startMs).toFixed(1)}%;width:${(pct(w.endMs) - pct(w.startMs)).toFixed(1)}%"></div>`).join('');
+    const nowPct = pct(now);
+    const pickNext = (arr) => arr.slice().sort((a, b) => a.startMs - b.startMs).find(w => w.endMs > now) || arr.slice().sort((a, b) => a.startMs - b.startMs)[0];
+    const maj = pickNext(solunar.majors), min = solunar.minors.length ? pickNext(solunar.minors) : null;
+    const row = (w, cls, label, strength) => w ? `<div class="huk-fc-frow ${cls}"><span class="huk-fc-frow-ic">●</span><span class="huk-fc-frow-mid"><span class="huk-fc-frow-l">${label} · <b>${strength}</b></span><span class="huk-fc-frow-v">${fmtClockShort(w.startMs)}–${fmtClockShort(w.endMs)}</span></span></div>` : '';
+    const strong = solunar.strong ? 'Strong' : 'Fair';
+    return `<div class="huk-fc-tides">
+      <div class="huk-fc-tides-title">Solunar Feeding Times</div>
+      <div class="huk-fc-sol-track">${bands}<div class="huk-fc-sol-now" style="left:${nowPct.toFixed(1)}%"></div></div>
+      <div class="huk-fc-sol-ticks"><span>12a</span><span>6a</span><span>12p</span><span>6p</span><span>12a</span></div>
+      <div class="huk-fc-frows">${row(maj, 'maj', 'Major', strong)}${row(min, 'min', 'Minor', 'Fair')}</div>
+    </div>`;
+  }
+
+  function buildWidgetHTML(weather, tides, station, tidePhase, lat, lon, stateCode, solunar) {
+    const isInland     = !!solunar;
+    const sc           = isInland ? computeInlandScore(weather, solunar) : computeFishingScore(weather, tides, tidePhase);
     const score        = sc.overallScore;
     const scoreColor   = sc.overallColor;
     const wc           = weather.current.weather_code;
@@ -824,9 +981,15 @@
       </div>`;
     }).join('');
 
-    // Build exactly 6 condition cards in priority order
-    // Priority: Wind, Tide, Current, Water Temp (if available), Surf (if available), Pressure, Visibility, Humidity
-    const cardDefs = [
+    // Build condition cards — inland (freshwater) vs coastal sets
+    const cardDefs = isInland ? [
+      { key: 'pressure',      icon: '📊', label: 'Pressure',   val: C.pressure?.value,  sub: C.pressure?.label },
+      { key: 'solunar',       icon: '🌙', label: 'Solunar',    val: C.solunar?.value,   sub: C.solunar?.label },
+      { key: 'wind',          icon: '💨', label: 'Wind',       val: C.wind?.value,      sub: C.wind?.label },
+      { key: 'visibility',    icon: '👁️', label: 'Sky',        val: weatherCodeText(wc),sub: C.visibility?.label },
+      { key: 'moon',          icon: '🌙', label: 'Moon',       val: C.moon?.value,      sub: C.moon?.label },
+      { key: 'seaSurfaceTemp',icon: '🌡️', label: 'Air Temp',   val: `${sc.airF}°F`,     sub: 'Current air' },
+    ] : [
       { key: 'wind',          icon: '💨', label: 'Wind',       val: C.wind?.value,                                   sub: C.wind?.label },
       { key: 'tide',          icon: '🌊', label: 'Tide',       val: tidePhase.label,                                 sub: nextTideNote || C.tide?.label },
       { key: 'current',       icon: '🔄', label: 'Current',    val: C.current?.value,                                sub: C.current?.label },
@@ -858,6 +1021,9 @@
 
     const licenseHTML = stateCode ? buildLicenseHTML(stateCode, lat, lon, station.name) : '';
     const tideGraph   = buildTideGraph(todayTides);
+    const panelHTML   = isInland
+      ? buildSolunarPanel(solunar)
+      : (upcoming.length > 0 ? `<div class="huk-fc-tides"><div class="huk-fc-tides-title">Today's Tide</div>${tideGraph}<div class="huk-fc-frows">${tideRows}</div></div>` : '');
     const confidenceBadge = sc.confidence === 'high' ? '' :
       `<span class="huk-fc-conf huk-fc-conf-${sc.confidence}">${sc.confidence} confidence</span>`;
 
@@ -871,20 +1037,23 @@
         const s7 = computeDayScore(weather.daily.wind_speed_10m_max?.[i] || 0, weather.daily.wave_height_max?.[i] ?? null, weather.daily.weather_code?.[i] || 0);
         if (s7 > bScore) { bScore = s7; bName = DAYS_S[new Date(ds + 'T12:00:00').getDay()]; }
       });
-      if (bName) bestDayTeaser = `<span class="huk-fc-tab-best">${bName} ${bScore}</span>`;
+      if (bName) bestDayTeaser = `<span class="huk-fc-tab-best">★ Best ${bName}</span>`;
     }
     const seenDot = (() => { try { return !!sessionStorage.getItem('huk_fc_7day_seen'); } catch { return false; } })();
     const dotHTML = seenDot ? '' : `<span class="huk-fc-tab-dot" aria-hidden="true"></span>`;
 
     const dateStr = new Date().toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
-    const stationLine = station && station.name
-      ? `<div class="huk-fc-modeline">${lineSvg('pin','huk-fc-ln-sm')} ${station.name}${station.distKm != null ? ` · ${station.distKm} mi` : ''}</div>`
-      : '';
+    const locName = stateCode && LICENSE[stateCode] ? LICENSE[stateCode].name : (station && station.name ? station.name.replace(/ tide.*$/i, '') : 'Your location');
+    const stationLine = isInland
+      ? `<div class="huk-fc-modeline">${lineSvg('pin','huk-fc-ln-sm')} Inland · weather, pressure, moon &amp; sun times</div>`
+      : (station && station.name
+          ? `<div class="huk-fc-modeline">${lineSvg('pin','huk-fc-ln-sm')} ${station.name}${station.distKm != null ? ` · ${station.distKm} mi` : ''}</div>`
+          : '');
 
     const hero = `
       <div class="huk-fc-hero">
         <div class="huk-fc-hero-top">
-          <span class="huk-fc-loc">${lineSvg('pin','huk-fc-ln-sm')} ${station && station.name ? station.name.replace(/ tide.*$/i,'') : 'Your location'}</span>
+          <span class="huk-fc-loc">${lineSvg('pin','huk-fc-ln-sm')} ${locName}</span>
           <span>${dateStr}</span>
         </div>
         <div class="huk-fc-score-block">
@@ -925,12 +1094,7 @@
           </div>
         </div>
         <div class="huk-fc-col-side">
-          ${upcoming.length > 0 ? `
-          <div class="huk-fc-tides">
-            <div class="huk-fc-tides-title">Today's Tide</div>
-            ${tideGraph}
-            <div class="huk-fc-frows">${tideRows}</div>
-          </div>` : ''}
+          ${panelHTML}
           ${licenseHTML}
         </div>
       </div>`;
@@ -1187,17 +1351,20 @@
 
     try {
       const station = nearestNoaaStation(lat, lon);
+      // Inland if the nearest NOAA tide station is too far to be relevant.
+      const isInland = station.distKm > 45;
 
-      // Fetch weather, tides, and state in parallel
+      // Fetch weather, tides (coastal only), and state in parallel
       const [weather, tides, stateInfo] = await Promise.all([
         fetchWeather(lat, lon),
-        fetchTides(station.id),
+        isInland ? Promise.resolve([]) : fetchTides(station.id),
         fetchStateFromCoords(lat, lon),
       ]);
 
       const stateCode = stateInfo?.stateCode || null;
-      const tidePhase = tidePhaseLabel(tides);
-      const args      = [weather, tides, station, tidePhase, lat, lon, stateCode];
+      const tidePhase = isInland ? { label: '—', incoming: null } : tidePhaseLabel(tides);
+      const solunar   = isInland ? computeSolunar(lat, lon) : null;
+      const args      = [weather, tides, station, tidePhase, lat, lon, stateCode, solunar];
       setCache(args);
 
       containers.forEach(el => {

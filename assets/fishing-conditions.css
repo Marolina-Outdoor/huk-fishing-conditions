@@ -1370,3 +1370,16 @@
 .huk-fc-stats { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important; }
 @container (min-width:700px){ .huk-fc-stats { grid-template-columns:repeat(2,1fr) !important; } }
 .huk-fc-stat strong { white-space: nowrap; }
+
+/* Solunar feeding-time panel (inland mode) */
+.huk-fc-sol-track { position:relative; height:34px; background:var(--huk-stat-bg); border:1px solid var(--huk-border); border-radius:8px; overflow:hidden; margin-top:2px; }
+.huk-fc-sol-band { position:absolute; top:0; bottom:0; }
+.huk-fc-sol-band.maj { background:rgba(22,163,74,.30); }
+.huk-fc-sol-band.min { background:rgba(101,163,13,.20); }
+.huk-fc-sol-now { position:absolute; top:-2px; bottom:-2px; width:0; border-left:1.5px dashed #dc2626; }
+.huk-fc-sol-ticks { display:flex; justify-content:space-between; font-size:9px; color:var(--huk-navy-body); opacity:.5; font-weight:600; margin-top:3px; padding:0 2px; }
+.huk-fc-frow.maj .huk-fc-frow-ic { color:#16a34a; }
+.huk-fc-frow.min .huk-fc-frow-ic { color:#84cc16; }
+.huk-fc-frow .huk-fc-frow-l b { font-weight:700; }
+.huk-fc-frow.maj .huk-fc-frow-l b { color:#16a34a; }
+.huk-fc-frow.min .huk-fc-frow-l b { color:#65a30d; }
