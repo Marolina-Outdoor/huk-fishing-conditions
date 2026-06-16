@@ -1365,3 +1365,8 @@
 /* 7-day pane needs its own horizontal padding (container padding now 0) */
 .huk-fc-pane-7day { padding: 4px 16px 8px; }
 .huk-fc-pane-7day .huk-fc-7day { padding-left: 0; padding-right: 0; }
+
+/* Cards size to available room — never cram values */
+.huk-fc-stats { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important; }
+@container (min-width:700px){ .huk-fc-stats { grid-template-columns:repeat(2,1fr) !important; } }
+.huk-fc-stat strong { white-space: nowrap; }

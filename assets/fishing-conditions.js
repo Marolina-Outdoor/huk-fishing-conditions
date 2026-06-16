@@ -270,15 +270,19 @@
     const nowX = (now >= tStart && now <= tEnd) ? tx(now) : null;
     const nowLine = nowX ? `<line x1="${nowX.toFixed(1)}" y1="0" x2="${nowX.toFixed(1)}" y2="${H}" stroke="rgba(239,68,68,0.5)" stroke-width="1.5" stroke-dasharray="3,2"/>` : '';
 
-    const dotLabels = pts.map(p => {
-      const x = tx(p.ms).toFixed(1);
+    const dotLabels = pts.map((p, i) => {
+      const xNum = tx(p.ms);
+      const x = xNum.toFixed(1);
       const y = ty(p.h).toFixed(1);
       const isH = p.type === 'H';
       const color = isH ? '#29ABE2' : '#0f4c81';
       const time = new Date(p.ms).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
       const labelY = (isH ? parseFloat(y) - 5 : parseFloat(y) + 11).toFixed(1);
+      // Keep edge labels inside the viewBox so they don't get clipped
+      const anchor = i === 0 ? 'start' : i === pts.length - 1 ? 'end' : 'middle';
+      const labelX = (i === 0 ? Math.max(xNum - 4, 1) : i === pts.length - 1 ? Math.min(xNum + 4, W - 1) : xNum).toFixed(1);
       return `<circle cx="${x}" cy="${y}" r="2.5" fill="${color}"/>
-        <text x="${x}" y="${labelY}" text-anchor="middle" font-size="6.5" fill="${color}" font-family="Manrope,sans-serif" font-weight="600">${time}</text>`;
+        <text x="${labelX}" y="${labelY}" text-anchor="${anchor}" font-size="6.5" fill="${color}" font-family="Manrope,sans-serif" font-weight="600">${time}</text>`;
     }).join('');
 
     return `<div class="huk-fc-tide-graph">
