@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>HUK Fishing Conditions — v2 (placements + guide)</title>
+<style>
+  @font-face { font-family:'Styrene A'; src:url('../assets/StyreneA-Black-Web.woff2') format('woff2'); font-weight:900; font-display:swap; }
+  @font-face { font-family:'Styrene A'; src:url('../assets/StyreneA-Bold-Web.woff2') format('woff2'); font-weight:700; font-display:swap; }
+  @font-face { font-family:'Manrope'; src:url('../assets/Manrope-VariableFont_wght.ttf') format('truetype'); font-weight:300 800; font-display:swap; }
+
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Manrope',system-ui,sans-serif; background:#e7edf3; color:#17314b; padding:28px 16px 80px; display:flex; flex-direction:column; align-items:center; gap:10px; }
+  .ptitle { font-family:'Styrene A',sans-serif; font-weight:700; text-transform:uppercase; letter-spacing:.04em; font-size:13px; color:#64748b; }
+  .controls { display:flex; gap:6px; background:#fff; border:1px solid #dbe4ec; border-radius:30px; padding:4px; margin-bottom:6px; }
+  .controls button { border:none; background:none; cursor:pointer; font-family:'Styrene A',sans-serif; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:#64748b; padding:7px 15px; border-radius:24px; }
+  .controls button.on { background:#0f4c81; color:#fff; }
+
+  .placements { display:flex; flex-wrap:wrap; gap:30px; justify-content:center; align-items:flex-start; width:100%; }
+  .placement { display:flex; flex-direction:column; align-items:center; gap:8px; }
+  .placement .plabel { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:#8a99a8; }
+  .frame { border-radius:22px; overflow:hidden; background:#fff; box-shadow:0 18px 50px rgba(15,76,129,.16),0 2px 8px rgba(15,76,129,.07); }
+  .frame.drawer { width:380px; } .frame.modal { width:520px; } .frame.section { width:960px; max-width:100%; }
+  @media (max-width:1000px){ .frame.section{ width:100%; } }
+  @media (max-width:560px){ .frame.modal{ width:100%; } .frame.drawer{ width:100%; } }
+
+  /* ===== WIDGET (container-query driven) ===== */
+  .fc { container-type:inline-size; width:100%; font-family:'Manrope',sans-serif; color:#17314b; }
+
+  /* hero */
+  .hero { position:relative; padding:18px 20px 20px; color:#fff;
+    background:radial-gradient(95% 80% at 85% 115%, rgba(63,143,47,.7), rgba(63,143,47,0) 60%), radial-gradient(120% 85% at 12% -12%, rgba(255,255,255,.16), rgba(255,255,255,0) 55%), linear-gradient(165deg,#0b3766,#0f4c81 55%,#14527f); }
+  .hero-top { display:flex; justify-content:space-between; align-items:center; font-size:12px; font-weight:600; color:rgba(255,255,255,.85); }
+  .hero-top .loc { display:flex; align-items:center; gap:5px; } .hero-top svg { width:13px; height:13px; }
+  .hero-main { display:flex; align-items:center; gap:18px; margin-top:6px; }
+  .hero-num { font-family:'Styrene A',sans-serif; font-weight:900; font-size:74px; line-height:.86; letter-spacing:-.02em; text-shadow:0 3px 16px rgba(0,0,0,.22); }
+  .hero-num small { font-size:22px; font-weight:700; opacity:.6; }
+  .hero-meta { flex:1; min-width:0; }
+  .hero-verdict { font-family:'Styrene A',sans-serif; font-weight:700; font-size:22px; text-transform:uppercase; letter-spacing:.04em; line-height:1; }
+  .hero-plain { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:#9be8a6; margin-top:5px; }
+  .hero-window { display:inline-flex; align-items:center; gap:6px; margin-top:10px; background:rgba(255,255,255,.15); border-radius:24px; padding:6px 12px; font-size:13px; font-weight:700; }
+  .hero-window svg { width:14px; height:14px; }
+  .hero-reasons { margin-top:12px; font-size:12.5px; line-height:1.45; color:rgba(255,255,255,.9); }
+  .hero-actions { display:flex; gap:8px; margin-top:14px; }
+  .hero-actions button { flex:1; border:none; cursor:pointer; border-radius:9px; padding:10px; font-family:'Styrene A',sans-serif; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.03em; }
+  .ha-pri { background:#fff; color:#0f4c81; } .ha-sec { background:rgba(255,255,255,.16); color:#fff; }
+
+  /* mode + tabs */
+  .bar { padding:12px 16px 0; }
+  .modepick { display:flex; gap:4px; background:#eef2f6; border-radius:11px; padding:4px; }
+  .modepick button { flex:1; border:none; background:none; cursor:pointer; border-radius:8px; padding:8px 4px; font-family:'Styrene A',sans-serif; font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:#64748b; }
+  .modepick button.on { background:#fff; box-shadow:0 1px 3px rgba(15,76,129,.16); color:#0e4174; }
+  .modeline { font-size:11px; color:#8a99a8; margin:7px 2px 0; display:flex; align-items:center; gap:5px; }
+  .modeline svg { width:12px; height:12px; color:#16a34a; }
+  .tabs { display:flex; gap:4px; background:#eef2f6; border-radius:11px; padding:4px; margin-top:10px; }
+  .tabs button { flex:1; border:none; background:none; cursor:pointer; border-radius:8px; padding:8px 4px; display:flex; flex-direction:column; align-items:center; gap:2px; color:#64748b; font-family:inherit; }
+  .tabs button.on { background:#fff; box-shadow:0 1px 3px rgba(15,76,129,.16); color:#0e4174; }
+  .tabs .nm { font-family:'Styrene A',sans-serif; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.04em; line-height:1; }
+  .tabs .best { font-size:9px; font-weight:700; color:#16a34a; text-transform:uppercase; }
+
+  /* body: stacks narrow, 2-col wide */
+  .body { padding:14px 16px 18px; display:flex; flex-direction:column; gap:16px; }
+  @container (min-width:700px){ .body { display:grid; grid-template-columns:1.3fr 1fr; gap:18px 20px; align-items:start; } }
+
+  .sec-h { font-family:'Styrene A',sans-serif; font-weight:700; font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:#64748b; margin-bottom:8px; }
+
+  /* why this score */
+  .why .wrow { display:flex; align-items:center; gap:10px; padding:6px 0; }
+  .why .wn { font-size:12px; font-weight:600; color:#3a536b; width:92px; flex-shrink:0; }
+  .why .wbar { flex:1; height:6px; border-radius:4px; background:#eef2f6; overflow:hidden; } .why .wf { height:100%; border-radius:4px; }
+  .why .wv { font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.02em; width:64px; text-align:right; flex-shrink:0; }
+  .why-how { font-size:11px; color:#94a3b8; margin-top:8px; }
+
+  /* timeline */
+  .tl { display:flex; gap:3px; }
+  .tl .cell { flex:1; min-width:0; text-align:center; }
+  .tl .bar { height:38px; border-radius:6px; display:flex; align-items:flex-end; justify-content:center; padding-bottom:3px; }
+  .tl .q { font-size:7.5px; font-weight:700; color:#fff; text-transform:uppercase; letter-spacing:.02em; }
+  .tl .hr { font-size:9px; color:#8a99a8; margin-top:4px; font-weight:600; }
+  .tl-note { font-size:11px; color:#7c8da0; margin-top:8px; }
+
+  /* stat chips (compact conditions) */
+  .stats { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+  @container (min-width:520px){ .stats { grid-template-columns:repeat(3,1fr); } }
+  .stat { border:1px solid #e4ebf2; border-radius:11px; padding:9px 10px; background:#fbfcfe; }
+  .stat .sl { display:flex; align-items:center; gap:6px; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:#7c8da0; }
+  .stat .sl svg { width:14px; height:14px; color:#0f4c81; }
+  .stat .sv { font-family:'Styrene A',sans-serif; font-weight:700; font-size:15px; color:#0e4174; margin-top:5px; line-height:1; }
+
+  /* 7-day scroll cards */
+  .days { display:flex; gap:8px; overflow-x:auto; padding-bottom:4px; -webkit-overflow-scrolling:touch; }
+  .day { flex:0 0 78px; border:1px solid #e4ebf2; border-radius:12px; padding:10px 8px; text-align:center; background:#fbfcfe; }
+  .day.best { border-color:#16a34a; background:rgba(22,163,74,.06); }
+  .day .dn { font-family:'Styrene A',sans-serif; font-weight:700; font-size:11px; text-transform:uppercase; color:#3a536b; }
+  .day .ds { font-family:'Styrene A',sans-serif; font-weight:900; font-size:22px; line-height:1.1; }
+  .day .dv { font-size:9px; font-weight:700; text-transform:uppercase; color:#7c8da0; }
+  .bestday { background:rgba(22,163,74,.08); border:1px solid rgba(22,163,74,.25); border-radius:12px; padding:11px 13px; margin-bottom:12px; }
+  .bestday .bt { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:#15803d; }
+  .bestday .bm { font-family:'Styrene A',sans-serif; font-weight:700; font-size:15px; color:#0e4174; margin-top:3px; }
+  .bestday .bw { font-size:11.5px; color:#5b7081; margin-top:2px; }
+
+  /* trip checklist */
+  .chk { display:flex; flex-direction:column; gap:8px; }
+  .ck { display:flex; align-items:center; gap:11px; border:1px solid #e4ebf2; border-radius:12px; padding:11px 12px; background:#fbfcfe; }
+  .ck .ci { width:34px; height:34px; border-radius:9px; background:rgba(15,76,129,.07); color:#0f4c81; display:flex; align-items:center; justify-content:center; flex-shrink:0; } .ck .ci svg{width:18px;height:18px;}
+  .ck .cx { flex:1; min-width:0; } .ck .cx b { display:block; font-size:12.5px; color:#0e4174; font-weight:700; } .ck .cx span { font-size:11px; color:#94a3b8; }
+  .ck .cgo { font-size:11px; font-weight:700; color:#0f4c81; white-space:nowrap; }
+
+  /* gear */
+  .gear { background:linear-gradient(160deg,#0f4c81,#0b3766); border-radius:14px; padding:14px 15px; color:#fff; }
+  .gear .gh { font-family:'Styrene A',sans-serif; font-weight:700; font-size:13px; text-transform:uppercase; letter-spacing:.03em; }
+  .gear .gc { font-size:11.5px; color:rgba(255,255,255,.8); margin:4px 0 11px; line-height:1.4; }
+  .gear .gbtns { display:flex; flex-wrap:wrap; gap:7px; }
+  .gear .gbtn { background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.18); border-radius:8px; padding:8px 12px; font-family:'Styrene A',sans-serif; font-weight:700; font-size:11px; color:#fff; cursor:pointer; }
+  .gear .gbtn.solid { background:#fff; color:#0f4c81; border-color:#fff; }
+
+  /* trust footer */
+  .trust { padding:11px 16px 14px; border-top:1px solid #eef2f6; display:flex; flex-wrap:wrap; gap:4px 14px; font-size:10px; color:#9aa8b6; }
+  .trust b { color:#5b7081; font-weight:700; }
+  .conf { color:#15803d; font-weight:700; }
+
+  svg.ln { fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .hidden { display:none; }
+  .note { max-width:900px; font-size:12.5px; line-height:1.6; color:#475569; background:#fff; border:1px solid #e2e8f0; border-radius:12px; padding:14px 18px; margin-top:14px; } .note b{color:#0e4174;}
+</style>
+</head>
+<body>
+  <div class="ptitle">HUK Fishing Conditions · v2 — one fluid widget, three placements</div>
+  <div class="controls">
+    <button class="on" data-mode="salt" onclick="setMode('salt')">Saltwater</button>
+    <button data-mode="fresh" onclick="setMode('fresh')">Freshwater</button>
+    <button data-mode="fly" onclick="setMode('fly')">Fly</button>
+  </div>
+
+  <div class="placements">
+    <div class="placement"><span class="plabel">Drawer / FAB · ~380px</span><div class="frame drawer"><div class="fc" data-fc="d"></div></div></div>
+    <div class="placement"><span class="plabel">Modal · ~520px</span><div class="frame modal"><div class="fc" data-fc="m"></div></div></div>
+    <div class="placement"><span class="plabel">Shopify Section · ~960px</span><div class="frame section"><div class="fc" data-fc="s"></div></div></div>
+  </div>
+
+  <div class="note" id="note"></div>
+
+<script>
+  const I = {
+    pin:'<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+    clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    wind:'<path d="M3 8h9.5a2.5 2.5 0 1 0-2.5-2.5"/><path d="M3 12h13a3 3 0 1 1-3 3"/><path d="M3 16h7a2 2 0 1 1-2 2"/>',
+    tide:'<path d="M2 9c2-2.2 4-2.2 6 0s4 2.2 6 0 4-2.2 6 0"/><path d="M2 14c2-2.2 4-2.2 6 0s4 2.2 6 0 4-2.2 6 0"/>',
+    temp:'<path d="M10 13.5V5a2 2 0 1 1 4 0v8.5a3.6 3.6 0 1 1-4 0z"/><line x1="12" y1="13" x2="12" y2="8.5"/>',
+    pressure:'<path d="M4 14a8 8 0 1 1 16 0"/><line x1="12" y1="14" x2="16" y2="10.5"/><circle cx="12" cy="14" r="1.4" fill="currentColor" stroke="none"/>',
+    sky:'<circle cx="8" cy="8" r="3"/><path d="M8 2.5V4M2.5 8H4M4.3 4.3l1 1"/><path d="M9 19a3.5 3.5 0 0 1 0-7 4.5 4.5 0 0 1 8.6-1A3.2 3.2 0 0 1 18 19z"/>',
+    moon:'<path d="M17 4a8 8 0 1 0 3 13A9 9 0 0 1 17 4z"/>',
+    license:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 10h4M7 14h7"/>',
+    nav:'<path d="M3 11l18-8-8 18-2-8-8-2z"/>',
+    shirt:'<path d="M8 4l4 3 4-3 4 3-3 3v8H7v-8L4 7z"/>'
+  };
+  function ratingColor(r){ return r==='Excellent'?'#16a34a':r==='Good'?'#65a30d':r==='Fair'?'#ca8a04':r==='Neutral'?'#64748b':'#dc2626'; }
+  function ratingPct(r){ return r==='Excellent'?92:r==='Good'?76:r==='Fair'?55:r==='Neutral'?60:30; }
+
+  const DATA = {
+    salt:{ label:'Saltwater', loc:'Charleston, SC', station:'Charleston Harbor tide station · 2.4 mi',
+      score:84, verdict:'Fish On', plain:'Excellent', window:'6:45–9:30 AM',
+      reasons:'Incoming tide, overcast sky, and steady current are working in your favor before midday wind picks up.',
+      why:[['Tide movement','Excellent'],['Cloud cover','Good'],['Current','Good'],['Wind','Fair'],['Water temp','Good'],['Pressure trend','Neutral']],
+      stats:[['Wind','wind','3 mph SW'],['Tide','tide','Outgoing'],['Water Temp','temp','83°F'],['Pressure','pressure','29.86'],['Sky','sky','Overcast'],['Surf','tide','1.6 ft']],
+      tlnote:'Incoming tide peaks around 8:20 AM — best bite on the push.',
+      gearctx:'82° · Overcast · Saltwater. Pack lightweight sun protection and deck-ready footwear.',
+      gear:[['Shop Salt Collection',1],['UPF Tops',0],['Footwear',0]] },
+    fresh:{ label:'Freshwater', loc:'Lake Murray, SC', station:'Weather, pressure, moon phase & sun times',
+      score:80, verdict:'Fish On', plain:'Excellent', window:'5:42–7:42 AM',
+      reasons:'Falling pressure and a strong solunar major window line up at first light, with good cloud cover.',
+      why:[['Pressure trend','Excellent'],['Solunar','Good'],['Water temp','Good'],['Cloud cover','Good'],['Wind','Fair'],['Moon phase','Neutral']],
+      stats:[['Pressure','pressure','29.92'],['Solunar','moon','Major 6:12a'],['Water Temp','temp','74°F'],['Wind','wind','5 mph W'],['Moon','moon','68%'],['Sky','sky','Partly']],
+      tlnote:'Major solunar window 5:42–7:42 AM overlaps sunrise — prime feeding.',
+      gearctx:'74° · Partly cloudy · Freshwater. Light layers and a brimmed hat for the morning bite.',
+      gear:[['Shop Fresh Collection',1],['Performance Tops',0],['Hats',0]] },
+    fly:{ label:'Fly', loc:'Davidson River, NC', station:'Stream flow, pressure, hatch window & sun times',
+      score:72, verdict:'Worth the Trip', plain:'Good', window:'7:30–10:00 AM',
+      reasons:'Stable flow and a falling barometer favor a morning hatch; overcast keeps fish looking up.',
+      why:[['Flow / level','Good'],['Pressure trend','Good'],['Cloud cover','Excellent'],['Water temp','Good'],['Wind','Fair'],['Hatch window','Neutral']],
+      stats:[['Flow','tide','142 cfs'],['Water Temp','temp','58°F'],['Pressure','pressure','30.01'],['Wind','wind','4 mph'],['Sky','sky','Overcast'],['Hatch','moon','Mid-AM']],
+      tlnote:'Best hatch potential mid-morning as water warms a couple degrees.',
+      gearctx:'58° · Overcast · Fly. Breathable layers and low-glare conditions — bring a light shell.',
+      gear:[['Shop Fly Collection',1],['Layering',0],['Headwear',0]] }
+  };
+  const DAYS = [['Today',84,'Fish On'],['Mon',86,'Best Day',1],['Tue',78,'Fish On'],['Wed',30,'Slow Pick'],['Thu',62,'Worth It'],['Fri',71,'Worth It'],['Sat',74,'Worth It']];
+  function dcolor(s){ return s>=90?'#16a34a':s>=75?'#65a30d':s>=60?'#ca8a04':s>=40?'#d97706':s>=20?'#ea580c':'#dc2626'; }
+
+  let mode='salt', tab='today';
+
+  function heroHTML(d){
+    return `<div class="hero">
+      <div class="hero-top"><span class="loc"><svg class="ln" viewBox="0 0 24 24">${I.pin}</svg> ${d.loc}</span><span>Sun · Jun 15</span></div>
+      <div class="hero-main">
+        <div class="hero-num">${d.score}<small>/100</small></div>
+        <div class="hero-meta">
+          <div class="hero-verdict">${d.verdict}</div>
+          <div class="hero-plain">${d.plain} conditions</div>
+          <div class="hero-window"><svg class="ln" viewBox="0 0 24 24">${I.clock}</svg> Best window · ${d.window}</div>
+        </div>
+      </div>
+      <div class="hero-reasons">${d.reasons}</div>
+      <div class="hero-actions"><button class="ha-sec" onclick="setTab('today')">Why this score</button><button class="ha-pri" onclick="setTab('7day')">See 7-day</button></div>
+    </div>`;
+  }
+  function whyHTML(d){
+    return `<div class="why"><div class="sec-h">Why it's ${d.score}</div>${d.why.map(([n,r])=>`
+      <div class="wrow"><span class="wn">${n}</span><span class="wbar"><span class="wf" style="width:${ratingPct(r)}%;background:${ratingColor(r)}"></span></span><span class="wv" style="color:${ratingColor(r)}">${r}</span></div>`).join('')}
+      <div class="why-how">Score blends tide/flow, current, wind, sky, water temp, pressure trend, ${mode==='salt'?'and time of tide':'solunar & sun times'}.</div></div>`;
+  }
+  function timelineHTML(d){
+    const hrs=['6a','7a','8a','9a','10a','11a','12p'];
+    const q = mode==='salt'?['Good','Great','Great','Good','Fair','Fair','Slow']:['Great','Great','Good','Good','Fair','Fair','Slow'];
+    const qc = {Great:'#16a34a',Good:'#65a30d',Fair:'#ca8a04',Slow:'#ea580c'};
+    return `<div><div class="sec-h">Today's bite windows</div><div class="tl">${hrs.map((h,i)=>`
+      <div class="cell"><div class="bar" style="background:${qc[q[i]]}"><span class="q">${q[i]}</span></div><div class="hr">${h}</div></div>`).join('')}</div>
+      <div class="tl-note">${d.tlnote}</div></div>`;
+  }
+  function statsHTML(d){
+    return `<div><div class="sec-h">Conditions</div><div class="stats">${d.stats.map(([l,ic,v])=>`
+      <div class="stat"><div class="sl"><svg class="ln" viewBox="0 0 24 24">${I[ic]}</svg>${l}</div><div class="sv">${v}</div></div>`).join('')}</div></div>`;
+  }
+  function checklistHTML(d){
+    const st = d.loc.split(', ')[1]||'SC';
+    return `<div><div class="sec-h">Before you go</div><div class="chk">
+      <div class="ck"><span class="ci"><svg class="ln" viewBox="0 0 24 24">${I.license}</svg></span><span class="cx"><b>Fishing license</b><span>${st} license required</span></span><span class="cgo">Get →</span></div>
+      <div class="ck"><span class="ci"><svg class="ln" viewBox="0 0 24 24">${I.nav}</svg></span><span class="cx"><b>Access & directions</b><span>Nearby ramps and launches</span></span><span class="cgo">Map →</span></div>
+      <div class="ck"><span class="ci"><svg class="ln" viewBox="0 0 24 24">${I.shirt}</svg></span><span class="cx"><b>Weather prep</b><span>${d.stats[0][2]} · dress for the bite</span></span><span class="cgo">Gear →</span></div>
+    </div></div>`;
+  }
+  function gearHTML(d){
+    return `<div class="gear"><div class="gh">Gear for today's conditions</div><div class="gc">${d.gearctx}</div>
+      <div class="gbtns">${d.gear.map(([t,s])=>`<button class="gbtn${s?' solid':''}">${t}</button>`).join('')}</div></div>`;
+  }
+  function sevenHTML(){
+    const bd = DAYS.find(x=>x[3]);
+    return `<div><div class="bestday"><div class="bt">★ Best day this week</div><div class="bm">${bd[0]==='Today'?'Today':bd[0]} · ${bd[1]}/100 · ${bd[2]==='Best Day'?'Fish On':bd[2]}</div><div class="bw">Best window: morning incoming tide</div></div>
+      <div class="sec-h">7-day outlook</div><div class="days">${DAYS.map(x=>`
+        <div class="day${x[3]?' best':''}"><div class="dn">${x[0]}</div><div class="ds" style="color:${dcolor(x[1])}">${x[1]}</div><div class="dv">${x[2]}</div></div>`).join('')}</div></div>`;
+  }
+  function trustHTML(d){
+    return `<div class="trust"><span><b>Updated</b> 8:12 AM</span><span><b>Source</b> Open-Meteo · NOAA</span><span><b>${mode==='salt'?'Station':'Signals'}</b> ${d.station.split(' · ')[0]}</span><span>Confidence <span class="conf">High</span></span></div>`;
+  }
+
+  function render(){
+    const d = DATA[mode];
+    const todayBody = `<div class="body">${whyHTML(d)}${timelineHTML(d)}${statsHTML(d)}${checklistHTML(d)}${gearHTML(d)}</div>`;
+    const sevenBody = `<div class="body">${sevenHTML()}${checklistHTML(d)}${gearHTML(d)}</div>`;
+    const html = `${heroHTML(d)}
+      <div class="bar">
+        <div class="modepick">
+          <button class="${mode==='salt'?'on':''}" onclick="setMode('salt')">Salt</button>
+          <button class="${mode==='fresh'?'on':''}" onclick="setMode('fresh')">Fresh</button>
+          <button class="${mode==='fly'?'on':''}" onclick="setMode('fly')">Fly</button>
+        </div>
+        <div class="modeline"><svg class="ln" viewBox="0 0 24 24">${I.pin}</svg> ${d.station}</div>
+        <div class="tabs">
+          <button class="${tab==='today'?'on':''}" onclick="setTab('today')"><span class="nm">Today</span></button>
+          <button class="${tab==='7day'?'on':''}" onclick="setTab('7day')"><span class="nm">7-Day</span><span class="best">★ Best Mon</span></button>
+        </div>
+      </div>
+      ${tab==='today'?todayBody:sevenBody}
+      ${trustHTML(d)}`;
+    document.querySelectorAll('.fc').forEach(el=>el.innerHTML=html);
+    document.querySelectorAll('.controls button').forEach(b=>b.classList.toggle('on',b.dataset.mode===mode));
+    document.getElementById('note').innerHTML = `<b>What's new in v2:</b> the hero now answers <b>should I go &amp; when</b> (score → verdict → best window → reasons). A <b>“Why it's ${d.score}”</b> factor breakdown builds trust, a <b>bite-window timeline</b> answers “when today,” mode is <b>Salt / Fresh / Fly</b> (HUK's own taxonomy) with a location-aware source line, the license block became a <b>trip checklist</b>, and a tasteful <b>gear-for-conditions</b> module bridges to commerce. One fluid widget — at ~960px it goes <b>two-column</b> (Shopify section), and reflows to a single column for the modal and drawer. Deferred for later: saved spots, alerts, Captain's Club, share/calendar.`;
+  }
+  function setMode(m){ mode=m; render(); }
+  function setTab(t){ tab=t; render(); }
+  render();
+</script>
+</body>
+</html>
