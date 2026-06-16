@@ -646,13 +646,32 @@
       return { name, score, color, label, conf, code: daily.weather_code?.[i] || 0 };
     });
     const best = scored.slice(1).reduce((b, d) => d.score > b.score ? d : b, scored[1] || scored[0]);
-    const cards = scored.map((d, i) => `
-      <div class="huk-fc-7day-card${i === 0 ? ' today' : ''}" style="opacity:${d.conf};">
-        <div class="huk-fc-7day-name">${d.name}</div>
-        <div class="huk-fc-7day-score" style="color:${d.color};">${d.score}</div>
-        <div class="huk-fc-7day-bar" style="background:${d.color};width:${d.score}%;"></div>
-        <div class="huk-fc-7day-icon">${weatherCodeIcon(d.code)}</div>
-      </div>`).join('');
+    const cards = scored.map((d, i) => {
+      const windMph  = Math.round((daily.wind_speed_10m_max?.[i] || 0) * 0.621371);
+      const waveM    = daily.wave_height_max?.[i];
+      const waveFt   = waveM != null ? (waveM * 3.28084).toFixed(1) : null;
+      const precip   = daily.precipitation_sum?.[i];
+      const wxDesc   = weatherCodeText(d.code);
+      const detailParts = [];
+      if (windMph)          detailParts.push(`💨 ${windMph} mph`);
+      if (waveFt != null)   detailParts.push(`🌊 ${waveFt} ft`);
+      if (precip > 0.05)    detailParts.push(`🌧 ${precip.toFixed(1)}" rain`);
+      return `
+      <div class="huk-fc-7day-card${d.name === 'Today' ? ' today' : ''}" style="opacity:${d.conf};">
+        <div class="huk-fc-7day-row-top">
+          <div class="huk-fc-7day-left">
+            <span class="huk-fc-7day-name">${d.name}</span>
+            <span class="huk-fc-7day-wx">${weatherCodeIcon(d.code)} ${wxDesc}</span>
+          </div>
+          <div class="huk-fc-7day-right">
+            <span class="huk-fc-7day-score-num" style="color:${d.color};">${d.score}</span>
+            <span class="huk-fc-7day-label" style="color:${d.color};">${d.label}</span>
+          </div>
+        </div>
+        <div class="huk-fc-7day-bar-track"><div class="huk-fc-7day-bar-fill" style="width:${d.score}%;background:${d.color};"></div></div>
+        ${detailParts.length ? `<div class="huk-fc-7day-detail">${detailParts.join('<span class="huk-fc-7day-sep"> · </span>')}</div>` : ''}
+      </div>`;
+    }).join('');
     return `
       <div class="huk-fc-7day">
         <div class="huk-fc-best-callout">
@@ -749,7 +768,9 @@
     const C            = sc.conditionScores;
 
     const now = Date.now();
-    const upcoming = tides
+    const todayStr = new Date().toLocaleDateString('en-CA'); // YYYY-MM-DD in local time
+    const todayTides = tides.filter(t => t.t.startsWith(todayStr));
+    const upcoming = todayTides
       .filter(t => new Date(t.t.replace(' ', 'T')).getTime() >= now - 30 * 60 * 1000)
       .slice(0, 4);
 
@@ -791,7 +812,7 @@
     const cardsHTML = cards.map(c => {
       const condData = C[c.key];
       const whyBtn = CONDITION_INFO[c.key] && condData
-        ? `<button type="button" class="huk-fc-why-btn" data-cond="${c.key}" data-score="${condData.score}" data-reason="${(condData.reason || '').replace(/"/g, '&quot;')}">Why?</button>`
+        ? `<button type="button" class="huk-fc-why-btn" aria-label="More info about ${c.label}" data-cond="${c.key}" data-score="${condData.score}" data-reason="${(condData.reason || '').replace(/"/g, '&quot;')}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></button>`
         : '';
       return `<div class="huk-fc-stat">
         <div class="huk-fc-stat-hd"><span class="huk-fc-stat-icon">${c.icon}</span><span class="huk-fc-stat-label">${c.label}</span>${whyBtn}</div>
@@ -801,7 +822,7 @@
     }).join('');
 
     const licenseHTML = stateCode ? buildLicenseHTML(stateCode, lat, lon, station.name) : '';
-    const tideGraph   = buildTideGraph(tides);
+    const tideGraph   = buildTideGraph(todayTides);
     const confidenceBadge = sc.confidence === 'high' ? '' :
       `<span class="huk-fc-conf huk-fc-conf-${sc.confidence}">${sc.confidence} confidence</span>`;
 
