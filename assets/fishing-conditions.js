@@ -23,6 +23,26 @@
     visibility:    { icon: '👁️', title: 'Why Sky Conditions Matter', sweetSpot: 'Overcast and partly cloudy typically score higher than full sun. Fog and heavy rain reduce visibility enough to hurt most presentations.',                                        weight: '8%'  },
   };
 
+  // ── Line-icon set (SF-Symbols style) ────────────────────────
+  const LINE_ICON = {
+    wind:          '<path d="M3 8h9.5a2.5 2.5 0 1 0-2.5-2.5"/><path d="M3 12h13a3 3 0 1 1-3 3"/><path d="M3 16h7a2 2 0 1 1-2 2"/>',
+    tide:          '<path d="M2 9c2-2.2 4-2.2 6 0s4 2.2 6 0 4-2.2 6 0"/><path d="M2 14c2-2.2 4-2.2 6 0s4 2.2 6 0 4-2.2 6 0"/>',
+    current:       '<path d="M4 8.5a8 8 0 0 1 13.5-2.8L20 8"/><path d="M20 4v4h-4"/><path d="M20 15.5a8 8 0 0 1-13.5 2.8L4 16"/><path d="M4 20v-4h4"/>',
+    seaSurfaceTemp:'<path d="M10 13.5V5a2 2 0 1 1 4 0v8.5a3.6 3.6 0 1 1-4 0z"/><line x1="12" y1="13" x2="12" y2="8.5"/>',
+    surf:          '<path d="M21 9.5C18.7 5.2 13.2 4.6 10 8c-2.1 2.2-1.7 5.4.5 7 1.8 1.3 4.3.6 4.8-1.4.4-1.5-.6-2.8-2-3"/><path d="M2.5 17.5c3 2.2 6.5 2.2 9.5 0"/>',
+    pressure:      '<path d="M4 14a8 8 0 1 1 16 0"/><line x1="12" y1="14" x2="16" y2="10.5"/><circle cx="12" cy="14" r="1.4" fill="currentColor" stroke="none"/>',
+    visibility:    '<circle cx="8" cy="8" r="3"/><path d="M8 2.5V4M2.5 8H4M4.3 4.3l1 1"/><path d="M9 19a3.5 3.5 0 0 1 0-7 4.5 4.5 0 0 1 8.6-1A3.2 3.2 0 0 1 18 19z"/>',
+    humidity:      '<path d="M12 3s5 5.5 5 9a5 5 0 0 1-10 0c0-3.5 5-9 5-9z"/>',
+    skyCover:      '<path d="M7 18a4 4 0 0 1 0-8 5.5 5.5 0 0 1 10.6-1.3A3.8 3.8 0 0 1 18 18z"/>',
+    pin:           '<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+    nav:           '<path d="M3 11l18-8-8 18-2-8-8-2z"/>',
+  };
+  function lineSvg(key, cls) {
+    const p = LINE_ICON[key];
+    if (!p) return '';
+    return `<svg class="${cls || 'huk-fc-ln'}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+  }
+
   // ── NOAA tide stations ──────────────────────────────────────
   // [lat, lon, stationId, label]
   const NOAA_STATIONS = [
@@ -789,14 +809,14 @@
       ? `${nextTide.type === 'H' ? 'High' : 'Low'} at ${new Date(nextTide.t.replace(' ', 'T')).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}`
       : '';
 
-    const tideRows = upcoming.map(t => {
+    const tideRows = upcoming.slice(0, 2).map(t => {
       const d = new Date(t.t.replace(' ', 'T'));
       const time = d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
       const isHigh = t.type === 'H';
-      return `<div class="huk-fc-tide-row">
-        <span class="huk-fc-tide-type ${isHigh ? 'high' : 'low'}">${isHigh ? '▲' : '▼'} ${isHigh ? 'High' : 'Low'} tide</span>
-        <span class="huk-fc-tide-time">${time}</span>
-        <span class="huk-fc-tide-ht">${parseFloat(t.v).toFixed(1)} ft</span>
+      return `<div class="huk-fc-frow ${isHigh ? 'hi' : 'lo'}">
+        <span class="huk-fc-frow-ic">${isHigh ? '▲' : '▼'}</span>
+        <span class="huk-fc-frow-mid"><span class="huk-fc-frow-l">Next ${isHigh ? 'High' : 'Low'}</span><span class="huk-fc-frow-v">${time}</span></span>
+        <span class="huk-fc-frow-r">${parseFloat(t.v).toFixed(1)} ft</span>
       </div>`;
     }).join('');
 
@@ -822,10 +842,11 @@
     const cardsHTML = cards.map(c => {
       const condData = C[c.key];
       const whyBtn = CONDITION_INFO[c.key] && condData
-        ? `<button type="button" class="huk-fc-why-btn" aria-label="More info about ${c.label}" data-cond="${c.key}" data-score="${condData.score}" data-reason="${(condData.reason || '').replace(/"/g, '&quot;')}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></button>`
+        ? `<button type="button" class="huk-fc-why-btn" aria-label="More info about ${c.label}" data-cond="${c.key}" data-score="${condData.score}" data-reason="${(condData.reason || '').replace(/"/g, '&quot;')}"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></button>`
         : '';
+      const iconHTML = LINE_ICON[c.key] ? `<span class="huk-fc-stat-ic">${lineSvg(c.key)}</span>` : `<span class="huk-fc-stat-ic huk-fc-stat-ic-emoji">${c.icon}</span>`;
       return `<div class="huk-fc-stat">
-        <div class="huk-fc-stat-hd"><span class="huk-fc-stat-icon">${c.icon}</span><span class="huk-fc-stat-label">${c.label}</span>${whyBtn}</div>
+        <div class="huk-fc-stat-hd">${iconHTML}<span class="huk-fc-stat-label">${c.label}</span>${whyBtn}</div>
         <strong>${c.val}</strong>
         ${c.sub ? `<span class="huk-fc-stat-sub">${c.sub}</span>` : ''}
       </div>`;
@@ -851,68 +872,67 @@
     const seenDot = (() => { try { return !!sessionStorage.getItem('huk_fc_7day_seen'); } catch { return false; } })();
     const dotHTML = seenDot ? '' : `<span class="huk-fc-tab-dot" aria-hidden="true"></span>`;
 
+    const dateStr = new Date().toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
+    const stationLine = station && station.name
+      ? `<div class="huk-fc-modeline">${lineSvg('pin','huk-fc-ln-sm')} ${station.name}${station.distKm != null ? ` · ${station.distKm} mi` : ''}</div>`
+      : '';
+
+    const hero = `
+      <div class="huk-fc-hero">
+        <div class="huk-fc-hero-top">
+          <span class="huk-fc-loc">${lineSvg('pin','huk-fc-ln-sm')} ${station && station.name ? station.name.replace(/ tide.*$/i,'') : 'Your location'}</span>
+          <span>${dateStr}</span>
+        </div>
+        <div class="huk-fc-score-block">
+          <div class="huk-fc-score-num">${score}</div>
+          <div class="huk-fc-score-verdict">${sc.overallLabel}</div>
+          <div class="huk-fc-score-tagline">${sc.overallTagline}</div>
+        </div>
+        <div class="huk-fc-scale-eyebrow">Cast score scale</div>
+        <div class="huk-fc-score-track"><div class="huk-fc-score-dot" style="left:${score}%"></div></div>
+        <div class="huk-fc-score-scale"><span>Skunked</span><span>Slow</span><span>Grind</span><span>Worth It</span><span>Fish On</span><span>Drop All</span></div>
+        <div class="huk-fc-hero-weather">
+          <span class="huk-fc-cond">${weatherCodeIcon(wc)} ${weatherCodeText(wc)}</span>
+          <span class="huk-fc-temp">${temp}°</span>
+        </div>
+        ${confidenceBadge}
+      </div>`;
+
     const todayPane = `
-      <div class="huk-fc-data">
-        <div class="huk-fc-cast-row">
-          <div class="huk-fc-score-ring" style="--score-color:${scoreColor}">
-            <svg viewBox="0 0 48 48" class="huk-fc-ring-svg">
-              <circle cx="24" cy="24" r="20" stroke="#e5e7eb" stroke-width="4" fill="none"/>
-              <circle cx="24" cy="24" r="20" stroke="${scoreColor}" stroke-width="4" fill="none"
-                stroke-dasharray="${(score / 100 * 125.66).toFixed(1)} 125.66"
-                stroke-dashoffset="31.4" stroke-linecap="round"
-                transform="rotate(-90 24 24)"/>
-            </svg>
-            <div class="huk-fc-ring-inner">
-              <span class="huk-fc-score-num">${score}</span>
-              <span class="huk-fc-score-sub">SCORE</span>
-            </div>
-          </div>
-          <div class="huk-fc-cast-meta">
-            <span class="huk-fc-cast-label">Cast Score</span>
-            <span class="huk-fc-cast-headline" style="color:${scoreColor}">${score}/100 · ${sc.overallLabel}</span>
-            <span class="huk-fc-cast-detail">${sc.overallTagline}</span>
-            ${confidenceBadge}
-          </div>
-        </div>
-        <div class="huk-fc-weather-row">
-          <span class="huk-fc-icon">${weatherCodeIcon(wc)}</span>
-          <span class="huk-fc-weather-desc">${weatherCodeText(wc)}</span>
-          <span class="huk-fc-weather-sep">·</span>
-          <span class="huk-fc-temp">${temp}°F</span>
-        </div>
-        ${sc.overallSummary ? `<div class="huk-fc-summary">${sc.overallSummary}</div>` : ''}
-        <div class="huk-fc-stats">
-          ${cardsHTML}
-        </div>
-        <div class="huk-fc-info-drawer" aria-live="polite">
-          <div class="huk-fc-info-drawer-inner">
-            <div class="huk-fc-info-drawer-hd">
-              <span class="huk-fc-info-drawer-title"></span>
-              <button type="button" class="huk-fc-info-close" aria-label="Close info">✕</button>
-            </div>
-            <div class="huk-fc-info-drawer-body">
-              <p class="huk-fc-info-why"></p>
-              <div class="huk-fc-score-bar-wrap">
-                <div class="huk-fc-score-bar-label">
-                  <span>Sub-score</span>
-                  <span class="huk-fc-score-bar-val"></span>
-                </div>
-                <div class="huk-fc-score-bar-track"><div class="huk-fc-score-bar-fill"></div></div>
+      ${sc.overallSummary ? `<div class="huk-fc-summary">${sc.overallSummary}</div>` : ''}
+      <div class="huk-fc-body">
+        <div class="huk-fc-col-main">
+          <div class="huk-fc-stats">${cardsHTML}</div>
+          <div class="huk-fc-info-drawer" aria-live="polite">
+            <div class="huk-fc-info-drawer-inner">
+              <div class="huk-fc-info-drawer-hd">
+                <span class="huk-fc-info-drawer-title"></span>
+                <button type="button" class="huk-fc-info-close" aria-label="Close info">✕</button>
               </div>
-              <div class="huk-fc-sweet-spot"></div>
+              <div class="huk-fc-info-drawer-body">
+                <p class="huk-fc-info-why"></p>
+                <div class="huk-fc-score-bar-wrap">
+                  <div class="huk-fc-score-bar-label"><span>Sub-score</span><span class="huk-fc-score-bar-val"></span></div>
+                  <div class="huk-fc-score-bar-track"><div class="huk-fc-score-bar-fill"></div></div>
+                </div>
+                <div class="huk-fc-sweet-spot"></div>
+              </div>
             </div>
           </div>
         </div>
-        ${upcoming.length > 0 ? `
-        <div class="huk-fc-tides">
-          <div class="huk-fc-tides-title">Today's tide times</div>
-          ${tideGraph}
-          ${tideRows}
-        </div>` : ''}
-        ${licenseHTML}
+        <div class="huk-fc-col-side">
+          ${upcoming.length > 0 ? `
+          <div class="huk-fc-tides">
+            <div class="huk-fc-tides-title">Today's Tide</div>
+            ${tideGraph}
+            <div class="huk-fc-frows">${tideRows}</div>
+          </div>` : ''}
+          ${licenseHTML}
+        </div>
       </div>`;
 
     return `
+      ${hero}
       <div class="huk-fc-tabs" role="tablist">
         <button class="huk-fc-tab active" data-tab="today" role="tab" aria-selected="true">
           <span class="huk-fc-tab-name">Today</span>
@@ -922,6 +942,7 @@
           ${(bestDayTeaser || dotHTML) ? `<span class="huk-fc-tab-meta">${bestDayTeaser}${dotHTML}</span>` : ''}
         </button>
       </div>
+      ${stationLine}
       <div class="huk-fc-pane huk-fc-pane-today" role="tabpanel">${todayPane}</div>
       <div class="huk-fc-pane huk-fc-pane-7day huk-fc-pane-hidden" role="tabpanel">${build7DayPaneHTML(weather)}</div>`;
   }
