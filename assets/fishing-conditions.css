@@ -24,7 +24,8 @@
 /* ── CSS custom properties (easy overrides) ────────────────── */
 .huk-fc-section,
 .huk-fc-float-panel,
-.huk-fc-float-wrap {
+.huk-fc-float-wrap,
+.huk-fc-vars {
   --huk-navy:       #0f4c81;
   --huk-navy-dark:  #0e4174;
   --huk-navy-body:  #17314b;
@@ -850,6 +851,16 @@
   .huk-fc-section { padding: 28px 0; }
   .huk-fc-section-body { padding: 16px; }
 
+  .huk-fc-license-btns {
+    flex-direction: column;
+  }
+
+  .huk-fc-license-btns .huk-fc-btn-primary,
+  .huk-fc-license-btns .huk-fc-btn-map {
+    width: 100%;
+    justify-content: center;
+  }
+
   .huk-fc-inner {
     flex-direction: column;
     gap: 16px;
@@ -990,23 +1001,29 @@
   cursor: pointer;
   padding: 2px;
   line-height: 0;
-  color: rgba(255,255,255,0.35);
+  color: rgba(15,76,129,0.3);
   transition: color 0.15s;
   border-radius: 50%;
 }
 
 .huk-fc-why-btn:hover,
 .huk-fc-why-btn[aria-expanded="true"] {
-  color: rgba(255,255,255,0.85);
+  color: rgba(15,76,129,0.8);
 }
 
-/* Light theme — icon needs to be dark to be visible */
-.huk-fc-section:not(.huk-fc-section-navy) .huk-fc-why-btn {
-  color: rgba(15,76,129,0.35);
+/* Dark/navy contexts — flip to white */
+.huk-fc-section-navy .huk-fc-why-btn,
+.huk-fc-float-panel .huk-fc-why-btn,
+.huk-fc-float-body .huk-fc-why-btn {
+  color: rgba(255,255,255,0.35);
 }
-.huk-fc-section:not(.huk-fc-section-navy) .huk-fc-why-btn:hover,
-.huk-fc-section:not(.huk-fc-section-navy) .huk-fc-why-btn[aria-expanded="true"] {
-  color: rgba(15,76,129,0.85);
+.huk-fc-section-navy .huk-fc-why-btn:hover,
+.huk-fc-section-navy .huk-fc-why-btn[aria-expanded="true"],
+.huk-fc-float-panel .huk-fc-why-btn:hover,
+.huk-fc-float-panel .huk-fc-why-btn[aria-expanded="true"],
+.huk-fc-float-body .huk-fc-why-btn:hover,
+.huk-fc-float-body .huk-fc-why-btn[aria-expanded="true"] {
+  color: rgba(255,255,255,0.85);
 }
 
 .huk-fc-why-btn svg {
