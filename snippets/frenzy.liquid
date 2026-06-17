@@ -1,0 +1,7 @@
+{% comment %} <script src="https://frenzy.cdn.appdomain.cloud/frenzy-plugin/swiper.min.js"></script> {% endcomment %}
+<script src="https://d1pep3e1a25kze.cloudfront.net/plugin/swiper-new.min.js"></script>
+<script id="frenzyCDN" src="https://d1pep3e1a25kze.cloudfront.net/plugin/frenzy-search.js" data-frenzyurl="https://app.search.plugin.frenzy.ai" data-frenzyapikey="f8dfa1f1-be96-400e-8ef6-a1b39c560afb" data-moneyformat='{{ shop.money_format | strip_html }}' data-company_id="{{ customer.current_company.id }}" data-location_id="{{ customer.current_location.id }}"></script>
+<!-- <script id="frenzyCDN" src="{{ 'frenzy-search.js' | asset_url }}" data-frenzyurl="https://hukgear.search.frenzy.me" data-frenzyapikey="f8dfa1f1-be96-400e-8ef6-a1b39c560afb" data-moneyformat='{{ shop.money_format | strip_html }}'></script> -->
+{{ 'frenzy-css.css' | asset_url | stylesheet_tag }}
+{% comment %} {{ 'frenzy-search.css' | asset_url | stylesheet_tag }}{% endcomment %}
+{% render 'frenzy-callback-function' %}

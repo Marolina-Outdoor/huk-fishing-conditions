@@ -1,0 +1,206 @@
+.timeline {
+    position: relative;
+    /* background: linear-gradient(180deg, #F7F4EF 6.58%, rgba(253, 253, 252, 0) 34.18%); */
+    padding: 50px 0;
+    text-align: center;
+    color: #2c2d2e;
+    z-index: 0;
+}
+
+.timeline .header-wrapper{
+    display: block;
+}
+
+.huk-timeline .section-title,
+.huk-timeline .tagline {
+    font-family: 'Styrene A Web';
+    font-size: 24px;
+    font-weight: 700;
+    color: #0E4175;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.huk-timeline .main-title {
+    font-family: trade-gothic-next-condensed;
+    font-size: 60px;
+    font-weight: 800;
+    color: #0581FF;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.huk-timeline .description {
+    font-size: 16px;
+    color: #2c2d2e;
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+}
+
+.timeline-intro{
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.intro-title{
+    font-family: 'Styrene A Web';
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 23.22px;
+    letter-spacing: 0.07em;
+    color: #0E4175;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.intro-content{
+    font-family: "Manrope", sans-serif;;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24.59px;
+    letter-spacing: 0.07em;
+    text-align: center;
+    color: #A5A5A5;
+}
+
+.timeline-body{
+    position: relative;
+    padding: 35px 0;
+}
+
+.timeline-track{
+    height: 99%;
+    position: absolute;
+    top: 0;
+    right: 50%;
+    bottom:0;
+    z-index: -1;
+    transform: translateX(50%);
+}
+
+div[data-milestone]{
+padding-top:90px;
+}
+
+.huk-timeline .milestone {
+    display: flex;
+    padding-bottom: 40px;
+}
+
+.milestone[data-align='left'] {
+    flex-flow: column;
+}
+
+.milestone[data-align='right'] {
+    flex-flow: column-reverse;
+}
+
+.milestone_image{
+    position: relative;
+}
+
+.milestone-year{
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: -80px;
+    width: 94px;
+    height: 94px;
+    opacity: 0px;
+    background: #0E4175BF;
+    font-size: 24px;
+    color: white;
+    border: 0.86px solid #FFFFFF
+}
+
+.milestone[data-align='left'] .milestone-year,
+.milestone[data-align='right'] .milestone-year{
+    right:50%;
+    transform: translateX(50%);
+}
+
+.huk-timeline .milestone-content {
+    padding: 6px;
+} 
+
+.huk-timeline .milestone-content h3 {
+    font-family: trade-gothic-next-condensed;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 44.78px;
+    letter-spacing: 0.07em;
+    text-align: left;
+    color: #0E4175;
+}
+
+.huk-timeline .milestone-content {
+    font-family: Manrope;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 35px;
+    text-align: left;
+    
+}
+
+@media only screen and (min-width: 768px) {
+    .huk-timeline .main-title {
+        font-size: 90px;
+    }
+    .milestone-year{
+        top: -25px;
+        width: 80px;
+        height: 80px;
+        font-size: 20px;
+    }
+}
+
+@media only screen and (min-width: 1068px) {
+    .huk-timeline .main-title {
+        font-size: 180.8px;
+    }
+    .timeline-body{
+        padding: 100px 0;
+    }
+    div[data-milestone]{
+        padding-top:30px;
+        }
+    .milestone-year{
+        top: -50px;
+        width: 136px;
+        height: 136px;
+        font-size: 36px;
+    }
+
+    .milestone[data-align='left'] .milestone-year{
+        right: 17%;
+    }
+    .milestone[data-align='right'] .milestone-year{
+        left: 0%;
+    }
+    .huk-timeline .milestone {
+        display: grid;
+        grid-auto-flow: dense;
+        gap: 10px;
+        margin-bottom: 100px;
+    }
+    .huk-timeline .milestone {
+        display: grid;
+        grid-auto-flow: dense;
+        gap: 10px;
+        margin-bottom: 100px;
+    }
+    .milestone[data-align='left'] {
+        grid-template-areas: "media content";
+        grid-template-columns: 60% 1fr;
+    }
+    .milestone[data-align='right'] {
+        grid-template-areas: "content media";
+        grid-template-columns: 1fr 60%;
+    }
+    .huk-timeline .milestone-content {
+        padding: 30px;
+    } 
+}

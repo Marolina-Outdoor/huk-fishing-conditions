@@ -1,0 +1,395 @@
+{{ 'shop-the-look.css' | asset_url | stylesheet_tag }}
+{% comment %} custom 50/50 styling below {% endcomment %}
+{% style %}
+	.shop-the-look-fifty-fifty[data-section-id="{{ section.id }}"] {
+		background: {{ section.settings.section-bg-color }}
+	}
+	.shop-the-look-fifty-fifty[data-section-id="{{ section.id }}"].section-spacing {
+		margin-top: 0;
+		margin-bottom: 0;
+		padding-top: var(--section-spacing-desktop, 0);
+		padding-bottom: var(--section-spacing-desktop, 0);
+	}
+	@media only screen and (min-width: 768px) {
+		.shop-the-look-fifty-fifty[data-section-id="{{ section.id }}"].section-spacing {
+			margin-top: 0;
+			margin-bottom: 0;
+			padding-top: var(--section-spacing-desktop, 0);
+			padding-bottom: var(--section-spacing-desktop, 0);
+		}
+	}
+	
+	.shop-the-look-fifty-fifty[data-section-id="{{ section.id }}"] .shop-the-look__mobile-copy-container {
+		display: none;
+	}
+
+	.shop-the-look-fifty-fifty[data-section-id="{{ section.id }}"] .column {
+		max-width: 50%;
+		margin: 0;
+	}
+
+	.shop-the-look-fifty-fifty[data-section-id="{{ section.id }}"] .slider-column {
+		height: 100%;
+    margin: 0;
+	}
+
+	.shop-the-look-fifty-fifty[data-section-id="{{ section.id }}"] .shop-the-look__heading {
+		font-size: {{ section.settings.head_size-desktop }}px;
+		color: {{ section.settings.heading_color }};
+		line-height: {{ section.settings.head_lineheight }}px;
+		margin-bottom: {{ section.settings.head_margin-bot }}px;
+	}
+
+	.shop-the-look-fifty-fifty[data-section-id="{{ section.id }}"] .shop-the-look__subheading {
+		font-size: {{ section.settings.subhead_size-desktop }}px;
+		color: {{ section.settings.subheading_color }};
+		margin-bottom: {{ section.settings.subhead_margin-bot }}px;
+	}
+
+	.shop-the-look-fifty-fifty[data-section-id="{{ section.id }}"] .shop-the-look__mobile-copy-container .shop-the-look__heading {
+		font-size: {{ section.settings.head_size-mobile }}px;
+		margin-bottom: 0;
+		line-height: normal;
+	}
+
+	.shop-the-look-fifty-fifty[data-section-id="{{ section.id }}"] .shop-the-look__mobile-copy-container .shop-the-look__subheading {
+		font-size: {{ section.settings.subhead_size-mobile }}px;
+		margin-bottom: 0;
+		line-height: normal;
+	}
+
+	.shop-the-look-fifty-fifty[data-section-id="{{ section.id }}"] .slider-column .product-card {
+		max-width: 50%;
+		margin: auto 15px auto 0px;
+	}
+
+	.shop-the-look-fifty-fifty[data-section-id="{{ section.id }}"] .full-width-row-full .slider-column {
+		max-width: 45%;
+	}
+
+	.shop-the-look-fifty-fifty[data-section-id="{{ section.id }}"] .slider-column .shop-the-look__copy-container {
+		margin-bottom: {{ section.settings.copy_margin-bot }}px;
+	}
+
+	.shop-the-look-fifty-fifty[data-section-id="{{ section.id }}"] .shop-the-look-slider .flickity-page-dots {
+		bottom: 0;
+	}
+	@media only screen and (max-width: 769px) {
+		.shop-the-look-fifty-fifty[data-section-id="{{ section.id }}"] .shop-the-look__mobile-copy-container {
+			display: block;
+		}
+		.shop-the-look-fifty-fifty[data-section-id="{{ section.id }}"] .column {
+			max-width: 100%;
+			padding-top: 10px;
+		}
+		.shop-the-look-fifty-fifty[data-section-id="{{ section.id }}"] .slider-column {
+			display: none;
+		}
+
+		.shop-the-look-fifty-fifty[data-section-id="{{ section.id }}"] .shop-the-look__heading {
+			font-size: {{ section.settings.head_size-mobile }}px;
+		}
+
+		.shop-the-look-fifty-fifty[data-section-id="{{ section.id }}"] .shop-the-look__subheading {
+			font-size: {{ section.settings.subhead_size-mobile }}px;
+		}
+	}
+{% endstyle %}
+<script src="{{ 'product.js' | asset_url }}" defer="defer"></script>
+{%- liquid
+	assign full_width = section.settings.full_width
+	assign image = section.settings.image
+	assign image_mobile = section.settings.image_mobile
+	assign disable_top_spacing = section.settings.disable_top_spacing
+	assign disable_bottom_spacing = section.settings.disable_bottom_spacing
+
+	unless image_mobile
+		assign image_mobile = image
+	endunless
+-%}
+<shop-the-look class="shop-the-look shop-the-look-fifty-fifty section-spacing{% if disable_top_spacing %} section-spacing--disable-top{% endif %}{% if disable_bottom_spacing %} section-spacing--disable-bottom{% endif %}" data-section-id="{{ section.id }}">
+	<div class="row{% if full_width %} full-width-row-full{% endif %}">
+		{% if section.settings.heading != blank or section.settings.subheading != blank %}
+			<div class="shop-the-look__mobile-copy-container">
+				{% if section.settings.heading != blank %}
+					<h2 class="shop-the-look__heading">{{ section.settings.heading }}</h2>
+				{% endif %}
+				{% if section.settings.subheading != blank %}
+					<span class="shop-the-look__subheading manrope-huk-font--reg">{{ section.settings.subheading }}</span>
+				{% endif %}
+			</div>
+		{% endif %}
+		<div class="small-12 columns column">
+			<figure class="shop-the-look--area shop-the-look--mobile shop-the-look--full-width-{{ full_width }}">
+				{%- if image_mobile -%}
+					{% assign small_height = image_mobile.src.height | times: '750' | divided_by: image_mobile.src.width %}
+					{% assign master_width = image_mobile.src.width | append: 'x' | append: image_mobile.src.height %}
+					{% assign sizes = '750x' | append: small_height | append: ',' | append: master_width %}
+					{% render 'responsive-image', image: image_mobile, sizes: sizes %}
+				{%- else -%}
+					<div class="thb-placeholder">
+						{{ 'collection-1' | placeholder_svg_tag }}
+					</div>
+				{%- endif -%}
+        {% for block in section.blocks %}
+					{%- assign hotspot_product = all_products[block.settings.product_handle] -%}
+          <div class="thb-hotspot pin-white" style="left: {{- block.settings.x_position_mobile | append: '%' -}}; top: {{- block.settings.y_position_mobile | append: '%' -}};" data-product-handle="{{ hotspot_product.handle }}">
+            <div class="thb-hotspot-content thb-pulsate">
+							{%- unless hotspot_product == empty -%}
+								<div class="loading-overlay">
+									{% render 'svg-icons' with 'thb-loading' %}
+								</div>
+							{%- endunless -%}
+						</div>
+          </div>
+        {% endfor %}
+			</figure>
+			<figure class="shop-the-look--area shop-the-look--desktop shop-the-look--full-width-{{ full_width }}">
+				{%- if image -%}
+					{% assign master_width = image.src.width | append: 'x' | append: image.src.height %}
+					{% render 'responsive-image', image: image, sizes: master_width %}
+				{%- else -%}
+					<div class="thb-placeholder">
+						{{ 'lifestyle-1' | placeholder_svg_tag }}
+					</div>
+				{%- endif -%}
+        {% for block in section.blocks %}
+					{%- assign hotspot_product = all_products[block.settings.product_handle] -%}
+          <div class="thb-hotspot pin-white" data-section-id="{{ section.id }}" data-index={{ forloop.index }} style="left: {{- block.settings.x_position | append: '%' -}}; top: {{- block.settings.y_position | append: '%' -}};" data-product-handle="{{ hotspot_product.handle }}" {{ block.shopify_attributes }}>
+            <div class="thb-hotspot-content thb-pulsate">
+							{%- unless hotspot_product == empty -%}
+							<div class="loading-overlay">
+								{% render 'svg-icons' with 'thb-loading' %}
+							</div>
+							<div class="thb-hotspot-arrow"></div>
+							<div class="thb-hotspot-bubble">
+								{% if hotspot_product.featured_image %}
+									<a href="{{ hotspot_product.url }}" title="{{ hotspot_product.title | escape }}" class="thb-hotspot-product-image">
+										{%- render 'responsive-image', image: hotspot_product.featured_image, sizes: '150x0' -%}
+									</a>
+								{% endif %}
+								<div class="thb-hotspot-product-content">
+									<div class="thb-hotspot-product-title">{{ hotspot_product.title }}</div>
+									{% render 'product-price', product: hotspot_product %}
+									{% assign text_button_title = 'sections.shop_the_look.view_product' | t %}
+									{% render 'text-button', url: hotspot_product.url, title: text_button_title %}
+								</div>
+							</div>
+							{%- endunless -%}
+						</div>
+          </div>
+        {% endfor %}
+			</figure>
+		</div>
+		<div class="small-12 columns column slider-column">
+			{% if section.settings.heading != blank or section.settings.subheading != blank %}
+				<div class="shop-the-look__copy-container">
+					{% if section.settings.heading != blank %}
+						<h2 class="shop-the-look__heading">{{ section.settings.heading }}</h2>
+					{% endif %}
+					{% if section.settings.subheading != blank %}
+						<span class="shop-the-look__subheading manrope-huk-font--reg">{{ section.settings.subheading }}</span>
+					{% endif %}
+				</div>
+			{% endif %}
+			<div class="shop-the-look-slider">
+				{% for block in section.blocks %}
+					{% assign block_prod = all_products[block.settings.product_handle] %}
+					{% render 'product-card', product_card_product: block_prod %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</shop-the-look>
+<script src="{{ 'shop-the-look.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'shop-the-look-50-50.js' | asset_url }}" defer="defer"></script>
+{% schema %}
+  {
+    "name": "Shop the look 50/50",
+    "settings": [
+      {
+        "type": "paragraph",
+				"content": "Learn more about how to set up the [shop the look section](https://documentation.fuelthemes.net/kb/how-to-set-up-shop-the-look-section-in-vision/)"
+      },
+			{
+				"type": "color",
+				"id": "section-bg-color",
+				"label": "Section Background Color",
+				"default": "#ffffff"
+			},
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image",
+        "info": "1280 x 650 px .jpg recommended."
+      },
+			{
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Mobile image",
+        "info": "750 x 800 px .jpg recommended. Default image is used if none is selected. To position the hotspots precisely, switch to mobile mode."
+      },
+			{
+				"type": "checkbox",
+				"id": "full_width",
+				"label": "Make section full width",
+				"default": false
+			},
+			{
+				"type": "text",
+				"id": "heading",
+				"label": "Heading",
+				"default": "Shop The Look"
+			},
+			{
+				"type": "color",
+				"id": "heading_color",
+				"label": "Heading Color"
+			},
+			{
+				"type": "number",
+				"id": "head_lineheight",
+				"label": "Heading lineheight - will convert to px",
+				"default": 18
+			},
+			{
+				"type": "number",
+				"id": "head_margin-bot",
+				"label": "Heading bottom margin - will convert to px",
+				"default": 0
+			},
+			{
+				"type": "number",
+				"id": "head_size-desktop",
+				"label": "Heading Size for desktop - will convert to px",
+				"default": 18
+			},
+			{
+				"type": "number",
+				"id": "head_size-mobile",
+				"label": "Heading Size for mobile - will convert to px",
+				"default": 12
+			},
+			{
+				"type": "text",
+				"id": "subheading",
+				"label": "Subheading",
+				"default": "Subheading"
+			},
+			{
+				"type": "color",
+				"id": "subheading_color",
+				"label": "Subheading Color"
+			},
+			{
+				"type": "number",
+				"id": "subhead_size-desktop",
+				"label": "Subheading Size for desktop - will convert to px",
+				"default": 18
+			},
+			{
+				"type": "number",
+				"id": "subhead_size-mobile",
+				"label": "Subheading Size for mobile - will convert to px",
+				"default": 12
+			},
+			{
+        "type": "header",
+        "content": "Spacing"
+      },
+			{
+				"type": "number",
+				"id": "copy_margin-bot",
+				"label": "Copy container margin bottom - will convert to px",
+				"default": 15
+			},
+			{
+				"type": "checkbox",
+				"id": "disable_top_spacing",
+				"default": false,
+				"label": "Remove top spacing"
+			},
+			{
+				"type": "checkbox",
+				"id": "disable_bottom_spacing",
+				"default": false,
+				"label": "Remove bottom spacing"
+			}
+    ],
+    "blocks": [
+      {
+        "type": "product",
+        "name": "Product",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product_handle",
+            "label": "Product"
+          },
+					{
+						"type": "header",
+						"content": "Position"
+					},
+					{
+						"type": "range",
+						"id": "x_position",
+						"min": 0,
+						"max": 100,
+						"step": 1,
+						"unit": "%",
+						"label": "Horizontal",
+						"default": 20,
+						"info": "Horizontal position of the hot spot"
+					},
+					{
+						"type": "range",
+						"id": "y_position",
+						"min": 0,
+						"max": 100,
+						"step": 1,
+						"unit": "%",
+						"label": "Vertical",
+						"default": 20,
+						"info": "Vertical position of the hot spot"
+					},
+					{
+						"type": "header",
+						"content": "Mobile position"
+					},
+					{
+						"type": "range",
+						"id": "x_position_mobile",
+						"min": 0,
+						"max": 100,
+						"step": 1,
+						"unit": "%",
+						"label": "Horizontal",
+						"default": 20,
+						"info": "Horizontal position of the hot spot on mobile screens"
+					},
+					{
+						"type": "range",
+						"id": "y_position_mobile",
+						"min": 0,
+						"max": 100,
+						"step": 1,
+						"unit": "%",
+						"label": "Vertical",
+						"default": 20,
+						"info": "Vertical position of the hot spot on mobile screens"
+					}
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Shop the look 50/50",
+				"blocks": [
+					{
+						"type": "product"
+					}
+				]
+      }
+    ]
+  }
+{% endschema %}

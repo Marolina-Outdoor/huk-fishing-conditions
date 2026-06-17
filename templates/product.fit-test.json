@@ -1,0 +1,508 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {}
+    },
+    "main-product": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "show_products_rating": false
+          }
+        },
+        "2b609eea-6cce-4efe-b447-c5560de1d797": {
+          "type": "label",
+          "settings": {}
+        },
+        "yotpo_product_reviews_ugc_star_rating_4z9zht": {
+          "type": "shopify://apps/yotpo-product-reviews/blocks/star-rating/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "meta_siblings_Y6VimQ": {
+          "type": "meta-siblings",
+          "disabled": true,
+          "settings": {
+            "text": "Color",
+            "siblings_product_list": "{{ product.metafields.custom.link_to_products.value.product_list.value }}",
+            "show_siblings_images": true,
+            "padding_bottom": 20
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "color_picker": true,
+            "variant_is_disabled": true,
+            "sizing_guide_variant": "Size",
+            "sizing_guide_text": "",
+            "sizing_guide_icon": "ruler",
+            "sizing_guide_page": "",
+            "variant_siblings_product_list": "{{ product.metafields.custom.link_to_products.value.product_list.value }}"
+          }
+        },
+        "quantity": {
+          "type": "quantity",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": false
+          }
+        },
+        "attentive_pop_up_D7mCnk": {
+          "type": "attentive_pop_up",
+          "settings": {
+            "enable_attentive": false,
+            "attentive-signup-id-desktop": "1100945",
+            "attentive-signup-id-mobile": "1100946",
+            "attentive_button_label": "Get 15% off your order*"
+          }
+        },
+        "inventory_level_Lmch3P": {
+          "type": "inventory_level",
+          "settings": {
+            "show_inventory_notice": "low",
+            "show_inventory_count": "low",
+            "inventory_notice_pulse": true,
+            "inventory_notice_bar": true,
+            "inventory_notice_threshold": 5,
+            "inventory_notice_base": 20
+          }
+        },
+        "icon_list_wiD8yt": {
+          "type": "icon_list",
+          "disabled": true,
+          "repeater": "{{ product.metafields.custom.link_to_products.value.feature_icons.value }}",
+          "settings": {
+            "icon_1_icon": "ruler",
+            "icon_1_image": "{{ block.repeater.icon.value }}",
+            "icon_1_text": "{{ block.repeater.icon_text.value }}",
+            "icon_2_icon": "box",
+            "icon_2_text": "",
+            "icon_3_icon": "star",
+            "icon_3_text": "",
+            "icon_4_icon": "washing",
+            "icon_4_text": ""
+          }
+        },
+        "icon_list_jYFYLb": {
+          "type": "icon_list",
+          "disabled": true,
+          "settings": {
+            "icon_1_icon": "shirt",
+            "icon_1_text": "100% Polyester",
+            "icon_2_icon": "none",
+            "icon_2_image": "shopify://shop_images/UPF.svg",
+            "icon_2_text": "50+ UPF Rating",
+            "icon_3_icon": "snowflake",
+            "icon_3_text": "Internal Cooling Element (I.C.E)",
+            "icon_4_icon": "none",
+            "icon_4_image": "shopify://shop_images/anti-microbial.svg",
+            "icon_4_text": "Anti-microbial"
+          }
+        },
+        "side_panel_3mJnDt": {
+          "type": "side_panel",
+          "disabled": true,
+          "settings": {
+            "side_panel_1_label": "Materials",
+            "side_panel_1_icon": "ruler",
+            "side_panel_1_page": "",
+            "side_panel_2_label": "Shipping & Returns",
+            "side_panel_2_icon": "box",
+            "side_panel_2_page": "shipping-policy",
+            "side_panel_3_label": "Care Guide",
+            "side_panel_3_icon": "washing",
+            "side_panel_3_page": ""
+          }
+        },
+        "fc6da228-45eb-4a6e-aa68-d6ec477bec34": {
+          "type": "complementary",
+          "disabled": true,
+          "settings": {
+            "block_heading": "Pairs well with",
+            "product_list_limit": 6
+          }
+        },
+        "custom_liquid_zVeKgr": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"frenzy_bundle_id\"></div>"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "2b609eea-6cce-4efe-b447-c5560de1d797",
+        "yotpo_product_reviews_ugc_star_rating_4z9zht",
+        "meta_siblings_Y6VimQ",
+        "variant_picker",
+        "quantity",
+        "buy_buttons",
+        "attentive_pop_up_D7mCnk",
+        "inventory_level_Lmch3P",
+        "icon_list_wiD8yt",
+        "icon_list_jYFYLb",
+        "side_panel_3mJnDt",
+        "fc6da228-45eb-4a6e-aa68-d6ec477bec34",
+        "custom_liquid_zVeKgr"
+      ],
+      "custom_css": [
+        ".product-card--label {color: #c62a32; border-color: #c62a32;}"
+      ],
+      "settings": {
+        "enable_sticky_add_to_cart": true,
+        "show_taxes_included": true,
+        "thumbnail_position": "left",
+        "media_aspect_ratio": "adapt",
+        "display_captions": true,
+        "lightbox": true,
+        "enable_video_looping": false
+      }
+    },
+    "16623877721f33fb14": {
+      "type": "spacer",
+      "settings": {
+        "spacer_mobile": 35,
+        "spacer_desktop": 90,
+        "border_separator": false,
+        "border_separator_full": false
+      }
+    },
+    "collapsible_content_WapUNQ": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_tab_8BDwLG": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Features",
+            "open": true,
+            "content": "<p>[feature_highlights]</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_b9gtFz": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Product Details & Materials",
+            "open": false,
+            "content": "<p>{{ product.metafields.custom.materials_care | metafield_tag }}</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_bnbw4G": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Size Chart",
+            "open": false,
+            "content": "",
+            "page": "{{ product.metafields.custom.size_chart.value }}"
+          }
+        },
+        "collapsible_tab_q89PJf": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Fit",
+            "open": false,
+            "content": "",
+            "page": ""
+          }
+        },
+        "collapsible_tab_QU3EaU": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Shipping & Returns",
+            "open": false,
+            "content": "<p>Orders are processed within 1-4 business days dependent on order volume. We offer free returns and exchanges on all products unless the item is marked final sale. Items must be returned / exchanged within 30 days of purchase and must be unworn with original tags attached. </p><p><a href=\"/pages/shipping-policy\" target=\"_blank\" title=\"Shipping\">Additional Shipping Details</a></p><p><a href=\"/pages/return-policy\" title=\"Returns/Exchanges\">Additional Returns & Exchanges Details</a></p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_tab_8BDwLG",
+        "collapsible_tab_b9gtFz",
+        "collapsible_tab_bnbw4G",
+        "collapsible_tab_q89PJf",
+        "collapsible_tab_QU3EaU"
+      ],
+      "custom_css": [
+        "{background-color: #f7f4ef;}"
+      ],
+      "settings": {
+        "id": "",
+        "heading": "Product Description",
+        "marker_style": "style1",
+        "description": "<p>[product_description]</p>",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_heading": "#0f4c81",
+        "marker_color": "#fd6262",
+        "color_text": "#17314b",
+        "color_links": "#3f72e5",
+        "color_border": "#dadce0",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false,
+        "section-reverse": false,
+        "section-reverse-mobile": false
+      }
+    },
+    "spacer_Wrj3Hg": {
+      "type": "spacer",
+      "settings": {
+        "spacer_mobile": 50,
+        "spacer_desktop": 50,
+        "border_separator": false,
+        "border_separator_full": false
+      }
+    },
+    "16623743398765981b": {
+      "type": "rich-text",
+      "blocks": {
+        "1662374339c00286b1-1": {
+          "type": "heading",
+          "settings": {
+            "text": "{{ product.metafields.custom.link_to_products.value.pdp_3_feature_highlights.value.main_heading.value }}",
+            "marker_style": "style1",
+            "size": "h1",
+            "marker_color": "#a9cbeb"
+          }
+        },
+        "1662374339c00286b1-2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>{{ product.metafields.custom.link_to_products.value.pdp_3_feature_highlights.value.main_description.value }}</p>",
+            "size": "text-size-regular"
+          }
+        }
+      },
+      "block_order": [
+        "1662374339c00286b1-1",
+        "1662374339c00286b1-2"
+      ],
+      "settings": {
+        "id": "",
+        "text_width": "xlarge",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_heading": "#0F4C81",
+        "color_text": "#0f4c81",
+        "color_links": "#151515",
+        "full_bleed_layout": false,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
+    },
+    "toggle_boxes_mRN3yT": {
+      "type": "toggle-boxes",
+      "blocks": {
+        "box_kxai7E": {
+          "type": "box",
+          "settings": {
+            "image": "{{ product.metafields.custom.link_to_products.value.pdp_3_feature_highlights.value.feature_1_image.value }}",
+            "image_link": "",
+            "open": false,
+            "heading": "<p>{{ product.metafields.custom.link_to_products.value.pdp_3_feature_highlights.value.feature_1_title.value }}</p>",
+            "text": "<p>{{ product.metafields.custom.link_to_products.value.pdp_3_feature_highlights.value.feature_1_text.value }}</p>"
+          }
+        },
+        "box_xbYNDy": {
+          "type": "box",
+          "settings": {
+            "image": "{{ product.metafields.custom.link_to_products.value.pdp_3_feature_highlights.value.feature_2_image.value }}",
+            "image_link": "",
+            "open": false,
+            "heading": "<p>{{ product.metafields.custom.link_to_products.value.pdp_3_feature_highlights.value.feature_2_title.value }}</p>",
+            "text": "<p>{{ product.metafields.custom.link_to_products.value.pdp_3_feature_highlights.value.feature_2_text.value }}</p>"
+          }
+        },
+        "box_LQKh79": {
+          "type": "box",
+          "settings": {
+            "image": "{{ product.metafields.custom.link_to_products.value.pdp_3_feature_highlights.value.feature_3_image.value }}",
+            "image_link": "",
+            "open": false,
+            "heading": "<p>{{ product.metafields.custom.link_to_products.value.pdp_3_feature_highlights.value.feature_3_title.value }}</p>",
+            "text": "<p>{{ product.metafields.custom.link_to_products.value.pdp_3_feature_highlights.value.feature_3_text.value }}</p>"
+          }
+        }
+      },
+      "block_order": [
+        "box_kxai7E",
+        "box_xbYNDy",
+        "box_LQKh79"
+      ],
+      "settings": {
+        "heading": "",
+        "marker_style": "style1",
+        "description": "",
+        "columns_desktop": 3,
+        "column_spacing": "large",
+        "image_ratio": "adapt",
+        "mobile_swipe": true,
+        "text_alignment": "left",
+        "color_bg": "#ffffff",
+        "color_heading": "#1a1c1d",
+        "marker_color": "#fd6262",
+        "color_text": "#2c2d2e",
+        "color_link": "#3f72e5",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "frenzy_recommendation_VcEH7Q": {
+      "type": "frenzy-recommendation",
+      "settings": {
+        "custom_liquid": "<div class=\"product-frenzy-section\"><div  class=\"frenzy_recommendation_section\"></div></div>"
+      }
+    },
+    "image_hotspots_CC8KEH": {
+      "type": "image-hotspots",
+      "blocks": {
+        "hotspot_RGTx33": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "Hood",
+            "description": "Hooded For Added Sun Protection",
+            "x_position": 44,
+            "y_position": 24,
+            "x_position_mobile": 58,
+            "y_position_mobile": 24
+          }
+        },
+        "hotspot_DA4G8F": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "Raglan Sleeve",
+            "description": "The raglan sleeve cut gives you full range of motion casting",
+            "x_position": 25,
+            "y_position": 49,
+            "x_position_mobile": 19,
+            "y_position_mobile": 56
+          }
+        },
+        "hotspot_JFtBeJ": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "Stealth Elastic Thumbloop",
+            "description": "Description text for this hotspot",
+            "x_position": 55,
+            "y_position": 78,
+            "x_position_mobile": 78,
+            "y_position_mobile": 78
+          }
+        }
+      },
+      "block_order": [
+        "hotspot_RGTx33",
+        "hotspot_DA4G8F",
+        "hotspot_JFtBeJ"
+      ],
+      "disabled": true,
+      "settings": {
+        "image": "shopify://shop_images/icon_hoodie_hotspot.jpg",
+        "image_mobile": "shopify://shop_images/icon_hoodie_hotspot_mobile.jpg",
+        "heading": "All New Features",
+        "marker_style": "style1",
+        "heading_size": "h3",
+        "description": "<p>Fully revamped for 2024 to deliver even more rod bending, pulse raising, and angler proven performance.</p>",
+        "badge_text": "ICON",
+        "image_position": "image_first",
+        "marker_color": "#a9cbeb",
+        "color_bg_badge": "#0e68b7",
+        "color_badge": "#ffffff",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "frenzy_recommendation_LTngBq": {
+      "type": "frenzy-recommendation",
+      "disabled": true,
+      "settings": {
+        "custom_liquid": "<div class=\"product-frenzy-section\"><div class=\"frenzy_cross_sell_carousel_section\"></div>"
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "description": "",
+        "mobile_swipe": true,
+        "product_limit": 4,
+        "columns_desktop": 4,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": false
+      }
+    },
+    "1713167682296f82bb": {
+      "type": "apps",
+      "blocks": {
+        "yotpo_product_reviews_ugc_reviews_8KQUj4": {
+          "type": "shopify://apps/yotpo-product-reviews/blocks/reviews/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{product}}"
+          }
+        }
+      },
+      "block_order": [
+        "yotpo_product_reviews_ugc_reviews_8KQUj4"
+      ],
+      "settings": {
+        "section_width": "grid",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "3585ec82c35408e6f3e8": {
+      "type": "apps",
+      "blocks": {
+        "b4cf18b1-e5af-4120-a58a-dea5e380db57": {
+          "type": "shopify://apps/yotpo-product-reviews/blocks/reviews/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{product}}"
+          }
+        }
+      },
+      "block_order": [
+        "b4cf18b1-e5af-4120-a58a-dea5e380db57"
+      ],
+      "settings": {
+        "section_width": "grid",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "main-product",
+    "16623877721f33fb14",
+    "collapsible_content_WapUNQ",
+    "spacer_Wrj3Hg",
+    "16623743398765981b",
+    "toggle_boxes_mRN3yT",
+    "frenzy_recommendation_VcEH7Q",
+    "image_hotspots_CC8KEH",
+    "frenzy_recommendation_LTngBq",
+    "product-recommendations",
+    "1713167682296f82bb",
+    "3585ec82c35408e6f3e8"
+  ]
+}

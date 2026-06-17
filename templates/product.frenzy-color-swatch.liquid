@@ -1,0 +1,160 @@
+{% layout none %}
+{%- if settings.show_products_swatches -%}
+  {%- liquid
+    assign product_metafield = product.metafields.custom.link_to_products
+    assign product_list = product_metafield.value.product_list
+    assign split_sale = product.metafields.custom.link_to_products.value.split_fp_and_sale.value
+    assign is_on_sale = false
+    for tag in product.tags
+      if tag contains 'sale-'
+        unless tag contains 'pos' or tag contains 'POS' or tag contains 'sale-xfory-2-'
+          assign is_on_sale = true
+        endunless
+      endif
+    endfor
+  -%}
+
+  {% comment %} if split sale set sib_products_array based on products matching on_sale of FP {% endcomment %}
+  {% if split_sale %}
+    {% capture sib_products %}
+		{% for sib_product in product_list.value %}
+			{% assign sib_product_on_sale = false %}
+			{% for tag in sib_product.tags %}
+				{% if tag contains 'sale-' %}
+					{% unless tag contains 'pos' or tag contains 'POS' or tag contains 'sale-xfory-2-' %}
+						{% assign sib_product_on_sale = true %}
+					{% endunless %}
+				{% endif %}
+			{% endfor %}
+			{% if is_on_sale == sib_product_on_sale %}
+				{{ sib_product.id }}{% unless forloop.last %},{% endunless %}
+			{% endif %}
+		{% endfor %}
+	{% endcapture %}
+
+  {% assign sib_products_array = sib_products | split: ','  %}
+
+  {% for product in sib_products_array %}
+      {% if forloop.last and product == blank %}
+        {% assign sib_products_array = sib_products |remove_last: ","  | split: ','  %}
+      {% endif %}
+  {% endfor %}
+
+    {% assign product_count = sib_products_array.size %}
+  {% else %}
+    {% assign product_count = product_list.value.count %}
+  {% endif %}
+
+
+  {%- if product_list -%}
+    <div class="frenzy_swatch-list" data-available="{{ product.available }}">
+      <div class="product-card-swatches--container no-js-hidden">
+      <div class="product-card-swatches">
+        {% assign swatch_count = 0 %}
+        {% for sib_product in product_list.value limit: 50 %}
+          {% assign is_matching_sale_or_fp = false %}
+          {% assign current_product_id = sib_product.id | strip %}
+          {% if split_sale %}
+            {% for id in sib_products_array %}
+              {% assign stripped_id = id | strip %}
+              {% if current_product_id == stripped_id %}
+                {% assign is_matching_sale_or_fp = true %}
+              {% endif %}
+            {% endfor %}
+          {% else %}
+            {% assign is_matching_sale_or_fp = true %}
+          {% endif %}
+
+          {% unless swatch_count >= 5 %}
+            {% if is_matching_sale_or_fp == true %}
+              {% assign swatch_count = swatch_count | plus: 1 %}
+              {%- for option in sib_product.options_with_values -%}
+                {% assign option_name = option.name | downcase | escape %}
+                {% if option_name contains 'color'
+                  or option_name contains 'colour'
+                  or option_name contains 'couleur'
+                  or option_name contains 'farbe'
+                %}
+                  {%- for value in option.values -%}
+                    {% assign color_name = option.values[0] %}
+                    {% assign print_color_variant_name_handleized = color_name | handleize %}
+                    {% assign bg_value = color_name | file_url %}
+                    {% assign active = '' %}
+                    {% assign variant_image = blank %}
+                    {% assign variant_url = '' %}
+                    {% assign srcset = '' %}
+
+                    {% for variant in sib_product.variants %}
+                      {% if variant.title contains color_name %}
+                        {% if product.options_with_values[0].values[0] == color_name%}
+                          {% assign active = 'active' %}
+                        {% endif %}
+                        {% if sib_product.images %}
+                          {% assign variant_image = sib_product.images[0] %}
+                        {% endif %}
+                        {% assign variant_url = variant.url %}
+                      {% endif %}
+                    {% endfor %}
+
+                    {% assign image_sizes = sizes | split: ',' %}
+                    {%- capture srcset -%}
+                      {%- if variant_image != blank -%}
+                        {%- for size in image_sizes -%}
+                          {%- assign small_size = '20x' -%}
+                          {%- assign size_array = size | split: "x" -%}
+                          {%- assign size_x = size_array[0] | append: 'x' -%}
+                          {% if size_array[1] != "0" %}
+                          {%- assign size_x = size -%}
+                          {%- assign small_x = size_array[1] | times: 20 | divided_by: size_array[0] | floor -%}
+                          {%- assign small_size = small_size | append: small_x -%}
+                          {% endif %}
+                          {{- variant_image.src | img_url: size_x, crop: 'top' }} {{ size_array[0] }}w,
+                        {%- endfor -%}
+                      {%- endif -%}
+									  {%- endcapture -%}
+                    {% assign l = srcset | size | minus: 1 %}
+                    {% for value in option.values %}
+                      <div
+                        class="product-card-swatch {{ active }}"
+                        data-splitsale="{{ is_matching_sale_or_fp }}"
+                        style="
+                          --option-color: {{ color_name | downcase | escape }};
+                          {%- if print_color_variant_name_handleized -%} --option-color-image: url('{{ print_color_variant_name_handleized | append: '.png' | file_img_url: '37.5x37.5' }}');{%- endif -%}
+                        "
+                        data-srcset="{{- srcset | slice: 0, l | strip_newlines -}}"
+                        data-href="{{ variant_url }}"
+                        data-product="{{ sib_product | json | replace: '"', '&quot;' }}"
+                      >
+                        <span class="visually-hidden" for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
+                          {{ value }}
+                        </span>
+                      </div>
+                    {% endfor %}
+                  {%- endfor -%}
+                {% endif %}
+              {%- endfor -%}
+            {% endif %}
+          {% endunless %}
+        {%- endfor -%}
+        {% if product_count > 5 %}
+          {% assign difference = product_count | minus: 5 %}
+        {% else %}
+          {% assign difference = 0 %}
+        {% endif %}
+        {% if difference > 0 %}
+          <div class="additionalOpp">+ {{ difference }} more</div>
+        {% endif %}
+      </div>
+      {% if product_count > 1 %}
+        <div class="product-card-swatches--title">
+          {{ 'products.product.available.other' | t: count: product_count }}
+        </div>
+      {% else %}
+        <div class="product-card-swatches--title">
+          {{ 'products.product.available.one' | t: count: product_count }}
+        </div>
+      {% endif %}
+    </div>
+    </div>
+  {%- endif -%}
+{%- endif -%}

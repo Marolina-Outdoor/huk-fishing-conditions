@@ -1,0 +1,247 @@
+{{- 'timeline.css' | asset_url | stylesheet_tag -}}
+    {%- liquid
+        assign subheading_text = section.settings.subheading-text
+        assign main_heading_text = section.settings.main-heading-text
+        
+        assign tagline_text = section.settings.tagline-text
+        assign description_text = section.settings.description-text
+        assign intro_text = section.settings.intro-text
+        assign intro_description = section.settings.intro-description
+        assign cta_label = section.settings.cta_label
+        assign cta_link = section.settings.cta_link
+    -%}
+{% style  %} 
+.timeline::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('{{ section.settings.bg_image | image_url }}');
+    background-size: contain;
+    background-position: Top;
+    background-repeat: repeat;
+    opacity: 0.25;
+    z-index: -2;
+}
+.timeline::after{ content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #F7F4EF 6.58%, rgba(253, 253, 252, 0) 34.18%), linear-gradient(0deg, #F7F4EF 12.8%, rgba(253, 253, 252, 0) 20.17%);
+    z-index: -2;
+}
+{% endstyle %}
+
+<section class="huk-timeline">
+    <div class="timeline">
+      {% comment %} <img data-src="{{ section.settings.bg_image | image_url }}" class="lazyload {{ class }}{% unless settings.lazy_loading %} no-blur{% endunless %}" width="{{ section.settings.bg_image.src.width }}" height="{{ section.settings.bg_image.src.height }}" alt="{{ section.settings.bg_image.alt }}" /> {% endcomment %}
+
+        <div class="row header-wrapper">
+            <h2 class="section-title">{{ subheading_text }}</h2>
+            <h2 class="main-title">{{ main_heading_text }}</h2>
+            <h2 class="tagline">{{ tagline_text }}</h2>
+            <div class="description">
+                <p>{{ description_text }}</p>
+            </div>
+            <div class="timeline-intro">
+              {% render 'svg-icons' with 'timeline-intro' %}
+                <h4 class="intro-title">{{intro_text}}</h4>
+                <div class="intro-content">{{intro_description}}</div>
+            </div>
+        </div>
+      <div class="timeline-body">
+        {% render 'svg-icons' with 'timeline-track' %}
+        <div class="milestone-wrapper" data-milestone-wrapper>
+            {%- for block in section.blocks -%}
+                {%- render 'timeline-milestone', block: block -%}
+            {% endfor %}
+        </div>
+        </div>
+        <a href="{{cta_link}}" class="button">{{cta_label}}</a>
+    </div>
+</section>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var milestoneWrapper = document.querySelector('.milestone-wrapper[data-milestone-wrapper]');
+    
+    function initializeFlickity() {
+      if (window.innerWidth < 1068) {
+
+        let milestoneFlkty = new Flickity(milestoneWrapper, {
+        wrapAround: false,
+        contain: true,
+        cellAlign: 'left',   
+        adaptiveHeight: true     
+        });
+      }
+    }
+
+    function destroyFlickity() {
+      if (window.innerWidth >= 1068 && milestoneWrapper.classList.contains('flickity-enabled')) {
+        milestoneWrapper
+        let milestoneFlkty = Flickity.data(milestoneWrapper);
+        milestoneFlkty.destroy();
+      }
+    }
+
+    initializeFlickity();
+
+    window.addEventListener('resize', function() {
+      if (window.innerWidth < 1068 && !milestoneWrapper.classList.contains('flickity-enabled')) {
+        initializeFlickity();
+      } else if (window.innerWidth >= 1068 && milestoneWrapper.classList.contains('flickity-enabled')) {
+        destroyFlickity();
+      }
+    });
+    
+  });
+</script>
+
+
+
+{% schema %}
+{
+  "name": "Timeline",
+  "class": "section-timeline",
+  "settings": [
+    {
+    "type": "image_picker",
+    "id": "bg_image",
+    "label": "Background Image"
+    },
+    {
+    "type": "header",
+    "content": "Subheading"
+    },
+    {
+    "type": "text",
+    "id": "subheading-text",
+    "label": "Text",
+    "default": "Subheading for this section"
+    },
+    {
+    "type": "header",
+    "content": "Main Heading"
+    },
+    {
+    "type": "text",
+    "id": "main-heading-text",
+    "label": "Text",
+    "default": "Talk about your brand",
+    "info": "Wrap your text between | to add animated markers. For example: Animated |marker| will underline marker text."
+    },
+    {
+    "type": "header",
+    "content": "Tagline"
+    },
+    {
+    "type": "text",
+    "id": "tagline-text",
+    "label": "Text",
+    "default": "Tagline for this section"
+    },
+    {
+    "type": "header",
+    "content": "Description"
+    },
+    {
+        "type": "richtext",
+        "id": "description-text",
+        "label": "description",
+        "default": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+    },
+    {
+    "type": "header",
+    "content": "Timeline Intro"
+    },
+    {
+    "type": "text",
+    "id": "intro-text",
+    "label": "Text",
+    "default": "Timeline Intro title"
+    },
+    {
+        "type": "richtext",
+        "id": "intro-description",
+        "label": "Timeline Intro description",
+        "default": "<p>Everything was made of cotton or fit like a trash bag and people got sweaty and sunburned</p>"
+    },
+    {
+    "type": "header",
+    "content": "CTA"
+    },
+    {
+        "id": "cta_label",
+        "type": "text",
+        "label": "Label",
+        "default": "Learn More",
+        "info": "Leave the label blank to hide the button."
+    },
+    {
+        "id": "cta_link",
+        "type": "url",
+        "label": "Link"
+    }
+        
+  ],
+  "blocks": [
+    {
+    "type": "milestone",
+    "name": "Milestone",
+    "settings": [
+                {
+                "type": "image_picker",
+                "id": "milestone_image",
+                "label": "Milestone Image"
+                },
+                {
+                "type": "radio",
+                "id": "milestone_image_alignment",
+                "label": "Image alignment",
+                "options": [
+                    {
+                    "value": "left",
+                    "label": "Left"
+                    },
+                    {
+                    "value": "right",
+                    "label": "right"
+                    }
+                ],
+                "default": "left"
+                },
+                {
+                "type": "text",
+                "id": "milestone_title",
+                "label": "Milestone Title",
+                "default": "Milestone Title"
+                },
+                {
+                "type": "textarea",
+                "id": "milestone_description",
+                "label": "Milestone Description",
+                "default": "This is a brief description of the milestone."
+                },
+                {
+                "type": "text",
+                "id": "milestone_date",
+                "label": "Milestone Date",
+                "default": "1990"
+                }
+            ]
+        }
+
+
+  ],
+  "presets": [
+    {
+      "name": "Timeline",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}

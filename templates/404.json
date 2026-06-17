@@ -1,0 +1,91 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "rich_text_KahDXi": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_GtNpR9": {
+          "type": "heading",
+          "settings": {
+            "text": "Huk'd the Wrong Page?",
+            "marker_style": "style1",
+            "size": "h2",
+            "marker_color": "#FD6262"
+          }
+        },
+        "text_8dUWbf": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Looks like the fish got away, and so did the page you're looking for. Don't worry, we've got plenty of other great catches for you!<\/p>",
+            "size": "text-size-regular"
+          }
+        },
+        "button_Nd6nDJ": {
+          "type": "button",
+          "settings": {
+            "link_label": "Back to Home",
+            "link": "\/"
+          }
+        }
+      },
+      "block_order": [
+        "heading_GtNpR9",
+        "text_8dUWbf",
+        "button_Nd6nDJ"
+      ],
+      "custom_css": [
+        ".button {background-color: #0581ff;}"
+      ],
+      "settings": {
+        "id": "",
+        "text_width": "medium",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "#f7f4ef",
+        "color_heading": "#0E4174",
+        "color_text": "#17314b",
+        "color_links": "#0581ff",
+        "full_bleed_layout": true,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "featured_collection_FjC3AX": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Shop Best Sellers",
+        "marker_style": "style1",
+        "description": "",
+        "collection": "new-arrivals-best-sellers",
+        "display_type": "carousel",
+        "product_limit": 12,
+        "columns_desktop": 5,
+        "show_view_all": true,
+        "mobile_swipe": true,
+        "show_progress_bar": true,
+        "marker_color": "#FD6262",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich_text_KahDXi",
+    "featured_collection_FjC3AX"
+  ]
+}

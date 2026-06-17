@@ -1,0 +1,93 @@
+<style>
+.seo-site-nav__link {
+  list-style: none;
+}
+.seo-site-nav__child-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.seo-site-nav__child-links.reduced-spacing-columns-wrap {
+  justify-content: flex-start;
+}
+
+.seo-site-nav__grandchild-column.reduced-spacing-columns {
+  flex-basis: 23%;
+}
+
+@media screen and (max-width: 769px) {
+  .seo-site-nav__child-links {
+    display: block;
+  }
+}
+</style>
+
+<div class="page-width seo-site-nav">
+    {% for link in section.settings.link_list.links %}
+    <ul class="seo-site-nav__main-links">
+      <li class="seo-site-nav__link parent-link"><a href="{{link.url}}">{{ link.title }}</a></li>
+    </ul>
+      {% if link.links !=blank %}
+        {% assign childlinkArrSize = link.links | size %}
+        <ul class="seo-site-nav__child-links{% if childlinkArrSize <= 3 %} reduced-spacing-columns-wrap{% endif %}">
+        {% for childlink in link.links %}
+            <div class="seo-site-nav__grandchild-column {% if childlinkArrSize <= 3 %} reduced-spacing-columns{% endif %}">
+            <li class="seo-site-nav__link link__child-link"><a href="{{ childlink.url }}">{{ childlink.title }}</a></li>
+              {% if childlink.links != blank %}
+                {% for grandchildlink in childlink.links %}
+                    <li class="seo-site-nav__link link__grandchild-link"><a href="{{ grandchildlink.url }}">{{ grandchildlink.title }}</a></li>
+                {% endfor %}
+              {% endif %}
+            </div>   
+        {% endfor %}
+        </ul>
+      {% endif %}
+      {% render 'include-divider' %}
+    {% endfor %}
+  </div>
+  
+  {% schema %}
+    {
+      "name": "Seo Site Nav",
+      "tag": "section",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "link_list",
+          "label": "Menu"
+        },
+        {
+        "type": "range",
+        "id": "divider_spacing",
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "unit": "em",
+        "label": "Desktop Space",
+        "default": 2
+      },
+      {
+        "type": "range",
+        "id": "divider_spacing_mobile",
+        "min": 0,
+        "max": 20,
+        "step": 1,
+        "unit": "em",
+        "label": "Mobile Space",
+        "default": 2
+      },
+      {
+        "type": "checkbox",
+        "id": "divider_border",
+        "label": "Show border",
+        "default": false
+      }
+      ],
+      "presets": [
+        {
+          "name": "Seo Site Nav"
+        }
+      ]
+    }
+  {% endschema %}
+  

@@ -1,0 +1,52 @@
+.yotpo-carousel .glide__arrows .yotpo-carousel-arrow {
+  background-color: #0581FF;
+  border: none;
+}
+
+.yotpo-carousel .glide__arrows .yotpo-carousel-arrow svg {
+  stroke: white;
+}
+
+.yotpo-carousel .glide__arrows .yotpo-carousel-arrow svg path{
+  fill: white;
+}
+
+.reviews-carousel-card .review-title {
+  font-family: Styrene A Web, sans-serif !important;
+  font-weight: 500 !important;
+}
+
+.reviews-carousel-card span.reviewer-display-name {
+  font-family: Styrene A Web, sans-serif !important;
+  text-transform: uppercase;
+  color: #0581FF !important;
+  font-weight: 500 !important;
+}
+
+.reviews-carousel-card-container {
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+.reviews-carousel-card .review-content {
+  font-family: Styrene A Web, sans-serif !important;
+}
+
+.reviews-carousel-card .reviewer-status-text {
+  font-size: 10px !important;
+  color: #bec1c7 !important;
+  font-family: Styrene A Web, sans-serif !important;
+}
+
+.yotpo-star-ratings div {
+  gap: 5px;
+}
+
+.yotpo-star-ratings svg {
+  height: 15px;
+}
+
+.product-information .shopify-app-block {
+  width: 100%;
+  margin-bottom: 20px;
+}

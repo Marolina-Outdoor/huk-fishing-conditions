@@ -1,0 +1,1015 @@
+<script>
+  function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw new Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw new Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+  function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+  function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+    var elements$4 = {};
+    var swatch_product_hanlde = '';
+    var ProductHTML = '';
+    var f_request_id = '';
+    var f_config_id = '';
+    var collectionSwatches = {
+        container: '[data-collection-swatches]',
+        products: '[data-product-handle]',
+        swatchGroup: '[data-collection-swatch-group]',
+        swatches: '[data-collection-swatch-product]'
+    };
+
+    var product_count = 0;
+    function updateCartDrawer() {
+        const sections = ['cart-drawer', 'cart-icon-bubble'];
+        fetch(`${window.location.pathname}?sections=${sections.join(',')}`)
+            .then(res => res.json())
+            .then(parsedState => {
+            sections.forEach(section => {
+                const container = document.getElementById(section);
+                if (container && parsedState.sections[section]) {
+                container.innerHTML = parsedState.sections[section];
+                }
+            });
+            document.dispatchEvent(new CustomEvent('cart:refresh'));
+            })
+            .catch(err => console.error('refreshCartDrawer failed:', err));
+
+        }
+    window.frenzyCartCallBack = function(response){
+          document.querySelector('#cart-drawer-toggle').click();
+          updateCartDrawer();
+          {% comment %} var t= new CartDrawer();
+          t.refresh(); {% endcomment %}
+          {% comment %} frenzyAsyncItems(); {% endcomment %}
+      }
+    window.FrenzyProductGridChangeCallBack = async function(html, data){
+        setTimeout(() => {
+            frenzySelectOptionUpdate(data)
+        }, 100);
+        var product_tags =  data.org_product_tags;
+        var has_custom_label = false;
+        var theme_metafields = '';
+        var tag_starts_with = '';
+        var sale_discount = '';
+        var custom_label = '';
+        var on_sale = false
+        var price = data.org_price;
+        var compare_price = data.org_msrp_price;
+        var has_new_label = false;
+        var org_stock_available = data.org_stock_available;
+        if(compare_price != null){
+            if(compare_price > price){
+                on_sale =  true;
+            }
+        }
+        if(theme_metafields != ''){
+            if(theme_metafields.label && theme_metafields.label != blank){
+                has_custom_label = true;
+                custom_label = theme_metafields.value;
+            }
+        }else{
+            if(product_tags.includes('new')){
+                product_tags.forEach(function(tag,key){
+                    if(tag === 'new'){
+                        has_new_label = true;
+                        return false;
+                    }
+                });
+            }else{
+                product_tags.forEach(function(tag,key){
+                    if(tag.includes('_label_')){
+                        tag_starts_with = tag.slice(0,1);
+                        if(tag_starts_with == '_'){
+                            has_custom_label = true;
+                            custom_label = tag.replace("_label_", "");
+                        }
+                    }
+                })
+            }
+
+            var sale_online_discount = 0;
+            var sale_xfory_discount = 0;
+            var can_apply_discount = false;
+            product_tags.forEach(function(tag,key){
+                if((tag.includes('sale-online-') || tag.includes('sale-xfory-1-')) &&
+                    !tag.includes('pos-sale-xfory-')){
+                    if(tag.includes('sale-xfory-')){
+                        sale_xfory_discount = parseFloat(tag.replace("online-sale-xfory-1-", "").replace("sale-xfory-1-", "")) / 100;
+                        can_apply_discount = true;
+                    }
+
+                    if(tag.includes('sale-online-')){
+                        sale_online_discount = parseFloat(tag.replace("sale-online-", ""));
+                        can_apply_discount = true;
+                    }
+                }
+            });
+
+            var discount_price = 0;
+            if(sale_online_discount != 0 && sale_xfory_discount != 0){
+                discount_price = sale_xfory_discount - (sale_xfory_discount * (sale_online_discount / 100.0));
+                discount_price = price - discount_price;
+                sale_discount = discount_price / price * 100.0;
+            }else if(sale_online_discount != 0 && sale_xfory_discount == 0){
+                sale_discount = sale_online_discount;
+            }else if(sale_online_discount == 0 && sale_xfory_discount != 0){
+                discount_price = sale_xfory_discount;
+                discount_price = price - discount_price;
+                sale_discount = discount_price / price * 100.0;
+            }
+            if(can_apply_discount){
+                var sale_price = html.querySelector('.frenzy_product_price_sale').innerHTML;
+
+                html.querySelector('.frenzy_product_price_compare').innerHTML = sale_price;
+                html.querySelector('.frenzy_product_price_sale').innerHTML = window.formatMoney(price * 100 - price * sale_discount, "${" + "{amount}" + "}");
+
+                var sale_message = 'Save ' + Math.round(sale_discount) + '%';
+
+                if (html.querySelector('.frenzy-price-sales-message')) {
+                    html.querySelector('.frenzy-price-sales-message').innerHTML = sale_message;
+                } else {
+                    var priceSalesMessageElement = document.createElement('span');
+                    priceSalesMessageElement.classList.add('frenzy-price-sales-message');
+                    priceSalesMessageElement.innerHTML = sale_message;
+                    html.querySelector('.frenzy_product_price_meta').appendChild(priceSalesMessageElement);
+                }
+            }
+        }
+
+        var tag = '';
+        var url_En_Ca = window.location.href;
+        var customer_type = null
+      
+        {% if customer %}
+            var customerData = {
+                tags: {{ customer.tags | json }}
+            };
+        {% else %}
+            var customerData = null;
+        {% endif %}
+
+        if (customerData) {
+            if (customerData.tags.includes('b2b')) {
+                customer_type = 'b2b';
+                console.log(customer_type)
+            }
+        } 
+
+        if(has_custom_label){
+            if (customer_type != 'b2b') {
+                if(!url_En_Ca.includes('en-ca') ){
+                    tag += '<div class="grid-product__tag grid-product__tag--custom">'+custom_label+'</div>';
+                }
+            } 
+        }else{
+
+            if(org_stock_available != true && org_stock_available != "True" && org_stock_available != "TRUE" && org_stock_available != "true"){
+                tag += '<div class="grid-product__tag grid-product__tag--sold-out">Sold out</div>';
+            }
+            if(on_sale && org_stock_available){
+                tag += '<div class="grid-product__tag grid-product__tag--sale">SALE</div>';
+            }
+            if(has_new_label){
+                tag += '<div class="grid-product__tag grid-product__tag--new">NEW</div>';
+            }
+            if (sale_discount) {
+                tag += '<div class="grid-product__tag grid-product__tag--sale">SALE</div>';
+            }
+        }
+     html.querySelector('.frenzy_product_tags').innerHTML = tag;
+
+        let data_id = html.querySelector('.frenzy_swatch').getAttribute('data-id') + "_" + product_count.toString();
+        html.querySelector('.frenzy_swatch').setAttribute('data-id', data_id);
+        product_count += 1;
+
+        ProductHTML =  html;
+        swatch_product_hanlde = data.org_prod_url;
+        swatch_product_hanlde =  swatch_product_hanlde.split('?');
+        swatch_product_hanlde = swatch_product_hanlde[0];
+        // setElements$4();
+        // _createSwatchElements(html,data.sku);
+            // createSwatchElementFrenzy(html,data.sku);
+            // if(!swatch_product_hanlde){frenzySwatchContent(html, data_id,data.handle);}
+        // if (!swatch_product_hanlde){new_frenzySwatchContent(data.handle, html);}
+
+        // # code to make a fecth reqest and integrate the Product Swatches
+    
+        var frenzy_product_grid_swatch = window.location.origin+Shopify.routes.root+"products/" + swatch_product_hanlde + "?view=frenzy-color-swatch";
+        const response = await fetch(frenzy_product_grid_swatch, {
+            method: "GET",
+        });
+        const new_result = await response.text();
+        if(new_result){
+          const parser = new DOMParser();
+          const new_HTML = parser.parseFromString(new_result, "text/html");
+          var shopify_available = new_HTML.querySelector('.frenzy_swatch-list')?.getAttribute('data-available');
+            document.querySelectorAll('.frenzy_product_item[data-id="'+data.sku+'"]').forEach(function(this_click){
+                if(new_HTML.querySelector('.frenzy_swatch-list')){
+                  this_click.querySelector('.frenzy_swatch').innerHTML = new_HTML.querySelector('.frenzy_swatch-list').innerHTML;
+                }
+                this_click.querySelectorAll('.product-card-swatches').forEach(function(targetElement) {
+                    attachSwatchClick(targetElement)
+                });
+                if (shopify_available === 'false') {
+                    var tagsEl = this_click.querySelector('.frenzy_product_tags');
+                    if (tagsEl && !tagsEl.innerHTML.includes('grid-product__tag--sold-out')) {
+                        tagsEl.innerHTML = '<div class="grid-product__tag grid-product__tag--sold-out">Sold out</div>' + tagsEl.innerHTML;
+                    }
+                }
+            })
+        }
+    }
+
+    function attachSwatchClick(swatches) {
+        const swatchElements = swatches.querySelectorAll('.product-card-swatch');
+        
+        swatchElements.forEach(swatch => {
+            if (!swatch.getAttribute('data-click-handler-added')) {
+                swatch.setAttribute('data-click-handler-added', 'true');
+
+                swatch.addEventListener('click', function() {
+                    // Remove active from all swatches
+                    const parent = swatch.closest('.product-card-swatches');
+
+                    const siblingSwatches = parent.querySelectorAll('.product-card-swatch');
+
+                    siblingSwatches.forEach((element) => {
+                    element.classList.remove('active');
+                    });
+
+                    const jsonString = swatch.getAttribute('data-product');
+                    const format = window.theme.settings.money_with_currency_format || "${{amount}}";
+
+                    try {
+                        const productData = JSON.parse(jsonString);
+
+                        const html = swatch.closest('.frenzy_product_item');
+
+                        if (!html) throw new Error('Product item not found');
+
+                        const updateAttribute = (selector, attr, value) => {
+                            const element = html.querySelector(selector);
+                            if (element) element.setAttribute(attr, value);
+                        };
+
+                        const updateImage = (selector, src) => {
+                            const img = html.querySelector(selector);
+                            if (img) {
+                            img.src = src;
+                            img.setAttribute('srcset', src);
+                            img.dataset.srcset = src;
+                            }
+                        };
+
+                        // Update the product link
+                        updateAttribute("a.product_link", 'href', Shopify.routes.root + 'products/' + productData.handle);
+                        updateAttribute("a.product_link", 'data-sku', `${productData.id}_${productData.variants[0].id}`);
+
+                        // Update images
+                        updateImage("img.frenzy_img_first", productData.images[0]);
+                        updateImage("img.frenzy_img_second", productData.images[1]);
+
+                        // Update sizes
+                        const availableVariants = productData.variants.filter(variant => variant.inventory_quantity > 0);
+                        const buttonContainer = html.querySelector(".frenzy_product_option");
+                        buttonContainer.innerHTML = '';
+
+                        availableVariants.forEach(variant => {
+                            const button = document.createElement('button');
+                            button.type = 'button';
+                            button.setAttribute('onclick', 'frenzyQuickAddEvent(this)');
+                            button.setAttribute('data-price', money_format_Frenzy(variant.price, format).replace("$", ''));
+                            button.setAttribute('data-name', '-');
+                            button.setAttribute('data-sku', `${productData.id}_${variant.id}`);
+                            button.textContent = variant.option2;
+                            buttonContainer.appendChild(button);
+                        });
+
+                        // Update price
+                        updateAttribute(".frenzy_product_price_sale .money", 'innerHTML', money_format_Frenzy(productData.price, format));
+
+                        // TAGS
+                        let tagHTML = '';
+                        const product_tags = productData.tags;
+                        const compare_price = productData.compare_at_price;
+                        const price = productData.price;
+                        const org_stock_available = productData.available;
+                        let on_sale = false;
+
+                        if (compare_price && compare_price > price) {
+                            on_sale = true;
+                        }
+
+                        const has_new_label = product_tags.includes('new');
+                        const custom_label_tag = product_tags.find(tag => tag.startsWith('_label_'));
+                        const custom_label = custom_label_tag ? custom_label_tag.replace('_label_', '') : '';
+
+                        if (custom_label) {
+                            tagHTML += `<div class="grid-product__tag grid-product__tag--custom">${custom_label}</div>`;
+                        } else {
+                            if (!org_stock_available) {
+                            tagHTML += '<div class="grid-product__tag grid-product__tag--sold-out">Sold out</div>';
+                            }
+                            if (on_sale) {
+                            tagHTML += '<div class="grid-product__tag grid-product__tag--sale">SALE</div>';
+                            }
+                            if (has_new_label) {
+                            tagHTML += '<div class="grid-product__tag grid-product__tag--new">NEW</div>';
+                            }
+                        }
+
+                        html.querySelector('.frenzy_product_tags').innerHTML = tagHTML;
+                        
+                        // Add active class
+                        swatch.classList.add('active');
+
+                    } catch (error) {
+                    console.error('Error processing product data:', error);
+                    }
+                });
+            }
+        });
+    }
+
+
+
+
+    function new_frenzySwatchContent(product_handle,html){
+        const QucikviewString = "?view=master_handle_metafields";
+        const frenzyQVHUrl = frenzy_root_url + Shopify.routes.root + "products/" + product_handle + QucikviewString;
+          if (window.XMLHttpRequest) {
+              xmlhttp = new XMLHttpRequest();
+          } else {
+              xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+          }
+          xmlhttp.onreadystatechange = function () {
+              if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                  // return xmlhttp.responseText;
+                html.querySelector('.frenzy_swatch').innerHTML = xmlhttp.responseText;
+              }
+          };
+          xmlhttp.open("GET", frenzyQVHUrl, false);
+          xmlhttp.send();
+    }
+
+    var maxSwatches = -0;
+
+    if (window.location.pathname.indexOf('/collections') > -1 || window.location.pathname.indexOf('/product') > -1) {
+    maxSwatches = -5;
+    } else if (window.location.pathname.indexOf('/search') > -1 || window.location.pathname === '/' || window.location.pathname.indexOf('/pages') > -1) {
+    maxSwatches = -3;
+    }
+
+    window.frenzAfterApiCallBack = function() {
+        if (__st.p === 'searchresults') {
+          if(document.querySelector('.section-header__title')){
+            document.querySelector('.section-header__title').innerHTML = document.querySelector('.frenzy_search_title').innerHTML;
+          }
+        }
+    };
+    // window.frenzAfterApiCallBack =  async function(){
+
+    //   setTimeout(function(){
+    //    document.querySelectorAll('.frenzy_grid').forEach(function(thisGrid){
+    //      var product_handle = thisGrid.querySelector('figure a').getAttribute('href');
+    //      product_handle =  product_handle.split('?');
+    //      product_handle = product_handle[0];
+    //      var sku = thisGrid.querySelector('figure a').getAttribute('data-sku');
+    //      frenzySwatchContent(thisGrid,sku,product_handle);
+    //    });
+    //   }, 3000);
+    // }
+
+    function setElements$4() {
+        elements$4.container = document.querySelectorAll(collectionSwatches.container);
+        elements$4.swatchGroup = document.querySelectorAll(collectionSwatches.swatchGroup);
+        elements$4.products = document.querySelectorAll(collectionSwatches.products);
+    }
+    function frenzySwatchContent(html,sku,handle){
+
+    var masterHandleMetafieldUrl = "https://www.hukgear.com/products/".concat(handle, "?view=master_handle_metafields");
+    var getMasterData, _getMasterData;
+    _getMasterData = function _getMasterData3(){
+        _getMasterData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(product, masterHandleMetafieldUrl) {
+            var response;
+
+            return regeneratorRuntime.wrap(function _callee2$(_context2) {
+            while (1) {
+                    switch (_context2.prev = _context2.next) {
+                    case 0:
+                        _context2.prev = 0;
+                        _context2.next = 3;
+                        return axios.get(masterHandleMetafieldUrl);
+
+                    case 3:
+
+                        response = _context2.sent;
+                        FrenzyprintSwatchData(html,sku, response.data.product_master_handle, response.data.master_color_group);
+                        _context2.next = 10;
+                        break;
+
+                    case 7:
+                        _context2.prev = 7;
+                        _context2.t0 = _context2["catch"](0);
+                        console.info("Check product setup. Master Handle Metafield missing... Reference 404s in console\n for missing data. ".concat(_context2.t0));
+
+                    case 10:
+                    case "end":
+                        return _context2.stop();
+                    }
+            }
+            }, _callee2, null, [[0, 7]]);
+        }));
+    return _getMasterData.apply(this, arguments);
+    }
+    getMasterData = function _getMasterData2(_x4, _x5) {
+    return _getMasterData.apply(this, arguments);
+    };
+    getMasterData(sku, masterHandleMetafieldUrl);
+    }
+    function FrenzyprintSwatchData(html,sku,product_master_handle,master_color_group){
+
+        var element =  document.querySelectorAll('.frenzy_swatch[data-id="'+sku+'"]');
+
+        // var element1 = html.querySelectorAll('.frenzy_swatch[data-id="'+sku+'"]');
+        // console.log('element', element, element.length);
+        // console.log('element1', element1, element1.length);
+
+        var productHandles = '';
+        var productHandlesLength = '';
+        let existing = '';
+        element.forEach(function(this_click){
+
+
+            this_click.setAttribute('data-master-handle', product_master_handle);
+            this_click.setAttribute('data-collection-swatch-group', master_color_group);
+            this_click.setAttribute('data-status', 0);
+            productHandles = this_click.dataset.collectionSwatchGroup.split(',');
+            productHandlesLength = productHandles.length;
+
+
+        });
+
+        //console.log('productHandles', productHandles)
+        productHandles.slice(maxSwatches).forEach(function (handle) {
+            var productURL = "https://hukgear.myshopify.com/products/".concat(handle, ".json");
+        // console.log('handle', handle);
+            printProductData();
+            function printProductData() {
+                return _printProductData.apply(this, arguments);
+            }
+            function _printProductData() {
+                _printProductData = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+                var data, productData, productColor, swatchFile, swatchURL, productImgOne, productImgTwo, croppedProductImgOne, croppedProductImgTwo, cropProductImages, isProductImgTwo;
+                return regeneratorRuntime.wrap(function _callee$(_context) {
+                    while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                        _context.prev = 0;
+                        _context.next = 3;
+                        return axios.get(productURL);
+
+                        case 3:
+
+                        data = _context.sent;
+                        productData = data.data;
+                        productColor = productData.product.options[0].values[0];
+                        swatchFile = handleize(productData.product.options[0].values[0]);
+                        swatchURL = "https://cdn.shopify.com/s/files/1/0668/8981/files/".concat(swatchFile, "_30x30.png");
+                        productImgOne = productData.product.images[0].src;
+                        productImgTwo = productData.product.images[1].src;
+                        // console.log('productData', productData.product.id)
+                        cropProductImages = function cropProductImages(image) {
+                            if (image.indexOf('.jpg') > -1) {
+                            croppedProductImgOne = productImgOne.replace('.jpg', '_360x.jpg');
+                            croppedProductImgTwo = productImgTwo.replace('.jpg', '_360x.jpg');
+                            } else if (image.indexOf('.png') > -1) {
+                            croppedProductImgOne = productImgOne.replace('.png', '_360x.png');
+                            croppedProductImgTwo = productImgTwo.replace('.png', '_360x.png');
+                            }
+                        };
+
+                        cropProductImages(productImgOne);
+                        cropProductImages(productImgTwo);
+
+                        isProductImgTwo = function isProductImgTwo() {
+                            if (croppedProductImgOne === undefined) {
+                            return croppedProductImgOne;
+                            } else {
+                            return croppedProductImgTwo;
+                            }
+                        };
+
+                        var count = 0;
+                        element.forEach(function(this_click){
+                            var tempSku = this_click.getAttribute('data-id');
+                            if(this_click.getAttribute('data-status') == 0){
+                            count += 1;
+                            // console.log('tempSku', tempSku, 'count', count, productColor);
+
+                            this_click.innerHTML = this_click.innerHTML + "\n        <img\n          class=\"collection-swatch-image\"\n          src=\"".concat(swatchURL, "\"\n          alt=\"").concat(productData.product.title, "\"\n          title=\"").concat(productColor, "\"\n          onerror=\"this.style.display = 'none';\"\n          data-collection-swatch-product-image=\"").concat(croppedProductImgOne, "\"\n          data-collection-swatch-product-image-hover=\"").concat(isProductImgTwo(), "\"\n          data-collection-swatch-product-url=\"").concat(productData.product.handle, "\"\n          data-collection-swatch-product-id=\"").concat(productData.product.id, "\"\n          data-collection-swatch-product-color=\"").concat(productColor, "\"\n          data-collection-swatch-product\n        ></img>\n        ");
+                            existing = this_click;
+                            }
+                        });
+                        // element.innerHTML = element.innerHTML + "\n        <img\n          class=\"collection-swatch-image\"\n          src=\"".concat(swatchURL, "\"\n          alt=\"").concat(productData.product.title, "\"\n          title=\"").concat(productColor, "\"\n          onerror=\"this.style.display = 'none';\"\n          data-collection-swatch-product-image=\"").concat(croppedProductImgOne, "\"\n          data-collection-swatch-product-image-hover=\"").concat(isProductImgTwo(), "\"\n          data-collection-swatch-product-url=\"").concat(productData.product.handle, "\"\n          data-collection-swatch-product-id=\"").concat(productData.product.id, "\"\n          data-collection-swatch-product-color=\"").concat(productColor, "\"\n          data-collection-swatch-product\n        ><span class=\"show-tooltip\">").concat(productColor, "</span></img>\n        ");
+                        _context.next = 20;
+
+                        break;
+
+                        case 17:
+                        _context.prev = 17;
+                        _context.t0 = _context["catch"](0);
+                        console.info("Check product setup. Swatch is missing or product referenced in metafields is\n        not active... Reference 404s in console for missing data. Error: ".concat(_context.t0));
+
+                        case 20:
+                        enableSwatches();
+
+                        case 21:
+                        case "end":
+                        return _context.stop();
+                    }
+                    }
+                }, _callee, null, [[0, 17]]);
+                }));
+                return _printProductData.apply(this, arguments);
+
+            }
+        });
+        setTimeout(function(){
+            if (window.location.pathname.indexOf('/collections') > -1 || window.location.pathname.indexOf('/product') > -1) {
+                // When 5
+            //console.log('When 5');
+                if (productHandlesLength > 5) {
+                var numberMoreSwatches = productHandlesLength - 5;
+                element.forEach(function(this_click){
+                    if(this_click.getAttribute('data-status') == 0){
+                        this_click.innerHTML = this_click.innerHTML + "\n        <span class=\"number-more-swatches\">+".concat(numberMoreSwatches, "</span>\n      ");
+                    }
+                });
+                }
+            enableSwatches();
+            } else if (window.location.pathname.indexOf('/search') > -1 || window.location.pathname === '/' || window.location.pathname.indexOf('/pages') > -1) {
+                // When 3
+                //console.log('When 3');
+                if (productHandlesLength > 3) {
+                var _numberMoreSwatches = productHandlesLength - 3;
+                element.forEach(function(this_click){
+                // console.log('this_click', this_click)
+                    if(this_click.getAttribute('data-status') == 0){
+                        this_click.innerHTML = this_click.innerHTML + "\n        <span class=\"number-more-swatches\">+".concat(_numberMoreSwatches, "</span>\n      ");
+                    }
+                });
+                }
+            enableSwatches();
+            }
+        existing?.setAttribute('data-status', 1);
+        },500);
+    }
+
+    function enableSwatches() {
+        elements$4.swatches = document.querySelectorAll(collectionSwatches.swatches);
+
+        //console.log('enableSwatches');
+        elements$4.swatches.forEach(function (swatch) {
+
+        if(swatch != null){
+            var fpid_row = document.querySelector('.fpid_row');
+            var swatchParent = swatch.parentElement;
+            //console.log('swatch', swatch)
+            if(swatchParent.classList.contains('frenzy_swatch')){
+            //console.log('HELLO123');
+                var swatchProductID = swatchParent.parentElement;
+                var swatchProductLink = swatchParent.closest('.frenzy_grid').querySelector('figure a');
+                var swatchProductImage = swatchParent.closest('.frenzy_grid').querySelector('figure a .frenzy_img_first');
+                var swatchProductImageHover = swatchParent.closest('.frenzy_grid').querySelector('figure a .frenzy_img_second');
+
+                swatch.addEventListener('click', function (e) {
+
+            e.preventDefault(), e.stopImmediatePropagation();
+                if (!this.classList.contains('collection-swatch-image--selected')) {
+                    // Remove selected swatch
+                    elements$4.swatches.forEach(function (swatch) {
+                    swatch.classList.remove('collection-swatch-image--selected');
+                    }); // Add selected swatch
+
+                    this.classList.add('collection-swatch-image--selected');
+                }
+
+                swatchProductID.setAttribute('data-product-id', e.target.dataset.collectionSwatchProductId);
+                swatchProductID.setAttribute('data-product-handle', e.target.dataset.collectionSwatchProductUrl);
+                swatchProductImage.setAttribute('src',e.target.dataset.collectionSwatchProductImage);
+                swatchProductImageHover.setAttribute('src',e.target.dataset.collectionSwatchProductImageHover);
+                if(window.collectionHandle != undefined){
+                swatchProductLink.setAttribute('href', "/products/".concat(e.target.dataset.collectionSwatchProductUrl));
+                }else{
+                swatchProductLink.setAttribute('href', "/collections/".concat(window.collectionHandle, "/products/").concat(e.target.dataset.collectionSwatchProductUrl));
+                }
+                // swatchProductLink.setAttribute('href', "/collections/".concat(collectionHandle, "/products/").concat(e.target.dataset.collectionSwatchProductUrl));
+                updateVariantPicker(e.target);
+                });
+                // swatch.addEventListener('mouseover', function (e) {
+                //   this.nextSibling.style.visibility = 'visible';
+                //   this.nextSibling.style.opacity = '1';
+                // });
+                // swatch.addEventListener('mouseout', function (e) {
+                //   this.nextSibling.style.visibility = 'hidden';
+                //   this.nextSibling.style.opacity = '0';
+                // });
+            }
+        else{
+            console.log("NO");
+        }
+
+            }
+        });
+        setTimeout(function () {
+            unhideSwatchElements();
+        }, 1000);
+    }
+
+    function handleize(str) {
+    return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zÀ-ú0-9]+/g, "-").replace(/-$/, "").replace(/^-/, "");
+    }
+    function unhideSwatchElements() {
+        var swatchesToUnhide = document.querySelectorAll('[data-collection-swatches]');
+        swatchesToUnhide.forEach(function (unhideSwatch) {
+            unhideSwatch.style.opacity = '1';
+        });
+    }
+
+    function updateVariantPicker(_x3) {
+    return _updateVariantPicker.apply(this, arguments);
+    }
+
+    function _updateVariantPicker() {
+    _updateVariantPicker = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10(element) {
+        var item, form, options, optionsWrapper, parent, current, prev, response, productData, variantSize;
+        return regeneratorRuntime.wrap(function _callee10$(_context10) {
+        while (1) {
+            switch (_context10.prev = _context10.next) {
+            case 0:
+                item = element.closest('.fpid_row');
+                parent = element.closest('.frenzy_product_item');
+                // form = item.querySelector('[data-quickadd-form]');
+                // options = Array.from(item.querySelectorAll('.variant-option'));
+                optionsWrapper = parent.querySelector('figure .frenzy_product_option');
+                optionsWrapper.innerHTML = '';
+                f_config_id = parent.querySelector('figure a').getAttribute('data-config_id');
+                f_request_id = parent.querySelector('figure a').getAttribute('data-request_id');
+                // options.forEach(function (option) {
+                //   return option.remove();
+                // });
+                _context10.next = 7;
+                return _getProduct(item.dataset.productHandle).then(function (response) {
+                return response;
+                });
+
+            case 7:
+                response = _context10.sent;
+                productData = response.data.product;
+                variantSize = productData.variants.length; // Populate options wrapper with buttons
+                var product_id = productData.id;
+                productData.variants.forEach(function (variant) {
+                var variant_id = variant.id;
+                var price = variant.price;
+                var sku = product_id+'_'+variant_id;
+                var variantButton = document.createElement('li');
+                // variantButton.classList.add('variant-option');
+                variantButton.innerHTML = variant.option2;
+                variantButton.dataset.name = 'collection';
+                variantButton.dataset.name = 'collection';
+                variantButton.dataset.image = 'undefined';
+                variantButton.dataset.config_id = f_config_id;
+                variantButton.dataset.request_id = f_request_id;
+                variantButton.onclick = "frenzyQuickAddEvent(this)";
+                variantButton.dataset.price = price;
+                variantButton.dataset.sku = sku;
+                var disabled= '';
+                if(!variant.inventory_quantity > 0){
+                    disabled = 'disabled';
+                }
+                var button = '<button '+disabled+' onclick="frenzyQuickAddEvent(this)"data-name="collection" data-image="" data-config_id="'+f_config_id+'" data-request_id="'+f_request_id+'" data-price="'+price+'" data-sku="'+sku+'">'+variant.option2+'</button>';
+                variantButton.disabled = !variant.inventory_quantity > 0;
+                // optionsWrapper.appendChild(variantButton);
+                optionsWrapper.innerHTML += button;
+                variantButton.addEventListener('click', /*#__PURE__*/function () {
+                    var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(e) {
+                    var variantId;
+                    return regeneratorRuntime.wrap(function _callee9$(_context9) {
+                        while (1) {
+                        switch (_context9.prev = _context9.next) {
+                            case 0:
+                            e.preventDefault();
+
+                            e.stopImmediatePropagation();
+                            if (prev) prev.classList.remove('variant-option--selected');
+                            current = variantButton;
+                            current.classList.add('variant-option--selected');
+                            prev = current;
+                            variantId = parseInt(e.target.dataset.variantId, 10);
+                            // _addToCart(variantId);
+
+                            case 8:
+                            case "end":
+                            return _context9.stop();
+                        }
+                        }
+                    }, _callee9);
+                    }));
+
+                    return function (_x8) {
+                    return _ref3.apply(this, arguments);
+                    };
+                }());
+                });
+                // form.classList.remove('enabled');
+
+            case 12:
+            case "end":
+                return _context10.stop();
+            }
+        }
+        }, _callee10);
+    }));
+    return _updateVariantPicker.apply(this, arguments);
+    }
+    function _getProduct(_x) {
+    return _getProduct2.apply(this, arguments);
+    }
+
+    function _getProduct2() {
+    _getProduct2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(handle) {
+        var productURL, response;
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        while (1) {
+            switch (_context4.prev = _context4.next) {
+            case 0:
+                productURL = "https://hukgear.myshopify.com/products/".concat(handle, ".json");
+                _context4.prev = 1;
+                _context4.next = 4;
+                return axios.get(productURL);
+
+            case 4:
+                response = _context4.sent;
+                return _context4.abrupt("return", response);
+
+            case 8:
+                _context4.prev = 8;
+                _context4.t0 = _context4["catch"](1);
+                return _context4.abrupt("return", _context4.t0);
+
+            case 11:
+            case "end":
+                return _context4.stop();
+            }
+        }
+        }, _callee4, null, [[1, 8]]);
+    }));
+    return _getProduct2.apply(this, arguments);
+    }
+    function _addToCart(_x2) {
+        return _addToCart2.apply(this, arguments);
+    }
+
+    function _addToCart2() {
+    _addToCart2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(id) {
+        var quantity;
+        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        while (1) {
+            switch (_context5.prev = _context5.next) {
+            case 0:
+                quantity = 1;
+                addItem(id, {
+                quantity: quantity
+                }).then(function (item) {
+                document.dispatchEvent(new CustomEvent('ajaxProduct:added', {
+                    detail: {
+                    product: item
+                    }
+                }));
+                });
+
+            case 2:
+            case "end":
+                return _context5.stop();
+            }
+        }
+        }, _callee5);
+    }));
+    return _addToCart2.apply(this, arguments);
+    }
+    function addItem(id$1, options) {
+    options = options || {};
+    // id(id$1);
+    return cartAdd(id$1, options.quantity, options.properties);
+    } // selectors: container, button
+    function cartAdd(id, quantity, properties) {
+    var config = getDefaultRequestConfig();
+    config.method = 'POST';
+    config.body = JSON.stringify({
+        id: id,
+        quantity: quantity,
+        properties: properties
+    });
+    return fetchJSON('/cart/add.js', config);
+    }
+    function id(id) {
+    if (typeof id !== 'number' || isNaN(id)) {
+        throw new TypeError('Theme Cart: Variant ID must be a number');
+    }
+    }
+
+    function frenzyQuickAddClick(this_click) {
+
+        var _a, _b, _c;
+        this_click.closest(".frenzy_product_item").querySelector(".frenzy_variant_option.is-open") ? (_a = this_click.closest(".frenzy_product_item").querySelector(".frenzy_variant_option")) == null || _a.classList.remove("is-open") : ((_b = document.querySelector(".frenzy_variant_option.is-open")) == null || _b.classList.remove("is-open"),
+        (_c = this_click.closest(".frenzy_product_item").querySelector(".frenzy_variant_option")) == null || _c.classList.add("is-open"))
+    }
+    function bundle_button_update(){
+      const frenzy_pb_details = document.querySelectorAll('.frenzy_pb_details .frenzy_bundle_product_grid');
+      let allUnchecked = true; 
+      let invalidOption = false; 
+      
+      frenzy_pb_details.forEach(function(this_val) {
+        const checkbox = this_val.querySelector('.frenzy_bundle_product_checkbox_val');
+        const option = this_val.querySelector('.frenzy_bo_option');
+        
+        if (checkbox.checked) {
+          allUnchecked = false; 
+          if (option.value === '') {
+            invalidOption = true; 
+          }
+        }
+      });
+      
+      const ctaButton = document.querySelector('.frenzy_bundle_cta_atc');
+      if (allUnchecked || invalidOption) {
+        ctaButton.setAttribute('disabled', 'disabled');
+      } else {
+        ctaButton.removeAttribute('disabled');
+      }
+    }
+    function FrenzyBundleAfterDetailsCallBack(products, bundleHTML) {
+    let isBundleTotlePrice = false;
+    document.querySelectorAll('.frenzy_pb_details .frenzy_bundle_product_grid').forEach(function(self, index){
+
+        var checkbundle = self.querySelectorAll('label');
+        var frenzy_bo_option = self.querySelectorAll('.frenzy_bo_option');
+
+        checkbundle.forEach(function(this_click){
+           this_click.addEventListener('click', function(){
+              setTimeout(function(){
+                bundle_checkbox_price(products);
+                bundle_button_update();
+              },0);
+           })
+        })
+      frenzy_bo_option.forEach(function(this_click){
+           const newOption = document.createElement("option");
+           newOption.text = "Select Size";
+           newOption.value = "";
+           this_click.insertBefore(newOption, this_click.firstChild);
+           this_click.selectedIndex = 0;
+           this_click.addEventListener('change', function(){
+              const blank_option = Array.from(this_click.options).find((e) => e.value == '');
+              if(blank_option){
+                blank_option.setAttribute('disabled', 'disabled');
+              }
+              setTimeout(function(){
+                if(this_click.value != ''){
+                  bundle_checkbox_price(products);
+                }
+                bundle_button_update();
+              },0);
+           })
+        })
+        bundle_button_update();
+        var product = products[index];
+        var product_tags = product.org_product_tags;
+        var get_particular_tag = product_tags.filter(tags => tags.includes('sale-online'));
+        var discountPercentage = parseInt(get_particular_tag[0]?.replace('sale-online-', ''));
+      if (discountPercentage) {
+        isBundleTotlePrice = true;
+        
+        let optionData = '';
+         self.querySelectorAll('.frenzy_bo_option option').forEach(function(option, optionIndex){
+           const getDataPrice = option.getAttribute('data-price');
+            var opPrice = Number(getDataPrice) * 1;
+           option.setAttribute("data-price", opPrice - (opPrice * (discountPercentage / 100)));
+           self.querySelectorAll('.frenzy_bo_option option')[optionIndex].setAttribute("data-price", opPrice - (opPrice * (discountPercentage / 100)));
+         })
+        var discounttobeadded = '<span class="sale-message discount_sale_price">Save '+ discountPercentage +'%</span>';
+        var product_price = Number(product.org_price) * 100;
+        discountedPrice = product_price - (product_price * (discountPercentage / 100));
+        console.log('discountedPrice', discountedPrice);
+        self.querySelector('.frenzy_bundle_product_checkbox_val').setAttribute('data-price',discountedPrice);
+        self.querySelector('.frenzy_bundle_product_checkbox_val').setAttribute('data-orgprice',product.org_price * 100);
+
+
+        self.querySelector('.frenzy_bundle_product_main_price').innerHTML =  '<span class="money">'+money_format_Frenzy(discountedPrice, check_shop_currency_frenzy())+'</span>';
+        var showdiscountedPrice = '<span class="frenzy_bundle_product_compare_price"><span class="money">'+ money_format_Frenzy(product.org_price * 100, check_shop_currency_frenzy()) +'</span></span>';
+        self.querySelector('.frenzy_bundle_product_price').insertAdjacentHTML("afterbegin", showdiscountedPrice);
+        self.querySelector('.frenzy_bundle_product_price').insertAdjacentHTML("beforeend",discounttobeadded);
+        self.querySelector('.frenzy_bundle_product_price .frenzy_bundle_product_main_price').classList.add('is-sale');
+      }
+    })
+    if(isBundleTotlePrice){
+      let frenzybundleTotlePrice = 0;
+      document.querySelectorAll('.frenzy_bundle_product_checkbox').forEach(function(self, index){
+        const getFBPrice = self.querySelector('.frenzy_bundle_product_checkbox_val').getAttribute('data-price') * 1;
+        frenzybundleTotlePrice = frenzybundleTotlePrice + getFBPrice;
+      })
+       document.querySelector('.frenzy_bundle_cta_atc .frenzy_bundle_final_total .money').innerHTML = money_format_Frenzy(frenzybundleTotlePrice, check_shop_currency_frenzy());
+    }
+  }
+    function bundle_checkbox_price(products) {
+      let isBundleTotlePrice = false;
+      document.querySelectorAll('.frenzy_pb_details .frenzy_bundle_product_grid').forEach(function(self, index){
+          var product = products[index];
+          var product_tags = product.org_product_tags;
+          var get_particular_tag = product_tags.filter(tags => tags.includes('sale-online'));
+          var discountPercentage = parseInt(get_particular_tag[0]?.replace('sale-online-', ''));
+        if (discountPercentage) {
+          isBundleTotlePrice = true;
+
+          let optionData = '';
+           self.querySelectorAll('.frenzy_bo_option option').forEach(function(option, optionIndex){
+             const getDataPrice = option.getAttribute('data-price');
+              var opPrice = Number(getDataPrice) * 1;
+             option.setAttribute("data-price", opPrice - (opPrice * (discountPercentage / 100)));
+             self.querySelectorAll('.frenzy_bo_option option')[optionIndex].setAttribute("data-price", opPrice - (opPrice * (discountPercentage / 100)));
+           })
+          var discounttobeadded = '<span class="sale-message discount_sale_price">Save '+ discountPercentage +'%</span>';
+          var product_price = Number(product.org_price) * 100;
+          discountedPrice = product_price - (product_price * (discountPercentage / 100));
+          self.querySelector('.frenzy_bundle_product_checkbox_val').setAttribute('data-price',discountedPrice);
+          self.querySelector('.frenzy_bundle_product_checkbox_val').setAttribute('data-orgprice',product.org_price * 100);
+
+
+          self.querySelector('.frenzy_bundle_product_main_price').innerHTML =  '<span class="money">'+money_format_Frenzy(discountedPrice, check_shop_currency_frenzy())+'</span>';
+          var showdiscountedPrice = '<span class="frenzy_bundle_product_compare_price"><span class="money">'+ money_format_Frenzy(product.org_price * 100, check_shop_currency_frenzy()) +'</span></span>';
+          if(self.querySelector('.frenzy_bundle_product_price').querySelector('.frenzy_bundle_product_compare_price')){
+            self.querySelector('.frenzy_bundle_product_price').querySelector('.frenzy_bundle_product_compare_price').innerHTML = '<span class="money">'+ money_format_Frenzy(product.org_price * 100, check_shop_currency_frenzy()) +'</span>';
+
+          }else{
+            self.querySelector('.frenzy_bundle_product_price').insertAdjacentHTML("afterbegin", showdiscountedPrice);
+          }
+          if(self.querySelector('.frenzy_bundle_product_price').querySelector('.sale-message')){
+            self.querySelector('.frenzy_bundle_product_price').querySelector('.sale-message').innerHTML = 'Save '+ discountPercentage +'%';
+          }else{
+            self.querySelector('.frenzy_bundle_product_price').insertAdjacentHTML("beforeend",discounttobeadded);
+          }
+          self.querySelector('.frenzy_bundle_product_price .frenzy_bundle_product_main_price').classList.add('is-sale');
+        }
+      })
+      if(isBundleTotlePrice){
+        let frenzybundleTotlePrice = 0;
+        document.querySelectorAll('.frenzy_bundle_product_checkbox').forEach(function(self, index){
+          const getFBPrice = self.querySelector('.frenzy_bundle_product_checkbox_val:checked')  ?self.querySelector('.frenzy_bundle_product_checkbox_val:checked').getAttribute('data-price') * 1 : 0;
+          frenzybundleTotlePrice = (frenzybundleTotlePrice + getFBPrice);
+        })
+         document.querySelector('.frenzy_bundle_cta_atc .frenzy_bundle_final_total .money').innerHTML = money_format_Frenzy(frenzybundleTotlePrice, check_shop_currency_frenzy());
+      }
+    }
+    {% comment %} window.frenzyProductGridWidgetCallBack = function(){
+        const getHHTML =  document.querySelector('#frenzy_product_grid_widget');
+        return getHHTML.innerHTML;
+    } {% endcomment %}
+
+  function frenzySelectOptionUpdate(data) {
+    document.querySelectorAll('.frenzy_product_item[data-id="' + data?.sku + '"]').forEach((this_el) => {
+        const frenzy_select_option = this_el.querySelectorAll('.frenzy_product_item_detail .frenzy_variant_option.frenzy_dropdown_type .frenzy_pro_select_option');
+        const cartBtn = this_el.querySelector('.frenzy_product_buttom .frenzy_auickAdd_cart');
+        if (frenzy_select_option) {
+        frenzy_select_option.forEach(function (this_click) {
+            const hasSelectSize = Array.from(this_click.options).some(
+            (opt) => opt.value === "" && opt.text === "Select Size"
+            );
+            if (!hasSelectSize) {
+            const newOption = document.createElement("option");
+            newOption.text = "Select Size";
+            newOption.value = "";
+            newOption.selected = true;
+            cartBtn.disabled = true;
+            this_click.insertBefore(newOption, this_click.firstChild);
+            }
+            this_click.addEventListener("change", function () {
+            const blank_option = Array.from(this_click.options).find((e) => e.value == "");
+            if (blank_option) {
+                blank_option.disabled = true;
+                cartBtn.disabled = false;
+            }
+            });
+        });
+        }
+    });
+    }
+
+document.addEventListener("DOMContentLoaded", (event) => {
+  document.querySelector('.thb-quick-search').addEventListener('click',function(){ 
+    document.querySelector('.frenzy_search_suggest').focus();
+    document.querySelector('.frenzy_mobile_search_box_close_button').addEventListener('click',function(event){ 
+      event.stopPropagation()
+      event.stopImmediatePropagation();
+      document.querySelector('.search-drawer').classList.remove('active');
+      document.querySelector('body').classList.remove('open-cc');
+    })
+  })
+});
+</script>

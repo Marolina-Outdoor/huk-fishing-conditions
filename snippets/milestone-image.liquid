@@ -1,0 +1,13 @@
+<div class="milestone_image">
+    <div class="milestone-year">
+    {{milestone_date}}
+    </div>
+        {%- liquid
+            assign small_height = milestone_image.src.height | times: '690' | divided_by: milestone_image.src.width
+            assign mid_height = milestone_image.src.height | times: '1280' | divided_by: milestone_image.src.width
+            assign master_width = milestone_image.src.width | append: 'x' | append: milestone_image.src.height
+            assign width = '690x' | append: small_height | append: ',' | append: '1280x' | append: mid_height | append: ',' | append: master_width
+
+            render 'responsive-image', image: milestone_image, sizes: width
+        -%}
+</div>

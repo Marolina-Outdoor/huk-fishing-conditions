@@ -1,0 +1,105 @@
+{%- liquid
+  if sticky
+    assign appended = '--sticky'
+  endif
+
+  assign handle = option.name | replace: ' ', '-' | downcase | escape
+-%}
+{%- case option_type -%}
+  {%- when 'dropdown' -%}
+    <fieldset
+      class="product-form__input product-form__input--dropdown"
+      data-index="option{{ forloop.index }}"
+      data-handle="{{ handle }}"
+    >
+      <div class="form__label" for="Option-{{ section.id }}-{{ forloop.index0 }}{{ appended }}">
+        {{ option.name }}:
+        <span class="form__label__value">{{ option.selected_value }}</span>
+        {{ sizing_link }}
+      </div>
+      <div class="select">
+        <select
+          id="Option-{{ section.id }}-{{ forloop.index0 }}{{ appended }}"
+          name="options[{{ option.name | escape | append: appended }}]"
+          form="{{ product_form_id }}"
+        >
+          {%- for value in option.values -%}
+            <option
+              value="{{ value | escape }}"
+              {% if option.selected_value == value %}
+                selected="selected"
+              {% endif %}
+            >
+              {{ value }}
+            </option>
+          {%- endfor -%}
+        </select>
+        <div class="select-arrow">{%- render 'svg-icons' with 'thb-select' -%}</div>
+      </div>
+    </fieldset>
+  {%- when 'button' -%}
+    <fieldset
+      class="product-form__input product-form__input--block"
+      data-index="option{{ forloop.index }}"
+      data-handle="{{ handle }}"
+    >
+      <div class="form__label" data-notcolor="true">
+        {{ option.name }}:
+        <span class="form__label__value">{{ option.selected_value }}</span>
+        {{ sizing_link }}
+      </div>
+      {%- for value in option.values -%}
+        {% assign matching_variant = product.variants | where: 'option2', value | first %}
+        {%- unless matching_variant -%}
+          {% assign matching_variant = product.variants | where: 'option1', value | first %}
+        {%- endunless -%}
+        <input
+          type="radio"
+          id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}{{ appended }}"
+          data-index="{{ forloop.index0 }}"
+          name="{{ option.name | append: appended }}"
+          value="{{ value | escape }}"
+          form="{{ product_form_id }}"
+          {% if option.selected_value == value %}
+            checked
+          {% endif %}
+          data-product-handle="{{ product.handle }}"
+        >
+        <label
+          for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}{{ appended }}"
+          {% if matching_variant and matching_variant.available %}
+            class=""
+          {% else %}
+            class="disabled-label"
+          {% endif %}
+        >
+          <span>{{ value }}</span>
+        </label>
+      {%- endfor -%}
+    </fieldset>
+  {%- when 'color' -%}
+    {% if frenzy == true %}
+      {% render 'frenzy-product-color-swatches',
+        option_type: option_type,
+        product: product,
+        option: option,
+        forloop: forloop,
+        product_form_id: product_form_id,
+        sizing_link: sizing_link,
+        meta_sib: meta_sib
+      %}
+    {% else %}
+      {% render 'product-color-swatches',
+        is_on_sale: is_on_sale,
+        option_type: option_type,
+        product: product,
+        option: option,
+        forloop: forloop,
+        product_form_id: product_form_id,
+        sizing_link: sizing_link,
+        meta_sib: meta_sib,
+        sticky: sticky,
+        block: block
+      %}
+    {% endif %}
+{%- endcase -%}

@@ -1,0 +1,302 @@
+<!-- /snippets/product-siblings.liquid -->
+{%- liquid
+    assign siblings_product_list = block.settings.siblings_product_list
+    assign padding_bottom = block.settings.padding_bottom
+    assign show_siblings_images = block.settings.show_siblings_images
+  
+    assign has_siblings = false
+    if siblings_product_list.count > 0
+      assign has_siblings = true
+    endif
+    
+    capture swatch_class
+      echo 'siblings__swatch'
+        case settings.color_swatches_product_style
+          when 'circle'
+            echo ' siblings__swatch--circle'
+          when 'rectangle'
+            echo ' siblings__swatch--rectangle'
+        endcase
+
+        unless show_siblings_images
+          echo ' siblings__swatch--colors'
+        else
+          echo ' siblings__swatch--image'
+        endunless
+    endcapture
+
+    assign custom_colors = settings.color_swatches | newline_to_br | split: '<br />'
+    assign key_array = ''
+    assign val_array = ''
+
+    for color in custom_colors
+      assign key = color | split: ':' | first | rstrip
+      assign value = color | split: ':' | last | lstrip
+      assign key_array = key_array | append: ',' | append: key
+      assign val_array = val_array | append: ',' | append: value
+    endfor
+
+    assign key_array = key_array | remove_first: ',' | strip_newlines | downcase | split: ','
+    assign val_array = val_array | remove_first: ',' | split: ','
+      
+    assign sib_label = 'test'
+    assign block_label = block.settings.text | default: sib_label
+  -%}
+
+  {% for option in product.options_with_values %}
+    {% if option.name == 'Color' or option.name == 'color' %}
+      {% for value in option.values %}
+        {% assign prod_color = value %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+  
+  {%- if has_siblings  -%}
+    <div class="product__block" style="--PBB: {{ padding_bottom }}px;" >
+      <fieldset class="siblings">
+        <legend class="radio__legend siblings__legend">
+          <span class="radio__legend__label form__label">Color: {{ prod_color }}</span>
+        </legend>
+  
+        {%- for sib_product in siblings_product_list limit: 50 -%}
+          {%- liquid
+            assign is_current_product = false
+            if sib_product.handle == product.handle
+              assign is_current_product = true
+            endif
+  
+            assign sib_swatch_class = swatch_class
+            if sib_product.available == false
+              assign sib_swatch_class =  'siblings__swatch--sold-out'
+            endif
+
+            for custom_color in key_array
+              if custom_color == color_value
+                assign color_value = val_array[forloop.index0]
+              endif
+            endfor
+
+            assign bg_value = empty
+            if color_value contains '.'
+              assign bg_value = color_value | file_url
+              assign color_value = 'var(--bg-body)'
+            endif
+
+            for option in sib_product.options_with_values
+              if option.name == 'Color' or option.name == 'color'
+                for value in option.values
+                  assign sib_prod_color = value
+                endfor
+              endif
+            endfor
+          -%}
+  
+          <a class="{% if is_current_product %} active {% endif %} siblings__container {{ sib_swatch_class }}" href="{{ sib_product.url }}" {% unless show_siblings_images %}style="--option-color: {{ color_value | downcase | escape }}; {%- if bg_value != empty -%} --option-color-image: url('{{ bg_value | escape }}');{%- endif -%}"{% endunless %}>
+            <div class="siblings__button" >
+              {% if show_siblings_images %}
+                {%- liquid
+                  assign image = sib_product.featured_media.preview_image
+                  assign image_widths = '44, 88'
+                  assign sizes = '44px'
+                    assign image_widths = '56, 112'
+                    assign sizes = '56px'
+                  assign placeholder_svg = 'product-' | append: forloop.index
+  
+                  render 'meta-sibling-images', image: image, widths: image_widths, sizes: sizes, classes: 'lazypreload img-object-cover', placeholder_svg: placeholder_svg
+                -%}
+              {% endif %}
+              {% comment %} <span class="visually-hidden">{{ color_name }}</span> {% endcomment %}
+            </div>
+            {% comment %} 
+              looks like metafield not present. 
+              Loop through variant options to find color value then print color value in tooltip text 
+            {% endcomment %}
+
+            <span class="tooltiptext">{{ sib_prod_color }}</span>
+          </a>
+        {%- endfor -%}
+  
+      </fieldset>
+    </div>
+  {%- endif -%}
+  
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const buttons = document.querySelectorAll('.siblings__button');
+
+      buttons.forEach(function(button) {
+          button.addEventListener('mouseover', function() {
+              // Show tooltip when hovering over the button
+              const tooltip = this.parentNode.querySelector('.tooltiptext');
+              tooltip.style.visibility = 'visible';
+              tooltip.style.opacity = '1';
+          });
+
+          button.addEventListener('mouseout', function() {
+              // Hide tooltip when moving mouse away from the button
+              const tooltip = this.parentNode.querySelector('.tooltiptext');
+              tooltip.style.visibility = 'hidden';
+              tooltip.style.opacity = '0';
+          });
+      });
+    });
+  </script>
+  <style>
+  /*================ Siblings - PDP ================*/
+  .siblings {  
+      margin: 0 0 calc(-1 * 12px);
+      margin-bottom: 14px;
+      display: flex;
+      width: 100%;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      border: none;
+      align-items: center;
+      padding: 0px;
+  }
+  .siblings .radio__legend__label{
+    color: #2C4471;
+  }
+  .siblings__legend {
+    flex: 0 0 100%;
+    margin-bottom: 9px;
+  }
+  .siblings__button {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    display: block;
+  }
+  .siblings__button img {
+    object-fit: cover;  
+    width: 44px;
+    height: 44px;
+  }
+  .siblings__swatch {
+    margin: 0 12px 12px 0;
+    overflow: hidden;
+  }
+  .siblings__swatch:last-child {
+    margin-right: 0;
+  }
+  .siblings__swatch[aria-current="true"] {
+    cursor: default;
+  }
+  .siblings > a{
+    margin: 6px;
+    margin-left: 0px;
+    margin-top: 0px;
+  }
+  .siblings__swatch[aria-current="true"] .siblings__button:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width:44px;
+    height:44px;
+    min-width:44px;
+    border: 2px solid #000;
+    z-index: 10;
+  }
+  .siblings__swatch[aria-current="true"] .siblings__button {
+    border: 2px solid #fff;
+  }
+  .siblings__swatch--sold-out img {
+    opacity: 0.8;
+  }
+  .siblings__swatch--sold-out .siblings__button:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    width: 2px;
+    height: 100%;
+    border-radius: 0;
+    background: #000;
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  .siblings__swatch--sold-out[aria-current="true"] .siblings__button:before {
+    height: calc(100% + 2 * 2px);
+  }
+  .siblings__swatch--circle img,
+  .siblings__swatch--circle svg {
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  .siblings__swatch--circle .siblings__button,
+  .siblings__swatch--circle .siblings__button:after {
+    border-radius: 50%;
+  }
+  .siblings__swatch--colors {
+    --swatch: #ccc;
+  }
+  .siblings__swatch--colors .icon-check {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 22px;
+    transform: translate(-50%, -50%);
+  }
+  .siblings__swatch--colors .siblings__button {
+    background-color: var(--option-color);
+    background-image: var(--option-color-image);
+  }
+  .siblings__swatch--rectangle {
+    --swatch-size: 56px;
+    --rectangle-ratio: calc(32px / 1.6);
+  }
+  .siblings__swatch--rectangle svg,
+  .siblings__swatch--rectangle .siblings__button,
+  .siblings__swatch--rectangle[aria-current="true"] .siblings__button:after {
+    height: var(--rectangle-ratio);
+  }
+  .siblings__swatch--rectangle[aria-current="true"] svg {
+    height: calc(var(--rectangle-ratio) - 2px * 2);
+  }
+  .siblings__swatch--rectangle.siblings__swatch--sold-out
+    .siblings__button:before {
+    --offset-diagonals: calc(2px * 1.4);
+    height: calc(32px + 2px * 2);
+    transform: translate(-50%, -50%) rotate(59deg);
+  }
+    /* Tooltip container */
+    .siblings .siblings__container {
+          position: relative;
+          display: inline-block;
+          overflow: visible;
+      }
+      .siblings .siblings__container.active{
+        border: 1px solid #2C4471;
+      }
+    /* Tooltip text */
+    .siblings .siblings__container .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        top: 125%;
+        font-size: 10px;
+        left: 50%;
+        margin-left: -60px;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    
+    /* Show the tooltip text when you mouse over the tooltip container */
+    .siblings .siblings__container:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+        z-index: 5;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+  </style>

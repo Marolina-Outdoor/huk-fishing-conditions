@@ -1,0 +1,842 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "166161901464a25e50": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "166161901437c6bc67-1": {
+          "type": "heading",
+          "settings": {
+            "text": "First to the fish",
+            "heading_size": "h1-xlarge"
+          }
+        }
+      },
+      "block_order": [
+        "166161901437c6bc67-1"
+      ],
+      "custom_css": [
+        "h3 {font-size: 92px; font-weight: 700; line-height: 93.75px; letter-spacing: 0.05em; font-family: \"Styrene A Web\", \"trade-gothic-next-condensed\", sans-serif;}"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Frame_1.jpg",
+        "image_parallax": true,
+        "desktop_height": "desktop-height-full",
+        "mobile_height": "mobile-height-350",
+        "full_width": true,
+        "content_width": "large",
+        "content_position": "middle-center",
+        "text_alignment": "center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "430e3fd4-6487-4550-8d73-86cdc88a218b": {
+      "type": "rich-text",
+      "blocks": {
+        "template--17918040834330__430e3fd4-6487-4550-8d73-86cdc88a218b-1676976677d37e1c8b-1": {
+          "type": "heading",
+          "settings": {
+            "text": "What Does Huk Stand For",
+            "marker_style": "style1",
+            "size": "h3",
+            "marker_color": "#fd6262"
+          }
+        },
+        "subheading_xtWGJP": {
+          "type": "subheading",
+          "settings": {
+            "text": "Huk \/hook\/ noun - a piece of metal or other material,<br>curved or bent back at an angle, for catching hold of things"
+          }
+        },
+        "text_qd6ihn": {
+          "type": "text",
+          "settings": {
+            "text": "<p>For more than 20,000 years this simple invention has connected people across the world. It has fed families, built relationships across communities, and inspired fireside stories for generations. That's why, when a group of passionate anglers and waterman came together in 2014 with an idea to create something different in the fishing space, they chose to name our brand after this critical tool. <br\/><br\/>(Yes, it's pronounced \"hook\" not \"huck\" ... gives you something to think about) <br\/><br\/>Our dedication since then has been creating hard-charging performance gear, designed to stoke a life centered around the water. With clothing designed at the fabric level to gear you up for all your on water adventures, we bring intentional performance features to all our designs. From technical fishing outerwear to all-day sun protection to off-water style, we'll have you covered no matter what adventure lies ahead.<\/p>",
+            "size": "text-size-regular"
+          }
+        }
+      },
+      "block_order": [
+        "template--17918040834330__430e3fd4-6487-4550-8d73-86cdc88a218b-1676976677d37e1c8b-1",
+        "subheading_xtWGJP",
+        "text_qd6ihn"
+      ],
+      "custom_css": [
+        "{background: #f7f4ef;}",
+        ".subheading {color: #0581ff; font-weight: 800; font-size: 16px;}"
+      ],
+      "settings": {
+        "id": "",
+        "text_width": "grid",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_heading": "#0E4175",
+        "color_text": "#252f35",
+        "color_links": "#2c2d2e",
+        "full_bleed_layout": false,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "background_video_Ci97pY": {
+      "type": "background-video",
+      "blocks": {
+        "button_qQYtfj": {
+          "type": "button",
+          "settings": {
+          }
+        },
+        "subheading_YLPxtQ": {
+          "type": "subheading",
+          "settings": {
+            "text": "Watch Now"
+          }
+        }
+      },
+      "block_order": [
+        "button_qQYtfj",
+        "subheading_YLPxtQ"
+      ],
+      "settings": {
+        "desktop_height": "desktop-height-650",
+        "mobile_height": "mobile-height-500",
+        "full_width": true,
+        "video_controls": false,
+        "video": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+        "video_hosted": "shopify:\/\/files\/videos\/huk_pursuit-hoodie.mp4",
+        "overlay_color": "#000000",
+        "overlay_opacity": 25,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "image_with_text_overlay_qFzrUn": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_gyaxKJ": {
+          "type": "heading",
+          "settings": {
+            "text": "10 years. full throttle.",
+            "heading_size": "h2"
+          }
+        },
+        "text_Kz6Y9x": {
+          "type": "text",
+          "settings": {
+            "text": "<p>From day one, we've been driven by the things that connect all anglers - early mornings, long days, gas station sandwiches, the thrill of feeling that thump and the line going tight, small town bbq stops, the flash of a wake or tail that forced a quick cast, the hat backward run to the next spot, cracking a cold one at the dock, telling stories around firepit late into the night ... we've built our life around this. <br\/><br\/>More than allegiance to a species, body of water, or type of gear, we stand by the belief that life is more epic on the water. <\/p>",
+            "description_size": "small"
+          }
+        }
+      },
+      "block_order": [
+        "heading_gyaxKJ",
+        "text_Kz6Y9x"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/our-story-bg.jpg",
+        "image_parallax": false,
+        "desktop_height": "desktop-height-650",
+        "mobile_height": "mobile-height-500",
+        "full_width": true,
+        "content_width": "small",
+        "content_position": "top-right",
+        "text_alignment": "left",
+        "text_color": "#0e4175",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "1661619177029ffd60": {
+      "type": "gallery",
+      "blocks": {
+        "1661619177c83c7652-0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/gall-item-1.gif",
+            "enable_gallery_video": false,
+            "enable_hover_play": true,
+            "subheading": "",
+            "title": "",
+            "marker_style": "style1",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "use_text_button": false,
+            "block_link": "",
+            "marker_color": "#fd6262"
+          }
+        },
+        "image_F7eJKB": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_99.png",
+            "enable_gallery_video": false,
+            "enable_hover_play": true,
+            "subheading": "",
+            "title": "",
+            "marker_style": "style1",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "use_text_button": false,
+            "block_link": "",
+            "marker_color": "#fd6262"
+          }
+        },
+        "image_nkUBrf": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_105.png",
+            "enable_gallery_video": false,
+            "enable_hover_play": true,
+            "subheading": "",
+            "title": "",
+            "marker_style": "style1",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "use_text_button": false,
+            "block_link": "",
+            "marker_color": "#fd6262"
+          }
+        },
+        "image_Mtc9H4": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/gal-item-4.gif",
+            "enable_gallery_video": false,
+            "enable_hover_play": true,
+            "subheading": "",
+            "title": "",
+            "marker_style": "style1",
+            "text": "",
+            "link_label": "",
+            "link": "",
+            "use_text_button": false,
+            "block_link": "",
+            "marker_color": "#fd6262"
+          }
+        }
+      },
+      "block_order": [
+        "1661619177c83c7652-0",
+        "image_F7eJKB",
+        "image_nkUBrf",
+        "image_Mtc9H4"
+      ],
+      "custom_css": [
+        "{background: #f7f4ef;}"
+      ],
+      "settings": {
+        "columns_desktop": 2,
+        "full_width": false,
+        "mobile_swipe": true,
+        "image_ratio": "adapt",
+        "content_position": "middle-center",
+        "text_alignment": "center",
+        "column_spacing": "large",
+        "heading_size": "h3",
+        "description_size": "small",
+        "overlay_color": "#353535",
+        "overlay_opacity": 0,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "76bbe0bf-7501-455a-acd8-8418cd712356": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_7L8eUn": {
+          "type": "heading",
+          "settings": {
+            "text": "A BRIEF HISTORY OF",
+            "marker_style": "style1",
+            "size": "h4",
+            "marker_color": "#fd6262"
+          }
+        },
+        "heading_hchQUV": {
+          "type": "heading",
+          "settings": {
+            "text": "THE ICON",
+            "marker_style": "style1",
+            "size": "h1",
+            "marker_color": "#fd6262"
+          }
+        },
+        "heading_TCHLMU": {
+          "type": "heading",
+          "settings": {
+            "text": "The Shirt That Started It All",
+            "marker_style": "style1",
+            "size": "h4",
+            "marker_color": "#fd6262"
+          }
+        },
+        "template--17918040834330__76bbe0bf-7501-455a-acd8-8418cd712356-1676976677d37e1c8b-2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Alooh bar barbelless beaked blacktip canary dojo duckbill dusky horsefish labyrinth lionfish. Alaska boga bonefish bonytongue bottlenose cat cookie-cutter delta driftwood duckbilled elver garden glass gray gulf kissing lampfish limia mudfish orbicular pompano.<\/p>",
+            "size": "text-size-small"
+          }
+        }
+      },
+      "block_order": [
+        "heading_7L8eUn",
+        "heading_hchQUV",
+        "heading_TCHLMU",
+        "template--17918040834330__76bbe0bf-7501-455a-acd8-8418cd712356-1676976677d37e1c8b-2"
+      ],
+      "disabled": true,
+      "custom_css": [
+        "{background: #f7f4ef;}"
+      ],
+      "settings": {
+        "id": "",
+        "text_width": "medium",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_heading": "#0581FF",
+        "color_text": "#303c43",
+        "color_links": "#2c2d2e",
+        "full_bleed_layout": false,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
+    },
+    "timeline_BFHGp8": {
+      "type": "timeline",
+      "blocks": {
+        "milestone_9QdAYh": {
+          "type": "milestone",
+          "settings": {
+            "milestone_image": "shopify:\/\/shop_images\/Rectangle_101.jpg",
+            "milestone_image_alignment": "left",
+            "milestone_title": "Bold decisions create a big brand",
+            "milestone_description": "Four friends decided chase an idea - to build a company that supported their passion for fishing all year long and to design best-in-class gear that looked good on and off the water.",
+            "milestone_date": "2014"
+          }
+        },
+        "milestone_DKGxPD": {
+          "type": "milestone",
+          "settings": {
+            "milestone_image": "shopify:\/\/shop_images\/Rectangle_102.jpg",
+            "milestone_image_alignment": "right",
+            "milestone_title": "THE BEGINNING OF HUK",
+            "milestone_description": "Huk was born with the launch of the Icon shirt, a new aggressive take on the performance fishing market. With bold colors and big branding, the guys rolled up to events with wrapped Freemans, and in that moment Huk shook up the space with an attitude that hadn't been seen before.",
+            "milestone_date": "2015"
+          }
+        },
+        "milestone_8HR7JN": {
+          "type": "milestone",
+          "settings": {
+            "milestone_image": "shopify:\/\/shop_images\/Rectangle_103.jpg",
+            "milestone_image_alignment": "left",
+            "milestone_title": "THE ICON MAKES WAVES",
+            "milestone_description": "The Icon goes national with distribution hitting all 50 states in only 3 years. Along with the Icon, Huk now represented a truly technical line of apparel built to allow serious anglers to fish harder and in more comfort.",
+            "milestone_date": "2018"
+          }
+        },
+        "milestone_KgbY66": {
+          "type": "milestone",
+          "settings": {
+            "milestone_image": "shopify:\/\/shop_images\/E4A6839rt_CC_medium_82e17a10-ad37-42c5-b09a-a666f1c51890.jpg",
+            "milestone_image_alignment": "right",
+            "milestone_title": "TIDE POINT ENTERS THE CHAT",
+            "milestone_description": "A fresh take on an old school shirt. After building the brand through performance knits, it was time to take on an industry giant - the woven button-down fishing shirt. Creating a knock off wasn’t our style, so we developed a cleaner, faster, more modern fit button down that delivered exceptional performance without the weight, do-dads, and giant baffles that our competition relied on to perform. The Tide Point was a hit and is still one of our best sellers today.",
+            "milestone_date": "2019"
+          }
+        },
+        "milestone_jd4Pp3": {
+          "type": "milestone",
+          "settings": {
+            "milestone_image": "shopify:\/\/shop_images\/FL_23Huk_547-_medium_f80b7403-4b60-4c53-a220-be7507b3fb72.jpg",
+            "milestone_image_alignment": "left",
+            "milestone_title": "A COLLECTION IS BORN",
+            "milestone_description": "Recognizing the energy around our performance driven approach to apparel, we began to build out new products to support the rest of our consumer’s lifestyle. We took inspiration from our performance fabrics and expanded into new water-inspired lifestyle categories that did more than just look good. Launching the Kona shirt opened the door to a whole new look for Huk - on the boat performance cred met off the boat sharp looks. The Kona has grown to become our customer's favorite everyday shirt and is offered in over 30 colors and prints.",
+            "milestone_date": "2020"
+          }
+        },
+        "milestone_4ArijA": {
+          "type": "milestone",
+          "settings": {
+            "milestone_image": "shopify:\/\/shop_images\/Rogue_Wave_Sole.jpg",
+            "milestone_image_alignment": "right",
+            "milestone_title": "A GAME-CHANGING BOOT",
+            "milestone_description": "2020 was a big year marking our entry into the waterproof boot category with the new Rogue Wave. Leveraging over two years of feedback and testing with guides and captains across the country, our proprietary Grip-X outsole was designed to be the ultimate in on-the-water stability, with a multi-directional traction support and all-day comfort.",
+            "milestone_date": "2020"
+          }
+        },
+        "milestone_YYimFQ": {
+          "type": "milestone",
+          "settings": {
+            "milestone_image": "shopify:\/\/shop_images\/Rectangle_104.jpg",
+            "milestone_image_alignment": "left",
+            "milestone_title": "A REDESIGN OF AN ICON",
+            "milestone_description": "Our 10th anniversary brought a revamp to the shirt that started it all. With a redesigned expanded full back mesh panel and hood, updated raglan sleeves to increase range of motion, and a modern fit (while maintaining 50+ UPF protection), the Icon is stronger than ever.  We continue to innovate for the anglers that trust us to gear them up to be First to the Fish.",
+            "milestone_date": "2024"
+          }
+        }
+      },
+      "block_order": [
+        "milestone_9QdAYh",
+        "milestone_DKGxPD",
+        "milestone_8HR7JN",
+        "milestone_KgbY66",
+        "milestone_jd4Pp3",
+        "milestone_4ArijA",
+        "milestone_YYimFQ"
+      ],
+      "settings": {
+        "bg_image": "shopify:\/\/shop_images\/timeline-bg-texture.jpg",
+        "subheading-text": "HUK",
+        "main-heading-text": "A BRIEF HISTORY",
+        "tagline-text": "",
+        "description-text": "<p>What started as a shirt program with our best-selling Icon, has become the ultimate hot weather fishing kit with head-to-toe coverage, in peak performance fabrics.<\/p>",
+        "intro-text": "before Icon",
+        "intro-description": "<p>Everything was made of cotton or fit like a trash bag and people got sweaty and sunburned.<\/p>",
+        "cta_label": "SHOP MUST-HAVE GEAR",
+        "cta_link": "shopify:\/\/collections\/new-arrivals-best-sellers"
+      }
+    },
+    "8653503a-90e7-446a-8f99-8905e1d4a2ac": {
+      "type": "image-with-text",
+      "blocks": {
+        "db73f8a2-20e5-459a-9b76-0f22a981a6f5": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Group_70.png"
+          }
+        },
+        "template--17918040834330__8653503a-90e7-446a-8f99-8905e1d4a2ac-16769132332abda0ff-1": {
+          "type": "heading",
+          "settings": {
+            "text": "The Original",
+            "marker_style": "style3",
+            "heading_size": "h4",
+            "marker_color": "#1fd76c"
+          }
+        },
+        "template--17918040834330__8653503a-90e7-446a-8f99-8905e1d4a2ac-16769132332abda0ff-2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Alooh bar barbelless beaked blacktip canary dojo duckbill dusky horsefish labyrinth lionfish. Alaska boga bonefish bonytongue bottlenose cat <\/p><ul><li>cookie-cutter delta driftwood duckbilledelver<\/li><li>garden glass gray gulf kissing lamp<\/li><li>fishlimia mudfish orbicular pompano.<\/li><\/ul>"
+          }
+        }
+      },
+      "block_order": [
+        "db73f8a2-20e5-459a-9b76-0f22a981a6f5",
+        "template--17918040834330__8653503a-90e7-446a-8f99-8905e1d4a2ac-16769132332abda0ff-1",
+        "template--17918040834330__8653503a-90e7-446a-8f99-8905e1d4a2ac-16769132332abda0ff-2"
+      ],
+      "disabled": true,
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Rectangle_101.jpg",
+        "use_video": false,
+        "video": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+        "video_autoplay": true,
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "full_width": false,
+        "layout": "image_first",
+        "content_position": "text-left",
+        "column_spacing": "small",
+        "color_bg": "#ffffff",
+        "color_text": "#252f35",
+        "color_border": "#e2e2e2",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "image_with_text_b7xeGG": {
+      "type": "image-with-text",
+      "blocks": {
+        "image_pqNHDk": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Group_70.png"
+          }
+        },
+        "heading_XfFpcx": {
+          "type": "heading",
+          "settings": {
+            "text": "The Original",
+            "marker_style": "style3",
+            "heading_size": "h4",
+            "marker_color": "#1fd76c"
+          }
+        },
+        "text_jgEBig": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Alooh bar barbelless beaked blacktip canary dojo duckbill dusky horsefish labyrinth lionfish. Alaska boga bonefish bonytongue bottlenose cat <\/p><ul><li>cookie-cutter delta driftwood duckbilledelver<\/li><li>garden glass gray gulf kissing lamp<\/li><li>fishlimia mudfish orbicular pompano.<\/li><\/ul>"
+          }
+        }
+      },
+      "block_order": [
+        "image_pqNHDk",
+        "heading_XfFpcx",
+        "text_jgEBig"
+      ],
+      "disabled": true,
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Rectangle_102.jpg",
+        "use_video": false,
+        "video": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+        "video_autoplay": true,
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "full_width": false,
+        "layout": "text_first",
+        "content_position": "text-left",
+        "column_spacing": "small",
+        "color_bg": "#ffffff",
+        "color_text": "#252f35",
+        "color_border": "#e2e2e2",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "image_with_text_36KWEV": {
+      "type": "image-with-text",
+      "blocks": {
+        "image_NHDjfb": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Group_70.png"
+          }
+        },
+        "heading_eGXaEG": {
+          "type": "heading",
+          "settings": {
+            "text": "The Original",
+            "marker_style": "style3",
+            "heading_size": "h4",
+            "marker_color": "#1fd76c"
+          }
+        },
+        "text_iBaCiL": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Alooh bar barbelless beaked blacktip canary dojo duckbill dusky horsefish labyrinth lionfish. Alaska boga bonefish bonytongue bottlenose cat <\/p><ul><li>cookie-cutter delta driftwood duckbilledelver<\/li><li>garden glass gray gulf kissing lamp<\/li><li>fishlimia mudfish orbicular pompano.<\/li><\/ul>"
+          }
+        }
+      },
+      "block_order": [
+        "image_NHDjfb",
+        "heading_eGXaEG",
+        "text_iBaCiL"
+      ],
+      "disabled": true,
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Rectangle_103.jpg",
+        "use_video": false,
+        "video": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+        "video_autoplay": true,
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "full_width": false,
+        "layout": "image_first",
+        "content_position": "text-left",
+        "column_spacing": "small",
+        "color_bg": "#ffffff",
+        "color_text": "#252f35",
+        "color_border": "#e2e2e2",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "image_with_text_KjYYT8": {
+      "type": "image-with-text",
+      "blocks": {
+        "image_rGaXWD": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Group_71.png"
+          }
+        },
+        "heading_MNExBq": {
+          "type": "heading",
+          "settings": {
+            "text": "The Original",
+            "marker_style": "style3",
+            "heading_size": "h4",
+            "marker_color": "#1fd76c"
+          }
+        },
+        "text_jnHHPP": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Alooh bar barbelless beaked blacktip canary dojo duckbill dusky horsefish labyrinth lionfish. Alaska boga bonefish bonytongue bottlenose cat <\/p><ul><li>cookie-cutter delta driftwood duckbilledelver<\/li><li>garden glass gray gulf kissing lamp<\/li><li>fishlimia mudfish orbicular pompano.<\/li><\/ul>"
+          }
+        }
+      },
+      "block_order": [
+        "image_rGaXWD",
+        "heading_MNExBq",
+        "text_jnHHPP"
+      ],
+      "disabled": true,
+      "custom_css": [
+
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Rectangle_104.jpg",
+        "use_video": false,
+        "video": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+        "video_autoplay": true,
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "full_width": false,
+        "layout": "text_first",
+        "content_position": "text-left",
+        "column_spacing": "small",
+        "color_bg": "#ffffff",
+        "color_text": "#252f35",
+        "color_border": "#e2e2e2",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "3c475617-855b-4e78-b265-b1ed05a760bb": {
+      "type": "spacer",
+      "custom_css": [
+        "{background: #f7f4ef;}"
+      ],
+      "settings": {
+        "spacer_mobile": 40,
+        "spacer_desktop": 185,
+        "border_separator": false,
+        "border_separator_full": false
+      }
+    },
+    "rich_text_PnLPXP": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_UNaAyt": {
+          "type": "heading",
+          "settings": {
+            "text": "Our Guiding Principles",
+            "marker_style": "style1",
+            "size": "h3",
+            "marker_color": "#fd6262"
+          }
+        }
+      },
+      "block_order": [
+        "heading_UNaAyt"
+      ],
+      "settings": {
+        "id": "",
+        "text_width": "medium",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_heading": "#1a1c1d",
+        "color_text": "#2c2d2e",
+        "color_links": "#2c2d2e",
+        "full_bleed_layout": false,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
+    },
+    "b4886a0d-aad0-4c13-9dc7-7decc9f31202": {
+      "type": "rich-text",
+      "settings": {
+        "id": "",
+        "text_width": "xlarge",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_heading": "#bb6b6b",
+        "color_text": "#2c2d2e",
+        "color_links": "#2c2d2e",
+        "full_bleed_layout": false,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "4741272f-d447-433a-bf7a-8df7997a0032": {
+      "type": "multicolumn",
+      "blocks": {
+        "template--17918040834330__4741272f-d447-433a-bf7a-8df7997a0032-16769789110686510d-0": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_107.png",
+            "image_full_width": false,
+            "image_link": "",
+            "title": "For All Anglers",
+            "text": "<p>At Huk we are not bound by a body of water, species of fish, or type of tackle. Our life centers around finding our way to the water - we just love to fish ... so don't be shy with those invites.<\/p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "template--17918040834330__4741272f-d447-433a-bf7a-8df7997a0032-16769789110686510d-1": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_108.png",
+            "image_full_width": false,
+            "image_link": "",
+            "title": "Everything Performs",
+            "text": "<p>Our approach to everything we make starts with looking good and adding value through performance. Whether it's a technical shirt that allows you to stay out longer and cast easier or that shirt comfortable enough to pick the table on the patio when everyone else is scrambling for AC, we take a performance first approach to looking good on and off the water. <\/p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "template--17918040834330__4741272f-d447-433a-bf7a-8df7997a0032-16769789110686510d-2": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Rectangle_109.png",
+            "image_full_width": false,
+            "image_link": "",
+            "title": "Bring The Energy",
+            "text": "<p>We believe life should be epic and living your life on the water is the best way to do that. Our personality is a reflection of our team ... we love bright colors, big adventure, hookset celebrations, making faces for the camera and showing up with a case of Modelo. The water keeps us young (even if only at heart). <\/p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--17918040834330__4741272f-d447-433a-bf7a-8df7997a0032-16769789110686510d-0",
+        "template--17918040834330__4741272f-d447-433a-bf7a-8df7997a0032-16769789110686510d-1",
+        "template--17918040834330__4741272f-d447-433a-bf7a-8df7997a0032-16769789110686510d-2"
+      ],
+      "settings": {
+        "heading": "",
+        "marker_style": "style1",
+        "description": "",
+        "link": "",
+        "link_copy": "",
+        "columns_desktop": 3,
+        "mobile_swipe": false,
+        "image_ratio": "adapt",
+        "text_alignment": "left",
+        "heading_size": "h5",
+        "color_heading": "#1a1c1d",
+        "marker_color": "#fd6262",
+        "color_text": "#2c2d2e",
+        "color_links": "#2c2d2e",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true,
+        "enable_hover_effect": false
+      }
+    },
+    "multicolumn_BBbKVF": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_YWqQAQ": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/angler.png",
+            "image_full_width": false,
+            "image_link": "",
+            "title": "Capt. Tom Roland",
+            "text": "<p>Guide & Host of The Saltwater Experience<\/p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_AgTE79": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/angler.png",
+            "image_full_width": false,
+            "image_link": "",
+            "title": "Capt. Tom Roland",
+            "text": "<p>Guide & Host of The Saltwater Experience<\/p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_GRQM98": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/angler.png",
+            "image_full_width": false,
+            "image_link": "",
+            "title": "Capt. Tom Roland",
+            "text": "<p>Guide & Host of The Saltwater Experience<\/p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_pNjnwq": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/angler.png",
+            "image_full_width": false,
+            "image_link": "",
+            "title": "Capt. Tom Roland",
+            "text": "<p>Guide & Host of The Saltwater Experience<\/p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_YWqQAQ",
+        "column_AgTE79",
+        "column_GRQM98",
+        "column_pNjnwq"
+      ],
+      "disabled": true,
+      "custom_css": [
+
+      ],
+      "settings": {
+        "heading": "Our Anglers",
+        "marker_style": "style1",
+        "description": "<p>Meet our team of ambassadors that embody our First to the Fish mentality.<\/p>",
+        "link": "",
+        "link_copy": "",
+        "columns_desktop": 4,
+        "mobile_swipe": false,
+        "image_ratio": "adapt",
+        "text_alignment": "left",
+        "heading_size": "h5",
+        "section_bg_img": "shopify:\/\/shop_images\/huk_our-anglers_bg-dark.jpg",
+        "color_heading": "#ffffff",
+        "marker_color": "#fd6262",
+        "color_text": "#ffffff",
+        "color_links": "#2c2d2e",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true,
+        "enable_hover_effect": false
+      }
+    }
+  },
+  "order": [
+    "166161901464a25e50",
+    "430e3fd4-6487-4550-8d73-86cdc88a218b",
+    "background_video_Ci97pY",
+    "image_with_text_overlay_qFzrUn",
+    "1661619177029ffd60",
+    "76bbe0bf-7501-455a-acd8-8418cd712356",
+    "timeline_BFHGp8",
+    "8653503a-90e7-446a-8f99-8905e1d4a2ac",
+    "image_with_text_b7xeGG",
+    "image_with_text_36KWEV",
+    "image_with_text_KjYYT8",
+    "3c475617-855b-4e78-b265-b1ed05a760bb",
+    "rich_text_PnLPXP",
+    "b4886a0d-aad0-4c13-9dc7-7decc9f31202",
+    "4741272f-d447-433a-bf7a-8df7997a0032",
+    "multicolumn_BBbKVF"
+  ]
+}

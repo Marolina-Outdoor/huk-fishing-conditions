@@ -1,0 +1,203 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {}
+    },
+    "accessibe_btn_PXQjGY": {
+      "type": "accessibe-btn",
+      "settings": {}
+    },
+    "rich_text_TzBdR6": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_njVRF6": {
+          "type": "subheading",
+          "settings": {
+            "text": "Clean 'Em. Shuck 'Em. Down 'Em."
+          }
+        },
+        "heading_gkjdmf": {
+          "type": "heading",
+          "settings": {
+            "text": "Oyster Season Giveaway",
+            "marker_style": "style1",
+            "size": "h3",
+            "marker_color": "#fd6262"
+          }
+        },
+        "text_JffJw8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>It's Oyster Season, and we're teaming up with<a href=\"https://williamsknife.com/\" target=\"_blank\" title=\"https://williamsknife.com/\"> <em><strong>Williams Knife Co.</strong></em></a><em><strong> </strong></em>to bring you the ultimate shucking essentials. We're giving away a Huk Haswer Flannel, two  Edisto Oyster Knives engraved with HUK and two Oyster Grips. All you need to do is enter your info below. Good luck!</p><p>Giveaway ends 10/25 at 11:59pm EST--the winner will be contacted by @hukgear on Instagram Monday, 10/28.</p>",
+            "size": "text-size-regular"
+          }
+        },
+        "button_ACHmpU": {
+          "type": "button",
+          "disabled": true,
+          "settings": {
+            "link_label": "Learn More",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_njVRF6",
+        "heading_gkjdmf",
+        "text_JffJw8",
+        "button_ACHmpU"
+      ],
+      "settings": {
+        "id": "",
+        "text_width": "medium",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_heading": "#1a1c1d",
+        "color_text": "#2c2d2e",
+        "color_links": "#2c2d2e",
+        "full_bleed_layout": false,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
+    },
+    "single_image_MPcPKf": {
+      "type": "single-image",
+      "settings": {
+        "image": "shopify://shop_images/williamsoyster_huk-13.jpg",
+        "image_mobile": "shopify://shop_images/williamsoyster_huk-13.jpg",
+        "full_width": true,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "1729021288a891bb90": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_email_marketing_sms_form_embed_block_ybJTRd": {
+          "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/form-embed-block/2632fe16-c075-4321-a88b-50b567f42507",
+          "settings": {
+            "formId": "<div class=\"klaviyo-form-U2apcu\"></div>"
+          }
+        }
+      },
+      "block_order": [
+        "klaviyo_email_marketing_sms_form_embed_block_ybJTRd"
+      ],
+      "settings": {}
+    },
+    "image_with_text_xjeiEW": {
+      "type": "image-with-text",
+      "blocks": {
+        "subheading_LPkJiF": {
+          "type": "subheading",
+          "settings": {
+            "text": "Add a tagline"
+          }
+        },
+        "heading_BaC4gA": {
+          "type": "heading",
+          "settings": {
+            "text": "Image with text",
+            "marker_style": "style1",
+            "heading_size": "h3",
+            "marker_color": "#fd6262"
+          }
+        },
+        "text_zCzEtR": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_LPkJiF",
+        "heading_BaC4gA",
+        "text_zCzEtR"
+      ],
+      "disabled": true,
+      "settings": {
+        "use_video": false,
+        "video": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "video_autoplay": true,
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "full_width": false,
+        "layout": "image_first",
+        "content_position": "text-left",
+        "column_spacing": "medium",
+        "color_bg": "#ffffff",
+        "color_text": "#2c2d2e",
+        "color_border": "#e2e2e2",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "layered_images_with_text_LFnnGA": {
+      "type": "layered-images-with-text",
+      "blocks": {
+        "subheading_WLGbEQ": {
+          "type": "subheading",
+          "settings": {
+            "text": "Williams Knife Co."
+          }
+        },
+        "heading_76kngH": {
+          "type": "heading",
+          "settings": {
+            "text": "Edisto Oyster Knife",
+            "marker_style": "style1",
+            "heading_size": "h3",
+            "marker_color": "#fd6262"
+          }
+        },
+        "text_dXbwTj": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Designed with intention of shape and form, and crafted to be elegant and functional - <em><strong>The Edisto Oyster Knife.</strong></em> It's the perfect tool for conquering our barnacled brethren of the deep. But it’s also a conversation starter, a memory maker, and a treasured tool that will stay with your oyster-loving clan for generations.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_WLGbEQ",
+        "heading_76kngH",
+        "text_dXbwTj"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/williamsoyster_huk-09_ef494390-1d77-4509-a792-c46a1bf4e9ba.jpg",
+        "image_ratio": "square",
+        "image_2": "shopify://shop_images/williamsoyster_huk-03.jpg",
+        "image_ratio_2": "square",
+        "image_3": "shopify://shop_images/williamsoyster_huk-04.jpg",
+        "image_ratio_3": "square",
+        "full_width": true,
+        "layout": "image_first",
+        "content_alignment": "text-left",
+        "content_position": "middle",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "accessibe_btn_PXQjGY",
+    "rich_text_TzBdR6",
+    "single_image_MPcPKf",
+    "1729021288a891bb90",
+    "image_with_text_xjeiEW",
+    "layered_images_with_text_LFnnGA"
+  ]
+}

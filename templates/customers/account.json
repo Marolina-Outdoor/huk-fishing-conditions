@@ -1,0 +1,66 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {
+      }
+    },
+    "template-header": {
+      "type": "template-header",
+      "settings": {
+        "show_collection_image": false,
+        "show_collection_description": true,
+        "show_subcollections": true,
+        "color_subcollection_bg": "#ffffff",
+        "color_subcollection_text": "#2C2D2E",
+        "display_description": true
+      }
+    },
+    "main-account": {
+      "type": "main-account",
+      "settings": {
+      }
+    },
+    "promotion_blocks_HxQ8jG": {
+      "type": "promotion-blocks",
+      "blocks": {
+        "promotion_36N7xd": {
+          "type": "promotion",
+          "settings": {
+            "title": "Captain's Club",
+            "button_text": "View Your Rewards",
+            "button_link": "\/pages\/rewards"
+          }
+        }
+      },
+      "block_order": [
+        "promotion_36N7xd"
+      ],
+      "settings": {
+        "mobile_swipe": false,
+        "image_ratio": "square",
+        "column_spacing": "medium",
+        "color_bg": "#ffffff",
+        "color_text": "#17314b",
+        "color_link": "#3F72E5",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": false
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "template-header",
+    "main-account",
+    "promotion_blocks_HxQ8jG"
+  ]
+}

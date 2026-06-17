@@ -1,0 +1,18 @@
+<div class="row" data-milestone>
+    {%- liquid
+     assign alignment = block.settings.milestone_image_alignment 
+     assign milestone_image = block.settings.milestone_image
+     assign milestone_title = block.settings.milestone_title 
+     assign milestone_description = block.settings.milestone_description 
+     assign milestone_date = block.settings.milestone_date
+     -%}
+    <div class="milestone small-12 columns" data-align="{{ alignment }}">
+        {% if alignment == 'left' %}
+            {%- render 'milestone-image', milestone_image: milestone_image, milestone_date:milestone_date  -%}
+            {%- render 'milestone-content', milestone_title:milestone_title, milestone_description: milestone_description -%}
+        {% else %}        
+        {%- render 'milestone-content', milestone_title:milestone_title, milestone_description: milestone_description -%}
+        {%- render 'milestone-image', milestone_image: milestone_image, milestone_date:milestone_date  -%}
+        {% endif %}                    
+    </div>
+</div> 

@@ -1,0 +1,250 @@
+{%- liquid
+  if sticky
+    assign appended = '--sticky'
+  endif
+%}
+
+{% assign siblings_product_list = block.settings.variant_siblings_product_list %}
+{% assign split_sale = product.metafields.custom.link_to_products.value.split_fp_and_sale.value %}
+{% assign solid_colors = settings.solid_color | strip_newlines | split: ',' | strip %}
+{% assign print_colors = settings.pattern_color | strip_newlines | split: ',' %}
+{% assign current_color_selection = product.options_with_values[0].values[0] %}
+
+{% for sib_product in siblings_product_list limit: 50 %}
+  {% for option in sib_product.options_with_values %}
+    {% if option.name == 'Color' or option.name == 'color' %}
+      {% for value in option.values %}
+        {% if print_colors contains value %}
+          {% assign show_print_colors = true %}
+        {% endif %}
+
+        {% if solid_colors contains value %}
+          {% assign show_solid_colors = true %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
+{% if show_print_colors or show_solid_colors %}
+  <fieldset
+    class="product-form__input product-form__input--color"
+    data-splitsale="{{ split_sale }}"
+    data-index="option{{ forloop.index }}"
+    data-handle="{{ handle }}"
+		data-colorswatches="true"
+  >
+    <div class="solid_swatches">
+      {% if show_solid_colors %}
+        <div class="form__label">
+          SOLID
+          <span class="form__label__value" data-handle="{{ handle }}">
+            {% if solid_colors contains option.selected_value %}
+              : {{ option.selected_value }}
+            {% endif %}
+          </span>
+          {{ sizing_link }}
+        </div>
+        {% assign solid_color_variant_name_handleized = color_variant_name | handleize %}
+        {% assign option_count = 0 %}
+        {% for sib_product in siblings_product_list limit: 50 %}
+          {% liquid
+            assign sib_product_on_sale = false
+            for tag in sib_product.tags
+              if tag contains 'sale-'
+                unless tag contains 'pos' or tag contains 'POS' or tag contains 'sale-xfory-2-'
+                  assign sib_product_on_sale = true
+                endunless
+              endif
+            endfor
+          %}
+          {% if split_sale == true %}
+            {% if sib_product_on_sale == is_on_sale %}
+              {% for option in sib_product.options_with_values %}
+                {% if option.name == 'Color' or option.name == 'color' %}
+                  {% if solid_colors contains option.values[0] %}
+                    {% assign option_count = option_count | plus: 1 %}
+                    {% assign show_solid_colors = true %}
+                    {% assign color_name = option.values[0] %}
+                    {% assign solid_color_variant_name_handleized = color_name | handleize %}
+                    {% assign bg_value = color_name | file_url %}
+
+                    <input
+                      type="radio"
+                      id="{{ section.id }}-{{ sib_product.handle }}-{{ forloop.index0 }}{{ appended }}"
+                      name="{{ option.name | append: appended }}"
+                      value="{{ color_name | escape }}"
+                      data-product-handle="{{ sib_product.handle }}"
+                      data-product-id="{{ sib_product.id }}"
+                      form="{{ product_form_id }}"
+                      {% if current_color_selection == color_name %}
+                        checked
+                      {% endif %}
+                    >
+
+                    <label
+                      class="swatch-label"
+                      for="{{ section.id }}-{{ sib_product.handle }}-{{ forloop.index0 }}{{ appended }}"
+                      style="--option-color: {{ color_name | downcase | escape }};   {%- if bg_value -%} --option-color-image: url('{{solid_color_variant_name_handleized | append: '.png' | file_img_url: '37.5x37.5'  }}');{%- endif -%}"
+                      data-var-url="{{ solid_product_group.url }}"
+                    >
+                      {{ color_name | escape }}
+                      <span class="tooltiptext">{{- color_name | escape -}}</span>
+                    </label>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% else %}
+            {% for option in sib_product.options_with_values %}
+              {% if option.name == 'Color' or option.name == 'color' %}
+                {% if solid_colors contains option.values[0] %}
+                  {% assign option_count = option_count | plus: 1 %}
+                  {% assign show_solid_colors = true %}
+                  {% assign color_name = option.values[0] %}
+                  {% assign solid_color_variant_name_handleized = color_name | handleize %}
+                  {% assign bg_value = color_name | file_url %}
+
+                  <input
+                    type="radio"
+                    id="{{ section.id }}-{{ sib_product.handle }}-{{ forloop.index0 }}{{ appended }}"
+                    name="{{ option.name | append: appended }}"
+                    value="{{ color_name | escape }}"
+                    data-product-handle="{{ sib_product.handle }}"
+                    data-product-id="{{ sib_product.id }}"
+										data-color="true"
+                    form="{{ product_form_id }}"
+                    {% if current_color_selection == color_name %}
+                      checked
+                    {% endif %}
+                  >
+
+                  <label
+                    class="swatch-label"
+                    for="{{ section.id }}-{{ sib_product.handle }}-{{ forloop.index0 }}{{ appended }}"
+                    style="--option-color: {{ color_name | downcase | escape }};   {%- if bg_value -%} --option-color-image: url('{{solid_color_variant_name_handleized | append: '.png' | file_img_url: '37.5x37.5'  }}');{%- endif -%}"
+                    data-var-url="{{ solid_product_group.url }}"
+                  >
+                    {{ color_name | escape }}
+                    <span class="tooltiptext">{{- color_name | escape -}}</span>
+                  </label>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+        {% if option_count == 0 %}
+          {% style %}
+            .solid_swatches {
+              display: none;
+            }
+          {% endstyle %}
+        {% endif %}
+      {% endif %}
+    </div>
+    <div class="print_swatches">
+      {% if show_print_colors %}
+        <div class="form__label">
+          PRINT
+          <span class="form__label__value" data-handle="{{ handle }}">
+            {% if print_colors contains option.selected_value %}
+              : {{ option.selected_value }}
+            {% endif %}
+          </span>
+          {{ sizing_link }}
+        </div>
+        {% assign print_option_count = 0 %}
+        {% for sib_product in siblings_product_list limit: 50 %}
+          {% liquid
+            assign sib_product_on_sale = false
+            for tag in sib_product.tags
+              if tag contains 'sale-'
+                unless tag contains 'pos' or tag contains 'POS' or tag contains 'sale-xfory-2-'
+                  assign sib_product_on_sale = true
+                endunless
+              endif
+            endfor
+          %}
+          {% if split_sale == true %}
+            {% if sib_product_on_sale == is_on_sale %}
+              {% for option in sib_product.options_with_values %}
+                {% if option.name == 'Color' or option.name == 'color' %}
+                  {% if print_colors contains option.values[0] %}
+                    {% assign print_option_count = print_option_count | plus: 1 %}
+                    {% assign show_print_colors = true %}
+                    {% assign color_name = option.values[0] %}
+                    {% assign print_color_variant_name_handleized = color_name | handleize %}
+                    {% assign bg_value = color_name | file_url %}
+                    <input
+                      type="radio"
+                      id="{{ section.id }}-{{ sib_product.handle }}-{{ forloop.index0 }}{{ appended }}"
+                      name="{{ option.name | append: appended }}"
+                      value="{{ color_name | escape }}"
+                      data-product-handle="{{ sib_product.handle }}"
+                      data-product-id="{{ sib_product.id }}"
+											data-color="true"
+                      form="{{ product_form_id }}"
+                      {% if current_color_selection == color_name %}
+                        checked
+                      {% endif %}
+                    >
+                    <label
+                      class="swatch-label"
+                      for="{{ section.id }}-{{ sib_product.handle }}-{{ forloop.index0 }}{{ appended }}"
+                      style="--option-color: {{ color_name | downcase | escape }}; {%- if bg_value -%} --option-color-image: url('{{ print_color_variant_name_handleized | append: '.png' | file_img_url: '37.5x37.5' }}');{%- endif -%}"
+                      data-var-url="{{ print_product_group.url }}"
+                    >
+                      {{ color_name | escape }}
+                      <span class="tooltiptext">{{- color_name | escape -}}</span>
+                    </label>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% else %}
+            {% for option in sib_product.options_with_values %}
+              {% if option.name == 'Color' or option.name == 'color' %}
+                {% if print_colors contains option.values[0] %}
+                  {% assign print_option_count = print_option_count | plus: 1 %}
+                  {% assign show_print_colors = true %}
+                  {% assign color_name = option.values[0] %}
+                  {% assign print_color_variant_name_handleized = color_name | handleize %}
+                  {% assign bg_value = color_name | file_url %}
+                  <input
+                    type="radio"
+                    id="{{ section.id }}-{{ sib_product.handle }}-{{ forloop.index0 }}{{ appended }}"
+                    name="{{ option.name | append: appended }}"
+                    value="{{ color_name | escape }}"
+                    data-product-handle="{{ sib_product.handle }}"
+                    data-product-id="{{ sib_product.id }}"
+										data-color="true"
+                    form="{{ product_form_id }}"
+                    {% if current_color_selection == color_name %}
+                      checked
+                    {% endif %}
+                  >
+                  <label
+                    class="swatch-label"
+                    for="{{ section.id }}-{{ sib_product.handle }}-{{ forloop.index0 }}{{ appended }}"
+                    style="--option-color: {{ color_name | downcase | escape }}; {%- if bg_value -%} --option-color-image: url('{{ print_color_variant_name_handleized | append: '.png' | file_img_url: '37.5x37.5' }}');{%- endif -%}"
+                    data-var-url="{{ print_product_group.url }}"
+                  >
+                    {{ color_name | escape }}
+                    <span class="tooltiptext">{{- color_name | escape -}}</span>
+                  </label>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+        {% if print_option_count == 0 %}
+          {% style %}
+            .print_swatches {
+              display: none;
+            }
+          {% endstyle %}
+        {% endif %}
+      {% endif %}
+    </div>
+  </fieldset>
+{% endif %}

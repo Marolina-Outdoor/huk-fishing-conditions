@@ -1,0 +1,41 @@
+{% comment %}
+  Accepts:
+  - progress_value: (Required) A number between 0 and 100.
+  - progress_color: (Optional) A CSS color value (e.g., '#ff0000', 'blue', or a gradient). Defaults to a blue gradient if not provided.
+{% endcomment %}
+
+{%- liquid
+  assign value = progress_value | default: 0 | at_least: 0 | at_most: 100
+  assign color = progress_color
+  if color == blank
+    assign color = 'linear-gradient(90deg, #034D99 0%, #0581FF 100%)'
+  endif
+-%}
+
+<style>
+  .progress-bar-container {
+    width: 100%;
+    height: 16px;
+    border:1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .progress-bar-inner {
+    height: 100%;
+    border-radius: 8px;
+    transition: width 0.5s ease-in-out;
+  }
+</style>
+
+<div class="progress-bar-container">
+  <div
+    class="progress-bar-inner"
+    style="width: {{ value }}%; background: {{ color }};"
+    role="progressbar"
+    aria-valuenow="{{ value }}"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-label="Progress indicator"
+  >
+  </div>
+</div>

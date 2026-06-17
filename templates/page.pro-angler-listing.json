@@ -1,0 +1,189 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "image_with_text_overlay_PR3W3x": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_CqdtjW": {
+          "type": "heading",
+          "settings": {
+            "text": "Pro Anglers",
+            "heading_size": "h1-xlarge"
+          }
+        }
+      },
+      "block_order": [
+        "heading_CqdtjW"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/FW24_New_Arrivals.png",
+        "image_parallax": false,
+        "desktop_height": "desktop-height-650",
+        "mobile_height": "mobile-height-500",
+        "full_width": true,
+        "content_width": "medium",
+        "content_position": "middle-center",
+        "text_alignment": "center",
+        "text_color": "#FFFFFF",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "rich_text_mEgERp": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_3ehrrY": {
+          "type": "heading",
+          "settings": {
+            "text": "Meet the team that embodies the first to the fish mentality",
+            "marker_style": "style1",
+            "size": "h3",
+            "marker_color": "#FD6262"
+          }
+        }
+      },
+      "block_order": [
+        "heading_3ehrrY"
+      ],
+      "settings": {
+        "text_width": "medium",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "#f7f4ef",
+        "color_heading": "#1a1c1d",
+        "color_text": "#2c2d2e",
+        "color_links": "#2c2d2e",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "multicolumn_XjCVBR": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_iKKTEB": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/WomensIcon-Lavender.jpg",
+            "image_full_width": false,
+            "image_link": "",
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_iPFwq6": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/WomensIcon-Lavender.jpg",
+            "image_full_width": false,
+            "image_link": "",
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_RqBTPk": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/WomensIcon-Lavender.jpg",
+            "image_full_width": false,
+            "image_link": "",
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_jnHWQr": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/WomensIcon-Lavender.jpg",
+            "image_full_width": false,
+            "image_link": "",
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_fFCATg": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/WomensIcon-Lavender.jpg",
+            "image_full_width": false,
+            "image_link": "",
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "column_m7BQfL": {
+          "type": "column",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/WomensIcon-Lavender.jpg",
+            "image_full_width": false,
+            "image_link": "",
+            "title": "Column",
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "column_iKKTEB",
+        "column_iPFwq6",
+        "column_RqBTPk",
+        "column_jnHWQr",
+        "column_fFCATg",
+        "column_m7BQfL"
+      ],
+      "custom_css": [
+        "{background-color: F7F4EF;}"
+      ],
+      "settings": {
+        "heading": "",
+        "marker_style": "style1",
+        "description": "",
+        "link": "",
+        "link_copy": "",
+        "columns_desktop": 3,
+        "mobile_swipe": false,
+        "image_ratio": "adapt",
+        "text_alignment": "left",
+        "heading_size": "h5",
+        "color_heading": "#1a1c1d",
+        "marker_color": "#FD6262",
+        "color_text": "#2c2d2e",
+        "color_links": "#2c2d2e",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_overlay_PR3W3x",
+    "rich_text_mEgERp",
+    "multicolumn_XjCVBR"
+  ]
+}

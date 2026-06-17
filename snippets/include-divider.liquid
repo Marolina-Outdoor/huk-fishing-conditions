@@ -1,0 +1,20 @@
+{% if type == 'block' %}
+  {% assign id = block.id %}
+  {% assign show_border = block.show_border %}
+  {% assign divider_border = block.settings.divider_border %}
+  {% assign divider_spacing = block.settings.divider_spacing %}
+  {% assign divider_spacing_mobile = block.settings.divider_spacing_mobile %}
+{% else %}
+  {% assign id = section.id %}
+  {% assign show_border = section.show_border %}
+  {% assign divider_border = section.settings.divider_border %}
+  {% assign divider_spacing = section.settings.divider_spacing %}
+  {% assign divider_spacing_mobile = section.settings.divider_spacing_mobile %}
+{% endif %}
+
+<div class="container" style="padding: 0;">
+  <div class="sixteen columns">
+    <hr class="page-divider-mobile {% if divider_border %}active-divider{% endif %}" style="{% if divider_spacing_mobile %}margin: {{ divider_spacing_mobile }}em 0em;{% endif %}">
+    <hr class="page-divider {% if divider_border %}active-divider{% endif %}" style="{% if divider_spacing %}margin: {{ divider_spacing }}em 0em;{% endif %}">
+  </div>
+</div>

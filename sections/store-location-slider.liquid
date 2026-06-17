@@ -1,0 +1,307 @@
+{% style %}
+  .section-sls {
+    margin: 45px 0px;
+  }
+  .section-sls__header-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+  .section-sls__slider {
+    max-width: 80%;
+    margin: auto;
+  }
+  .section-sls__slider-wrapper {
+    position: relative;
+  }
+  .section-sls__slider-wrapper:hover .flickity-nav {
+    display: flex;
+    opacity: 1;
+  }
+  .section-sls__slider-wrapper:hover .flickity-nav.flickity-prev {
+    left: 8%;
+    top: 27%;
+  }
+  .section-sls__slider-wrapper:hover .flickity-nav.flickity-next {
+    right: 8%;
+    top: 27%;
+  }
+  .section-sls__slide {
+    width: 31.95%;
+    margin-right: 2%;
+    min-width: 30%;
+  }
+  @media only screen and (max-width: 1020px) {
+    .section-sls__slide {
+      width: 30%;
+      margin-right: 5%;
+      min-width: 100%;
+    }
+  }
+  .slide__location-header-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .slide__location-header-wrap p {
+    margin-bottom: 0px;
+  }
+  .section-sls__header {
+    font-size: 3rem;
+    margin-bottom: 2.5%;
+  }
+  .slide__location {
+    font-size: 22px;
+  }
+  .slide__location-content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+  .slide__location-hours {
+    margin-bottom: 5px;
+    font-size: 14px;
+    text-align: center;
+  }
+  .slide__location-contact {
+    font-size: 14px;
+  }
+  .slide__location-link {
+    color: #0e4174;
+    font-weight: bold;
+    font-size: 1rem;
+    border-bottom: 2px solid #0e4174;
+  }
+  .slide__location-hours__header {
+    font-size: 16px;
+    letter-spacing: normal;
+    margin-bottom: 0px;
+  }
+  .section-sls__slider .flickity-prev-next-button.flickity-previous {
+    left: -5%;
+    top: 25%;
+  }
+  .section-sls__slider .flickity-prev-next-button.flickity-next {
+    right: -5%;
+    top: 25%;
+  }
+  @media only screen and (max-width: 572px) {
+    .section-sls__slider .flickity-prev-next-button.flickity-previous {
+      left: -10%;
+      width: 25px;
+      height: 25px;
+    }
+    .section-sls__slider .flickity-prev-next-button.flickity-next {
+      right: -10%;
+      width: 25px;
+      height: 25px;
+    }
+  }
+  .section-sls__slider .flickity-button:hover path {
+    fill: #0e4174;
+  }
+  .section-sls__slider .slide__location-img-overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: .5;
+    background: {{ section.settings.overlay_color }};
+  }
+  .section-sls__slider .slide__location-header-img {
+    position: relative;
+    max-height: 238px;
+    overflow: hidden;
+    height: 238px;
+  }
+  .section-sls__slider .slide__location-header-img img {
+    height: 100%;
+    object-position: center;
+    object-fit: cover;
+  }
+  .section-sls__slider .slide__location-name {
+    font-size: 26px;
+    margin-top: 15px;
+  }
+  .section-sls__slider .slide__location-header-content {
+    position: absolute;
+    left: 0;
+    margin: 0;
+    padding: 0 20px;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+  }
+
+  .section-sls__slider .slide__location-header-content h3, .section-sls__slider .slide__location-header-content p {
+    color: {{ section.settings.header_color }}
+  }
+  .slide__location-addy-one, .slide__location-addy-two, .slide__location-addy-three {
+    font-size: 14px;
+  }
+  .section-sls__slider .slide__location-header-content strong {
+    font-weight: bold;
+  }
+  @media only screen and (min-width: 1021px) {
+    .section-sls__slider .flickity-viewport {
+      min-height: 422px !important;
+    }
+  }
+{% endstyle %}
+<div class="section-sls">
+  <div class="section-sls__header-wrapper">
+    <h2 class="section-sls__header">
+      {{ section.settings.header }}
+    </h2>
+  </div>
+  <div class="section-sls__slider-wrapper">
+    <div class="section-sls__slider">
+      {% for block in section.blocks %}
+        <div class="section-sls__slide slide-{{ block.id }}">
+          <div class="slide__location-header-container">
+            <div class="slide__location-header-wrap">
+              <div class="slide__location-header-img">
+                <div class="slide__location-img-overlay"></div>
+                <img width="100%" height="100%" class="slide__location-img" src="{{ block.settings.location_image | image_url: width: 352 }}">
+                <div class="slide__location-header-content">
+                  <h3 class="slide__location-name">{{ block.settings.location_name }}</h3>
+                  <p class="slide__location-addy-one"><strong>{{ block.settings.location_address_one }}</strong></p>
+                  {% if block.settings.location_address_two !=blank %}
+                    <p class="slide__location-addy-two"><strong>{{ block.settings.location_address_two }}</strong></p>
+                  {% endif %}
+                  <p class="slide__location-addy-three"><strong>{{ block.settings.location_address_three }}</strong></p>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          <div class="slide__location-content-container">
+            <h4 class="slide__location-hours__header">Hours:</h4>
+            <p class="slide__location-hours">{{ block.settings.location_hours }}</p>
+            <p class="slide__location-contact"><strong>{{ block.settings.location_phone_num }}</strong></p>
+            {% render 'text-button', url: block.settings.link_url, title: block.settings.link_text, icon: 'huk-link-icon'%}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="flickity-nav flickity-prev" tabindex="0">{% render 'svg-icons' with 'carousel-prev' %}</div>
+    <div class="flickity-nav flickity-next" tabindex="0">{% render 'svg-icons' with 'carousel-next' %}</div>
+</div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elem = document.querySelector('.section-sls__slider');
+    let prev_button = document.querySelector('.flickity-prev');
+    let next_button = document.querySelector('.flickity-next');
+    var flkty = new Flickity( elem, {
+      // options
+      cellAlign: 'left',
+      contain: true,
+      pageDots: false,
+      prevNextButtons: false
+    });
+    prev_button.addEventListener('click', (event) => {
+      flkty.previous();
+    });
+    prev_button.addEventListener('keyup', (event) => {
+      flkty.previous();
+    });
+    next_button.addEventListener('click', (event) => {
+      flkty.next();
+    });
+    next_button.addEventListener('keyup', (event) => {
+      flkty.next();
+    });
+  })
+</script>
+{% schema %}
+    {
+      "name": "Store Locations Slider",
+      "tag": "section",
+      "settings": [
+        {
+          "type": "text",
+          "id": "header",
+          "label": "Section Heading",
+          "default": "Our Stores"
+        },
+        {
+          "type": "color",
+          "id": "overlay_color",
+          "label": "Image legibility overlay color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "header_color",
+          "label": "Store Name and Address color",
+          "default": "#ffffff"
+        }
+      ],
+      "blocks": [
+        {
+          "type": "location",
+          "name": "Store Location",
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "location_image",
+              "label": "Location image"
+            },
+            {
+              "type": "text",
+              "id": "location_name",
+              "label": "Location Name",
+              "default": "Location Name"
+            },
+            {
+              "type": "text",
+              "id": "location_address_one",
+              "label": "Location Address - Line 1",
+              "default": "1234 Broadway"
+            },
+            {
+              "type": "text",
+              "id": "location_address_two",
+              "label": "Location Address - Line 2",
+              "default": "Suite 360"
+            },
+            {
+              "type": "text",
+              "id": "location_address_three",
+              "label": "Location Address - Line 3",
+              "default": "Ft. Lauderdale, Florida 33301"
+            },
+            {
+              "type": "textarea",
+              "id": "location_hours",
+              "label": "Location Hours"
+            },
+            {
+              "type": "text",
+              "id": "location_phone_num",
+              "label": "Location phone number"
+            },
+            {
+              "type": "text",
+              "id": "link_text",
+              "label": "Link text",
+              "default": "Get Directions"
+            },
+            {
+              "type": "url",
+              "id": "link_url",
+              "label": "Link Destination"
+            }
+          ]
+        }
+      ],
+      "presets": [
+        {
+          "name": "Store Location Slider"
+        }
+      ]
+    }
+{% endschema %}

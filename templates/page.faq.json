@@ -1,0 +1,190 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {
+      }
+    },
+    "template-header": {
+      "type": "template-header",
+      "disabled": true,
+      "settings": {
+        "show_collection_image": false,
+        "show_collection_description": true,
+        "show_subcollections": true,
+        "color_subcollection_bg": "#ffffff",
+        "color_subcollection_text": "#2c2d2e",
+        "display_description": true
+      }
+    },
+    "collapsible_content_KByi7h": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_tab_6RrkRR": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "What is Huk Gear?",
+            "open": false,
+            "content": "<p>Huk Gear is <em>the<\/em> technical performance fishing company dedicated to making life on the water more enjoyable from the first cast to the last. We are your destination for best-in-class performance fishing gear. We offer a wide range of apparel and accessories for men, women and kids designed to enhance comfort, protection and performance for anglers and outdoor enthusiasts.<\/p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_cKxVd8": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Where can I buy Huk Gear products?",
+            "open": false,
+            "content": "<p>Huk Gear products are available for purchase on our official website (hukgear.com), through our company owned retail stores as well as authorized retailers. Visit our <a href=\"https:\/\/www.hukgear.com\/pages\/store-locator\">store locator<\/a> to find a store near you. <\/p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_q8keFR": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "What makes Huk Gear different from other outdoor clothing brands?",
+            "open": false,
+            "content": "<p>Huk Gear stands out for its focus on innovation, quality and functionality. Our products are specifically designed for anglers and outdoor enthusiasts, incorporating advanced technologies, superior materials and thoughtful features that enhance performance, comfort and style.<\/p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_MzAPDd": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "What types of products does Huk Gear offer?",
+            "open": false,
+            "content": "<p>Huk Gear offers a wide range of products for men, women & kids including fishing shirts, performance hoodies, fishing shorts, rainwear, hats, footwear and accessories. We have numerous options to meet the specific needs of anglers and outdoor enthusiasts.<\/p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_fcDKaM": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Are Huk Gear products suitable for all types of fishing?",
+            "open": false,
+            "content": "<p>Yes, Huk Gear products are designed for various fishing styles and environments. Whether you enjoy freshwater, saltwater, fly fishing or offshore fishing, Huk Gear has the performance apparel and accessories to suit your needs.<\/p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_wetPjJ": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Are Huk Gear products durable and long-lasting?",
+            "open": false,
+            "content": "<p>Yes, Huk Gear is known for its commitment to durability. Our products are constructed with high-quality materials and undergo rigorous testing to ensure they can withstand the demands of fishing and outdoor activities.<\/p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_fJGczE": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Do Huk Gear products offer sun protection?",
+            "open": false,
+            "content": "<p>Yes, many of our products incorporate UPF (Ultraviolet Protection Factor) technology to protect against harmful UV rays. Look for products with UPF ratings to ensure effective sun protection for those sunny days on and off the water.<\/p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_7iD4qk": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Are Huk Gear products waterproof?",
+            "open": false,
+            "content": "<p>Huk Gear offers waterproof and water-resistant products. Our rainwear and outerwear collections are designed to provide protection against rain, splashes and other wet conditions, keeping you dry and comfortable during outdoor activities. <\/p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_NygAkE": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Do Huk Gear products offer moisture-wicking capabilities?",
+            "open": false,
+            "content": "<p>Yes, Huk Gear incorporates moisture-wicking technologies into many of our products. These fabrics pull moisture away from the skin, promoting quick evaporation and keeping you cool and dry.<\/p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_KKJgH4": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "How can I contact Huk Gear's customer service?",
+            "open": false,
+            "content": "<p>To contact our customer service, please visit our <a href=\"https:\/\/www.hukgear.com\/pages\/contact-us\">contact us<\/a> page to chat with us. You can also send an email to customerservice@marolinaoutdoor.com. We are happy to address any inquiries or concerns.<\/p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_tab_6RrkRR",
+        "collapsible_tab_cKxVd8",
+        "collapsible_tab_q8keFR",
+        "collapsible_tab_MzAPDd",
+        "collapsible_tab_fcDKaM",
+        "collapsible_tab_wetPjJ",
+        "collapsible_tab_fJGczE",
+        "collapsible_tab_7iD4qk",
+        "collapsible_tab_NygAkE",
+        "collapsible_tab_KKJgH4"
+      ],
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "marker_style": "style1",
+        "description": "<p>Need more help? Visit our <a href=\"https:\/\/www.hukgear.com\/pages\/contact-us\" title=\"https:\/\/www.hukgear.com\/pages\/contact-us\">customer care<\/a> page or email us at customerservice@marolinaoutdoor.com <\/p>",
+        "color_bg": "transparent",
+        "color_heading": "#0f4c81",
+        "marker_color": "#FD6262",
+        "color_text": "#2c2d2e",
+        "color_links": "#2c2d2e",
+        "color_border": "#DADCE0",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false,
+        "section-reverse": false,
+        "section-reverse-mobile": false
+      }
+    },
+    "contact_form_BVwjBX": {
+      "type": "contact-form",
+      "blocks": {
+        "text_MM99Xz": {
+          "type": "text",
+          "settings": {
+            "heading": "Corporate Address:",
+            "text": "<p>Huk Performance Fishing \/ Marolina Outdoor<\/p><p>2265 Clements Ferry Road, Suite 401<\/p><p>Charleston SC 29492<\/p>"
+          }
+        },
+        "text_RXTLQj": {
+          "type": "text",
+          "settings": {
+            "heading": "Email:",
+            "text": "<p>You can also email us directly at <a href=\"mailto:CustomerService@Marolina.com\" target=\"_blank\">CustomerService@Marolina.com<\/a><\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_MM99Xz",
+        "text_RXTLQj"
+      ],
+      "settings": {
+        "heading": "Contact form",
+        "marker_style": "style1",
+        "description": "",
+        "show_phone_number": true,
+        "marker_color": "#FD6262",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "template-header",
+    "collapsible_content_KByi7h",
+    "contact_form_BVwjBX"
+  ]
+}

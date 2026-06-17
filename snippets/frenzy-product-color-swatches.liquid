@@ -1,0 +1,176 @@
+
+{% if product.metafields["global"]["MasterProductHandle"] != blank %}
+	{% assign master_handle = product.metafields["global"]["MasterProductHandle"] | remove: '' %}
+	{% if all_products[master_handle].handle != blank %}
+	  {% assign masterproduct = all_products[master_handle] %}
+	  {% assign master_product_color = masterproduct.metafields["global"]["Color"] | handleize %}
+	  {% assign base_product_handle = masterproduct.handle | remove: master_product_color %}
+	{% endif %}
+  {% endif %}
+  
+  {% comment %} Grab Colors that are mapped to Master Handle {% endcomment %}
+  {% if masterproduct.metafields["global"]["ColorVariants"] != blank %}
+	{% assign color_variant_names = masterproduct.metafields['global']['ColorVariants'] | split: "," | sort %}
+  {% endif %}
+  
+  {% assign solid_colors = settings.solid_color | strip_newlines | split: "," | strip %}
+  {% assign print_colors = settings.pattern_color | strip_newlines | split: "," %}
+
+	{% comment %} Check if color group exists {% endcomment %}
+	{% for color_variant_name in color_variant_names %}
+		{% assign color_variant_name_handleized = color_variant_name | handleize %}
+		{% assign all_product_handles = base_product_handle | append: color_variant_name_handleized %}
+	
+		{% if print_colors contains color_variant_name %}
+		{% assign show_print_colors = true %}
+		{% comment %} <div style="background: green">{{ color_variant_name }}</div>
+		<div style="background: pink">{{ print_colors }}</div> {% endcomment %}
+		{% endif %}
+	
+		{% if solid_colors contains color_variant_name %}
+		{% assign show_solid_colors = true %}
+		{% comment %} <div style="background: green">{{ color_variant_name }}</div>
+		<div style="background: yellow">{{ solid_colors }}</div> {% endcomment %}
+		{% endif %}
+	{% endfor %}
+
+{% if show_solid_colors %}
+	<fieldset data-frenzy="frenzy" class="product-form__input product-form__input--color" data-index="option{{ forloop.index }}" data-handle="{{ handle }}">
+	
+
+		{%- for color_variant_name in color_variant_names -%}
+			{% assign solid_color_variant_name_handleized = color_variant_name | handleize %}
+      		{% assign all_solid_product_handles = base_product_handle | append: solid_color_variant_name_handleized %}
+
+			{% if solid_colors contains color_variant_name %}
+			  {% comment %} Output Swatches {% endcomment %}
+				{% for solid_product_handle in all_solid_product_handles %}
+					{% assign solid_product_group = all_products[solid_product_handle] %}
+				
+					{%- liquid
+						assign color_value = color_variant_name | downcase | escape
+
+						for custom_color in key_array
+							if custom_color == color_value
+								assign color_value = val_array[forloop.index0]
+							endif
+						endfor
+
+						assign bg_value = empty
+						if color_value contains '.'
+							assign bg_value = color_value | file_url
+							assign color_value = 'var(--bg-body)'
+						endif
+						
+						if color_picker_use_variants
+							assign variant_image = blank
+							for variant in product.variants
+								if variant.title contains value
+									if variant.image
+										assign bg_value = variant.image | image_url: width: variant_image_size
+										break
+									endif
+								endif
+							endfor
+						endif
+					-%}
+
+					<a class="product-group-swatch {% if solid_product_group.url == product.url %}product-group-swatch--selected{% endif %}"
+						href="javascript:void(0);"
+						style="--option-color: {{ color_value | downcase | escape }}; {%- if bg_value -%} --option-color-image: url('{{solid_color_variant_name_handleized | append: '.png' | file_img_url: '37.5x37.5'  }}');{% endif %}"
+					>
+				  </a>
+
+					{% comment %} <input type="radio" id="{{ section.id }}-{{ solid_product_group.id }}-{{ forloop.index0 }}{{ appended }}"
+					name="{{ option.name | append: appended }}"
+					value="{{ color_variant_name | escape }}"
+					form="{{ product_form_id }}"
+					{% if option.selected_value == color_variant_name %}checked{% endif %}
+					>
+
+					<label for="{{ section.id }}-{{ solid_product_group.id }}-{{ forloop.index0 }}{{ appended }}" style="--option-color: {{ color_value | downcase | escape }}; {%- if bg_value -%} --option-color-image: url('{{solid_color_variant_name_handleized | append: '.png' | file_img_url: '37.5x37.5'  }}');{%- endif -%}" data-var-url="{{ solid_product_group.url }}">
+						{{ color_variant_name | escape }}
+					</label> {% endcomment %}
+
+				{% endfor %}
+			{% endif %}
+		{%- endfor -%}
+	</fieldset>
+{% endif %}
+
+{% comment %}
+{% if show_print_colors %}
+	<fieldset class="product-form__input product-form__input--print" data-index="option{{ forloop.index }}" data-handle="{{ handle }}">
+		<div class="form__label">
+			{% if print_colors contains color_variant_name %}
+				PRINT: <span class="form__label__value">{{ option.selected_value }}</span>
+				{{ sizing_link }}
+			{% else %}
+				PRINT
+			{% endif %}
+			</div>
+
+		{% for color_variant_name in color_variant_names %}
+			{% assign print_color_variant_name_handleized = color_variant_name | handleize %}
+			{% assign all_print_product_handles = base_product_handle | append: print_color_variant_name_handleized %}
+	  
+			{% if print_colors contains color_variant_name %}
+			  {% comment %} Output Swatches {% endcomment %}
+			  {% for print_product_handle in all_print_product_handles %}
+					{% assign print_product_group = all_products[print_product_handle] %}
+
+					<a
+					class="
+					product-group-swatch
+					{% if print_product_group.url == product.url %}
+					  product-group-swatch--selected
+					{% endif %}
+					"
+					href="{{ print_product_group.url }}"
+				style="--option-color: {{ color_value | downcase | escape }}; {%- if bg_value -%} --option-color-image: url('{{ print_color_variant_name_handleized | append: '.png' | file_img_url: '37.5x37.5' }}');{%- endif -%}"
+				  >
+				  </a>
+
+					{% comment %} <input type="radio" id="{{ section.id }}-{{ print_product_group.id }}-{{ forloop.index0 }}{{ appended }}"
+								name="{{ option.name | append: appended }}"
+								value="{{ color_variant_name | escape }}"
+								form="{{ product_form_id }}"
+								{% if option.selected_value == color_variant_name %}checked{% endif %}
+					>
+					{%- liquid
+						assign color_value = color_variant_name | downcase | escape
+
+						for custom_color in key_array
+							if custom_color == color_value
+								assign color_value = val_array[forloop.index0]
+							endif
+						endfor
+
+						assign bg_value = empty
+						if color_value contains '.'
+							assign bg_value = color_value | file_url
+							assign color_value = 'var(--bg-body)'
+						endif
+						
+						if color_picker_use_variants
+							assign variant_image = blank
+
+							for variant in product.variants
+								if variant.title contains value
+									if variant.image
+										assign bg_value = variant.image | image_url: width: variant_image_size
+										break
+									endif
+								endif
+							endfor
+						endif
+					-%}
+					<label for="{{ section.id }}-{{ print_product_group.id }}-{{ forloop.index0 }}{{ appended }}" style="--option-color: {{ color_value | downcase | escape }}; {%- if bg_value -%} --option-color-image: url('{{ print_color_variant_name_handleized | append: '.png' | file_img_url: '37.5x37.5' }}');{%- endif -%}" data-var-url="{{ print_product_group.url }}">
+						{{ color_variant_name | escape }}
+					</label> {% endcomment %}
+				{%- endfor -%}
+			{% endif %}
+		{%- endfor -%}
+	</fieldset>
+{% endif %}
+{% endcomment %}

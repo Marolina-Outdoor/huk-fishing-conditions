@@ -1,0 +1,505 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "custom_css": [],
+      "settings": {}
+    },
+    "accessibe_btn_PXQjGY": {
+      "type": "accessibe-btn",
+      "disabled": true,
+      "settings": {}
+    },
+    "custom_liquid_bywyMr": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "settings": {
+        "custom_liquid": "<div header-and-navigation ></div>",
+        "color_bg": "rgba(0,0,0,0)"
+      }
+    },
+    "image_with_text_overlay_ctKydT": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_VWpV9V": {
+          "type": "heading",
+          "settings": {
+            "text": "We Thank You",
+            "heading_size": "h2"
+          }
+        },
+        "text_bH3CQN": {
+          "type": "text",
+          "settings": {
+            "text": "<p>As a special thank you to show our appreciation for all that you do, verified medical professionals, first responders, military members, and teachers can enjoy an exclusive discount. Learn more below.</p>",
+            "description_size": "small"
+          }
+        }
+      },
+      "block_order": [
+        "heading_VWpV9V",
+        "text_bH3CQN"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/E4A6574rt_medium_6d4843cb-5268-45a5-bcd0-0473040e216c.jpg",
+        "image_parallax": false,
+        "desktop_height": "desktop-height-450",
+        "mobile_height": "mobile-height-500",
+        "image_focal_point_y": 50,
+        "mob_image_focal_point_y": 50,
+        "enable_focal_control": false,
+        "full_width": true,
+        "content_width": "medium",
+        "content_position": "bottom-left",
+        "text_alignment": "left",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 51,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "rich_text_fMqJ7A": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_pEBYEY": {
+          "type": "heading",
+          "settings": {
+            "text": "How it Works",
+            "marker_style": "style2",
+            "size": "h3",
+            "marker_color": "#fd6262"
+          }
+        }
+      },
+      "block_order": [
+        "heading_pEBYEY"
+      ],
+      "custom_css": [
+        "{background-color: #f7f4ef;}"
+      ],
+      "settings": {
+        "id": "",
+        "text_width": "medium",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "#f7f4ef",
+        "color_heading": "#0E4174",
+        "color_text": "#0e4174",
+        "color_links": "#2c2d2e",
+        "full_bleed_layout": false,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "text_with_icons_CV7UQq": {
+      "type": "text-with-icons",
+      "blocks": {
+        "icon_hMjERK": {
+          "type": "icon",
+          "settings": {
+            "icon": "price_tag",
+            "heading": "Shop",
+            "text": "<p>Choose your favorite gear and add it to your cart.</p>"
+          }
+        },
+        "icon_tkWAAF": {
+          "type": "icon",
+          "settings": {
+            "icon": "check_mark",
+            "heading": "Get Verified",
+            "text": "<p>It only takes a few seconds using the link below (you will need a GovX profile). </p>"
+          }
+        },
+        "icon_HdVdzc": {
+          "type": "icon",
+          "settings": {
+            "icon": "star",
+            "heading": "Save",
+            "text": "<p>Use your unique discount code at checkout. </p>"
+          }
+        }
+      },
+      "block_order": [
+        "icon_hMjERK",
+        "icon_tkWAAF",
+        "icon_HdVdzc"
+      ],
+      "custom_css": [
+        "@media only screen and (max-width: 768px) {.text-with-icons__inner {flex-direction: column; display: flex; }}",
+        " {background-color: #f7f4ef;}"
+      ],
+      "settings": {
+        "text_alignment": "left",
+        "icon_position": "left",
+        "icon_size": "medium",
+        "heading_size": "large",
+        "mobile_swipe": true,
+        "color_bg": "#f7f4ef",
+        "color_heading": "#0581ff",
+        "color_text": "#0e4174",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "image_with_text_waGGXC": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_Hn49r9": {
+          "type": "heading",
+          "settings": {
+            "text": "Get Verified",
+            "marker_style": "style1",
+            "heading_size": "h3",
+            "marker_color": "#fd6262"
+          }
+        },
+        "text_jmnn6d": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Click on the verification button below and follow the steps to verify your eligibility. Once validated, you will receive a custom discount code which you can use on your next order. </p>"
+          }
+        },
+        "button_Uk8bLV": {
+          "type": "button",
+          "settings": {
+            "show_if_logged_in": false,
+            "show_if_logged_out": false,
+            "button_attributes": "",
+            "button_text": "Govx verficiation",
+            "button_link": "https://auth.govx.com/shopify/verify?shop=hukgear.myshopify.com&utm_source=shopify&utm_medium=govxid&utm_campaign=custom_link"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Hn49r9",
+        "text_jmnn6d",
+        "button_Uk8bLV"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/E4A0166rt_medium_00fe8ab1-4c4d-4b16-9602-0bd14b04fc88.jpg",
+        "use_video": false,
+        "video": "",
+        "video_autoplay": true,
+        "height": "large",
+        "desktop_image_width": "medium",
+        "full_width": false,
+        "layout": "image_first",
+        "content_position": "text-left",
+        "column_spacing": "medium",
+        "color_bg": "#ffffff",
+        "color_text": "#0e4174",
+        "color_border": "#e2e2e2",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "spacer_zcYnMf": {
+      "type": "spacer",
+      "custom_css": [
+        "{}"
+      ],
+      "settings": {
+        "spacer_mobile": 50,
+        "spacer_desktop": 100,
+        "border_separator": true,
+        "border_separator_full": false
+      }
+    },
+    "rich_text_J9YDd9": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_wtdAQt": {
+          "type": "heading",
+          "settings": {
+            "text": "Shopping in One of Our Stores?",
+            "marker_style": "style1",
+            "size": "h3",
+            "marker_color": "#fd6262"
+          }
+        },
+        "text_iAdHeV": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Simply give our sales associates your GovX information and they can apply your discounts at the register.</p>",
+            "size": "text-size-regular"
+          }
+        },
+        "button_7YDenB": {
+          "type": "button",
+          "settings": {
+            "link_label": "Find Store Locations",
+            "link": "shopify://pages/stores"
+          }
+        }
+      },
+      "block_order": [
+        "heading_wtdAQt",
+        "text_iAdHeV",
+        "button_7YDenB"
+      ],
+      "custom_css": [
+        "{background-color: #f7f4ef;}"
+      ],
+      "settings": {
+        "id": "",
+        "text_width": "medium",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "#f7f4ef",
+        "color_heading": "#0E4174",
+        "color_text": "#0e4174",
+        "color_links": "#0581ff",
+        "full_bleed_layout": false,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "spacer_UYxXym": {
+      "type": "spacer",
+      "settings": {
+        "spacer_mobile": 50,
+        "spacer_desktop": 100,
+        "border_separator": false,
+        "border_separator_full": false
+      }
+    },
+    "collapsible_content_Cn9A3Y": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_tab_rBM6Mf": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "What is the Captain's Club?",
+            "open": false,
+            "content": "<p>The Captains Club is our way of saying thank you to you - our loyal customers for all your support over the years. You will receive points for every dollar spent along with completing activities. You can use them to earn discounts off purchases, so the more you collect the more you save!</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_eKKdGD": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "How do I join?",
+            "open": false,
+            "content": "<p>Joining is easy! All you have to do is create an account here.</p><p>Already have an account? Awesome - you are already in the club. All you need to do is login to your existing account to view your Captains Club status and benefits.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_XRYJwM": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Will my previous purchases count towards my current status tier?",
+            "open": false,
+            "content": "<p>At program launch in August 2024, if you have an existing account on hukgear.com, you will automatically be placed into the appropriate tier based on your qualifying purchases made on hukgear.com from January 1st, 2024. Your account will then follow the outlined program and update based on spend every 12 months</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_hVtyFG": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "How do I earn points?",
+            "open": false,
+            "content": "<p>You can earn points for all different activities, including referring friends and making purchases as examples. For every $1 you spend on hukgear.com or at one of our official company stores, you will receive 5 points. You can not redeem points directly, points earned will apply to your tier status. To see all the ways you can earn points click the<strong>Earn Points</strong>tab in the menu.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_nH33p4": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "What if I purchase from a third party retailer?",
+            "open": false,
+            "content": "<p>The Captains Club is only eligible for purchases made on hukgear.com or at one of our official company stores. Make sure you give us your account email at check out so your points can apply.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_gzhcKG": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Will my points expire?",
+            "open": false,
+            "content": "<p>Yes, 12 months after the date you were enrolled. Make sure to use your points before they expire!</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_XmmaAN": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "How do I know I have levelled up to the next tier?",
+            "open": false,
+            "content": "<p>Once you have reached a new tier, you will receive an email notifying you of the new tier benefits you have unlocked within 15 days.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_yRzihr": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "I made a purchase but don’t see a change in my tier status?",
+            "open": false,
+            "content": "<p>Don’t worry - after you place an order there is a 15-day delay in spend calculations. If you do move up a higher tier, we will send you an email to inform you! You can always check your status by logging into your account.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_nzXGUx": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "How do I view my point balance?",
+            "open": false,
+            "content": "<p>SImply log into your account and you will be able to see your points balance on the header of the loyalty page.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_NhLhnx": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Is there a limit to the number of points I can earn?",
+            "open": false,
+            "content": "<p>No. Go ahead and earn as many as you can!</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_Ykcew6": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "How long does it take for my points to be verified?",
+            "open": false,
+            "content": "<p>Within 15 days, you will be notified if your points are added to your account via email.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_PVcJND": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "What do the 'approved', 'pending' and 'cancelled' statuses mean?",
+            "open": false,
+            "content": "<ul><li>Approved: These points can be redeemed on rewards immediately</li><li>Pending: These points need to be verified before you can redeem them. This typically applies to purchases and referrals.</li><li>Cancelled: These points will not be added to your account. For example, this will happen if you cancel a purchase (the points will change from pending to cancelled).</li></ul>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_rQjjK6": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Can I combine orders on multiple accounts?",
+            "open": false,
+            "content": "<p>No, you can not combine orders. You will only receive points for the email account you’re logged into at checkout. We urge you to use the same email moving forward to help accumulate as many points as possible.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_iGyegj": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "What happens if a friend I refer cancels or returns their order?",
+            "open": false,
+            "content": "<p>Your pending points will become cancelled and will be removed from your account.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_dE7iCx": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "I completed an activity but didn't earn points?",
+            "open": false,
+            "content": "<p>It can sometimes take a few minutes for us to process your activity and provide your points. If you were already signed up, then your points will not count.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_zEgeBd": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "What doesn’t count towards my status?",
+            "open": false,
+            "content": "<p>Purchases made with gift cards or store credit are not eligible towards your Captains Club status.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_NNFj6h": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "How do I leave the program?",
+            "open": false,
+            "content": "<p>If you no longer wish to earn points, please contact us and ask to be unenrolled. We'll unenroll you and you will lose any points you have accrued.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_BWQaN8": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "What happens if I leave and decide to join again?",
+            "open": false,
+            "content": "<p>Just contact us and we'll re-enroll you, or you can simply rejoin above. However, your point total will begin from zero.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_tab_TiQBwG": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Where can I report a problem or give feedback?",
+            "open": false,
+            "content": "<p>Please email <a href=\"mailto:customerservice@marolina.com\">customerservice@marolina.com</a></p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_tab_rBM6Mf",
+        "collapsible_tab_eKKdGD",
+        "collapsible_tab_XRYJwM",
+        "collapsible_tab_hVtyFG",
+        "collapsible_tab_nH33p4",
+        "collapsible_tab_gzhcKG",
+        "collapsible_tab_XmmaAN",
+        "collapsible_tab_yRzihr",
+        "collapsible_tab_nzXGUx",
+        "collapsible_tab_NhLhnx",
+        "collapsible_tab_Ykcew6",
+        "collapsible_tab_PVcJND",
+        "collapsible_tab_rQjjK6",
+        "collapsible_tab_iGyegj",
+        "collapsible_tab_dE7iCx",
+        "collapsible_tab_zEgeBd",
+        "collapsible_tab_NNFj6h",
+        "collapsible_tab_BWQaN8",
+        "collapsible_tab_TiQBwG"
+      ],
+      "disabled": true,
+      "settings": {
+        "id": "loyalty-faqs",
+        "heading": "Frequently Asked Questions",
+        "marker_style": "style1",
+        "description": "<p>Here's everything you need to know about the loyalty program.</p>",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_heading": "#0f4c81",
+        "marker_color": "#fd6262",
+        "color_text": "#2c2d2e",
+        "color_links": "#2c2d2e",
+        "color_border": "#dadce0",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false,
+        "section-reverse": false,
+        "section-reverse-mobile": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "accessibe_btn_PXQjGY",
+    "custom_liquid_bywyMr",
+    "image_with_text_overlay_ctKydT",
+    "rich_text_fMqJ7A",
+    "text_with_icons_CV7UQq",
+    "image_with_text_waGGXC",
+    "spacer_zcYnMf",
+    "rich_text_J9YDd9",
+    "spacer_UYxXym",
+    "collapsible_content_Cn9A3Y"
+  ]
+}

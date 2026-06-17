@@ -1,0 +1,84 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "single_image_riXwYh": {
+      "type": "single-image",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/BR_x_Huk_Desktop_Hero_1.png",
+        "image_mobile": "shopify:\/\/shop_images\/BR_x_Huk_Mobile_Hero_1.png",
+        "full_width": false,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "17213152586028a7a8": {
+      "type": "apps",
+      "blocks": {
+        "klaviyo_email_marketing_sms_form_embed_block_MhrPGR": {
+          "type": "shopify:\/\/apps\/klaviyo-email-marketing-sms\/blocks\/form-embed-block\/2632fe16-c075-4321-a88b-50b567f42507",
+          "settings": {
+            "formId": "TbSkD4"
+          }
+        }
+      },
+      "block_order": [
+        "klaviyo_email_marketing_sms_form_embed_block_MhrPGR"
+      ],
+      "settings": {
+      }
+    },
+    "featured_collection_3bCP3k": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Shop Best Sellers",
+        "marker_style": "style1",
+        "description": "<p>Top-rated angler tested gear that performs.<\/p>",
+        "collection": "new-arrivals-best-sellers",
+        "display_type": "carousel",
+        "product_limit": 8,
+        "columns_desktop": 4,
+        "show_view_all": true,
+        "mobile_swipe": true,
+        "show_progress_bar": false,
+        "marker_color": "#FD6262",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "background_video_mVXAqq": {
+      "type": "background-video",
+      "settings": {
+        "desktop_height": "desktop-height-650",
+        "mobile_height": "mobile-height-500",
+        "full_width": true,
+        "video_controls": true,
+        "video": "https:\/\/www.youtube.com\/watch?v=ETYaUDs3nw8",
+        "overlay_color": "#000000",
+        "overlay_opacity": 25,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "single_image_riXwYh",
+    "17213152586028a7a8",
+    "featured_collection_3bCP3k",
+    "background_video_mVXAqq"
+  ]
+}

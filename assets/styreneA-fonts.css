@@ -1,0 +1,64 @@
+/*
+        This font software is the property of Commercial Type.
+
+        You may not modify the font software, use it on another website, or install it on a computer.
+
+        License information is available at http://commercialtype.com/eula
+        For more information please visit Commercial Type at http://commercialtype.com or email us at info[at]commercialtype.com
+
+        Copyright (C) 2024 Schwartzco Inc.
+        License 2406-MMXOZE      
+*/
+
+@font-face {
+	font-family: 'Styrene A Web';
+	src: url('StyreneA-Regular-Web.woff2') format('woff2'),
+		 url('StyreneA-Regular-Web.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+	}
+
+.StyreneA-Regular-Web {
+	font-family: 'Styrene A Web';
+	font-weight: 400;
+	font-style: normal;
+	}
+@font-face {
+	font-family: 'Styrene A Web';
+	src: url('StyreneA-Medium-Web.woff2') format('woff2'),
+		 url('StyreneA-Medium-Web.woff') format('woff');
+	font-weight: 500;
+	font-style: normal;
+	}
+
+.StyreneA-Medium-Web {
+	font-family: 'Styrene A Web';
+	font-weight: 500;
+	font-style: normal;
+	}
+@font-face {
+	font-family: 'Styrene A Web';
+	src: url('StyreneA-Bold-Web.woff2') format('woff2'),
+		 url('StyreneA-Bold-Web.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+	}
+
+.StyreneA-Bold-Web {
+	font-family: 'Styrene A Web';
+	font-weight: 700;
+	font-style: normal;
+	}
+@font-face {
+	font-family: 'Styrene A Web';
+	src: url('StyreneA-Black-Web.woff2') format('woff2'),
+		 url('StyreneA-Black-Web.woff') format('woff');
+	font-weight: 900;
+	font-style: normal;
+	}
+
+.StyreneA-Black-Web {
+	font-family: 'Styrene A Web';
+	font-weight: 900;
+	font-style: normal;
+	}

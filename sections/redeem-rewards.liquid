@@ -1,0 +1,43 @@
+{% if customer %}
+    <style>
+      .redeem-rewards {
+        display: flex;
+        justify-content: center;
+      }
+  
+      .rewards-title {
+        text-align: center;
+        margin-bottom: 40px;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+  
+      .rewards-content {
+        width: 75%;
+        margin: 0 auto;
+      }
+    </style>
+  
+    <div class="redeem-rewards" id="redeem-rewards"></div>
+    <h2 class="rewards-title">{{ section.settings.title }}</h2>
+    <div class="rewards-content" data-lion-rewards-list></div>
+  {% endif %}
+  
+  {% schema %}
+  {
+    "name": "Redeem Rewards",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Redeem Rewards"
+      }
+    ]
+  }
+  {% endschema %}
+  

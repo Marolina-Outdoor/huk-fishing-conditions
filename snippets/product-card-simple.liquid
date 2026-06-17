@@ -1,0 +1,105 @@
+{%- liquid
+	assign products_hover_images = settings.products_hover_images
+	assign product_aspect_ratio = settings.product_aspect_ratio
+	assign product_content_alignment = settings.product_content_alignment
+	assign featured_media = product_card_product.featured_media
+	assign product_price_position = settings.product_price_position
+	assign ratio = 1
+	assign sizes = '298x298,596x596'
+
+	if featured_media.media_type != 'image'
+		assign featured_media = featured_media.preview_image
+	endif
+
+	if product_aspect_ratio == 'adapt'
+		assign ratio = featured_media.aspect_ratio
+		assign sizes = '298x0,596x0'
+	elsif product_aspect_ratio == 'portrait'
+		assign ratio = 1 | divided_by: 1.25
+		assign sizes = '298x350,596x700'
+	elsif product_aspect_ratio == 'landscape'
+		assign ratio = 1 | divided_by: 0.75
+		assign sizes = '298x250,596x500'
+	endif
+
+-%}
+{%- if product_card_product and product_card_product != empty -%}
+<product-card class="product-card text-{{ product_content_alignment }} product-card--content-spacing-false">
+  <figure class="product-featured-image {% if products_hover_images and product_card_product.images.size > 1 %}thb-hover{% endif %}">
+    {% render 'product-card-badge', product_card_product: product_card_product %}
+    <a href="{{ product_card_product.url | within: collection }}" title="{{ product_card_product.title | escape }}" class="product-featured-image-link aspect-ratio aspect-ratio--{{ settings.product_aspect_ratio }}" style="--padding-bottom: {{ 1 | divided_by: ratio | times: 100 }}%;">
+      {%- if products_hover_images and product_card_product.images.size > 1 -%}
+        {%- render 'responsive-image', class: 'product-secondary-image', image: product_card_product.images[1], sizes: sizes -%}
+      {%- endif -%}
+			{%- if featured_media -%}
+      	{%- render 'responsive-image', class: 'product-primary-image', image: featured_media, sizes: sizes -%}
+			{%- else -%}
+				<div class="thb-placeholder">
+					{{ 'product-apparel-1' | placeholder_svg_tag }}
+				</div>
+			{%- endif -%}
+
+			{%- if settings.enable_quick_view -%}
+			<quick-view class="product-card-quickview custom-button-quickview" data-product-handle="{{ product_card_product.handle }}" tabindex="-1">
+				<div class="loading-overlay hide-mobile">{% render 'svg-icons' with 'thb-loading' %}</div>
+				<span class="hide-mobile">{{ 'products.product.quick_view' | t }}</span>
+				<svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<rect width="52" height="52" rx="26" fill="white"/>
+					<path d="M36.6539 29.4428C37.0685 25.689 37.2262 22.1271 37.2665 17.3947C37.2689 17.1173 37.0444 16.8911 36.767 16.8911H14.4499C14.1688 16.8911 13.9429 17.1252 13.9505 17.4062C14.1576 25.0501 14.5665 29.6461 15.6948 37.0733C15.8059 37.8041 16.4357 38.3448 17.1749 38.3448H28.1423" stroke="#0F4C81" stroke-width="0.8" stroke-linecap="round"/>
+					<path d="M19.7584 21.1275C19.3941 19.1229 19.2661 17.6954 19.3928 16.0299C19.4868 14.794 19.5339 14.176 20.0182 13.6615C20.5026 13.147 21.143 13.0591 22.4238 12.8834C24.6797 12.574 26.548 12.5808 28.8091 12.8948C30.075 13.0705 30.7079 13.1584 31.1908 13.6706C31.6737 14.1829 31.721 14.78 31.8156 15.9742C31.9469 17.6316 31.796 19.0745 31.425 21.1275" stroke="#0F4C81" stroke-width="0.8" stroke-linecap="round"/>
+					<path d="M33.7126 31.23L33.7126 38.3451" stroke="#0F4C81" stroke-width="0.8" stroke-linecap="round"/>
+					<path d="M30.1553 34.7876H37.2703" stroke="#0F4C81" stroke-width="0.8" stroke-linecap="round"/>
+				</svg>
+			</quick-view>
+			{%- endif -%}
+    </a>
+  </figure>
+	<div class="product-card-info">
+		{%- liquid
+			if product_price_position == 'before-product-title'
+				render 'product-price', product: product_card_product
+			endif
+		-%}
+  	<a href="{{ product_card_product.url | within: collection }}" title="{{ product_card_product.title | escape }}" class="product-card-title">{{ product_card_product.title }}</a>
+		{%- liquid
+			if product_price_position == 'after-product-title'
+				render 'product-price', product: product_card_product
+			endif
+		-%}
+  </div>
+</product-card>
+{%- else -%}
+<product-card class="product-card text-{{ product_content_alignment }} product-card--content-spacing-{{ info_spacing }} product-card--border-{{ product_card_border }} {{ product_card_shadow_class }}">
+	<figure class="product-featured-image {% if settings.products_hover_images %}thb-hover{% endif %}">
+		<a href="{{ product_card_product.url | within: collection }}" title="{{ product_card_product.title | escape }}" class="product-featured-image-link aspect-ratio aspect-ratio--{{ settings.product_aspect_ratio }}" style="--padding-bottom: {{ 1 | divided_by: 1 | times: 100 }}%;">
+			<div class="thb-placeholder">
+				{{ 'product-apparel-1' | placeholder_svg_tag }}
+			</div>
+			<quick-view class="product-card-quickview custom-button-quickview" data-product-handle="{{ product_card_product.handle }}" tabindex="-1">
+				<div class="loading-overlay hide-mobile">{% render 'svg-icons' with 'thb-loading' %}</div>
+				<span class="hide-mobile">{{ 'products.product.quick_view' | t }}</span>
+				<svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<rect width="52" height="52" rx="26" fill="white"/>
+					<path d="M36.6539 29.4428C37.0685 25.689 37.2262 22.1271 37.2665 17.3947C37.2689 17.1173 37.0444 16.8911 36.767 16.8911H14.4499C14.1688 16.8911 13.9429 17.1252 13.9505 17.4062C14.1576 25.0501 14.5665 29.6461 15.6948 37.0733C15.8059 37.8041 16.4357 38.3448 17.1749 38.3448H28.1423" stroke="#0F4C81" stroke-width="0.8" stroke-linecap="round"/>
+					<path d="M19.7584 21.1275C19.3941 19.1229 19.2661 17.6954 19.3928 16.0299C19.4868 14.794 19.5339 14.176 20.0182 13.6615C20.5026 13.147 21.143 13.0591 22.4238 12.8834C24.6797 12.574 26.548 12.5808 28.8091 12.8948C30.075 13.0705 30.7079 13.1584 31.1908 13.6706C31.6737 14.1829 31.721 14.78 31.8156 15.9742C31.9469 17.6316 31.796 19.0745 31.425 21.1275" stroke="#0F4C81" stroke-width="0.8" stroke-linecap="round"/>
+					<path d="M33.7126 31.23L33.7126 38.3451" stroke="#0F4C81" stroke-width="0.8" stroke-linecap="round"/>
+					<path d="M30.1553 34.7876H37.2703" stroke="#0F4C81" stroke-width="0.8" stroke-linecap="round"/>
+				</svg>
+			</quick-view>
+		</a>
+	</figure>
+	<div class="product-card-info">
+		{%- liquid
+			if product_price_position == 'before-product-title'
+				render 'product-price', product: product_card_product
+			endif
+		-%}
+		<a href="#" title="{{ product_card_product.title | escape }}" class="product-card-title">{{ 'onboarding.product_title' | t }}</a>
+		{%- liquid
+			if product_price_position == 'after-product-title'
+				render 'product-price', product: product_card_product
+			endif
+		-%}
+	</div>
+</product-card>
+{%- endif -%}

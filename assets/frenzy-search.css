@@ -1,0 +1,12 @@
+.frenzy_collection__nav_icon {fill: #17314b;}
+
+.frenzy_collection__nav {
+  height:1em;
+}
+
+.frenzy_sw_bottom_btn a.frenzy_sw_view_all_link, button.frenzy_auickAdd_cart {
+  border: 1px solid;
+  border-radius:4;
+  border-color: #17314b;
+  color:#17314b;
+}

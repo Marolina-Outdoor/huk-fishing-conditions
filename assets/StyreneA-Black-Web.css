@@ -1,0 +1,13 @@
+@font-face {
+	font-family: 'Styrene A Web';
+	src: url('StyreneA-Black-Web.woff2') format('woff2'),
+		 url('StyreneA-Black-Web.woff') format('woff');
+	font-weight: 900;
+	font-style: normal;
+	}
+
+.StyreneA-Black-Web {
+	font-family: 'Styrene A Web';
+	font-weight: 900;
+	font-style: normal;
+	}

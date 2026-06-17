@@ -1,0 +1,114 @@
+<div class="collection-featured-grid">
+  {% for block in section.blocks %}
+    {% if block.type == 'banners' %}
+      <div class="banner-item" {{ block.shopify_attributes }}>
+        {% if block.settings.image != blank %}
+          <a href="{{ block.settings.btn_link }}">
+            <picture>
+              {% if block.settings.image_mobile != blank %}
+                <source media="(max-width: 768px)" srcset="{{ block.settings.image_mobile | image_url: width: 800 }}">
+              {% endif %}
+              {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy' }}
+            </picture>
+          </a>
+        {% endif %}
+
+        {% if block.settings.tag != blank or block.settings.title != blank or block.settings.sub_text != blank or block.settings.button_text != blank %}
+          <div class="banner-content">
+            {% if block.settings.tag != blank %}
+              <span class="banner-tag">{{ block.settings.tag }}</span>
+            {% endif %}
+            {% if block.settings.title != blank %}
+              <h3 class="banner-title">{{ block.settings.title }}</h3>
+            {% endif %}
+            {% if block.settings.sub_text != blank %}
+              <p class="banner-text">{{ block.settings.sub_text }}</p>
+            {% endif %}
+            {% if block.settings.button_text != blank and block.settings.btn_link != blank %}
+              <a href="{{ block.settings.btn_link }}" class="button">{{ block.settings.button_text }}</a>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% schema %}
+{
+  "name": "Collection Featured Grid",
+  "tag": "section",
+  "class": "collection-featured-grid-section",
+  "settings": [
+    {
+      "type": "collection_list",
+      "id": "multiple_collection",
+      "label": "Collections",
+      "info": "Select collections to display this grid on"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "banners",
+      "name": "Banner",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "Mobile Image",
+          "info": "Optional separate image for mobile devices"
+        },
+        {
+          "type": "text",
+          "id": "image_position",
+          "label": "Image Position",
+          "info": "Grid position (e.g., 1, 2, 3)"
+        },
+        {
+          "type": "text",
+          "id": "image_length",
+          "label": "Image Length",
+          "default": "1",
+          "info": "How many grid cells this banner spans"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Tag"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "sub_text",
+          "label": "Subtitle"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text"
+        },
+        {
+          "type": "url",
+          "id": "btn_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Collection Featured Grid"
+    }
+  ]
+}
+{% endschema %}

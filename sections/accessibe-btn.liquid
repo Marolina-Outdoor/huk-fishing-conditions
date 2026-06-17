@@ -1,0 +1,31 @@
+{% unless page.title != "Accessibility Statement" %}
+  {% style %}
+    .accessibe-btn-wrapper {
+      display: flex;
+      justify-content: center;
+      padding-bottom: 45px;
+    }
+
+    .accessibe-btn-wrapper button {
+      width: 350px;
+      height: 75px;
+      border: 1px solid #0e4174;
+      border-radius: 5px;
+      font-size: 26px;
+    }
+  {% endstyle %}
+  <div class="accessibe-btn-wrapper">
+    <button data-acsb-custom-trigger="true">Activate Accessibility Toolbar</button>
+  </div>
+{% endunless %}
+{% schema %}
+{
+  "name": "AccessiBe Btn",
+  "tag": "section",
+  "presets": [
+    {
+      "name": "AccessiBe Btn"
+    }
+  ]
+}
+{% endschema %}

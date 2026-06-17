@@ -1,0 +1,644 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "rich_text_wUXgzX": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_Nf8RBK": {
+          "type": "heading",
+          "settings": {
+            "text": "Huk Outlets",
+            "marker_style": "style1",
+            "size": "h3",
+            "marker_color": "#fd6262"
+          }
+        },
+        "text_nJzBhW": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Whether you're on vacation and need a last minute item for your on-trip adventure, or a local looking for must-have gear to use in your local honey hole, our outlet locations are the perfect place to find your favorite Huk apparel at a great price.  <\/p>",
+            "size": "text-size-regular"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Nf8RBK",
+        "text_nJzBhW"
+      ],
+      "settings": {
+        "id": "",
+        "text_width": "medium",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_heading": "#0E4174",
+        "color_text": "#17314b",
+        "color_links": "#0581ff",
+        "full_bleed_layout": false,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
+    },
+    "store_locator_grid_GXpBLf": {
+      "type": "store-locator-grid",
+      "blocks": {
+        "location_rNJNGb": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Charleston_Outlet.jpg",
+            "location_name": "CHARLESTON, SC",
+            "location_address_one": "4840 Tanger Outlet Blvd",
+            "location_address_two": "Suite 721",
+            "location_address_three": "Charleston, SC 29418",
+            "location_hours": "Mon - Sat: 10am - 9pm <br>\nSun: 10am - 7pm",
+            "location_phone_num": "843-584-8184",
+            "link_text": "VISIT CHARLESTON",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/4840+Tanger+Outlet+Blvd,+North+Charleston,+SC+29418\/@32.8729916,-80.0197648,17z\/data=!4m6!3m5!1s0x88fe635aff89bb89:0xde800d4a43f598ea!8m2!3d32.8729916!4d-80.0171899!16s%2Fg%2F11b8v560j0?entry=ttu&g_ep=EgoyMDI0MDkwMi4xIKXMDSoASAFQAw%3D%3D"
+          }
+        },
+        "location_aDxrGT": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Charlotte_Outlet.jpg",
+            "location_name": "Charlotte, NC",
+            "location_address_one": "5512 New Fashion Way",
+            "location_address_two": "Suite 1055",
+            "location_address_three": "Charlotte, NC 28278",
+            "location_hours": "Mon - Sat: 10am - 8pm<br>\nSun: 11am - 6pm",
+            "location_phone_num": "980-485-6788",
+            "link_text": "VISIT CHARLOTTE",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/5512+New+Fashion+Way,+Charlotte,+NC+28278\/@35.169741,-80.9698974,17z\/data=!3m1!4b1!4m6!3m5!1s0x885699c6a2bb0add:0x2e0f44dc6bf21683!8m2!3d35.169741!4d-80.9698974!16s%2Fg%2F11q2nlmmtz?entry=ttu&g_ep=EgoyMDI0MDkxNi4wIKXMDSoASAFQAw%3D%3D"
+          }
+        },
+        "location_LzjATj": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/North_GA_Outlet.jpg",
+            "location_name": "DAWSONVILLE, GA",
+            "location_address_one": "800 Highway 400 S",
+            "location_address_two": "Suite 640",
+            "location_address_three": "Dawsonville, GA 30534",
+            "location_hours": "Mon - Sat: 10am - 8pm <br>\nSun: 12pm - 6pm",
+            "location_phone_num": "706-397-5339",
+            "link_text": "VISIT DAWSONVILLE",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/North+Georgia+Premium+Outlets\/@34.3566669,-84.0511973,17z\/data=!4m15!1m8!3m7!1s0x88f58901c30ef63b:0xbf133e414726e0f!2s800+GA-400,+Dawsonville,+GA+30534!3b1!8m2!3d34.3566669!4d-84.0486224!16s%2Fg%2F11l6hn068z!3m5!1s0x88f589da13457867:0xfa078bfea10e6c9f!8m2!3d34.3568168!4d-84.0481825!16s%2Fm%2F03l__07?entry=ttu&g_ep=EgoyMDI0MDkwMi4xIKXMDSoASAFQAw%3D%3D"
+          }
+        },
+        "location_Q7bb8R": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Destin_Outlet_89f49a5d-de81-4324-9905-7ab799ad8720.jpg",
+            "location_name": "DESTIN, FL",
+            "location_address_one": "10746 Emerald Coast Pkwy",
+            "location_address_two": "Suite 149A",
+            "location_address_three": "Destin, FL 32550",
+            "location_hours": "Mon - Sat: 10am - 8pm <br>\nSun: 11am - 7pm",
+            "location_phone_num": "850-424-1374",
+            "link_text": "VISIT DESTIN",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/10746+Emerald+Coast+Pkwy+%23149a,+Miramar+Beach,+FL+32550\/@30.3805863,-86.3564665,17z\/data=!3m1!4b1!4m5!3m4!1s0x88915b8b2c60bf25:0xb953770a01a4b810!8m2!3d30.3805863!4d-86.3538862?entry=ttu"
+          }
+        },
+        "location_N84TDP": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Elleton_Outlet.jpg",
+            "location_name": "ELLENTON, FL",
+            "location_address_one": "5585 Factory Shops Blvd",
+            "location_address_two": "Suite 310",
+            "location_address_three": "Ellenton, FL 34222",
+            "location_hours": "Mon - Thurs: 11am - 7pm <br>\nFri - Sat: 10am - 8pm<br>\nSun: 12pm - 6pm",
+            "location_phone_num": "941-722-3850",
+            "link_text": "VISIT ELLENTON",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/Ellenton+Premium+Outlets\/@27.5335083,-82.5096804,16z\/data=!4m15!1m8!3m7!1s0x88c33ccd658b4ed9:0x307ee343bb5e65!2s5585+Factory+Shops+Blvd+Suite+310,+Ellenton,+FL+34222!3b1!8m2!3d27.5335083!4d-82.5071001!16s%2Fg%2F11sc5d4rzl!3m5!1s0x88c3232d57098c29:0xc3e3abe3abc47991!8m2!3d27.5342533!4d-82.5066915!16s%2Fg%2F1v2pq_fv?entry=ttu&g_ep=EgoyMDI0MDkwMi4xIKXMDSoASAFQAw%3D%3D"
+          }
+        },
+        "location_Jq4zAb": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Foley_Outlet.jpg",
+            "location_name": "FOLEY, AL",
+            "location_address_one": "2601 S McKenzie St",
+            "location_address_two": "Suite 114",
+            "location_address_three": "Foley, AL 36535",
+            "location_hours": "Mon - Sat: 10am - 9pm <br>\nSun: 10am - 7pm",
+            "location_phone_num": "251-451-7905",
+            "link_text": "VISIT FOLEY",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/Tanger+Outlets+Foley\/@30.3747928,-87.6800275,17z\/data=!4m15!1m8!3m7!1s0x889a0e4a03d0c6e5:0x22737a23c7ef6a23!2s2601+S+McKenzie+St,+Foley,+AL+36535!3b1!8m2!3d30.3747928!4d-87.6774526!16s%2Fg%2F11b8v7cn9s!3m5!1s0x889a0e314d9a13bb:0x38ccdaadab86303e!8m2!3d30.3763263!4d-87.6801872!16s%2Fg%2F1tkc7g81?entry=ttu&g_ep=EgoyMDI0MDkwMi4xIKXMDSoASAFQAw%3D%3D"
+          }
+        },
+        "location_TiR9QQ": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/HHI_Outlet_2.jpg",
+            "location_name": "HILTON HEAD, SC",
+            "location_address_one": "1414 Fording Island Rd",
+            "location_address_two": "Suite C110",
+            "location_address_three": "Bluffton, SC 29910",
+            "location_hours": "Mon - Sat: 10am - 9pm <br>\nSun: 10am - 7pm",
+            "location_phone_num": "843-825-1647",
+            "link_text": "VISIT HILTON HEAD",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/Huk\/@32.2394269,-80.8218812,17z\/data=!3m2!4b1!5s0x88fb882e4c34a90b:0x64dca85300c6a530!4m6!3m5!1s0x88fb890001cb553b:0xcabf5d213f877026!8m2!3d32.2394269!4d-80.8193063!16s%2Fg%2F11vk198cgy?entry=ttu&g_ep=EgoyMDI0MDkwMi4xIKXMDSoASAFQAw%3D%3D"
+          }
+        },
+        "location_FR4RNf": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Myrtle_Beach_Outlet_2.jpg",
+            "location_name": "MYRTLE BEACH, SC",
+            "location_address_one": "10827 Kings Rd",
+            "location_address_two": "Suite 825",
+            "location_address_three": "Myrtle Beach, SC 29572",
+            "location_hours": "Mon - Sat: 10am-9pm <br>\nSun: 10am - 7pm",
+            "location_phone_num": "843-314-4358",
+            "link_text": "VISIT MYRTLE BEACH",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/Huk\/@33.7841874,-78.7761864,17z\/data=!3m2!4b1!5s0x890064f2751a5a49:0x9e08e85613be9fe0!4m6!3m5!1s0x8900655453154d97:0xe76b76b2bab7b34d!8m2!3d33.7841874!4d-78.7736115!16s%2Fg%2F11vc82rmdv?entry=ttu&g_ep=EgoyMDI0MDkwMi4xIKXMDSoASAFQAw%3D%3D"
+          }
+        },
+        "location_7ymPkc": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Nashville.jpg",
+            "location_name": "NASHVILLE, TN",
+            "location_address_one": "4060 Cane Ridge Pkwy",
+            "location_address_two": "Suite 323",
+            "location_address_three": "Antioch, TN 37031",
+            "location_hours": "Mon - Sat: 10am - 9pm <br>\nSun: 10am - 7pm",
+            "location_phone_num": "615-645-3623",
+            "link_text": "VISIT NASHVILLE",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/Huk\/@36.0325676,-86.6445817,15z\/data=!4m6!3m5!1s0x8864730051be04a3:0x6a4c217ae9f6747e!8m2!3d36.0325676!4d-86.6445817!16s%2Fg%2F11vx3hbbl_?entry=ttu&g_ep=EgoyMDI0MDkwMi4xIKXMDSoASAFQAw%3D%3D"
+          }
+        },
+        "location_8RAer3": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Orlando_Outlet_2.jpg",
+            "location_name": "ORLANDO, FL",
+            "location_address_one": "4969 International Dr",
+            "location_address_two": "Suite 3E16",
+            "location_address_three": "Orlando, FL 32819",
+            "location_hours": "Mon - Sat: 10am - 9pm <br>\nSun: 12pm - 6pm",
+            "location_phone_num": "321-248-2569",
+            "link_text": "VISIT ORLANDO",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/Huk\/@28.4753253,-81.4536665,17z\/data=!3m1!4b1!4m6!3m5!1s0x88e77f6b89403bdf:0xd1c32bc256197585!8m2!3d28.4753253!4d-81.4510916!16s%2Fg%2F11s7rfnlym?entry=ttu&g_ep=EgoyMDI0MDkwMi4xIKXMDSoASAFQAw%3D%3D"
+          }
+        },
+        "location_tpaapy": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Rehoboth_Outlet.jpg",
+            "location_name": "REHOBOTH BEACH",
+            "location_address_one": "34986 Midway Outlet Dr",
+            "location_address_two": "Suite 109",
+            "location_address_three": "Rehoboth Beach, DE 19971",
+            "location_hours": "Mon - Sat: 10am - 8pm <br>\nSun: 10am - 7pm",
+            "location_phone_num": "302-223-3153",
+            "link_text": "VISIT REHOBOTH",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/Huk\/@38.7353164,-75.1434043,17z\/data=!3m1!4b1!4m6!3m5!1s0x89b8b7489dd59843:0x46772b4bff6eca3a!8m2!3d38.7353164!4d-75.1408294!16s%2Fg%2F11k4wczktd?entry=ttu&g_ep=EgoyMDI0MDkwMi4xIKXMDSoASAFQAw%3D%3D"
+          }
+        },
+        "location_VUWQFc": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Round_Rock_Outlet_7e40310d-ce77-47fb-8497-9144dd246f60.png",
+            "location_name": "ROUND ROCK, TX",
+            "location_address_one": "4401 N Interstate 35",
+            "location_address_two": "Suite 820A",
+            "location_address_three": "Round Rock, TX 78665",
+            "location_hours": "Mon - Sat: 10am - 8pm<br>\nSun: 11am - 6pm",
+            "location_phone_num": "512-960-1884",
+            "link_text": "VISIT ROUND ROCK",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/Huk\/@30.5638869,-97.6936713,17z\/data=!3m1!4b1!4m6!3m5!1s0x8644d11f738b8a4f:0x2d5d109e9764d244!8m2!3d30.5638869!4d-97.6910964!16s%2Fg%2F11w9y6kbl8?entry=ttu&g_ep=EgoyMDI0MDkwMi4xIKXMDSoASAFQAw%3D%3D"
+          }
+        },
+        "location_q4Lwtn": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Savannah_Outlet.png",
+            "location_name": "SAVANNAH, GA",
+            "location_address_one": "200 Tanger Outlet Blvd",
+            "location_address_two": "Suite 321",
+            "location_address_three": "Pooler, GA 31322",
+            "location_hours": "Mon - Sat: 10am - 9pm <br>\nSun: 11am - 7pm",
+            "location_phone_num": "912-475-4652",
+            "link_text": "VISIT SAVANNAH",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/200+Tanger+Outlets+Blvd,+Pooler,+GA+31322\/@32.1346418,-81.245803,17z\/data=!3m1!4b1!4m6!3m5!1s0x88fba151b04d0e25:0x435c9280b9aaa906!8m2!3d32.1346418!4d-81.2432281!16s%2Fg%2F11c5q4fpyy?entry=ttu&g_ep=EgoyMDI0MDkwMi4xIKXMDSoASAFQAw%3D%3D"
+          }
+        },
+        "location_HnxqW7": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Sawgrass_Outlet_2.jpg",
+            "location_name": "SAWGRASS, FL",
+            "location_address_one": "12801 W Sunrise Blvd",
+            "location_address_two": "Suite 5035",
+            "location_address_three": "Sunrise, FL 33323",
+            "location_hours": "Mon - Sat: 10am - 9pm <br>\nSun: 11am - 8pm",
+            "location_phone_num": "954-466-3841",
+            "link_text": "VISIT SAWGRASS",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/Huk\/@26.1487385,-80.3250582,17z\/data=!3m1!4b1!4m6!3m5!1s0x88d909924cfd9a15:0x50b03ec64ab3cfc3!8m2!3d26.1487385!4d-80.3224833!16s%2Fg%2F11w9y5llmq?entry=ttu&g_ep=EgoyMDI0MDkwMi4xIKXMDSoASAFQAw%3D%3D"
+          }
+        },
+        "location_gyDdY9": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Sevierville_Outlet.jpg",
+            "location_name": "SEVIERVILLE, TN",
+            "location_address_one": "1645 Parkway",
+            "location_address_two": "Suite 1360",
+            "location_address_three": "Sevierville, TN 37862",
+            "location_hours": "Mon - Sat: 10am - 9pm <br>\nSun: 10am - 7pm",
+            "location_phone_num": "865-412-8437",
+            "link_text": "VISIT SEVIERVILLE",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/Huk\/@35.8334422,-83.5759552,17z\/data=!3m2!4b1!5s0x885bf8ca8ccb297f:0x64dca8534ebec150!4m6!3m5!1s0x885bf9180b1a2e1b:0x49469bf8b819078f!8m2!3d35.8334423!4d-83.5710843!16s%2Fg%2F11lmh_6tzd?entry=ttu&g_ep=EgoyMDI0MDkwMi4xIKXMDSoASAFQAw%3D%3D"
+          }
+        },
+        "location_G4YGcY": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Carolina_Premium_705b7dfb-2d27-4da8-af72-97d905043b94.jpg",
+            "location_name": "SMITHFIELD, NC",
+            "location_address_one": "1025 Outlet Center Drive",
+            "location_address_two": "Suite 600",
+            "location_address_three": "Smithfield, NC 27577",
+            "location_hours": "Mon - Sat: 10am - 7pm<br>\nSun: 11am - 7pm",
+            "location_phone_num": "984-310-2170",
+            "link_text": "VISIT SMITHFIELD",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/1025+Outlet+Center+Dr,+Smithfield,+NC+27577\/@35.5106685,-78.3150297,17z\/data=!3m1!4b1!4m6!3m5!1s0x89ac72a319e7c453:0x1c72aeaad7803ba4!8m2!3d35.5106685!4d-78.3124494!16s%2Fg%2F11bytp5nvp?entry=ttu"
+          }
+        },
+        "location_8catdq": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Tulsa_Store.jpg",
+            "location_name": "Tulsa, OK",
+            "location_address_one": "801 E 103rd St S",
+            "location_address_two": "Suite 4132",
+            "location_address_three": "Jenks, OK 74037",
+            "location_hours": "Mon-Sat: 10am-9pm<br>\nSun: 11am-6pm",
+            "location_phone_num": "918-400-3823",
+            "link_text": "VISIT TULSA",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/Tulsa+Premium+Outlets\/@36.0147952,-95.962744,15z\/data=!4m2!3m1!1s0x0:0xf3737d7117564428?sa=X&ved=1t:2428&ictx=111"
+          }
+        }
+      },
+      "block_order": [
+        "location_rNJNGb",
+        "location_aDxrGT",
+        "location_LzjATj",
+        "location_Q7bb8R",
+        "location_N84TDP",
+        "location_Jq4zAb",
+        "location_TiR9QQ",
+        "location_FR4RNf",
+        "location_7ymPkc",
+        "location_8RAer3",
+        "location_tpaapy",
+        "location_VUWQFc",
+        "location_q4Lwtn",
+        "location_HnxqW7",
+        "location_gyDdY9",
+        "location_G4YGcY",
+        "location_8catdq"
+      ],
+      "settings": {
+        "desktop_height": 480,
+        "mobile_height": 480,
+        "column_spacing": "medium",
+        "header": "",
+        "overlay_color": "#17314b",
+        "header_color": "#ffffff",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "store_location_slider_894Ccw": {
+      "type": "store-location-slider",
+      "blocks": {
+        "location_rNJNGb": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Charleston_Outlet.jpg",
+            "location_name": "CHARLESTON, SC",
+            "location_address_one": "4840 Tanger Outlet Blvd",
+            "location_address_two": "Suite 721",
+            "location_address_three": "Charleston, SC 29418",
+            "location_hours": "Mon - Sat: 10am - 9pm <br>\nSun: 10am - 7pm",
+            "location_phone_num": "843-584-8184",
+            "link_text": "VISIT CHARLESTON",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/4840+Tanger+Outlet+Blvd,+North+Charleston,+SC+29418\/@32.8729916,-80.0197702,17z\/data=!3m1!4b1!4m6!3m5!1s0x88fe635aff89bb89:0xde800d4a43f598ea!8m2!3d32.8729916!4d-80.0171899!16s%2Fg%2F11b8v560j0?entry=ttuGet Directions"
+          }
+        },
+        "location_aDxrGT": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Charlotte_Outlet.jpg",
+            "location_name": "Charlotte, NC",
+            "location_address_one": "5404 New Fashion Way",
+            "location_address_two": "Suite 1055",
+            "location_address_three": "Charlotte, NC 28278",
+            "location_hours": "Mon - Sat: 10am - 8pm<br>\nSun: 11am - 6pm",
+            "location_phone_num": "980-485-6788",
+            "link_text": "VISIT CHARLOTTE",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/5404+New+Fashion+Way,+Charlotte,+NC+28278\/@35.1683388,-80.9723323,17z\/data=!3m1!4b1!4m6!3m5!1s0x885699c14d11465d:0x41b35176ea3ebcc4!8m2!3d35.1683344!4d-80.969752!16s%2Fg%2F11b8v9dhdg?entry=ttu"
+          }
+        },
+        "location_LzjATj": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/North_GA_Outlet.jpg",
+            "location_name": "DAWSONVILLE, GA",
+            "location_address_one": "800 Highway 400 S",
+            "location_address_two": "Suite 640",
+            "location_address_three": "Dawsonville, GA 30534",
+            "location_hours": "Mon - Sat: 10am - 8pm <br>\nSun: 12pm - 6pm",
+            "location_phone_num": "706-397-5339",
+            "link_text": "VISIT DAWSONVILLE",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/5585+Factory+Shops+Blvd+Suite+310,+Ellenton,+FL+34222\/@27.5335083,-82.5096804,16z\/data=!4m6!3m5!1s0x88c33ccd658b4ed9:0x307ee343bb5e65!8m2!3d27.5335083!4d-82.5071001!16s%2Fg%2F11sc5d4rzl?entry=ttu"
+          }
+        },
+        "location_Q7bb8R": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Destin_Outlet_89f49a5d-de81-4324-9905-7ab799ad8720.jpg",
+            "location_name": "DESTIN, FL",
+            "location_address_one": "10746 Emerald Coast Pkwy",
+            "location_address_two": "Suite 149A",
+            "location_address_three": "Destin, FL 32550",
+            "location_hours": "Mon - Sat: 10am - 8pm <br>\nSun: 11am - 7pm",
+            "location_phone_num": "850-424-1374",
+            "link_text": "VISIT DESTIN",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/10746+Emerald+Coast+Pkwy+%23149a,+Miramar+Beach,+FL+32550\/@30.3805863,-86.3564665,17z\/data=!3m1!4b1!4m5!3m4!1s0x88915b8b2c60bf25:0xb953770a01a4b810!8m2!3d30.3805863!4d-86.3538862?entry=ttu"
+          }
+        },
+        "location_N84TDP": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Elleton_Outlet.jpg",
+            "location_name": "ELLENTON, FL",
+            "location_address_one": "5585 Factory Shops Blvd",
+            "location_address_two": "Suite 310",
+            "location_address_three": "Ellenton, FL 34222",
+            "location_hours": "Mon - Thurs, Sun: 11am - 7pm <br>\nFri - Sat: 10am - 8pm",
+            "location_phone_num": "941-722-3850",
+            "link_text": "VISIT ELLENTON",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/5585+Factory+Shops+Blvd+Suite+310,+Ellenton,+FL+34222\/@27.5335083,-82.5096804,16z\/data=!4m6!3m5!1s0x88c33ccd658b4ed9:0x307ee343bb5e65!8m2!3d27.5335083!4d-82.5071001!16s%2Fg%2F11sc5d4rzl?entry=ttu"
+          }
+        },
+        "location_Jq4zAb": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Foley_Outlet.jpg",
+            "location_name": "FOLEY, AL",
+            "location_address_one": "2601 S McKenzie St",
+            "location_address_two": "Suite 114",
+            "location_address_three": "Foley, AL 36535",
+            "location_hours": "Mon - Sat: 10am - 9pm <br>\nSun: 10am - 7pm",
+            "location_phone_num": "251-451-7905",
+            "link_text": "VISIT FOLEY",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/5585+Factory+Shops+Blvd+Suite+310,+Ellenton,+FL+34222\/@27.5335083,-82.5096804,16z\/data=!4m6!3m5!1s0x88c33ccd658b4ed9:0x307ee343bb5e65!8m2!3d27.5335083!4d-82.5071001!16s%2Fg%2F11sc5d4rzl?entry=ttu"
+          }
+        },
+        "location_TiR9QQ": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/HHI_Outlet_2.jpg",
+            "location_name": "HILTON HEAD, SC",
+            "location_address_one": "1414 Fording Island Rd",
+            "location_address_two": "Suite C110",
+            "location_address_three": "Bluffton, SC 29910",
+            "location_hours": "Mon - Sat: 10am - 9pm <br>\nSun: 10am - 7pm",
+            "location_phone_num": "843-825-1647",
+            "link_text": "VISIT HILTON HEAD",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/1414+Fording+Island+Rd+c110,+Bluffton,+SC+29910\/@32.2394269,-80.8218866,17z\/data=!3m1!4b1!4m6!3m5!1s0x88fb882fb17b384d:0x30d3667dbc5d03c2!8m2!3d32.2394269!4d-80.8193063!16s%2Fg%2F11sn00cwjc?entry=ttu"
+          }
+        },
+        "location_FR4RNf": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Myrtle_Beach_Outlet_2.jpg",
+            "location_name": "MYRTLE BEACH, SC",
+            "location_address_one": "10827 Kings Rd",
+            "location_address_two": "Suite 825",
+            "location_address_three": "Myrtle Beach, SC 29572",
+            "location_hours": "Mon - Sat: 10am-9pm <br>\nSun: 10am - 7pm",
+            "location_phone_num": "843-314-4358",
+            "link_text": "VISIT MYRTLE BEACH",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/10827+Kings+Rd+%23825,+Myrtle+Beach,+SC+29572\/@33.7838388,-78.7747217,17.6z\/data=!3m1!5s0x890064f2751a5a49:0x9e08e85613be9fe0!4m6!3m5!1s0x890064f27f6dac1b:0x976fcf808f4ee238!8m2!3d33.784173!4d-78.7733662!16s%2Fg%2F11btn19jyj?entry=ttu"
+          }
+        },
+        "location_7ymPkc": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Nashville.jpg",
+            "location_name": "NASHVILLE, TN",
+            "location_address_one": "4060 Cane Ridge Pkwy",
+            "location_address_two": "Suite 323",
+            "location_address_three": "Antioch, TN 37031",
+            "location_hours": "Mon - Sat: 10am - 9pm <br>\nSun: 10am - 7pm",
+            "location_phone_num": "615-645-3623",
+            "link_text": "VISIT NASHVILLE",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/5585+Factory+Shops+Blvd+Suite+310,+Ellenton,+FL+34222\/@27.5335083,-82.5096804,16z\/data=!4m6!3m5!1s0x88c33ccd658b4ed9:0x307ee343bb5e65!8m2!3d27.5335083!4d-82.5071001!16s%2Fg%2F11sc5d4rzl?entry=ttu"
+          }
+        },
+        "location_8RAer3": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Orlando_Outlet_2.jpg",
+            "location_name": "ORLANDO, FL",
+            "location_address_one": "4969 International Dr",
+            "location_address_two": "Suite 3E16",
+            "location_address_three": "Orlando, FL 32819",
+            "location_hours": "Mon - Sat: 10am - 9pm <br>\nSun: 12pm - 6pm",
+            "location_phone_num": "321-248-2569",
+            "link_text": "VISIT ORLANDO",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/4969+International+Dr,+Orlando,+FL+32819\/@28.4753253,-81.4536719,17z\/data=!3m1!4b1!4m6!3m5!1s0x88e77ec03fa7f5e9:0xe89770ae1ea4682!8m2!3d28.4753253!4d-81.4510916!16s%2Fg%2F11c0zrj61n?entry=ttu"
+          }
+        },
+        "location_tpaapy": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Rehoboth_Outlet.jpg",
+            "location_name": "REHOBOTH BEACH",
+            "location_address_one": "34986 Midway Outlet Dr",
+            "location_address_two": "Suite 109",
+            "location_address_three": "Rehoboth Beach, DE 19971",
+            "location_hours": "Mon - Sat: 10am - 8pm <br>\nSun: 10am - 7pm",
+            "location_phone_num": "302-223-3153",
+            "link_text": "VISIT REHOBOTH",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/5585+Factory+Shops+Blvd+Suite+310,+Ellenton,+FL+34222\/@27.5335083,-82.5096804,16z\/data=!4m6!3m5!1s0x88c33ccd658b4ed9:0x307ee343bb5e65!8m2!3d27.5335083!4d-82.5071001!16s%2Fg%2F11sc5d4rzl?entry=ttu"
+          }
+        },
+        "location_VUWQFc": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Round_Rock_Outlet_7e40310d-ce77-47fb-8497-9144dd246f60.png",
+            "location_name": "ROUND ROCK, TX",
+            "location_address_one": "4401 N Interstate 35",
+            "location_address_two": "Suite 820A",
+            "location_address_three": "Round Rock, TX 78665",
+            "location_hours": "Mon - Sat: 10am - 8pm<br>\nSun: 11am - 6pm",
+            "location_phone_num": "512-960-1884",
+            "link_text": "VISIT ROUND ROCK",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/4401+N+Interstate+Hwy+35,+Round+Rock,+TX+78664\/@30.5672923,-97.6924953,17z\/data=!3m1!4b1!4m6!3m5!1s0x8644d150590b2529:0x5065725c16b5e8da!8m2!3d30.5672923!4d-97.689915!16s%2Fg%2F11bw3h_76g?entry=ttu"
+          }
+        },
+        "location_q4Lwtn": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Savannah_Outlet.png",
+            "location_name": "SAVANNAH, GA",
+            "location_address_one": "200 Tanger Outlet Blvd",
+            "location_address_two": "Suite 321",
+            "location_address_three": "Pooler, GA 31322",
+            "location_hours": "Mon - Sat: 10am - 9pm <br>\nSun: 11am - 7pm",
+            "location_phone_num": "912-475-4652",
+            "link_text": "VISIT SAVANNAH",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/5585+Factory+Shops+Blvd+Suite+310,+Ellenton,+FL+34222\/@27.5335083,-82.5096804,16z\/data=!4m6!3m5!1s0x88c33ccd658b4ed9:0x307ee343bb5e65!8m2!3d27.5335083!4d-82.5071001!16s%2Fg%2F11sc5d4rzl?entry=ttu"
+          }
+        },
+        "location_HnxqW7": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Sawgrass_Outlet_2.jpg",
+            "location_name": "SAWGRASS, FL",
+            "location_address_one": "12801 W Sunrise Blvd",
+            "location_address_two": "Suite 5035",
+            "location_address_three": "Sunrise, FL 33323",
+            "location_hours": "Mon - Sat: 10am - 9pm <br>\nSun: 11am - 8pm",
+            "location_phone_num": "954-466-3841",
+            "link_text": "VISIT SAWGRASS",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/5585+Factory+Shops+Blvd+Suite+310,+Ellenton,+FL+34222\/@27.5335083,-82.5096804,16z\/data=!4m6!3m5!1s0x88c33ccd658b4ed9:0x307ee343bb5e65!8m2!3d27.5335083!4d-82.5071001!16s%2Fg%2F11sc5d4rzl?entry=ttu"
+          }
+        },
+        "location_gyDdY9": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Sevierville_Outlet.jpg",
+            "location_name": "SEVIERVILLE, TN",
+            "location_address_one": "1645 Parkway",
+            "location_address_two": "Suite 1360",
+            "location_address_three": "Sevierville, TN 37862",
+            "location_hours": "Mon - Sat: 10am - 9pm <br>\nSun: 10am - 7pm",
+            "location_phone_num": "865-412-8437",
+            "link_text": "VISIT SEVIERVILLE",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/1645+Parkway+%231360,+Sevierville,+TN+37862\/@35.8321578,-83.5711868,17.46z\/data=!4m6!3m5!1s0x885bf8b580459f29:0x615f3e9c9f90f19c!8m2!3d35.8334423!4d-83.5710843!16s%2Fg%2F11v5g2w_1d?entry=ttu"
+          }
+        },
+        "location_G4YGcY": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify:\/\/shop_images\/Carolina_Premium_705b7dfb-2d27-4da8-af72-97d905043b94.jpg",
+            "location_name": "SMITHFIELD, NC",
+            "location_address_one": "1025 Outlet Center Drive",
+            "location_address_two": "Suite 600",
+            "location_address_three": "Smithfield, NC 27577",
+            "location_hours": "Mon - Sat: 10am - 7pm<br>\nSun: 11am - 7pm",
+            "location_phone_num": "984-310-2170",
+            "link_text": "VISIT SMITHFIELD",
+            "link_url": "https:\/\/www.google.com\/maps\/place\/Huk\/@35.509323,-78.3194232,17z\/data=!3m1!4b1!4m6!3m5!1s0x89ac731e73014caf:0xace15fef51bf41ef!8m2!3d35.509323!4d-78.3168483!16s%2Fg%2F11vy5xl03b?entry=ttu&g_ep=EgoyMDI0MDkwMi4xIKXMDSoASAFQAw%3D%3D"
+          }
+        }
+      },
+      "block_order": [
+        "location_rNJNGb",
+        "location_aDxrGT",
+        "location_LzjATj",
+        "location_Q7bb8R",
+        "location_N84TDP",
+        "location_Jq4zAb",
+        "location_TiR9QQ",
+        "location_FR4RNf",
+        "location_7ymPkc",
+        "location_8RAer3",
+        "location_tpaapy",
+        "location_VUWQFc",
+        "location_q4Lwtn",
+        "location_HnxqW7",
+        "location_gyDdY9",
+        "location_G4YGcY"
+      ],
+      "disabled": true,
+      "settings": {
+        "header": "",
+        "overlay_color": "#010101",
+        "header_color": "#ffffff"
+      }
+    },
+    "rich_text_brpX8f": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_pxJX3P": {
+          "type": "subheading",
+          "settings": {
+            "text": "Store Locator"
+          }
+        },
+        "heading_APtzmm": {
+          "type": "heading",
+          "settings": {
+            "text": "Stores that Carry huk",
+            "marker_style": "style1",
+            "size": "h3",
+            "marker_color": "#fd6262"
+          }
+        },
+        "text_4V6bdY": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Find our best-in-class gear at a store near you! <\/p>",
+            "size": "text-size-regular"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_pxJX3P",
+        "heading_APtzmm",
+        "text_4V6bdY"
+      ],
+      "disabled": true,
+      "settings": {
+        "id": "",
+        "text_width": "medium",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_heading": "#0E4174",
+        "color_text": "#17314b",
+        "color_links": "#0581ff",
+        "full_bleed_layout": false,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
+    },
+    "custom_liquid_z3T6d9": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "settings": {
+        "custom_liquid": "<div id=\"storepoint-container\" data-map-id=\"1661fc17a8a80d\"><\/div><script>(function(){var a=document.createElement(\"script\");a.type=\"text\/javascript\";a.async=!0;a.src=\"https:\/\/cdn.storepoint.co\/api\/v1\/js\/1661fc17a8a80d.js\";var b=document.getElementsByTagName(\"script\")[0];b.parentNode.insertBefore(a,b);}());<\/script>",
+        "color_bg": "rgba(0,0,0,0)"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich_text_wUXgzX",
+    "store_locator_grid_GXpBLf",
+    "store_location_slider_894Ccw",
+    "rich_text_brpX8f",
+    "custom_liquid_z3T6d9"
+  ]
+}

@@ -1,0 +1,641 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "567fa266-e3a3-4d42-8bd7-d5c0c15798dd": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "template--14745674219578__567fa266-e3a3-4d42-8bd7-d5c0c15798dd-heading-1": {
+          "type": "heading",
+          "settings": {
+            "text": "The Icon",
+            "heading_size": "h1-xlarge"
+          }
+        },
+        "template--14745674219578__567fa266-e3a3-4d42-8bd7-d5c0c15798dd-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Best-In-Class Performance, Ultimate Sun Protection</p>",
+            "description_size": "medium"
+          }
+        }
+      },
+      "block_order": [
+        "template--14745674219578__567fa266-e3a3-4d42-8bd7-d5c0c15798dd-heading-1",
+        "template--14745674219578__567fa266-e3a3-4d42-8bd7-d5c0c15798dd-text-1"
+      ],
+      "custom_css": [],
+      "settings": {
+        "image": "shopify://shop_images/Icon_Spring_Collection_Header.jpg",
+        "mobile_image": "shopify://shop_images/Icon_Spring_Landing_Mobile.jpg",
+        "image_parallax": true,
+        "desktop_height": "desktop-height-450",
+        "mobile_height": "mobile-height-350",
+        "image_focal_point_y": 50,
+        "mob_image_focal_point_y": 50,
+        "enable_focal_control": false,
+        "full_width": true,
+        "content_width": "medium",
+        "content_position": "middle-center",
+        "text_alignment": "center",
+        "text_color": "#ffffff",
+        "overlay_color": "#35393d",
+        "overlay_opacity": 9,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "rich_text_GFVwhC": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_mfCkw6": {
+          "type": "heading",
+          "settings": {
+            "text": "ICON From Head-To-Toe",
+            "marker_style": "style1",
+            "size": "h2",
+            "marker_color": "#fd6262"
+          }
+        },
+        "text_w8UnhU": {
+          "type": "text",
+          "settings": {
+            "text": "<p>What started as a \"we need a better shirt so we're going to make the best shirt out there\"  program and the product that launched the brand, is now the ultimate hot weather fishing kit with head-to-toe coverage, in peak performance fabrics.</p>",
+            "size": "text-size-large"
+          }
+        },
+        "button_8Nc9aU": {
+          "type": "button",
+          "settings": {
+            "link_label": "Shop Mens",
+            "link": "shopify://collections/mens-icon-collection"
+          }
+        },
+        "button_GYmzGQ": {
+          "type": "button",
+          "settings": {
+            "link_label": "Shop Womens",
+            "link": "shopify://collections/womens-icon-collection"
+          }
+        }
+      },
+      "block_order": [
+        "heading_mfCkw6",
+        "text_w8UnhU",
+        "button_8Nc9aU",
+        "button_GYmzGQ"
+      ],
+      "custom_css": [
+        "{background-color: #f7f4ef;}",
+        "p {color: black;}",
+        ".button {margin-top: 10px;}"
+      ],
+      "settings": {
+        "id": "",
+        "text_width": "xlarge",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "#f7f4ef",
+        "color_heading": "#0E4175",
+        "color_text": "#0581ff",
+        "color_links": "#0581ff",
+        "full_bleed_layout": true,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "video_mnpttM": {
+      "type": "video",
+      "settings": {
+        "heading": "",
+        "marker_style": "style1",
+        "description": "",
+        "full_width": true,
+        "video": "",
+        "video_hosted": "shopify://files/videos/Fall Icon Video.mp4",
+        "video_autoplay": true,
+        "aspect_ratio": "16-9",
+        "marker_color": "#fd6262",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": false
+      }
+    },
+    "rich_text_QVGMph": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_FMLAb9": {
+          "type": "heading",
+          "settings": {
+            "text": "THE SHIRT THAT STARTED IT ALL",
+            "marker_style": "style1",
+            "size": "h2",
+            "marker_color": "#fd6262"
+          }
+        },
+        "text_MyWtr8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>The shirt that launched the brand has been completely revamped<br/>for to take on even more rod-bending, pulse-raising moments. The new, upgraded version features a full back panel of moisture-wicking mesh that enhances breathability and shortens dry time. To keep you out on the water longer, the Icon provides 50+ UPF rating and is made with I.C.E. (Internal Cooling Element) technology. This incredible fiber-technology reacts to sweat by producing an endothermic reaction to lower body temperature. The raglan sleeve cut provides full range of motion to eliminate pulls and bunching while casting, and it's antimicrobial treatment will help keep you from smelling like your catch when you dock up at the local watering hole for a post trip celebratory brew.</p>",
+            "size": "text-size-regular"
+          }
+        },
+        "button_meAzTd": {
+          "type": "button",
+          "settings": {
+            "link_label": "Shop Mens",
+            "link": "shopify://collections/mens-icon-collection"
+          }
+        },
+        "button_RMPEex": {
+          "type": "button",
+          "settings": {
+            "link_label": "Shop Womens",
+            "link": "shopify://collections/womens-icon-collection"
+          }
+        }
+      },
+      "block_order": [
+        "heading_FMLAb9",
+        "text_MyWtr8",
+        "button_meAzTd",
+        "button_RMPEex"
+      ],
+      "disabled": true,
+      "settings": {
+        "id": "",
+        "text_width": "medium",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "#f7f4ef",
+        "color_heading": "#0E4175",
+        "color_text": "#17314b",
+        "color_links": "#0581ff",
+        "full_bleed_layout": true,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "image_hotspots_bgYVT3": {
+      "type": "image-hotspots",
+      "blocks": {
+        "hotspot_GkzN87": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "I.C.E. COOLING TECHNOLOGY",
+            "description": "This incredible fiber-technology reacts to sweat by producing an endothermic reaction to lower body temperature.",
+            "x_position": 32,
+            "y_position": 31,
+            "x_position_mobile": 39,
+            "y_position_mobile": 38
+          }
+        },
+        "hotspot_HAm8NE": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "UPF 50+ SUN PROTECTION",
+            "description": "Designed to protect you from the sun and keep you out on the water longer.",
+            "x_position": 36,
+            "y_position": 48,
+            "x_position_mobile": 62,
+            "y_position_mobile": 20
+          }
+        },
+        "hotspot_C3i9iK": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "MESH HOOD, BACK, AND SIDES",
+            "description": "The upgraded Icon hoodie now features a full back panel of moisture-wicking mesh that enhances breathability and shortens dry time.",
+            "x_position": 18,
+            "y_position": 10,
+            "x_position_mobile": 20,
+            "y_position_mobile": 20
+          }
+        },
+        "hotspot_bptChN": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "ANTIMICROBIAL TREATMENT",
+            "description": "With our best-in-class microbial treatment, you can keep you from smelling like your catch when you dock up at the local watering hole for a post trip celebratory brew.",
+            "x_position": 67,
+            "y_position": 51,
+            "x_position_mobile": 67,
+            "y_position_mobile": 55
+          }
+        }
+      },
+      "block_order": [
+        "hotspot_GkzN87",
+        "hotspot_HAm8NE",
+        "hotspot_C3i9iK",
+        "hotspot_bptChN"
+      ],
+      "custom_css": [
+        "{padding-left: 10%; padding-right: 10%;}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Icon-Hot-Spot-SS25.jpg",
+        "heading": "The Shirt that started it all",
+        "marker_style": "style1",
+        "heading_size": "h2",
+        "description": "<p>Tested and perfected for over 10 years on the water. The sun is not your friend—sweat in the eyes, a scorched neck, and a battle over the last icy Modelo, doesn’t add up to a great day on the water. Avoid the sun's perils, and stay out longer with our best-selling performance top.</p>",
+        "badge_text": "",
+        "image_position": "text_first",
+        "marker_color": "#fd6262",
+        "color_bg_badge": "#3f72e5",
+        "color_badge": "#ffffff",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "rich_text_BqWp8U": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_gQK4pA": {
+          "type": "subheading",
+          "settings": {
+            "text": "About the Collection"
+          }
+        },
+        "heading_7wdVaG": {
+          "type": "heading",
+          "settings": {
+            "text": "NEW ICON BOTTOMS",
+            "marker_style": "style1",
+            "size": "h2",
+            "marker_color": "#fd6262"
+          }
+        },
+        "text_6zjNdk": {
+          "type": "text",
+          "settings": {
+            "text": "<p>To keep you protected from head to toe, we've launched our Icon Pants and Icon Shorts to perfectly complement to our signature top. We love this 4-way stretch nylon for one key reason - long wear durability. Built and tested in partnership with our Pros and Captains who pay their bills on a boat, the feature set is dialed in for ultimate versatility. Lightweight ... breathable ... quick dry ... 50+ UPF protection .... add in DWR coating to shed spray and light rain, stain resistant treatment, and details for a custom fit, and a built-in reinforced plier pocket and you have the ultimate bottom for fishing hard.</p>",
+            "size": "text-size-large"
+          }
+        },
+        "button_f8VebW": {
+          "type": "button",
+          "settings": {
+            "link_label": "Shop Mens",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_gQK4pA",
+        "heading_7wdVaG",
+        "text_6zjNdk",
+        "button_f8VebW"
+      ],
+      "settings": {
+        "id": "",
+        "text_width": "xlarge",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "#f7f4ef",
+        "color_heading": "#0E4175",
+        "color_text": "#17314b",
+        "color_links": "#0581ff",
+        "full_bleed_layout": true,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "image_hotspots_G87tfC": {
+      "type": "image-hotspots",
+      "blocks": {
+        "hotspot_gj9nhW": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "4 WAY STRETCH NYLON",
+            "description": "Our four way stretch material adds, mobility and durability without adding weight.",
+            "x_position": 25,
+            "y_position": 32,
+            "x_position_mobile": 20,
+            "y_position_mobile": 20
+          }
+        },
+        "hotspot_UVqeJN": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "MULTI-LAYERED POCKETS",
+            "description": "Intentional pocketing, designed for the angler. Including a tear resistant plier pocket.",
+            "x_position": 73,
+            "y_position": 25,
+            "x_position_mobile": 20,
+            "y_position_mobile": 20
+          }
+        },
+        "hotspot_tFjaLY": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "STAIN RESIST TREATMENT",
+            "description": "Keeps your pants looking good trip after trip.",
+            "x_position": 57,
+            "y_position": 77,
+            "x_position_mobile": 20,
+            "y_position_mobile": 20
+          }
+        },
+        "hotspot_YDBTp9": {
+          "type": "hotspot",
+          "settings": {
+            "heading": "DWR COATING",
+            "description": "Sheds the inevitable spray that comes with fishing hard.",
+            "x_position": 57,
+            "y_position": 51,
+            "x_position_mobile": 20,
+            "y_position_mobile": 20
+          }
+        }
+      },
+      "block_order": [
+        "hotspot_gj9nhW",
+        "hotspot_UVqeJN",
+        "hotspot_tFjaLY",
+        "hotspot_YDBTp9"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/Icon_Short_Landing_Page.jpg",
+        "heading": "Complete the system for on the water performance",
+        "marker_style": "style1",
+        "heading_size": "h2",
+        "description": "<p>The new Icon Short is quickly becoming our favorite bottom for long days of hard fishing. Built with input from our pro anglers and captains, these lightweight nylon shorts check all the boxes.</p>",
+        "badge_text": "",
+        "image_position": "text_first",
+        "marker_color": "#fd6262",
+        "color_bg_badge": "#3f72e5",
+        "color_badge": "#ffffff",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "collection_tabs_xeNMgg": {
+      "type": "collection-tabs",
+      "blocks": {
+        "collection_za9Cjb": {
+          "type": "collection",
+          "settings": {
+            "collection": "mens-icon-collection",
+            "show_alternate_images": false,
+            "enable_promotion": false,
+            "title": "Promotion",
+            "text": "Advertise a promotion or a sale",
+            "link_label": "Explore",
+            "content_position": "bottom-left",
+            "text_alignment": "left",
+            "link": "",
+            "use_text_button": false,
+            "block_link": "",
+            "overlay_color": "#000000",
+            "overlay_opacity": 70
+          }
+        },
+        "collection_Yx6x9g": {
+          "type": "collection",
+          "settings": {
+            "collection": "womens-icon-collection",
+            "show_alternate_images": false,
+            "enable_promotion": false,
+            "title": "Promotion",
+            "text": "Advertise a promotion or a sale",
+            "link_label": "Explore",
+            "content_position": "bottom-left",
+            "text_alignment": "left",
+            "link": "",
+            "use_text_button": false,
+            "block_link": "",
+            "overlay_color": "#000000",
+            "overlay_opacity": 70
+          }
+        }
+      },
+      "block_order": [
+        "collection_za9Cjb",
+        "collection_Yx6x9g"
+      ],
+      "settings": {
+        "heading": "Shop the Collection",
+        "marker_style": "style1",
+        "description": "",
+        "product_limit": 16,
+        "columns_desktop": 5,
+        "show_progress_bar": false,
+        "marker_color": "#ffffff",
+        "bg-color": "#ffffff",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "8ab8f1f0-7339-452e-9f95-73816fef5c9e": {
+      "type": "testimonials",
+      "blocks": {
+        "template--14745674219578__8ab8f1f0-7339-452e-9f95-73816fef5c9e-quote-3": {
+          "type": "quote",
+          "settings": {
+            "stars": "",
+            "text": "\"The new Icon shirt is Huk's best shirt yet.  Being a south Florida Captain the heat is what will keep you from wanting to go out. The I.C.E. tech is legit.  You can feel it cooling your skin allowing me to stay comfortable all day on the water.\"",
+            "author": "Thomas L."
+          }
+        },
+        "quote_bUj6VJ": {
+          "type": "quote",
+          "settings": {
+            "stars": "",
+            "text": "\"Great fitting shirt! The hood is big enough to cover the sides of your face. Very cool even in 95 degrees. Light and comfortable material, with great sun protection.\"",
+            "author": "Tod H."
+          }
+        },
+        "template--14745674219578__8ab8f1f0-7339-452e-9f95-73816fef5c9e-quote-1": {
+          "type": "quote",
+          "settings": {
+            "stars": "",
+            "text": "\"I had a great experience! It's always a good feeling when a product lives up to its description. Staying comfortable and protected from the elements is key for any successful fishing trip. A good hoodie can make all the difference when you're out on the water. It sounds like I found a winner wearing the HUK Icon hoodie.\"",
+            "author": "Bebee M."
+          }
+        },
+        "template--14745674219578__8ab8f1f0-7339-452e-9f95-73816fef5c9e-quote-2": {
+          "type": "quote",
+          "settings": {
+            "stars": "",
+            "text": "\"The Huk Icon Performance Hoodie is as essential as the hook on the end of your line. Plain and simple, get it.\"",
+            "author": "Shane E."
+          }
+        }
+      },
+      "block_order": [
+        "template--14745674219578__8ab8f1f0-7339-452e-9f95-73816fef5c9e-quote-3",
+        "quote_bUj6VJ",
+        "template--14745674219578__8ab8f1f0-7339-452e-9f95-73816fef5c9e-quote-1",
+        "template--14745674219578__8ab8f1f0-7339-452e-9f95-73816fef5c9e-quote-2"
+      ],
+      "settings": {
+        "heading": "TESTIMONIALS",
+        "full_width": true,
+        "text_size": "medium",
+        "font_family": "body",
+        "pagination": "dots",
+        "autoplay": true,
+        "autoplay_length": 5,
+        "color_bg": "#f7f4ef",
+        "color_text": "#0581ff",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "scrolling_images_m3DYFP": {
+      "type": "scrolling-images",
+      "blocks": {
+        "image_gtQkqb": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Icon_17.jpg",
+            "link": "",
+            "heading": "",
+            "text": ""
+          }
+        },
+        "image_7c6Ltj": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Icon_6.jpg",
+            "link": "",
+            "heading": "",
+            "text": ""
+          }
+        },
+        "image_jQDMYj": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Icon_16.jpg",
+            "link": "",
+            "heading": "",
+            "text": ""
+          }
+        },
+        "image_qyFG3T": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Icon_12.jpg",
+            "link": "",
+            "heading": "",
+            "text": ""
+          }
+        },
+        "image_7Uwehx": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Icon_1.jpg",
+            "link": "",
+            "heading": "",
+            "text": ""
+          }
+        },
+        "image_NEp4MC": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Icon_15.jpg",
+            "link": "",
+            "heading": "",
+            "text": ""
+          }
+        },
+        "image_NBrypF": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Icon_20.jpg",
+            "link": "",
+            "heading": "",
+            "text": ""
+          }
+        },
+        "image_BDbthM": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Icon_3.jpg",
+            "link": "",
+            "heading": "",
+            "text": ""
+          }
+        },
+        "image_9yriDe": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Icon_11.jpg",
+            "link": "",
+            "heading": "",
+            "text": ""
+          }
+        },
+        "image_MpAfk8": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Icon_9.jpg",
+            "link": "",
+            "heading": "",
+            "text": ""
+          }
+        },
+        "image_g7EfwX": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Icon_13.jpg",
+            "link": "",
+            "heading": "",
+            "text": ""
+          }
+        },
+        "image_pXQAdJ": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Icon_21_4140c95b-2ea9-47a1-a8d7-10ff0e64c19a.jpg",
+            "link": "",
+            "heading": "",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_gtQkqb",
+        "image_7c6Ltj",
+        "image_jQDMYj",
+        "image_qyFG3T",
+        "image_7Uwehx",
+        "image_NEp4MC",
+        "image_NBrypF",
+        "image_BDbthM",
+        "image_9yriDe",
+        "image_MpAfk8",
+        "image_g7EfwX",
+        "image_pXQAdJ"
+      ],
+      "settings": {
+        "image_ratio": "adapt",
+        "column_spacing": "small",
+        "image_alignment": "top",
+        "direction": "left",
+        "speed": "30s",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    }
+  },
+  "order": [
+    "567fa266-e3a3-4d42-8bd7-d5c0c15798dd",
+    "rich_text_GFVwhC",
+    "video_mnpttM",
+    "rich_text_QVGMph",
+    "image_hotspots_bgYVT3",
+    "rich_text_BqWp8U",
+    "image_hotspots_G87tfC",
+    "collection_tabs_xeNMgg",
+    "8ab8f1f0-7339-452e-9f95-73816fef5c9e",
+    "scrolling_images_m3DYFP"
+  ]
+}

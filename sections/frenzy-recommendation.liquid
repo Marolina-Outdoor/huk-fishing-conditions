@@ -1,0 +1,22 @@
+<div class="custom-section">
+    {{ section.settings.custom_liquid }}
+</div>
+{% schema %}
+  {
+    "name": "Frenzy Recommendation",
+    "tag": "section",
+    "class": "section",
+    "settings": [
+      {
+        "type": "liquid",
+        "id": "custom_liquid",
+        "label": "Liquid code"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Frenzy Recommendation"
+      }
+    ]
+  }
+{% endschema %}

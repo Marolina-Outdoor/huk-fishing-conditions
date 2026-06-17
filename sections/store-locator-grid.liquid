@@ -1,0 +1,342 @@
+{%- liquid
+  assign desktop_height = section.settings.desktop_height
+  assign mobile_height = section.settings.mobile_height
+  assign column_spacing = section.settings.column_spacing
+
+  assign disable_top_spacing = section.settings.disable_top_spacing
+  assign disable_bottom_spacing = section.settings.disable_bottom_spacing
+-%}
+
+{% style %}
+    .media-grid--inner {
+      padding: 0 15px;
+      max-width: 1380px;
+      margin-left: auto;
+      margin-right: auto; }
+      @media only screen and (min-width: 768px) {
+        .media-grid--inner {
+          padding: 0 50px; } }
+
+    .media-grid--inner {
+      display: grid;
+      grid-auto-flow: dense;
+      width: 100%;
+      align-items: start;
+      grid: auto-flow dense var(--mobile-height)/repeat(2, minmax(0, 1fr)); }
+      @media only screen and (min-width: 768px) {
+        .media-grid--inner {
+          grid: auto-flow dense var(--desktop-height)/repeat(4, minmax(0, 1fr)); } }
+
+    .section-slg__header-wrapper {
+      display: flex;
+      justify-content: center;
+    }
+    .section-slg {
+      max-width: 100%;
+    }
+    .section-slg-wrapper {
+      position: relative;
+    }
+    .section-slg__slide {
+      width: 100%;
+      min-width: 100%;
+    }
+    @media only screen and (max-width: 1020px) {
+      .section-slg__slide {
+        width: 100%;
+        min-width: 100%;
+      }
+    }
+    .grid-item__location-header-wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .grid-item__location-header-wrap p {
+      margin-bottom: 0px;
+    }
+    .section-slg__header {
+      font-size: 3rem;
+      margin-bottom: 2.5%;
+    }
+    .grid-item__location {
+      font-size: 22px;
+    }
+    .grid-item__location-content-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 10px;
+      padding-top: 10px;
+    }
+    .grid-item__location-hours {
+      margin-bottom: 5px;
+      font-size: 14px;
+      text-align: center;
+    }
+    .grid-item__location-contact {
+      font-size: 14px;
+    }
+    .grid-item__location-link {
+      color: #0e4174;
+      font-weight: bold;
+      font-size: 1rem;
+      border-bottom: 2px solid #0e4174;
+    }
+    .grid-item__location-hours__header {
+      font-size: 16px;
+      letter-spacing: normal;
+      margin-bottom: 0px;
+    }
+    .section-slg .grid-item__location-img-overlay {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      opacity: .5;
+      background: {{ section.settings.overlay_color }};
+    }
+    .section-slg .grid-item__location-header-img {
+      position: relative;
+      max-height: 238px;
+      overflow: hidden;
+      height: 238px;
+    }
+    .section-slg .grid-item__location-header-img img {
+      height: 100%;
+      object-position: center;
+      object-fit: cover;
+    }
+    .section-slg .grid-item__location-name {
+      font-size: 26px;
+      margin-top: 15px;
+    }
+    .section-slg .grid-item__location-header-content {
+      position: absolute;
+      left: 0;
+      margin: 0;
+      padding: 0 20px;
+      text-align: center;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+    }
+
+    .section-slg .grid-item__location-header-content h3, .section-slg .grid-item__location-header-content p {
+      color: {{ section.settings.header_color }}
+    }
+    .grid-item__location-addy-one, .grid-item__location-addy-two, .grid-item__location-addy-three {
+      font-size: 14px;
+    }
+    .section-slg .grid-item__location-header-content strong {
+      font-weight: bold;
+    }
+    @media only screen and (max-width: 768px) {
+      .section-slg .grid-item__location-name {
+        font-size: 18px;
+      }
+      .grid-item__location-addy-one,
+      .grid-item__location-addy-two,
+      .grid-item__location-addy-three {
+        font-size: 12px;
+      }
+      .grid-item__location-content-container a{
+        font-size: 11px;
+      }
+  }
+{% endstyle %}
+<div class="section-slg media-grid section-spacing{% if disable_top_spacing %} section-spacing--disable-top{% endif %}{% if disable_bottom_spacing %} section-spacing--disable-bottom{% endif %}">
+  <div class="section-slg__header-wrapper">
+    <h2 class="section-slg__header">
+      {{ section.settings.header }}
+    </h2>
+  </div>
+  <div
+    class="section-slg-wrapper section-slg media-grid--inner column-spacing--{{ column_spacing }}"
+    style="--desktop-height:{{ desktop_height | append: 'px' }}; --mobile-height:{{ mobile_height | append: 'px' }}"
+  >
+    {% for block in section.blocks %}
+      <div class="section-slg__slide slide-{{ block.id }}">
+        <div class="grid-item__location-header-container">
+          <div class="grid-item__location-header-wrap">
+            <div class="grid-item__location-header-img">
+              <div class="grid-item__location-img-overlay"></div>
+              <img
+                width="100%"
+                height="100%"
+                class="grid-item__location-img"
+                src="{{ block.settings.location_image | image_url: width: 352 }}"
+              >
+              <div class="grid-item__location-header-content">
+                <h3 class="grid-item__location-name">{{ block.settings.location_name }}</h3>
+                <p class="grid-item__location-addy-one">
+                  <strong>{{ block.settings.location_address_one }}</strong>
+                </p>
+                {% if block.settings.location_address_two != blank %}
+                  <p class="grid-item__location-addy-two">
+                    <strong>{{ block.settings.location_address_two }}</strong>
+                  </p>
+                {% endif %}
+                <p class="grid-item__location-addy-three">
+                  <strong>{{ block.settings.location_address_three }}</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid-item__location-content-container">
+          <h4 class="grid-item__location-hours__header">Hours:</h4>
+          <p class="grid-item__location-hours">{{ block.settings.location_hours }}</p>
+          <p class="grid-item__location-contact">
+            <strong>{{ block.settings.location_phone_num }}</strong>
+          </p>
+          {% render 'text-button',
+            url: block.settings.link_url,
+            title: block.settings.link_text,
+            icon: 'huk-link-icon'
+          %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Store Locations Grid",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "min": 350,
+      "max": 525,
+      "step": 5,
+      "default": 375,
+      "label": "Desktop row height"
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "min": 325,
+      "max": 500,
+      "step": 5,
+      "default": 325,
+      "label": "Mobile row height"
+    },
+    {
+      "type": "select",
+      "id": "column_spacing",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "medium",
+      "label": "Column spacing"
+    },
+    {
+      "type": "text",
+      "id": "header",
+      "label": "Section Heading",
+      "default": "Our Stores"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Image legibility overlay color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "header_color",
+      "label": "Store Name and Address color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "disable_top_spacing",
+      "default": false,
+      "label": "Remove top spacing"
+    },
+    {
+      "type": "checkbox",
+      "id": "disable_bottom_spacing",
+      "default": false,
+      "label": "Remove bottom spacing"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "location",
+      "name": "Store Location",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "location_image",
+          "label": "Location image"
+        },
+        {
+          "type": "text",
+          "id": "location_name",
+          "label": "Location Name",
+          "default": "Location Name"
+        },
+        {
+          "type": "text",
+          "id": "location_address_one",
+          "label": "Location Address - Line 1",
+          "default": "1234 Broadway"
+        },
+        {
+          "type": "text",
+          "id": "location_address_two",
+          "label": "Location Address - Line 2",
+          "default": "Suite 360"
+        },
+        {
+          "type": "text",
+          "id": "location_address_three",
+          "label": "Location Address - Line 3",
+          "default": "Ft. Lauderdale, Florida 33301"
+        },
+        {
+          "type": "textarea",
+          "id": "location_hours",
+          "label": "Location Hours"
+        },
+        {
+          "type": "text",
+          "id": "location_phone_num",
+          "label": "Location phone number"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link text",
+          "default": "Get Directions"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link Destination"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Store Location Grid"
+    }
+  ]
+}
+{% endschema %}

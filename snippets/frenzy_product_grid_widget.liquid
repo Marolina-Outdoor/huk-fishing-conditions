@@ -1,0 +1,39 @@
+<div class="frenzy_product_item" data-id="[[product_id]]">
+  <figure>
+    <a href="[[product_url]]" class="product_link">
+      <img class="frenzy_img frenzy_img_first" data-srcset="[[product_featured_image]]" src="[[product_featured_image]]" alt="[[product_title]]">
+      <img class="frenzy_img frenzy_img_second" data-srcset="[[product_second_image]]" src="[[product_second_image]]" alt="[[product_title]]">
+    </a>
+    <div class="frenzy_product_tags">
+      <span class="frenzy_tag [[product_sale_tag]]">Sale</span>
+      <span class="frenzy_tag [[product_stock_out_tag]]">Sold Out</span>
+    </div>
+    <div class="option_wrapper">
+    [[product_options]]
+    <button type="button" class="frenzyQuickAdd" onmouseover="frenzyQuickAddClick(this)">Quick Add</button>
+    </div>
+  </figure> 
+  <a href="[[product_url]]" class="product_link_overlap"></a>
+  <div class="frenzy_product_item_detail">
+    <div class="fpid_row">
+     <div class="fpid_grid">
+      <h3 class="frenzy_product_title"><a href="[[product_url]]">[[product_title]]</a></h3>
+      <div class="frenzy_product_price_meta">
+        <span class="frenzy_product_price_compare"><span class="money">[[product_compare_price]]</span></span>
+        <span class="frenzy_product_price_sale"><span class="money">[[product_sale_price]]</span></span>
+      </div>
+      </div>
+      <div class="frenzy_swatch" data-id="[[product_id]]" data-collection-swatches data-collection-swatch-group data-master-handle></div>
+    <div class="frenzyQuickContain">
+    [[product_options]]
+    </div>
+    </div>
+    <div class="frenzy_swatch_wrap">
+     <span class="frenzy_swatch_label">Available Colors</span>
+      <div class="frenzy_product_swatch">[[product_available_colors]]</div>
+    </div>
+    <div class="frenzy_product_buttom">
+      <button type="button" class="button [[product_add_to_cart]]">Add to Cart</button>
+    </div>
+  </div>
+</div>

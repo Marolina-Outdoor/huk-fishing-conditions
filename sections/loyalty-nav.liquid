@@ -1,0 +1,283 @@
+{% if customer %}
+{{'loyalty-nav.css' |  asset_url |  stylesheet_tag}}
+<div class="loyalty-navigation">
+  {% for block in section.blocks %}
+    {% if block.settings.link != blank %}
+      <a class="nav-item nav-item-link" href="{{block.settings.link}}">
+        <div class="icon">
+          {%- if block.settings.image != blank -%}
+            <img
+              data-src="{{ block.settings.image | image_url }}"
+              alt="{{ block.settings.image.alt | escape }}"
+              width="{{ block.settings.image.width }}"
+              height="{{ block.settings.image.height }}"
+              class="lazyload{% unless settings.lazy_loading %} no-blur{% endunless %}"
+            >
+            <noscript>
+              <img
+                src="{{ block.settings.image | image_url }}"
+                alt="{{ block.settings.image.alt | escape }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+              >
+            </noscript>
+          {%- else -%}
+            {% render 'svg-icons-inline', icon: block.settings.icon %}
+          {%- endif -%}
+        </div>
+        {%- if block.settings.text != blank -%}
+          <p>{{ block.settings.text }}</p>
+        {% endif %}
+      </a>
+      {% else %}
+      <div class="nav-item">
+        <div class="icon">
+          {%- if block.settings.image != blank -%}
+            <img
+              data-src="{{ block.settings.image | image_url }}"
+              alt="{{ block.settings.image.alt | escape }}"
+              width="{{ block.settings.image.width }}"
+              height="{{ block.settings.image.height }}"
+              class="lazyload{% unless settings.lazy_loading %} no-blur{% endunless %}"
+            >
+            <noscript>
+              <img
+                src="{{ block.settings.image | image_url }}"
+                alt="{{ block.settings.image.alt | escape }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+              >
+            </noscript>
+          {%- else -%}
+            {% render 'svg-icons-inline', icon: block.settings.icon %}
+          {%- endif -%}
+        </div>
+        {%- if block.settings.text != blank -%}
+          <p>{{ block.settings.text }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+  {% endfor %}
+</div>
+{% endif  %}
+
+{% schema %}
+{
+  "name": "Loyalty Navigation",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "nav_item",
+      "name": "Navigation Link",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "icon",
+          "options": [
+            {
+              "value": "none",
+              "label": "None"
+            },
+            {
+              "value": "apple",
+              "label": "Apple"
+            },
+            {
+              "value": "banana",
+              "label": "Banana"
+            },
+            {
+              "value": "bottle",
+              "label": "Bottle"
+            },
+            {
+              "value": "box",
+              "label": "Box"
+            },
+            {
+              "value": "carrot",
+              "label": "Carrot"
+            },
+            {
+              "value": "chat_bubble",
+              "label": "Chat bubble"
+            },
+            {
+              "value": "check_mark",
+              "label": "Check mark"
+            },
+            {
+              "value": "clipboard",
+              "label": "Clipboard"
+            },
+            {
+              "value": "dairy",
+              "label": "Dairy"
+            },
+            {
+              "value": "dairy_free",
+              "label": "Dairy free"
+            },
+            {
+              "value": "dryer",
+              "label": "Dryer"
+            },
+            {
+              "value": "eye",
+              "label": "Eye"
+            },
+            {
+              "value": "fire",
+              "label": "Fire"
+            },
+            {
+              "value": "gluten_free",
+              "label": "Gluten free"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "iron",
+              "label": "Iron"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "leather",
+              "label": "Leather"
+            },
+            {
+              "value": "lightning_bolt",
+              "label": "Lightning bolt"
+            },
+            {
+              "value": "lipstick",
+              "label": "Lipstick"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "map_pin",
+              "label": "Map pin"
+            },
+            {
+              "value": "nut_free",
+              "label": "Nut free"
+            },
+            {
+              "value": "pants",
+              "label": "Pants"
+            },
+            {
+              "value": "paw_print",
+              "label": "Paw print"
+            },
+            {
+              "value": "pepper",
+              "label": "Pepper"
+            },
+            {
+              "value": "perfume",
+              "label": "Perfume"
+            },
+            {
+              "value": "plane",
+              "label": "Plane"
+            },
+            {
+              "value": "plant",
+              "label": "Plant"
+            },
+            {
+              "value": "price_tag",
+              "label": "Price tag"
+            },
+            {
+              "value": "question_mark",
+              "label": "Question mark"
+            },
+            {
+              "value": "recycle",
+              "label": "Recycle"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "ruler",
+              "label": "Ruler"
+            },
+            {
+              "value": "serving_dish",
+              "label": "Serving dish"
+            },
+            {
+              "value": "shirt",
+              "label": "Shirt"
+            },
+            {
+              "value": "shoe",
+              "label": "Shoe"
+            },
+            {
+              "value": "silhouette",
+              "label": "Silhouette"
+            },
+            {
+              "value": "snowflake",
+              "label": "Snowflake"
+            },
+            {
+              "value": "star",
+              "label": "Star"
+            },
+            {
+              "value": "stopwatch",
+              "label": "Stopwatch"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            },
+            {
+              "value": "washing",
+              "label": "Washing"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Icon",
+          "info": "Use an image as your icon"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Loyalty Navigation",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}

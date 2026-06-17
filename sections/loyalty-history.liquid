@@ -1,0 +1,42 @@
+{% if customer %}
+  <style>
+    .loyalty-history {
+      display: flex;
+      justify-content: center;
+    }
+
+    .history-title {
+      text-align: center;
+      margin-bottom: 40px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    .history-table {
+      width: 75%;
+      margin: 0 auto;
+    }
+  </style>
+
+  <div class="loyalty-history" id="loyalty-history"></div>
+  <h2 class="history-title">{{ section.settings.title }}</h2>
+  <div class="history-table" data-lion-history-table></div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Loyalty History",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Loyalty History"
+    }
+  ]
+}
+{% endschema %}

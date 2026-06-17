@@ -1,0 +1,172 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {}
+    },
+    "rich_text_wUXgzX": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_aTHfny": {
+          "type": "subheading",
+          "settings": {
+            "text": "Store Locator"
+          }
+        },
+        "heading_Nf8RBK": {
+          "type": "heading",
+          "settings": {
+            "text": "Huk Stores",
+            "marker_style": "style1",
+            "size": "h3",
+            "marker_color": "#fd6262"
+          }
+        },
+        "text_nJzBhW": {
+          "type": "text",
+          "settings": {
+            "text": "<p>There's no better place to shop for best-in-class gear than our Huk stores around the country. Check out the list of our stores below, or visit our store locator with your zip code to find an authorized dealer in your area.</p>",
+            "size": "text-size-regular"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_aTHfny",
+        "heading_Nf8RBK",
+        "text_nJzBhW"
+      ],
+      "settings": {
+        "id": "",
+        "text_width": "medium",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_heading": "#0E4174",
+        "color_text": "#17314b",
+        "color_links": "#0581ff",
+        "full_bleed_layout": false,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
+    },
+    "store_locator_grid_gUk6ML": {
+      "type": "store-locator-grid",
+      "blocks": {
+        "location_RiggYf": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify://shop_images/Key_West_Storefront.jpg",
+            "location_name": "Key West, FL",
+            "location_address_one": "406 Duval St",
+            "location_address_two": "",
+            "location_address_three": "Key West, FL 33040",
+            "location_hours": "Mon - Sat: 10am - 9pm\n<br>\nSun: 10am - 6pm",
+            "location_phone_num": "305-928-1672",
+            "link_text": "VISIT KEY WEST",
+            "link_url": "https://maps.app.goo.gl/vqMpbA8CwiiJrV4G7"
+          }
+        },
+        "location_9FQDm4": {
+          "type": "location",
+          "settings": {
+            "location_image": "shopify://shop_images/PCB_Storefront.jpg",
+            "location_name": "Panama City Beach, FL",
+            "location_address_one": "800 S Pier Park Dr",
+            "location_address_two": "Suite 110",
+            "location_address_three": "Panama City Beach, FL 32413",
+            "location_hours": "Mon-Sat: 10am-9pm\n<br>\nSun: 12pm-6pm",
+            "location_phone_num": "850-230-3040",
+            "link_text": "Visit Panama City",
+            "link_url": "https://maps.app.goo.gl/HtZtVBvjb8cpn8118"
+          }
+        }
+      },
+      "block_order": [
+        "location_RiggYf",
+        "location_9FQDm4"
+      ],
+      "custom_css": [
+        ".media-grid--inner {max-width: 1080px; grid: auto-flow dense var(--desktop-height) / repeat(2, minmax(0, 1fr));}"
+      ],
+      "settings": {
+        "desktop_height": 375,
+        "mobile_height": 325,
+        "column_spacing": "medium",
+        "header": "",
+        "overlay_color": "#17314b",
+        "header_color": "#ffffff",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "rich_text_brpX8f": {
+      "type": "rich-text",
+      "blocks": {
+        "subheading_pxJX3P": {
+          "type": "subheading",
+          "settings": {
+            "text": "Store Locator"
+          }
+        },
+        "heading_APtzmm": {
+          "type": "heading",
+          "settings": {
+            "text": "Stores that Carry huk",
+            "marker_style": "style1",
+            "size": "h3",
+            "marker_color": "#fd6262"
+          }
+        },
+        "text_4V6bdY": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Find our best-in-class gear at a store near you! </p>",
+            "size": "text-size-regular"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_pxJX3P",
+        "heading_APtzmm",
+        "text_4V6bdY"
+      ],
+      "settings": {
+        "id": "",
+        "text_width": "medium",
+        "text_position": "center",
+        "text_alignment": "center",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_heading": "#0E4174",
+        "color_text": "#17314b",
+        "color_links": "#0581ff",
+        "full_bleed_layout": false,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
+    },
+    "custom_liquid_z3T6d9": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div id=\"storepoint-container\" data-map-id=\"1661fc17a8a80d\"></div><script>(function(){var a=document.createElement(\"script\");a.type=\"text/javascript\";a.async=!0;a.src=\"https://cdn.storepoint.co/api/v1/js/1661fc17a8a80d.js\";var b=document.getElementsByTagName(\"script\")[0];b.parentNode.insertBefore(a,b);}());</script>",
+        "color_bg": "rgba(0,0,0,0)"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich_text_wUXgzX",
+    "store_locator_grid_gUk6ML",
+    "rich_text_brpX8f",
+    "custom_liquid_z3T6d9"
+  ]
+}

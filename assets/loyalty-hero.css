@@ -1,0 +1,35 @@
+
+.points-container {
+  max-width: 266px !important;
+  background: #ffffff;
+  width: calc(100% - 60px) !important;
+  padding: 25px 40px 25px 40px;
+  text-align: center;
+  line-height: 26px !important;
+  border-radius: 10px;
+  color: #000000;
+  font-size: 24px;
+  font-family: "trade-gothic-next-compressed";
+}
+
+.points-container .points,
+.points-container p {
+  margin-bottom: 0px;
+}
+
+.points-container .points {
+  color: #0581ff;
+  font-size: 80px;
+  line-height: 80px;
+  min-height: 80px;
+}
+.pending-points {
+  margin-top: 5px;
+}
+
+@media only screen and (max-width: 768px) {
+    .customer-points-balance-wrapper {
+      justify-content: center !important;
+    }
+  }
+  

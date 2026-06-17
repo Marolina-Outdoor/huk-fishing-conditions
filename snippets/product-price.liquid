@@ -1,0 +1,164 @@
+{% comment %}
+  Renders a list of product's price (regular, sale)
+  Accepts:
+  - product: {Object} Product Liquid object (optional)
+  - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
+  - price_class: {String} Adds a price class to the price element (optional)
+  Usage:
+  {% render 'price', product: product %}
+{% endcomment %}
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign product_org_price = current_variant.price
+  assign product_compare_price = current_variant.compare_at_price
+
+  if use_variant
+    assign target = product.selected_or_first_available_variant
+  else
+    assign target = product
+  endif
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price | default: 1999
+  assign available = target.available | default: false
+
+  assign discounted_class = ''
+  unless product.price_varies == false and product.compare_at_price_varies
+    if compare_at_price != null and compare_at_price != 0 and price != compare_at_price
+      assign discounted_class = 'discounted'
+    endif
+  endunless
+
+  unless sale_tag == false
+    assign compare_at_price = price
+
+    if sale_tag contains 'sale-online'
+      assign percent_off = sale_tag | remove: 'sale-online-'
+      assign percent_off = percent_off | divided_by: 100.00
+      assign price_off = price | times: percent_off
+      assign price = price | minus: price_off
+      assign show_badges = true
+    endif
+  endunless
+
+  assign money_price = price | money
+  if settings.currency_code_enabled
+    assign money_price = price | money_with_currency
+  endif
+
+  if target == product and product.price_varies
+    assign money_price = 'products.product.price.from_price_html' | t: price: money_price
+  endif
+-%}
+
+
+    {% for tag in product.tags %}
+        {% if tag contains 'online-sale-xfory-' or tag contains 'sale-xfory-' %}
+
+      {% if tag contains 'sale-xfory-' %}
+        {% unless tag contains 'pos-sale-xfory-' %}
+          {% assign show_badges = true %}
+          {% assign price_tokens = tag | remove: 'online-sale-xfory-' | remove: 'sale-xfory-' | split: '-' %}
+          {% assign new_price = price_tokens | last | times: 1 %}
+          {% assign tag_qty = price_tokens | first | times: 1 %}
+    
+          {% if tag_qty == 1 %}
+            {% assign compare_at_price = current_variant.price %}
+            {% assign product_compare_price = current_variant.price %}
+            {% assign price = new_price %}
+
+            {% assign product_compare_at_max = product_compare_price %}
+            {% assign money_price = price | money %}
+            {% assign has_sale_discount = new_price %}
+            {% break %}
+          {% endif %}
+        {% endunless %}
+      {% endif %}
+  {% endif %}
+    {% endfor %}
+
+  {% for tag in product.tags %}
+    {% if tag contains 'sale-online-' %}
+      {% assign sale_discount = tag | remove: 'sale-online-' %}
+      <div id="sale-discount" style="display: none;" data-sale-discount="{{ sale_discount }}"></div>
+    {% endif %}
+    {% if tag contains 'sale-xfory-' %}
+      {% assign xfory_price = tag | remove: 'sale-xfory-' | times: 1 %}
+      <ins>
+        <span class="amount sale-price xfory-price" style="display: none">
+          {{- xfory_price | divided_by: 100 | money -}}
+        </span>
+      </ins>
+    {% endif %}
+  {% endfor %}
+
+  <span class="price">
+  {%- unless product.price_varies == false and product.compare_at_price_varies %}
+    {% if compare_at_price != null and compare_at_price != 0 and price != compare_at_price %}
+      <del>
+        <span class="amount">
+          {% if settings.currency_code_enabled %}
+            {{ compare_at_price | money_with_currency }}
+          {% else %}
+            {{ compare_at_price | money }}
+          {% endif %}
+        </span>
+      </del>
+    {% endif %}
+  {%- endunless -%}
+
+  <ins>
+    <span class="amount {{ discounted_class }}">{{ money_price }}</span>
+  </ins>
+
+  {% if sale_discount != blank %}
+    <span id="sale-price" class="sale-price" style="display: none;"> </span>
+    <span id="sale-price-compare-org" class="sale-price" style="display: none;"> </span>
+  {% endif %}
+
+  {% comment %}
+    <span data-save-price class="product__price-savings">
+      {{ product_compare_price }}
+      {{ product_org_price }}
+    </span>
+  {% endcomment %}
+
+  <small class="unit-price {% if product.selected_or_first_available_variant.unit_price_measurement == nil %} hidden{% endif %}">
+    <span>{{- product.selected_or_first_available_variant.unit_price | money -}}</span>
+    <span class="unit-price-separator">/</span>
+    <span>
+      {%- if product.selected_or_first_available_variant.unit_price_measurement.reference_value != 1 -%}
+        {{- product.selected_or_first_available_variant.unit_price_measurement.reference_value -}}
+      {%- endif -%}
+      {{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}
+    </span>
+  </small>
+  {%- if show_badges -%}
+    <span class="badges">
+      {%- if compare_at_price > price %}
+        {%- if settings.sale_badge_type == 'save_amount' -%}
+          {%- capture saved_amount -%}{{ compare_at_price | minus: price | money }}{%- endcapture -%}
+        {%- elsif settings.sale_badge_type == 'save_percentage' -%}
+          {%- capture saved_amount -%}{{ compare_at_price | minus: price | times: 100.0 | divided_by: compare_at_price | round }}%{%- endcapture -%}
+        {%- endif -%}
+        <span class="badge onsale">
+          {%- if settings.sale_badge_type == 'sale' -%}
+            {{ 'products.product.on_sale' | t }}
+          {%- else -%}
+            {{ 'products.product.save_html' | t: saved_amount: saved_amount }}
+          {%- endif -%}
+        </span>
+      {% endif %}
+
+      {%- if available == false -%}
+        <span class="badge out-of-stock">
+          {{ 'products.product.sold_out' | t }}
+        </span>
+      {% endif %}
+      {%- if product.metafields.theme.preorder and product.available -%}
+        <span class="badge pre-order">
+          {{ 'products.product.pre_order' | t }}
+        </span>
+      {%- endif %}
+    </span>
+  {% endif %}
+</span>

@@ -1,0 +1,495 @@
+{% comment %} 
+  Refactor to include: 
+    bg image with positioning options. Top, Bottom, Left, Center, Right
+    bg color option for area outside image.
+    Separate desktop and mobile views. Mobile remains basically the same.
+{% endcomment %}
+{{- 'collection-tabs.css' | asset_url | stylesheet_tag -}}
+{{- 'custom-shop-by-collection.css' | asset_url | stylesheet_tag -}}
+{%- liquid
+  assign section_heading = section.settings.heading
+  assign marker_style = section.settings.marker_style
+  assign section_description = section.settings.description
+  assign columns_desktop = section.settings.columns_desktop
+  assign show_progress_bar = section.settings.show_progress_bar
+  assign product_limit = section.settings.product_limit
+
+  assign marker_color = section.settings.marker_color
+
+  assign disable_top_spacing = section.settings.disable_top_spacing
+  assign disable_bottom_spacing = section.settings.disable_bottom_spacing
+
+  assign columns_class = 'medium-6 large-4'
+  case columns_desktop
+    when 2
+      assign columns_class = 'medium-6'
+    when 3
+      assign columns_class = 'medium-4'
+    when 4
+      assign columns_class = 'medium-6 large-3'
+    when 5
+      assign columns_class = 'medium-3 large-1/5'
+    when 6
+      assign columns_class = 'medium-3 large-2'
+  endcase
+-%}
+{% style %}
+  .custom-collection-tabs .desktop-view .content-wrapper .card-container.active {
+    display: grid;
+    grid-template-rows: repeat({{ section.settings.product_limit }}, 1fr);
+  }
+  .custom-collection-tabs .desktop-view .content-wrapper .card-container.promo.active {
+    display: grid;
+    grid-template-rows: repeat({{ section.settings.product_limit | plus: 1 }}, 1fr);
+  }
+  .custom-collection-tabs.custom {
+    Background: {{ section.settings.bg_color }}
+  }
+{% endstyle %}
+<div class="custom-collection-tabs custom {% if disable_top_spacing %} section-spacing--disable-top{% endif %}{% if disable_bottom_spacing %} section-spacing--disable-bottom{% endif %}">
+  <div class="mobile-view">
+    <div class="row">
+      <div class="small-12 columns">
+        {% render 'section-header',
+          section_heading: section_heading,
+          section_description: section_description,
+          section_id: section.id,
+          blocks: section.blocks,
+          marker_color: marker_color,
+          marker_style: marker_style
+        %}
+        <slide-show
+          id="product-grid-{{ section.id }}"
+          data-id="{{ section.id }}"
+          class="products carousel row small-up-2 medium-up-{{ columns_desktop }}"
+        >
+          {%- for block in section.blocks -%}
+            {%- assign mainloop = forloop -%}
+            {% if block.settings.collection != blank %}
+              {%- if block.settings.enable_promotion -%}
+                {{- 'gallery.css' | asset_url | stylesheet_tag -}}
+                <div
+                  class="promotion-column {{ columns_class }} columns{% if mainloop.first == true %} carousel__slide{% endif %}"
+                  data-collection="{{ block.settings.collection.handle }}"
+                >
+                  {%- render 'product-promotion-custom-mobile', block: block -%}
+                </div>
+              {%- endif -%}
+              {%- for product in block.settings.collection.products limit: product_limit -%}
+                <div
+                  class="{{ columns_class }} columns{% if mainloop.first == true %} carousel__slide{% endif %}"
+                  data-collection="{{ block.settings.collection.handle }}"
+                >
+                  {% render 'product-card-custom', product_card_product: product %}
+                </div>
+              {%- endfor -%}
+            {%- else -%}
+              {%- if block.settings.enable_promotion -%}
+                {{- 'gallery.css' | asset_url | stylesheet_tag -}}
+                <div
+                  class="promotion-column {{ columns_class }} columns{% if mainloop.first == true %} carousel__slide{% endif %}"
+                  data-collection="collection-{{ block.id }}"
+                >
+                  {%- render 'product-promotion-custom-mobile', block: block -%}
+                </div>
+              {%- endif -%}
+              {%- for i in (1..product_limit) -%}
+                <div
+                  class="{{ columns_class }} columns{% if mainloop.first == true %} carousel__slide{% endif %}"
+                  data-collection="collection-{{ block.id }}"
+                >
+                  {% render 'product-card-custom' %}
+                </div>
+              {%- endfor -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if product_limit > columns_desktop -%}
+            <div class="flickity-nav flickity-prev" tabindex="0">{% render 'svg-icons' with 'carousel-prev' %}</div>
+            <div class="flickity-nav flickity-next" tabindex="0">{% render 'svg-icons' with 'carousel-next' %}</div>
+          {%- endif -%}
+        </slide-show>
+        {%- if show_progress_bar -%}
+          <div class="flickity-progress">
+            <div class="flickity-progress--bar"></div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+    {% if  section.settings.bg_image != blank %}
+      <div class="bg-image">
+        {%- liquid
+          assign sizes = section.settings.bg_image.width | append: 'x' | append: section.settings.bg_image.height
+        -%}
+        {%- render 'responsive-image', image: section.settings.bg_image, sizes: sizes -%}
+      </div>
+    {% endif %}
+  </div>
+  <div class="desktop-view">
+    <div class="row">
+      {% comment %} snippet contains collection buttons as well {% endcomment %}
+      {% render 'section-header',
+        section_heading: section_heading,
+        section_description: section_description,
+        section_id: section.id,
+        blocks: section.blocks,
+        marker_color: marker_color,
+        marker_style: marker_style
+      %}
+      <div class="content-wrapper">
+        {% comment %} display flex content {% endcomment %}
+        <div class="featured-image">
+          {% for block in section.blocks %}
+            {% if block.collection != blank %}
+              {% assign block_collection_handle = block.collection.handle %}
+            {% else %}
+              {% assign block_collection_handle = forloop.index %}
+            {% endif %}
+            <div id="block-{{ forloop.index }}" class="block-featured-image collection-{{ block_collection_handle }}  {% if forloop.index == 1 %}active{% endif %}" {% if block.settings.collection != blank %} data-collection="{{ block.settings.collection.handle }}" {% else  %}data-collection="collection-{{ block.id }}"{% endif %}>
+              {%- if block.settings.image -%}
+                {%- liquid
+                  assign sizes = block.settings.image.width | append: 'x' | append: block.settings.image.height
+                -%}
+                {%- render 'responsive-image', image: block.settings.image, sizes: sizes -%}
+              {%- else -%}
+                <div class="thb-placeholder">
+                  {{ 'image' | placeholder_svg_tag: 'placeholder_svg_tag' }}
+                </div>
+              {%- endif -%}
+            </div>
+          {% endfor %}
+        </div>
+        {%- for block in section.blocks -%}
+        {%- assign mainloop = forloop -%}
+        <div {% if block.settings.collection != blank %} data-collection="{{ block.settings.collection.handle }}" {% else  %}data-collection="collection-{{ block.id }}"{% endif %} class="card-container {% if mainloop.first == true %}active{% endif %}{% if block.settings.enable_promotion %} promo{% endif %}">
+          {% comment %} display grid these items so they are all vertically aligned {% endcomment %}
+          
+            {% if block.settings.collection != blank %}
+              {%- if block.settings.enable_promotion -%}
+                {{- 'gallery.css' | asset_url | stylesheet_tag -}}
+                <div
+                  class="promotion-column {{ columns_class }} columns{% if mainloop.first == true %} carousel__slide active{% endif %}"
+                  data-collection="{{ block.settings.collection.handle }}"
+                >
+                  {%- render 'product-promotion-custom', block: block -%}
+                </div>
+              {%- endif -%}
+              {%- for product in block.settings.collection.products limit: product_limit -%}
+                <div
+                  class="{{ columns_class }} columns{% if mainloop.first == true %} carousel__slide active{% endif %}"
+                  data-collection="{{ block.settings.collection.handle }}"
+                >
+                  {% render 'product-card-custom', product_card_product: product %}
+                </div>
+              {%- endfor -%}
+            {%- else -%}
+              {%- if block.settings.enable_promotion -%}
+                {{- 'gallery.css' | asset_url | stylesheet_tag -}}
+                <div
+                  class="promotion-column {{ columns_class }} columns{% if mainloop.first == true %} carousel__slide active{% endif %}"
+                  data-collection="collection-{{ block.id }}"
+                >
+                  {%- render 'product-promotion-custom', block: block -%}
+                </div>
+              {%- endif -%}
+              {%- for i in (1..product_limit) -%}
+                <div
+                  class="{{ columns_class }} columns{% if mainloop.first == true %} carousel__slide active{% endif %}"
+                  data-collection="collection-{{ block.id }}"
+                >
+                  {% render 'product-card-custom' %}
+                </div>
+              {%- endfor -%}
+            {%- endif -%}
+          
+        </div>
+        {%- endfor -%}
+        {% comment %} <div style="display: none" class="js-featured-image-container">
+          {% for block in section.blocks %}
+            {% assign block_collection_handle = block.collection.handle %}
+            <div id="block-{{ forloop.index }}" class="block-featured-image collection-{{ block_collection_handle }}">
+              {%- if block.settings.image -%}
+                {%- liquid
+                  assign sizes = block.settings.image.width | append: 'x' | append: block.settings.image.height
+                -%}
+                {%- render 'responsive-image', image: block.settings.image, sizes: sizes -%}
+              {%- else -%}
+                <div class="thb-placeholder">
+                  {{ 'image' | placeholder_svg_tag: 'placeholder_svg_tag' }}
+                </div>
+              {%- endif -%}
+            </div>
+          {% endfor %}
+        </div> {% endcomment %}
+      </div>
+    </div>
+    {% if  section.settings.bg_image != blank %}
+      <div class="bg-image {{ section.settings.bg_position }}">
+        {%- liquid
+          assign sizes = section.settings.bg_image.width | append: 'x' | append: section.settings.bg_image.height
+        -%}
+        {%- render 'responsive-image', image: section.settings.bg_image, sizes: sizes -%}
+      </div>
+    {% endif %}
+  </div>
+</div>
+<script src="{{ 'collection-tabs.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'custom-shop-by-collection.js' | asset_url }}" defer="defer"></script>
+{% schema %}
+{
+  "name": "Custom Collection Tabs",
+  "class": "section-custom-collection-tabs",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Collection Tabs",
+      "info": "Wrap your text between | to add animated markers. For example: Animated |marker| will underline marker text."
+    },
+    {
+      "type": "select",
+      "id": "marker_style",
+      "options": [
+        {
+          "value": "style1",
+          "label": "Basic"
+        },
+        {
+          "value": "style2",
+          "label": "Double"
+        },
+        {
+          "value": "style3",
+          "label": "Squiggle"
+        },
+        {
+          "value": "style4",
+          "label": "Zigzag"
+        }
+      ],
+      "default": "style1",
+      "label": "Marker"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "select",
+      "id": "bg_position",
+      "label": "Background Position",
+      "options": [
+        {
+          "value": "align-center",
+          "label": "Center"
+        },
+        {
+          "value": "align-left",
+          "label": "Left"
+        },
+        {
+          "value": "align-right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "min": 2,
+      "max": 16,
+      "step": 1,
+      "default": 6,
+      "label": "Number of products to show"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4,
+      "label": "Number of columns on desktop"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_progress_bar",
+      "label": "Show progress bar",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "marker_color",
+      "label": "Marker",
+      "default": "#FD6262"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "checkbox",
+      "id": "disable_top_spacing",
+      "default": false,
+      "label": "Remove top spacing"
+    },
+    {
+      "type": "checkbox",
+      "id": "disable_bottom_spacing",
+      "default": false,
+      "label": "Remove bottom spacing"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "header",
+          "content": "Promotion"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_promotion",
+          "label": "Enable promotion",
+          "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Promotion",
+          "label": "Heading"
+        },
+
+        {
+          "type": "textarea",
+          "id": "text",
+          "default": "Advertise a promotion or a sale",
+          "label": "Description"
+        },
+        {
+          "id": "link_label",
+          "type": "text",
+          "label": "Button label",
+          "default": "Explore",
+          "info": "Leave the label blank to hide the button."
+        },
+        {
+          "type": "select",
+          "id": "content_position",
+          "label": "Content position",
+          "options": [
+            { "value": "top-left", "label": "Top left" },
+            { "value": "top-center", "label": "Top center" },
+            { "value": "top-right", "label": "Top right" },
+            { "value": "middle-left", "label": "Middle left" },
+            { "value": "middle-center", "label": "Middle center" },
+            { "value": "middle-right", "label": "Middle right" },
+            { "value": "bottom-left", "label": "Bottom left" },
+            { "value": "bottom-center", "label": "Bottom center" },
+            { "value": "bottom-right", "label": "Bottom right" }
+          ],
+          "default": "bottom-left"
+        },
+        {
+          "type": "select",
+          "id": "text_alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left",
+          "label": "Content alignment"
+        },
+        {
+          "id": "link",
+          "type": "url",
+          "label": "Button link"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_text_button",
+          "label": "Use text button",
+          "default": false
+        },
+        {
+          "id": "block_link",
+          "type": "url",
+          "label": "Link",
+          "info": "This will allow you to set a link to the promotion"
+        },
+        {
+          "type": "header",
+          "content": "Colors"
+        },
+        {
+          "type": "color",
+          "id": "overlay_color",
+          "label": "Overlay",
+          "default": "#000000"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "Overlay opacity",
+          "default": 70
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Collection Tabs",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

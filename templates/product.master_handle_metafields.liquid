@@ -1,0 +1,13 @@
+{% layout none %}
+<div class="frenzy_product_grid_swatch">
+{%- for option in product.options_with_values -%}
+
+  {% assign option_name = option.name | downcase | escape %}
+  {% assign option_type = '' %}
+
+  {% if option_name contains 'color' or option_name contains 'colour' or option_name contains 'couleur' or option_name contains 'farbe' %}
+        {% assign option_type = 'color' %}
+  {% endif %}
+ {% render 'product-option', option_type: option_type, product: product, option: option, forloop: forloop, product_form_id: '', sizing_link: '', meta_sib: true, frenzy:true %}
+{%- endfor -%}
+</div>

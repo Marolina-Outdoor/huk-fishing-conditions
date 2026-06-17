@@ -1,0 +1,7 @@
+{% layout none %}
+{%- liquid
+    assign ratio = 1 | divided_by: 1.25
+    assign sizes = '298x350,596x700'
+-%}
+
+{% render 'product-card-swatch', product: product, sizes: sizes %}

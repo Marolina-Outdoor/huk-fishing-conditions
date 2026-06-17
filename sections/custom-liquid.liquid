@@ -1,0 +1,46 @@
+{% style %}
+#shopify-section-{{ section.id }} {
+  --bg-color: {{ section.settings.color_bg }};
+  background: {{ section.settings.color_bg }};
+}
+{% endstyle %}
+
+{%- comment -%}
+  Breadcrumb JSON-LD from collection metafield:
+  namespace.key = custom.json_ld_schema_omit_script_tags_2
+{%- endcomment -%}
+
+{% if collection and collection.metafields.custom.json_ld_schema_omit_script_tags_2 != blank %}
+  <script type="application/ld+json">
+    {{ collection.metafields.custom.json_ld_schema_omit_script_tags_2.value | json }}
+  </script>
+{% endif %}
+
+{{ section.settings.custom_liquid }}
+
+{% schema %}
+{
+  "name": "Custom liquid",
+  "tag": "section",
+  "class": "spaced-section",
+  "settings": [
+    {
+      "type": "liquid",
+      "id": "custom_liquid",
+      "label": "Custom liquid",
+      "info": "Add app snippets or other Liquid code to create advanced customizations."
+    },
+    {
+      "type": "color",
+      "id": "color_bg",
+      "label": "Background",
+      "default": "transparent"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom liquid"
+    }
+  ]
+}
+{% endschema %}

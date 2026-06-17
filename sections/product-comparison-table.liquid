@@ -1,0 +1,451 @@
+{% comment %}
+  ** Product Comparison Table **
+  - A Shopify section that displays a comparison table for up to 4 products.
+  - Allows for dynamic rows based on blocks.
+{% endcomment %}
+
+<style>
+  .product-comparison-container .row {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .product-comparison-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: none;
+  }
+
+  .product-comparison-table th,
+  .product-comparison-table td {
+    padding: 16px;
+    text-align: center;
+    border: 1px solid #C7DFF4;
+    vertical-align: middle;
+  }
+
+  .product-comparison-table th:first-child,
+  .product-comparison-table td:first-child {
+    text-align: left;
+    font-weight: 500;
+  }
+
+  .product-comparison-table thead th:first-child,
+  .product-comparison-table tfoot td:first-child {
+    border: none;
+  }
+
+  .product-comparison-table tbody tr:nth-child(odd) td {
+    background-color: #F7F4EF;
+  }
+
+  .product-comparison-table .product-image {
+    display: block;
+    height: auto;
+    margin: 0 auto 16px;
+  }
+
+  .header-text-sm { font-size: 0.875rem; }
+  .header-text-md { font-size: 1rem; }
+  .header-text-lg { font-size: 1.125rem; }
+
+  .product-comparison-table .feature-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .product-comparison-table .feature-icon:not(:last-child) {
+    margin-bottom: 16px;
+  }
+
+  .product-comparison-table .styles-cta {
+    text-decoration: underline;
+  }
+
+  .product-comparison-table .button {
+    width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 768px) {
+    .product-comparison-table {
+      table-layout: auto;
+    }
+
+    .product-comparison-table td,
+    .product-comparison-table th {
+      min-width: 200px;
+      max-width: 200px;
+      white-space: normal;
+      vertical-align: top;
+    }
+
+    .product-comparison-table td:first-child,
+    .product-comparison-table th:first-child {
+      min-width: 150px;
+      max-width: 150px;
+    }
+  }
+</style>
+
+<div class="product-comparison-container section-spacing">
+  {%- liquid
+    assign products = section.settings.products
+    assign header_text_size_class = 'header-text-md'
+    if section.settings.header_text_size == 'Small'
+      assign header_text_size_class = 'header-text-sm'
+    elsif section.settings.header_text_size == 'Large'
+      assign header_text_size_class = 'header-text-lg'
+    endif
+  -%}
+
+  <div class="row">
+    {% if products != blank %}
+      <table class="product-comparison-table">
+        <thead>
+          <tr>
+            <th></th>
+            {% for product in section.settings.products %}
+              {% assign index = forloop.index %}
+
+              {% assign alt_image_key = 'product_' | append: index | append: '_alt_image' %}
+              {% assign header_cta_text_key = 'product_' | append: index | append: '_header_cta_text' %}
+              {% assign header_cta_url_key = 'product_' | append: index | append: '_header_cta_url' %}
+
+              {% assign alt_image = section.settings[alt_image_key] %}
+              {% assign header_cta_text = section.settings[header_cta_text_key] %}
+              {% assign header_cta_url = section.settings[header_cta_url_key] %}
+
+              {% if alt_image != blank %}
+                {% assign final_image = alt_image %}
+              {% else %}
+                {% assign final_image = product.featured_image %}
+              {% endif %}
+
+              <th>
+                <a href="{{ header_cta_url }}">
+                  {% if final_image %}
+                    <img 
+                      src="{{ final_image | image_url: width: 500 }}" 
+                      alt="{{ final_image.alt | escape }}" 
+                      class="product-image" 
+                      width="500" 
+                      height="500"
+                    >
+                  {% else %}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg product-image' }}
+                  {% endif %}
+                </a>
+
+                {% if header_cta_text != blank %}
+                  <a href="{{ header_cta_url }}" class="styles-cta">
+                    {{ header_cta_text }} &rarr;
+                  </a>
+                {% endif %}
+              </th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'product_title' %}
+                <tr>
+                  <td class="{{ header_text_size_class }}">{{ block.settings.header_value | default: 'Title' }}</td>
+                  {% for product in products %}
+                    <td><a href="{{ product.url }}">{{ product.title }}</a></td>
+                  {% endfor %}
+                </tr>
+              {% when 'product_price' %}
+                <tr>
+                  <td class="{{ header_text_size_class }}">{{ block.settings.header_value | default: 'Price' }}</td>
+                  {% for product in products %}
+                    <td>{{ product.price | money }}</td>
+                  {% endfor %}
+                </tr>
+              {% when 'product_metafield' %}
+                {%- liquid
+                  assign namespace_key = block.settings.namespace_and_key | split: '.'
+                  assign namespace = namespace_key[0]
+                  assign key = namespace_key[1]
+                -%}
+                <tr>
+                  <td class="{{ header_text_size_class }}">{{ block.settings.header_value | default: 'Metafield' }}</td>
+                  {% for product in products %}
+                    <td>
+                        {% case key %}
+                          {% when 'features' %}
+                            {% for feature in product.metafields[namespace][key].value %}
+                              <div class="feature-icon">
+                                {{ feature.icon | image_url: width: 20 | image_tag }}
+                                <div>{{ feature.icon_text }}</div>
+                              </div>
+                            {% endfor %}
+                          {% when 'breathability' %}
+                            {% render 'progress-bar', progress_value: product.metafields[namespace][key] %}
+                          {% else %}
+                            {{ product.metafields[namespace][key] }}
+                        {% endcase %}
+                    </td>
+                  {% endfor %}
+                </tr>
+            {% endcase %}
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            {% for product in section.settings.products %}
+              {% assign index = forloop.index %}
+
+              {% assign footer_cta_text_key = 'product_' | append: index | append: '_footer_cta_text' %}
+              {% assign footer_cta_url_key = 'product_' | append: index | append: '_footer_cta_url' %}
+
+              {% assign footer_cta_text = section.settings[footer_cta_text_key] %}
+              {% assign footer_cta_url = section.settings[footer_cta_url_key] %}
+
+              <td>
+                {% if footer_cta_text != blank %}
+                  <a href="{{ footer_cta_url }}" class="button medium">
+                    {{ footer_cta_text }}
+                  </a>
+                {% endif %}
+              </td>
+            {% endfor %}
+          </tr>
+        </tfoot>
+      </table>
+    {% else %}
+      <p>Please select products to compare.</p>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Comparison Table",
+  "settings": [
+    {
+      "type": "product_list",
+      "id": "products",
+      "label": "Products",
+      "limit": 5,
+      "info": "Select up to 5 products to compare."
+    },
+    {
+      "type": "select",
+      "id": "header_text_size",
+      "label": "Header text size",
+      "options": [
+        { "value": "Small", "label": "Small" },
+        { "value": "Medium", "label": "Medium" },
+        { "value": "Large", "label": "Large" }
+      ],
+      "default": "Medium"
+    },
+    {
+      "type": "header",
+      "content": "Product 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_1_alt_image",
+      "label": "Alternative image",
+    },
+    {
+      "type": "text",
+      "id": "product_1_header_cta_text",
+      "label": "Header CTA Text"
+    },
+    {
+      "type": "url",
+      "id": "product_1_header_cta_url",
+      "label": "Header CTA URL"
+    },
+    {
+      "type": "text",
+      "id": "product_1_footer_cta_text",
+      "label": "Footer CTA Text"
+    },
+    {
+      "type": "url",
+      "id": "product_1_footer_cta_url",
+      "label": "Footer CTA URL"
+    },
+    {
+      "type": "header",
+      "content": "Product 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_2_alt_image",
+      "label": "Alternative image",
+    },
+    {
+      "type": "text",
+      "id": "product_2_header_cta_text",
+      "label": "Header CTA Text"
+    },
+    {
+      "type": "url",
+      "id": "product_2_header_cta_url",
+      "label": "Header CTA URL"
+    },
+    {
+      "type": "text",
+      "id": "product_2_footer_cta_text",
+      "label": "Footer CTA Text"
+    },
+    {
+      "type": "url",
+      "id": "product_2_footer_cta_url",
+      "label": "Footer CTA URL"
+    },
+    {
+      "type": "header",
+      "content": "Product 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_3_alt_image",
+      "label": "Alternative image",
+    },
+    {
+      "type": "text",
+      "id": "product_3_header_cta_text",
+      "label": "Header CTA Text"
+    },
+    {
+      "type": "url",
+      "id": "product_3_header_cta_url",
+      "label": "Header CTA URL"
+    },
+    {
+      "type": "text",
+      "id": "product_3_footer_cta_text",
+      "label": "Footer CTA Text"
+    },
+    {
+      "type": "url",
+      "id": "product_3_footer_cta_url",
+      "label": "Footer CTA URL"
+    },
+    {
+      "type": "header",
+      "content": "Product 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_4_alt_image",
+      "label": "Alternative image",
+    },
+    {
+      "type": "text",
+      "id": "product_4_header_cta_text",
+      "label": "Header CTA Text"
+    },
+    {
+      "type": "url",
+      "id": "product_4_header_cta_url",
+      "label": "Header CTA URL"
+    },
+    {
+      "type": "text",
+      "id": "product_4_footer_cta_text",
+      "label": "Footer CTA Text"
+    },
+    {
+      "type": "url",
+      "id": "product_4_footer_cta_url",
+      "label": "Footer CTA URL"
+    },
+    {
+      "type": "header",
+      "content": "Product 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_5_alt_image",
+      "label": "Alternative image",
+    },
+    {
+      "type": "text",
+      "id": "product_5_header_cta_text",
+      "label": "Header CTA Text"
+    },
+    {
+      "type": "url",
+      "id": "product_5_header_cta_url",
+      "label": "Header CTA URL"
+    },
+    {
+      "type": "text",
+      "id": "product_5_footer_cta_text",
+      "label": "Footer CTA Text"
+    },
+    {
+      "type": "url",
+      "id": "product_5_footer_cta_url",
+      "label": "Footer CTA URL"
+    },
+  ],
+  "blocks": [
+    {
+      "type": "product_title",
+      "name": "Product title",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "header_value",
+          "label": "Header value",
+          "default": "Title"
+        }
+      ]
+    },
+    {
+      "type": "product_price",
+      "name": "Product price",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "header_value",
+          "label": "Header value",
+          "default": "Price"
+        }
+      ]
+    },
+    {
+      "type": "product_metafield",
+      "name": "Product metafield",
+      "settings": [
+        {
+          "type": "text",
+          "id": "header_value",
+          "label": "Header value",
+          "default": "Feature"
+        },
+        {
+          "type": "text",
+          "id": "namespace_and_key",
+          "label": "Namespace and key",
+          "info": "e.g., custom.breathability"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Comparison Table",
+      "blocks": [
+        { "type": "product_title" },
+        { "type": "product_price" }
+      ]
+    }
+  ]
+}
+{% endschema %}
