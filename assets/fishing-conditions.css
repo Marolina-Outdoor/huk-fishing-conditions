@@ -1302,6 +1302,7 @@
 .huk-fc-hero { position:relative; padding:18px 20px 20px; color:#fff;
   background:radial-gradient(95% 80% at 85% 115%, rgba(63,143,47,.7), rgba(63,143,47,0) 60%),
     radial-gradient(120% 85% at 12% -12%, rgba(255,255,255,.16), rgba(255,255,255,0) 55%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='47' height='37' viewBox='2.8 3.5 194.5 153.1'%3E%3Cpath fill='white' fill-opacity='0.05' d='M149.27 61.22 L149.27 102.22 C149.28 112.46 146.91 114.89 136.55 114.87 L66.07 114.87 C55.73 114.89 53.34 112.46 53.34 102.22 L53.34 22.78 L21.36 22.75 C23.4 29.54 23.98 35.91 23.98 47.13 L23.96 107.51 C23.95 130.41 33.42 137.23 60.04 137.25 L142.58 137.21 C169.2 137.2 178.65 130.37 178.64 107.48 L178.64 22.83 L131.13 61.25 Z'/%3E%3C/svg%3E"),
     linear-gradient(165deg,#0b3766,#0f4c81 55%,#14527f); }
 .huk-fc-hero-top { display:flex; justify-content:space-between; align-items:center; font-size:12px; font-weight:600; color:rgba(255,255,255,.85); }
 .huk-fc-hero-top .huk-fc-loc { display:flex; align-items:center; gap:5px; }
