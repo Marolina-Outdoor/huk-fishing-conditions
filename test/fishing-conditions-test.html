@@ -373,7 +373,438 @@
 <div class="hiw-tabs">
   <button class="hiw-tab on" id="tab-preview" onclick="showView('preview')">Live Preview</button>
   <button class="hiw-tab" id="tab-hiw" onclick="showView('hiw')">How It Works</button>
+  <button class="hiw-tab" id="tab-landing" onclick="showView('landing')">📧 Landing Page</button>
 </div>
+
+<!-- ── Landing Page styles ── -->
+<style>
+  /* ── Landing page shell ── */
+  #view-landing { background: #f0f4f8; min-height: 100vh; }
+
+  .lp-wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  /* Header */
+  .lp-header {
+    background: #0a2f52;
+    padding: 20px 28px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .lp-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+  .lp-logo-wordmark {
+    height: 22px;
+    width: auto;
+  }
+  .lp-header-right {
+    text-align: right;
+  }
+  .lp-header-eyebrow {
+    color: #7dd3fc;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  .lp-header-dates {
+    color: rgba(255,255,255,.55);
+    font-size: 11px;
+    margin-top: 2px;
+  }
+
+  /* Hero */
+  .lp-hero {
+    background: linear-gradient(145deg, #0a2f52 0%, #0f4c81 55%, #1a6fad 100%);
+    padding: 36px 28px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .lp-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .lp-hero-location {
+    color: #7dd3fc;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+  .lp-score-ring {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .lp-score-ring svg.ring-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+  .lp-score-ring-bg { fill: none; stroke: rgba(255,255,255,.12); stroke-width: 6; }
+  .lp-score-ring-fill { fill: none; stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset .6s ease; }
+  .lp-score-num {
+    font-size: 42px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+  }
+  .lp-score-label {
+    font-size: 10px;
+    color: rgba(255,255,255,.5);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    position: relative;
+    z-index: 1;
+  }
+  .lp-verdict {
+    font-size: 26px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 6px;
+    letter-spacing: -.01em;
+  }
+  .lp-hero-sub {
+    color: rgba(255,255,255,.65);
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  /* Section label */
+  .lp-section-label {
+    padding: 20px 28px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #64748b;
+  }
+
+  /* 7-day grid */
+  .lp-7day {
+    padding: 0 28px 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .lp-day-row {
+    background: #fff;
+    border-radius: 10px;
+    padding: 12px 16px;
+    display: grid;
+    grid-template-columns: 70px 1fr 56px;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid #e2e8f0;
+    transition: box-shadow .15s;
+  }
+  .lp-day-row.best-day {
+    border-color: #29ABE2;
+    box-shadow: 0 0 0 2px rgba(41,171,226,.18);
+    background: #f0f9ff;
+  }
+  .lp-day-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+  .lp-day-date {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 1px;
+  }
+  .lp-day-wx {
+    font-size: 12px;
+    color: #475569;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .lp-day-bar-track {
+    height: 5px;
+    background: #e2e8f0;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .lp-day-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width .4s ease;
+  }
+  .lp-day-score-col {
+    text-align: right;
+  }
+  .lp-day-score-num {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .lp-day-score-tier {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-top: 2px;
+  }
+  .lp-best-badge {
+    display: inline-block;
+    background: #0ea5e9;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 10px;
+    margin-bottom: 3px;
+  }
+
+  /* Conditions snapshot */
+  .lp-conditions {
+    margin: 4px 28px 0;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .lp-cond-item {
+    text-align: center;
+  }
+  .lp-cond-icon { font-size: 20px; }
+  .lp-cond-val {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-top: 3px;
+  }
+  .lp-cond-lbl {
+    font-size: 10px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-top: 2px;
+  }
+
+  /* CTA */
+  .lp-cta-wrap {
+    padding: 24px 28px;
+    text-align: center;
+  }
+  .lp-cta-heading {
+    font-size: 18px;
+    font-weight: 800;
+    color: #0a2f52;
+    margin-bottom: 6px;
+  }
+  .lp-cta-sub {
+    font-size: 13px;
+    color: #64748b;
+    margin-bottom: 18px;
+    line-height: 1.5;
+  }
+  .lp-cta-btn {
+    display: inline-block;
+    background: #0ea5e9;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 13px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    letter-spacing: .01em;
+    box-shadow: 0 4px 14px rgba(14,165,233,.35);
+  }
+  .lp-cta-btn:hover { background: #0284c7; }
+
+  /* Footer */
+  .lp-footer {
+    background: #0a2f52;
+    padding: 20px 28px;
+    text-align: center;
+  }
+  .lp-footer p {
+    color: rgba(255,255,255,.35);
+    font-size: 11px;
+    margin: 4px 0;
+    line-height: 1.6;
+  }
+  .lp-footer a { color: rgba(255,255,255,.5); }
+
+  /* Confidence legend */
+  .lp-conf-legend {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    padding: 10px 28px 4px;
+  }
+  .lp-conf-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: #64748b;
+  }
+  .lp-conf-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+  }
+
+  /* Loading state */
+  .lp-loading {
+    padding: 60px 28px;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 14px;
+  }
+
+  /* Desktop preview frame */
+  .lp-preview-frame {
+    max-width: 740px;
+    margin: 20px auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,.18);
+  }
+  .lp-frame-bar {
+    background: #e2e8f0;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .lp-frame-dot { width: 10px; height: 10px; border-radius: 50%; }
+</style>
+
+<!-- ── Landing Page View ── -->
+<div id="view-landing" style="display:none;">
+  <div style="background:#e2e8f0; padding:12px 20px 6px; font-size:12px; color:#64748b; text-align:center;">
+    📧 <strong>Email / SMS Landing Page mockup</strong> — Populates automatically when you load a location in Live Preview. Designed for weekly subscriber sends.
+  </div>
+
+  <div class="lp-preview-frame">
+    <!-- Browser chrome -->
+    <div class="lp-frame-bar">
+      <div class="lp-frame-dot" style="background:#f87171;"></div>
+      <div class="lp-frame-dot" style="background:#fbbf24;"></div>
+      <div class="lp-frame-dot" style="background:#4ade80;"></div>
+      <div style="flex:1; background:#fff; border-radius:4px; padding:4px 10px; font-size:11px; color:#94a3b8; margin-left:10px;">
+        huk.com/pages/fish-forecast
+      </div>
+    </div>
+
+    <div id="lp-body">
+      <div id="lp-loading" class="lp-loading" style="background:#f0f4f8;">
+        ⏳ Load a location in <strong>Live Preview</strong> first — the landing page will populate automatically.
+      </div>
+
+      <div id="lp-content" style="display:none;">
+        <div class="lp-wrap">
+
+          <!-- Header -->
+          <div class="lp-header">
+            <div class="lp-logo">
+              <svg height="26" viewBox="130 245 535 125" xmlns="http://www.w3.org/2000/svg" aria-label="HUK">
+                <path fill="#fff" d="M286.84,251.66l-36.96-.02c-.72,0-1.24.7-1.03,1.39l1.45,4.68c1.61,5.18,2.16,10.17,2.16,19.78l-.02,14.92c0,.59-.48,1.08-1.08,1.08l-79.76.06c-.6,0-1.08-.48-1.08-1.08v-14.96c.02-9.6.57-14.59,2.19-19.78l1.47-4.68c.22-.69-.3-1.4-1.03-1.4l-36.46-.03c-.72,0-1.24.7-1.03,1.39l1.45,4.69c1.63,5.2,2.17,10.19,2.16,19.77l-.03,56.91c0,9.63-.56,14.63-2.18,19.8l-1.46,4.68c-.22.69.3,1.4,1.03,1.4l36.46.02c.73,0,1.25-.7,1.03-1.4l-1.47-4.68c-1.62-5.15-2.16-10.15-2.16-19.79v-14.77c.01-.59.5-1.08,1.09-1.08l79.76.05c.59,0,1.07.48,1.07,1.08v14.78c-.02,9.61-.57,14.61-2.18,19.79l-1.46,4.68c-.22.69.3,1.4,1.03,1.4l36.95.03c.72,0,1.24-.71,1.03-1.4l-1.46-4.68c-1.62-5.19-2.16-10.18-2.16-19.78l.04-57c0-9.57.55-14.56,2.18-19.78l1.47-4.68c.22-.69-.3-1.4-1.03-1.4"/>
+                <path fill="#fff" d="M470.01,251.85l-48.5,39.22c-.79.64-.34,1.91.68,1.91l16.76-.03c.6,0,1.08.48,1.08,1.08v31.55c0,4.41-.5,6.8-1.68,7.98-1.19,1.19-3.6,1.63-8.05,1.68h-65.85c-4.39.07-6.85-.49-8.04-1.69-1.19-1.18-1.69-3.57-1.69-7.98v-72.88c0-.6-.48-1.08-1.07-1.08h-9.79s-7.06-.02-7.06-.02l-15.39-.02h0s-.86,0-.86,0c-.72,0-1.24.7-1.03,1.39l1.45,4.68c.88,2.82,1.43,5.63,1.76,9.12.18,2.76.26,5.9.26,9.72l-.02,54.01c0,22.07,9.37,29.9,35.86,29.92l77.1-.04c13.57,0,22.06-1.96,27.51-6.34,5.76-4.62,8.32-11.89,8.32-23.57v-77.81c0-.9-1.05-1.4-1.75-.83"/>
+                <path fill="#fff" d="M656.09,360.12c.21-.2.32-.48.32-.76.03-.37-.1-.76-.43-1l-82.39-56.56,75.97-44.98,6.24-3.18c1.04-.49.68-2.05-.46-2.05,0,0-43.2-.04-55.4-.04-1.33,0-2.31,1.37-2.31,1.37-3.36,3.36-8.09,6.11-13.11,9.02l-23.44,13.97-22.52,13.38v-15.27c.04-2.74.11-5.12.25-7.26.33-3.49.88-6.3,1.77-9.13l1.45-4.68c.22-.69-.3-1.4-1.03-1.4h-1.88s-7.43,0-7.43,0v.09h-27.25c-.72-.01-1.24.69-1.03,1.38l1.46,4.68c1.61,5.17,2.15,10.05,2.14,19.67l-.03,57.12c0,9.65-.55,14.64-2.16,19.79l-1.47,4.68c-.22.69.3,1.4,1.03,1.4h36.75c.72.01,1.24-.69,1.03-1.38l-1.46-4.68c-1.62-5.21-2.17-10.2-2.17-19.78v-11.98s6.77-4,6.77-4l52.58,36.57c.07.06.15.13.21.17,1.71,1.19,3.27,2.44,4.61,3.78,0,0,.98,1.37,2.31,1.37,12.2,0,50.33-.04,50.33-.04.31,0,.55-.12.74-.29"/>
+              </svg>
+            </div>
+            <div class="lp-header-right">
+              <div class="lp-header-eyebrow">Weekly Fish Forecast</div>
+              <div class="lp-header-dates" id="lp-week-dates">—</div>
+            </div>
+          </div>
+
+          <!-- Hero -->
+          <div class="lp-hero">
+            <div class="lp-hero-location" id="lp-location">📍 —</div>
+            <div class="lp-score-ring" id="lp-score-ring">
+              <svg class="ring-svg" viewBox="0 0 120 120">
+                <circle class="lp-score-ring-bg" cx="60" cy="60" r="54"/>
+                <circle class="lp-score-ring-fill" id="lp-ring-fill" cx="60" cy="60" r="54"
+                  stroke="#29ABE2"
+                  stroke-dasharray="339.3"
+                  stroke-dashoffset="339.3"/>
+              </svg>
+              <span class="lp-score-num" id="lp-score-num">—</span>
+              <span class="lp-score-label">Cast Score</span>
+            </div>
+            <div class="lp-verdict" id="lp-verdict">—</div>
+            <div class="lp-hero-sub" id="lp-hero-sub">Loading conditions…</div>
+          </div>
+
+          <!-- 7-day section -->
+          <div class="lp-section-label">7-Day Fishing Outlook</div>
+          <div class="lp-7day" id="lp-7day">
+            <!-- populated by JS -->
+          </div>
+
+          <!-- Confidence legend -->
+          <div class="lp-conf-legend">
+            <div class="lp-conf-item"><div class="lp-conf-dot" style="background:#16a34a;"></div>Days 1–2 solid</div>
+            <div class="lp-conf-item"><div class="lp-conf-dot" style="background:#f59e0b;"></div>Days 3–5 moderate</div>
+            <div class="lp-conf-item"><div class="lp-conf-dot" style="background:#94a3b8;"></div>Days 6–7 estimated</div>
+          </div>
+
+          <!-- Today's conditions snapshot -->
+          <div class="lp-section-label">Today's Conditions</div>
+          <div class="lp-conditions" id="lp-conditions">
+            <!-- populated by JS -->
+          </div>
+
+          <!-- CTA -->
+          <div class="lp-cta-wrap">
+            <div class="lp-cta-heading">Gear up for your best day</div>
+            <div class="lp-cta-sub">Built for the water. HUK performance fishing apparel keeps you protected and comfortable from first cast to last light.</div>
+            <a class="lp-cta-btn" href="https://www.huk.com/collections/fishing" target="_blank">Shop HUK Fishing Gear →</a>
+          </div>
+
+          <!-- Footer -->
+          <div class="lp-footer">
+            <p>© 2026 HUK Performance Fishing · <a href="#">Unsubscribe</a> · <a href="#">Privacy Policy</a></p>
+            <p>Forecast data: Open-Meteo weather · NOAA CO-OPS tides · Computed solunar</p>
+            <p>Scores are guidance — conditions and fish both have a sense of humor.</p>
+          </div>
+
+        </div><!-- /.lp-wrap -->
+      </div><!-- /#lp-content -->
+    </div><!-- /#lp-body -->
+  </div><!-- /.lp-preview-frame -->
+</div><!-- /#view-landing -->
 
 <!-- ── How It Works ── -->
 <div id="view-hiw" style="display:none; background:#fff;">
@@ -526,12 +957,14 @@ Waiting for data...
 
 <!-- ── Test Harness ── -->
 <script>
-  // ── View toggle (Live Preview / How It Works) ─────────────
+  // ── View toggle ───────────────────────────────────────────
   function showView(v) {
     document.getElementById('view-preview').style.display = v === 'preview' ? '' : 'none';
-    document.getElementById('view-hiw').style.display     = v === 'hiw' ? '' : 'none';
+    document.getElementById('view-hiw').style.display     = v === 'hiw'     ? '' : 'none';
+    document.getElementById('view-landing').style.display = v === 'landing' ? '' : 'none';
     document.getElementById('tab-preview').classList.toggle('on', v === 'preview');
     document.getElementById('tab-hiw').classList.toggle('on', v === 'hiw');
+    document.getElementById('tab-landing').classList.toggle('on', v === 'landing');
   }
 
   // ── Logging ──────────────────────────────────────────────
@@ -631,6 +1064,201 @@ Waiting for data...
       JSON.stringify(display, null, 2);
     log(`Fishing score: ${score}/100`, score >= 60 ? 'ok' : 'info');
     log(`Station: ${station.name} (${station.distKm} km away)`, 'info');
+  });
+
+  // ── Landing page data population ────────────────────────
+  function scoreColor(s) {
+    if (s >= 90) return '#16a34a';
+    if (s >= 75) return '#65a30d';
+    if (s >= 60) return '#ca8a04';
+    if (s >= 40) return '#d97706';
+    if (s >= 20) return '#ea580c';
+    return '#dc2626';
+  }
+  function scoreVerdict(s) {
+    if (s >= 90) return 'Drop Everything';
+    if (s >= 75) return 'Fish On';
+    if (s >= 60) return 'Worth the Trip';
+    if (s >= 40) return 'Grind It Out';
+    if (s >= 20) return 'Slow Pick';
+    return 'Skunked';
+  }
+  function wxIcon(code) {
+    if (code === 0) return '☀️';
+    if (code <= 2) return '⛅';
+    if (code <= 3) return '☁️';
+    if (code <= 49) return '🌫️';
+    if (code <= 59) return '🌦️';
+    if (code <= 69) return '🌧️';
+    if (code <= 79) return '❄️';
+    if (code <= 84) return '🌦️';
+    if (code <= 94) return '⛈️';
+    return '🌩️';
+  }
+  function wxDesc(code) {
+    if (code === 0) return 'Clear';
+    if (code <= 2) return 'Partly cloudy';
+    if (code <= 3) return 'Overcast';
+    if (code <= 49) return 'Foggy';
+    if (code <= 59) return 'Drizzle';
+    if (code <= 69) return 'Rain';
+    if (code <= 79) return 'Snow';
+    if (code <= 82) return 'Rain showers';
+    if (code <= 84) return 'Heavy showers';
+    if (code <= 94) return 'Thunderstorm';
+    return 'Severe storm';
+  }
+  function dayScore(weather, i) {
+    // Quick heuristic from daily data
+    const code = weather.daily?.weather_code?.[i] ?? 0;
+    const wind = weather.daily?.wind_speed_10m_max?.[i] ?? 10;
+    const precip = weather.daily?.precipitation_sum?.[i] ?? 0;
+    let s = 70;
+    if (wind > 40) s -= 30; else if (wind > 25) s -= 18; else if (wind < 8) s -= 5;
+    if (code >= 95) s -= 30; else if (code >= 80) s -= 15; else if (code >= 61) s -= 10;
+    if (precip > 10) s -= 12; else if (precip > 3) s -= 6;
+    if (code === 0) s -= 5; // full sun slightly worse than overcast
+    if (code >= 1 && code <= 2) s += 8;
+    return Math.min(99, Math.max(5, Math.round(s)));
+  }
+  function confOpacity(i) {
+    if (i <= 1) return 1;
+    if (i <= 4) return 0.82;
+    return 0.6;
+  }
+  function confColor(i) {
+    if (i <= 1) return '#16a34a';
+    if (i <= 4) return '#f59e0b';
+    return '#94a3b8';
+  }
+  function msToDir(deg) {
+    const dirs = ['N','NE','E','SE','S','SW','W','NW'];
+    return dirs[Math.round(deg / 45) % 8];
+  }
+
+  document.addEventListener('huk-fc-data', (e) => {
+    const { weather, tides, station, score } = e.detail;
+    const daily = weather?.daily;
+    if (!daily?.time?.length) return;
+
+    // Show content, hide loading
+    document.getElementById('lp-loading').style.display = 'none';
+    document.getElementById('lp-content').style.display = '';
+
+    // Week date range
+    const d0 = new Date(daily.time[0] + 'T12:00:00');
+    const d6 = new Date(daily.time[Math.min(6, daily.time.length-1)] + 'T12:00:00');
+    const fmt = (d) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    document.getElementById('lp-week-dates').textContent = `${fmt(d0)} – ${fmt(d6)}, 2026`;
+
+    // Location
+    const locName = station?.name ? station.name.replace(/,.*$/, '') : 'Your Location';
+    document.getElementById('lp-location').textContent = `📍 ${locName}`;
+
+    // Hero score (today)
+    const todayScore = score ?? dayScore(weather, 0);
+    const color = scoreColor(todayScore);
+    document.getElementById('lp-score-num').textContent = todayScore;
+    document.getElementById('lp-score-num').style.color = color;
+    document.getElementById('lp-verdict').textContent = scoreVerdict(todayScore);
+    document.getElementById('lp-verdict').style.color = color;
+    document.getElementById('lp-hero-sub').textContent =
+      `Live conditions for the week of ${fmt(d0)}. Check back each week for your updated forecast.`;
+
+    // Ring fill
+    const circumference = 339.3;
+    const fill = document.getElementById('lp-ring-fill');
+    fill.style.stroke = color;
+    fill.style.strokeDashoffset = circumference * (1 - todayScore / 100);
+
+    // 7-day rows
+    const days = daily.time.length;
+    const scores = Array.from({ length: days }, (_, i) => i === 0 ? todayScore : dayScore(weather, i));
+    const bestIdx = scores.indexOf(Math.max(...scores));
+
+    const container = document.getElementById('lp-7day');
+    container.innerHTML = '';
+    const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+    daily.time.forEach((dateStr, i) => {
+      const d = new Date(dateStr + 'T12:00:00');
+      const s = scores[i];
+      const col = scoreColor(s);
+      const isBest = i === bestIdx;
+      const conf = confOpacity(i);
+      const confCol = confColor(i);
+      const wind = daily.wind_speed_10m_max?.[i];
+      const wIcon = wxIcon(daily.weather_code?.[i] ?? 0);
+      const wDesc = wxDesc(daily.weather_code?.[i] ?? 0);
+      const windStr = wind ? `${Math.round(wind * 0.621)} mph` : '';
+
+      const row = document.createElement('div');
+      row.className = 'lp-day-row' + (isBest ? ' best-day' : '');
+      row.style.opacity = conf;
+      row.innerHTML = `
+        <div>
+          ${isBest ? '<div class="lp-best-badge">★ Best Day</div>' : ''}
+          <div class="lp-day-name">${i === 0 ? 'Today' : dayNames[d.getDay()]}</div>
+          <div class="lp-day-date">${fmt(d)}</div>
+        </div>
+        <div>
+          <div class="lp-day-wx">${wIcon} ${wDesc}${windStr ? ' · ' + windStr : ''}</div>
+          <div class="lp-day-bar-track">
+            <div class="lp-day-bar-fill" style="width:${s}%; background:${col};"></div>
+          </div>
+        </div>
+        <div class="lp-day-score-col">
+          <div class="lp-day-score-num" style="color:${col};">${s}</div>
+          <div class="lp-day-score-tier" style="color:${confCol};">
+            ${i <= 1 ? '●' : i <= 4 ? '◐' : '○'}
+          </div>
+        </div>`;
+      container.appendChild(row);
+    });
+
+    // Today's conditions snapshot
+    const cur = weather?.current;
+    const windSpd = cur?.wind_speed_10m != null ? `${Math.round(cur.wind_speed_10m * 0.621)} mph` : '—';
+    const windDir = cur?.wind_direction_10m != null ? msToDir(cur.wind_direction_10m) : '';
+    const waterT = weather?.hourly?.sea_surface_temperature?.[0] ?? weather?.hourly?.water_temperature?.[0];
+    const waterStr = waterT != null ? `${Math.round(waterT * 9/5 + 32)}°F` : '—';
+    const waveH = weather?.hourly?.wave_height?.[0];
+    const waveStr = waveH != null ? `${(waveH * 3.28).toFixed(1)} ft` : '—';
+    const tide = tides?.[0];
+    const tideStr = tide ? `${tide.type === 'H' ? '↑' : '↓'} ${tide.type === 'H' ? 'High' : 'Low'} ${tide.time}` : '—';
+    const cloud = cur?.cloud_cover != null ? `${cur.cloud_cover}%` : '—';
+
+    document.getElementById('lp-conditions').innerHTML = `
+      <div class="lp-cond-item">
+        <div class="lp-cond-icon">💨</div>
+        <div class="lp-cond-val">${windSpd}</div>
+        <div class="lp-cond-lbl">Wind ${windDir}</div>
+      </div>
+      <div class="lp-cond-item">
+        <div class="lp-cond-icon">🌡️</div>
+        <div class="lp-cond-val">${waterStr}</div>
+        <div class="lp-cond-lbl">Water Temp</div>
+      </div>
+      <div class="lp-cond-item">
+        <div class="lp-cond-icon">🌊</div>
+        <div class="lp-cond-val">${waveStr !== '—' ? waveStr : tideStr}</div>
+        <div class="lp-cond-lbl">${waveStr !== '—' ? 'Wave Height' : 'Next Tide'}</div>
+      </div>
+      <div class="lp-cond-item">
+        <div class="lp-cond-icon">🌤️</div>
+        <div class="lp-cond-val">${cloud}</div>
+        <div class="lp-cond-lbl">Cloud Cover</div>
+      </div>
+      <div class="lp-cond-item">
+        <div class="lp-cond-icon">🌡</div>
+        <div class="lp-cond-val">${cur?.temperature_2m != null ? Math.round(cur.temperature_2m) + '°F' : '—'}</div>
+        <div class="lp-cond-lbl">Air Temp</div>
+      </div>
+      <div class="lp-cond-item">
+        <div class="lp-cond-icon">📡</div>
+        <div class="lp-cond-val">${station?.distKm != null ? station.distKm + ' km' : '—'}</div>
+        <div class="lp-cond-lbl">Tide Station</div>
+      </div>`;
   });
 
   // ── Geolocation status (real) ────────────────────────────
