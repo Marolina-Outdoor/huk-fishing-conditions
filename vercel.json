@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/test/fishing-conditions-test.html" },
+    { "source": "/forecast", "destination": "/test/fishing-conditions-test.html" }
+  ]
+}
