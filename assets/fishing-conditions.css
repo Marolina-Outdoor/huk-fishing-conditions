@@ -408,6 +408,15 @@
   margin: 0;
   letter-spacing: -0.01em;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.huk-fc-section-logo {
+  height: 22px;
+  width: auto;
+  flex-shrink: 0;
 }
 
 .huk-fc-section-sub {
