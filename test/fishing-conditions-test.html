@@ -711,8 +711,14 @@
 
 <!-- ── Landing Page View ── -->
 <div id="view-landing" style="display:none;">
-  <div style="background:#e2e8f0; padding:12px 20px 6px; font-size:12px; color:#64748b; text-align:center;">
-    📧 <strong>Email / SMS Landing Page mockup</strong> — Populates automatically when you load a location in Live Preview. Designed for weekly subscriber sends.
+  <div style="background:#e2e8f0; padding:10px 20px; display:flex; flex-wrap:wrap; align-items:center; gap:8px;">
+    <span style="font-size:12px; font-weight:600; color:#475569;">📧 Weekly Forecast:</span>
+    <button class="test-btn" onclick="lpLoad(47.6,-122.3,'Seattle, WA')">📍 Seattle</button>
+    <button class="test-btn" onclick="lpLoad(32.7,-117.2,'San Diego, CA')">📍 San Diego</button>
+    <button class="test-btn" onclick="lpLoad(25.8,-80.2,'Miami, FL')">📍 Miami</button>
+    <button class="test-btn" onclick="lpLoad(29.3,-94.8,'Galveston, TX')">📍 Galveston</button>
+    <button class="test-btn" onclick="lpLoad(32.8,-79.9,'Charleston, SC')">📍 Charleston</button>
+    <button class="test-btn" onclick="lpLoad(40.7,-74.0,'New York, NY')">📍 New York</button>
   </div>
 
   <div class="lp-preview-frame">
@@ -728,7 +734,7 @@
 
     <div id="lp-body">
       <div id="lp-loading" class="lp-loading" style="background:#f0f4f8;">
-        ⏳ Load a location in <strong>Live Preview</strong> first — the landing page will populate automatically.
+        📍 Pick a location above to load the weekly forecast.
       </div>
 
       <div id="lp-content" style="display:none;">
@@ -1066,6 +1072,57 @@ Waiting for data...
     log(`Station: ${station.name} (${station.distKm} km away)`, 'info');
   });
 
+  // ── Landing page direct fetch ────────────────────────────
+  async function lpLoad(lat, lon, label) {
+    document.getElementById('lp-loading').style.display = '';
+    document.getElementById('lp-loading').textContent = '⏳ Loading forecast…';
+    document.getElementById('lp-content').style.display = 'none';
+    showView('landing');
+
+    try {
+      const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m,cloud_cover,surface_pressure&daily=wind_speed_10m_max,weather_code,precipitation_sum,wave_height_max&wind_speed_unit=kmh&temperature_unit=fahrenheit&precipitation_unit=inch&forecast_days=7&timezone=auto`;
+      const marineUrl  = `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lon}&hourly=wave_height,sea_surface_temperature&forecast_days=7&timezone=auto`;
+
+      const [wRes, mRes] = await Promise.all([
+        fetch(weatherUrl),
+        fetch(marineUrl).catch(() => null),
+      ]);
+      if (!wRes.ok) throw new Error('Weather fetch failed');
+
+      const weather = await wRes.json();
+      if (mRes && mRes.ok) {
+        const marine = await mRes.json();
+        weather.hourly = weather.hourly || {};
+        weather.hourly.wave_height       = marine.hourly?.wave_height;
+        weather.hourly.water_temperature = marine.hourly?.sea_surface_temperature;
+      }
+
+      // Fire the same event path the widget uses
+      document.dispatchEvent(new CustomEvent('huk-fc-data', {
+        detail: {
+          weather,
+          tides: [],
+          station: { name: label, distKm: 0 },
+          score: lpDayScore(weather, 0),
+        }
+      }));
+    } catch(err) {
+      document.getElementById('lp-loading').textContent = `⚠️ Failed to load: ${err.message}`;
+    }
+  }
+
+  function lpDayScore(weather, i) {
+    const wind  = weather.daily?.wind_speed_10m_max?.[i] ?? 10;
+    const wave  = weather.daily?.wave_height_max?.[i] ?? null;
+    const code  = weather.daily?.weather_code?.[i] ?? 0;
+    const windS = wind <= 5 ? 65 : wind <= 24 ? 90 : wind <= 32 ? 65 : wind <= 40 ? 40 : 20;
+    const waveS = wave == null ? 75 : wave <= 0.5 ? 83 : wave <= 1.5 ? 92 : wave <= 3 ? 65 : wave <= 5 ? 35 : 15;
+    const wxS   = code >= 95 ? 15 : code >= 80 ? 50 : code >= 61 ? 62 : code >= 51 ? 72 : 85;
+    let s = Math.round(windS * 0.4 + waveS * 0.3 + wxS * 0.3);
+    if (code >= 95) s = Math.min(s, 30);
+    return Math.min(Math.max(s, 5), 100);
+  }
+
   // ── Landing page data population ────────────────────────
   function scoreColor(s) {
     if (s >= 90) return '#16a34a';
@@ -1173,7 +1230,7 @@ Waiting for data...
 
     // 7-day rows
     const days = daily.time.length;
-    const scores = Array.from({ length: days }, (_, i) => i === 0 ? todayScore : dayScore(weather, i));
+    const scores = Array.from({ length: days }, (_, i) => i === 0 ? todayScore : lpDayScore(weather, i));
     const bestIdx = scores.indexOf(Math.max(...scores));
 
     const container = document.getElementById('lp-7day');
