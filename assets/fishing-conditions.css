@@ -415,8 +415,16 @@
 
 .huk-fc-section-logo {
   height: 22px;
-  width: auto;
+  width: 94px;
   flex-shrink: 0;
+  display: block;
+}
+
+.huk-fc-float-logo {
+  height: 16px;
+  width: 68px;
+  flex-shrink: 0;
+  display: block;
 }
 
 .huk-fc-section-sub {
