@@ -533,6 +533,15 @@
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.huk-fc-float-logo {
+  height: 16px;
+  width: auto;
+  flex-shrink: 0;
 }
 
 .huk-fc-float-close {
